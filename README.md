@@ -4,12 +4,16 @@
 
 Arion Kennedy 
 - kenned64@myumanitoba.ca
+
 Huzaifa
 - TBD
+
 Nathan
 - nguye89@myumanitoba.ca
+
 Nicholas
 - TBD
+
 Tega
 - TBD
 
