@@ -22,26 +22,26 @@ Success Criteria?
 
 ### Priority
 User Account
-    - Time estimate: 
+- Time estimate: 
 
 Filter for topics
-    - Time estimate: 4 Days
+- Time estimate: 4 Days
 
 Notifications
-    - Time estimate: 
+- Time estimate: 
 
 User Preference Settings
-    - Time estimate: 7 Days
+- Time estimate: 7 Days
 
 ## Iteration 1 User Stories
 As a user, I need to be able to track my progress.
-    - Time Estimate: 
+- Time Estimate: 
 
 As a user, I need to be able to find topics I am interested in.
-    - Time Estimate: 
+- Time Estimate: 
 
 As a user, I need to be able to have my progress saved
-    - Time Estimate: 
+- Time Estimate: 
 
 As a user, I need to kept updated on any news (eg. double exp, daily streak, energy recharge is full) from the game when I am away from the game.
-    - Time Estimate: 
+- Time Estimate: 
