@@ -2,11 +2,16 @@
 
 ## Iteration 0
 
-Arion Kennedy - kenned64@myumanitoba.ca
-Huzaifa - 
-Nathan - nguye89@myumanitoba.ca
-Nicholas -
-Tega -
+Arion Kennedy 
+- kenned64@myumanitoba.ca
+Huzaifa
+- TBD
+Nathan
+- nguye89@myumanitoba.ca
+Nicholas
+- TBD
+Tega
+- TBD
 
 ## Vision Statement
 
