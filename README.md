@@ -2,24 +2,9 @@
 
 ## Iteration 0
 
-Arion Kennedy 
-- kenned64@myumanitoba.ca
+### Vision Statement
 
-Huzaifa
-- TBD
-
-Nathan
-- nguye89@myumanitoba.ca
-
-Nicholas
-- TBD
-
-Tega
-- TBD
-
-## Vision Statement
-
-### Title Here
+#### Title Here
 
 Our project will help people to learn and practice topics they are interested in. 
 
@@ -29,9 +14,9 @@ This project is valuable as there are many applications that focus solely on stu
 
 The success for this application will be measured through multiple success criteria. Firstly, the number of downloads is a large indicator of success. This can be seen through the year, with a higher increase of downloads at the beginning of terms for educational institutions. Another measure is the number of accounts that have been created by users, or multiple users. A single user may make multiple accounts on a single download of an application, so this will help track the progress that it makes. The number of created quizzes by users will also help to measure the success of the application through the amount of interaction from educators or self-learners. The average user time during the day, and learning progression is also a large indicator of how successful the intention to promote learning is. Lastly, by striving to lower the need for support, this is a measurement for success as one of the most important parts when interacting with users is listening to what they need in order to improve their experience.
 
-## Features
+### Features
 
-### Priority
+#### Priority
 User Account
 - Time estimate: 
 
@@ -44,7 +29,7 @@ Notifications
 User Preference Settings
 - Time estimate: 7 Days
 
-## Iteration 1 User Stories
+### Iteration 1 User Stories
 As a user, I need to be able to track my progress.
 - Time Estimate: 
 
