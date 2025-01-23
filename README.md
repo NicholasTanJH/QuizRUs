@@ -16,18 +16,46 @@ The success for this application will be measured through multiple success crite
 
 ### Features
 
-#### Priority
-User Account
-- Time estimate: 
+User Interface
+- Time estimate: 1 week
+- Priority: High
 
-Filter for topics
+User account
+- Time estimate: 1 week
+- Priority: High
+
+Create custom trivia questions
+- Time estimate: 1 week
+- Priority: High
+
+Collection of trivia questions
+- Time estimate: 1 week
+- Priority: High
+
+Competitive leaderboard for each game
+- Time estimate: 1 Week?
+- Priority: Medium
+
+Filter for desired topics
 - Time estimate: 4 Days
+- Priority: Medium
 
-Notifications
-- Time estimate: 
+Timers and/or stopwatches to time games
+- Time estimate: 4 Days
+- Priority: Medium
 
-User Preference Settings
-- Time estimate: 7 Days
+Point System
+- Time estimate: 3 Days
+- Priority: Medium
+
+User preference settings (Dark mode, text size, etc.)
+- Time estimate: 1 week
+- Priority: Low
+
+Notification
+- Time estimate: 2 Days
+- Priority: Low
+
 
 ### Iteration 1 User Stories
 As a user, I need to be able to track my progress.
