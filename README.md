@@ -2,7 +2,7 @@
 
 > Quizzle is a video game quizzing tool that provides an engaging and fun alternative to help people learn and study.
 
-#### [Vision Statement](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/blob/main/docs/visionStatement.md)
+#### [Vision Statement](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/blob/main/docs/VisionStatement.md)
 
 #### [Iteration 1](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers)
  - [User Stories](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers)
