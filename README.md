@@ -1,6 +1,6 @@
 # Quiz"R"Us
 
-> Quizzle is a video game quizzing tool that provides an engaging and fun alternative to help people study and learn.
+> Quiz"R"Us is a video game quizzing tool that provides an engaging and fun alternative to help people study and learn.
 
 #### [Vision Statement](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/blob/main/docs/VisionStatement.md)
 
