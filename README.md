@@ -1,4 +1,4 @@
-# Quizzle
+# Quiz"R"Us
 
 > Quizzle is a video game quizzing tool that provides an engaging and fun alternative to help people study and learn.
 
