@@ -1,6 +1,6 @@
 # Quiz"R"Us
 
-> Quizzle is a video game quizzing tool that provides an engaging and fun alternative to help people study and learn.
+> Quiz"R"Us is a video game quizzing tool that provides an engaging and fun alternative to help people study and learn.
 
 The core of the project is a video game that focuses on allowing users to create quizzes, compete in leaderboards for quizzes, and create a reliable way to study through trivia games. The primary users of this project will consist of students at any level of learning, as it will provide them with a space to study, while also tracking their progress. The secondary users will be the educators, this will provide an environment for them to make use of competition to understand where a learner may be struggling. Lastly, the tertiary group of users will consist of people who wish to take any topic, and practice their knowledge of it.
 
