@@ -1,0 +1,38 @@
+{
+    "logs": [
+        {
+            "outputFile": "comp3350.quizrus.app-mergeDebugResources-26:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "/Users/nicholastan/.gradle/caches/8.10.2/transforms/5cfb70539a664893bfd296a2ceb8c25b/transformed/appcompat-1.7.0/res/values-v18/values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                },
+                {
+                    "source": "/Users/nicholastan/.gradle/caches/8.10.2/transforms/d8d474b18dabb700d0d17f726f5924a1/transformed/jetified-core-1.6.1/res/values-v18/values.xml",
+                    "from": {
+                        "startLines": "4,12",
+                        "startColumns": "0,0",
+                        "startOffsets": "146,562",
+                        "endLines": "11,19",
+                        "endColumns": "8,8",
+                        "endOffsets": "561,975"
+                    },
+                    "to": {
+                        "startLines": "3,11",
+                        "startColumns": "4,4",
+                        "startOffsets": "104,524",
+                        "endLines": "10,18",
+                        "endColumns": "8,8",
+                        "endOffsets": "519,937"
+                    }
+                }
+            ]
+        }
+    ]
+}
