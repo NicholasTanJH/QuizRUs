@@ -24,7 +24,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class QuizSelectionActivity extends Activity {
-
     //(Demo) A List for the quiz titles
     //Hard coded for now
     ArrayList<String> quizTitles = new ArrayList<>();
@@ -37,8 +36,14 @@ public class QuizSelectionActivity extends Activity {
         //init for quizTitles, again this is just hard coded
         quizTitles.add("First");
         quizTitles.add("Sec");
-        quizTitles.add("Thirdabhsdjfhajslhdfjsa");
+        quizTitles.add("Thirdabhsdjfhajslhdfjsaasdfasdfasdfasdf");
         quizTitles.add("");
+        quizTitles.add("4");
+        quizTitles.add("µ∆˜å∆ø∂˜∆ßøå");
+        quizTitles.add("asdf asdf asdf asdf ");
+        quizTitles.add("Hello World!");
+        quizTitles.add("Hello World!");
+        quizTitles.add("End");
 
         //Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.listQuiz);
