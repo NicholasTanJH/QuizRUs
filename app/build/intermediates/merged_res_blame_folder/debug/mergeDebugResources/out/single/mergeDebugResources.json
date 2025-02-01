@@ -1,86 +1,62 @@
 [
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/menu_menu_students.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/menu/menu_students.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "comp3350.quizrus.app-main-30:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/drawable_writer.png.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/drawable/writer.png"
+        "merged": "comp3350.quizrus.app-debug-28:/menu_menu_course_students.xml.flat",
+        "source": "comp3350.quizrus.app-main-30:/menu/menu_course_students.xml"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/layout_activity_quiz_selection_row.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/layout/activity_quiz_selection_row.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/menu_menu_student_courses.xml.flat",
+        "source": "comp3350.quizrus.app-main-30:/menu/menu_student_courses.xml"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/drawable_mortarboard.png.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/drawable/mortarboard.png"
+        "merged": "comp3350.quizrus.app-debug-28:/layout_activity_quiz_selection.xml.flat",
+        "source": "comp3350.quizrus.app-main-30:/layout/activity_quiz_selection.xml"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "comp3350.quizrus.app-debug-28:/menu_menu_courses.xml.flat",
+        "source": "comp3350.quizrus.app-main-30:/menu/menu_courses.xml"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/layout_activity_courses.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/layout/activity_courses.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "comp3350.quizrus.app-main-30:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/menu_menu_student_courses.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/menu/menu_student_courses.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/layout_activity_quiz_selection_row.xml.flat",
+        "source": "comp3350.quizrus.app-main-30:/layout/activity_quiz_selection_row.xml"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/layout_activity_quiz_selection.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/layout/activity_quiz_selection.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "comp3350.quizrus.app-main-30:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/layout_activity_course_students.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/layout/activity_course_students.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/drawable_mortarboard.png.flat",
+        "source": "comp3350.quizrus.app-main-30:/drawable/mortarboard.png"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/menu_menu_course_students.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/menu/menu_course_students.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "comp3350.quizrus.app-main-30:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/layout_activity_students.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/layout/activity_students.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/menu_menu_students.xml.flat",
+        "source": "comp3350.quizrus.app-main-30:/menu/menu_students.xml"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/menu_menu_home.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/menu/menu_home.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/drawable_student.png.flat",
+        "source": "comp3350.quizrus.app-main-30:/drawable/student.png"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/mipmap-mdpi/ic_launcher.png"
+        "merged": "comp3350.quizrus.app-debug-28:/drawable_writer.png.flat",
+        "source": "comp3350.quizrus.app-main-30:/drawable/writer.png"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/layout_quiz_selection_row.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/layout/quiz_selection_row.xml"
+        "merged": "comp3350.quizrus.app-debug-28:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "comp3350.quizrus.app-main-30:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/layout_activity_home.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/layout/activity_home.xml"
-    },
-    {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/drawable_student.png.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/drawable/student.png"
-    },
-    {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/menu_menu_courses.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/menu/menu_courses.xml"
-    },
-    {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/layout_activity_student_courses.xml.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/layout/activity_student_courses.xml"
-    },
-    {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/mipmap-hdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/mipmap-xxxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-debug-28:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "/Users/nicholastan/.gradle/daemon/8.10.2/comp3350.quizrus.app-main-30:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "comp3350.quizrus.app-debug-28:/menu_menu_home.xml.flat",
+        "source": "comp3350.quizrus.app-main-30:/menu/menu_home.xml"
     }
 ]
