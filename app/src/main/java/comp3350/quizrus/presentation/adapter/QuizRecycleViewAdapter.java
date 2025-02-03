@@ -1,7 +1,10 @@
 package comp3350.quizrus.presentation.adapter;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -36,8 +39,25 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
         //Changing the values of the recycle view items (implementing the quiz tiles string to each item)
         //The "position" from the parameter where the user is scrolled to, we can change the title accordingly
 
+        TextView itemTextView = holder.quizTitle;
+
         //Changing the name of the item according to the position
-        holder.quizTitle.setText(quizTitles.get(position));
+        itemTextView.setText(quizTitles.get(position));
+
+        //set the quiz item fade animation when touched
+        holder.itemView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    itemTextView.setAlpha(0.9f); // Fade when pressed
+                    return true;
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP || motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                    itemTextView.setAlpha(1.0f); // Restore when released
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -48,7 +68,7 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
     }
 
 
-
+    //==============================ViewHolder Class==========================================================
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView quizTitle;

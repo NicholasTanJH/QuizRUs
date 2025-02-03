@@ -52,6 +52,7 @@ public class QuizSelectionActivity extends Activity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 //        copyDatabaseToDevice(); //from prof's sample
+
     }
 
     @Override
