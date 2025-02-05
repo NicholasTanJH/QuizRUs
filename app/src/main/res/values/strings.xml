@@ -20,4 +20,7 @@
     <string name="gpa">GPA</string>
     <string name="fatalError">Fatal error</string>
     <string name="warning">Warning</string>
+    <string name="title_activity_question">QuestionActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
