@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#575757</color>
     <color name="colorGrey">#7F474747</color>
+    <color name="colorLightGrey">#29474747</color>
     <color name="colorPrimary">#0D1B2A</color>
     <color name="colorPrimaryLight">#000D1B2A</color>
     <color name="colorBlue">#1B263B</color>
@@ -14,4 +15,6 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+    <color name="green">#34CC0C</color>
+
 </resources>
