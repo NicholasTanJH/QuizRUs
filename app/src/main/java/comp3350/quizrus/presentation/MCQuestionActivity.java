@@ -2,6 +2,7 @@ package comp3350.quizrus.presentation;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +13,10 @@ import androidx.core.view.WindowInsetsCompat;
 import comp3350.quizrus.R;
 
 public class MCQuestionActivity extends AppCompatActivity {
-    Button button1;
-    Button button2;
-    Button button3;
-    Button button4;
+    private Button option1;
+    private Button option2;
+    private Button option3;
+    private Button option4;
     private int lastPressedButtonId = -1;
 
 
@@ -30,7 +31,19 @@ public class MCQuestionActivity extends AppCompatActivity {
             return insets;
         });
 
+        setQuestionText("Question: How cold is today?");
         initButton();
+    }
+
+    //set the question text
+    private void setQuestionText(String questionText) {
+        TextView questionTv = findViewById(R.id.questionTV);
+        questionTv.setText(questionText);
+    }
+
+    //set the option button text
+    private void setOptionsText(String optionText, Button button){
+           button.setText(optionText);
     }
 
     /*
@@ -39,41 +52,41 @@ public class MCQuestionActivity extends AppCompatActivity {
     and change color when pressed
      */
     private void initButton() {
-        button1 = findViewById(R.id.button1);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
-        button4 = findViewById(R.id.button4);
+        option1 = findViewById(R.id.button1);
+        option2 = findViewById(R.id.button2);
+        option3 = findViewById(R.id.button3);
+        option4 = findViewById(R.id.button4);
 
-        button1.setOnClickListener(b -> {
+        option1.setOnClickListener(b -> {
             lastPressedButtonId = b.getId();
             b.setBackgroundResource(R.drawable.button_clicked_color);
-            button2.setBackgroundResource(R.drawable.button_default_color);
-            button3.setBackgroundResource(R.drawable.button_default_color);
-            button4.setBackgroundResource(R.drawable.button_default_color);
+            option2.setBackgroundResource(R.drawable.button_default_color);
+            option3.setBackgroundResource(R.drawable.button_default_color);
+            option4.setBackgroundResource(R.drawable.button_default_color);
         });
 
-        button2.setOnClickListener(b -> {
+        option2.setOnClickListener(b -> {
             lastPressedButtonId = b.getId();
             b.setBackgroundResource(R.drawable.button_clicked_color);
-            button1.setBackgroundResource(R.drawable.button_default_color);
-            button3.setBackgroundResource(R.drawable.button_default_color);
-            button4.setBackgroundResource(R.drawable.button_default_color);
+            option1.setBackgroundResource(R.drawable.button_default_color);
+            option3.setBackgroundResource(R.drawable.button_default_color);
+            option4.setBackgroundResource(R.drawable.button_default_color);
         });
 
-        button3.setOnClickListener(b -> {
+        option3.setOnClickListener(b -> {
             lastPressedButtonId = b.getId();
             b.setBackgroundResource(R.drawable.button_clicked_color);
-            button1.setBackgroundResource(R.drawable.button_default_color);
-            button2.setBackgroundResource(R.drawable.button_default_color);
-            button4.setBackgroundResource(R.drawable.button_default_color);
+            option1.setBackgroundResource(R.drawable.button_default_color);
+            option2.setBackgroundResource(R.drawable.button_default_color);
+            option4.setBackgroundResource(R.drawable.button_default_color);
         });
 
-        button4.setOnClickListener(b -> {
+        option4.setOnClickListener(b -> {
             lastPressedButtonId = b.getId();
             b.setBackgroundResource(R.drawable.button_clicked_color);
-            button1.setBackgroundResource(R.drawable.button_default_color);
-            button2.setBackgroundResource(R.drawable.button_default_color);
-            button3.setBackgroundResource(R.drawable.button_default_color);
+            option1.setBackgroundResource(R.drawable.button_default_color);
+            option2.setBackgroundResource(R.drawable.button_default_color);
+            option3.setBackgroundResource(R.drawable.button_default_color);
         });
     }
 }
