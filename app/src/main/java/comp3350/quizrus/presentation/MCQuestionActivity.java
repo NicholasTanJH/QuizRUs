@@ -59,34 +59,34 @@ public class MCQuestionActivity extends AppCompatActivity {
 
         option1.setOnClickListener(b -> {
             lastPressedButtonId = b.getId();
-            b.setBackgroundResource(R.drawable.button_clicked_color);
-            option2.setBackgroundResource(R.drawable.button_default_color);
-            option3.setBackgroundResource(R.drawable.button_default_color);
-            option4.setBackgroundResource(R.drawable.button_default_color);
+            b.setBackgroundResource(R.drawable.question_option_button_clicked_color);
+            option2.setBackgroundResource(R.drawable.question_option_button_default_color);
+            option3.setBackgroundResource(R.drawable.question_option_button_default_color);
+            option4.setBackgroundResource(R.drawable.question_option_button_default_color);
         });
 
         option2.setOnClickListener(b -> {
             lastPressedButtonId = b.getId();
-            b.setBackgroundResource(R.drawable.button_clicked_color);
-            option1.setBackgroundResource(R.drawable.button_default_color);
-            option3.setBackgroundResource(R.drawable.button_default_color);
-            option4.setBackgroundResource(R.drawable.button_default_color);
+            b.setBackgroundResource(R.drawable.question_option_button_clicked_color);
+            option1.setBackgroundResource(R.drawable.question_option_button_default_color);
+            option3.setBackgroundResource(R.drawable.question_option_button_default_color);
+            option4.setBackgroundResource(R.drawable.question_option_button_default_color);
         });
 
         option3.setOnClickListener(b -> {
             lastPressedButtonId = b.getId();
-            b.setBackgroundResource(R.drawable.button_clicked_color);
-            option1.setBackgroundResource(R.drawable.button_default_color);
-            option2.setBackgroundResource(R.drawable.button_default_color);
-            option4.setBackgroundResource(R.drawable.button_default_color);
+            b.setBackgroundResource(R.drawable.question_option_button_clicked_color);
+            option1.setBackgroundResource(R.drawable.question_option_button_default_color);
+            option2.setBackgroundResource(R.drawable.question_option_button_default_color);
+            option4.setBackgroundResource(R.drawable.question_option_button_default_color);
         });
 
         option4.setOnClickListener(b -> {
             lastPressedButtonId = b.getId();
-            b.setBackgroundResource(R.drawable.button_clicked_color);
-            option1.setBackgroundResource(R.drawable.button_default_color);
-            option2.setBackgroundResource(R.drawable.button_default_color);
-            option3.setBackgroundResource(R.drawable.button_default_color);
+            b.setBackgroundResource(R.drawable.question_option_button_clicked_color);
+            option1.setBackgroundResource(R.drawable.question_option_button_default_color);
+            option2.setBackgroundResource(R.drawable.question_option_button_default_color);
+            option3.setBackgroundResource(R.drawable.question_option_button_default_color);
         });
     }
 }
