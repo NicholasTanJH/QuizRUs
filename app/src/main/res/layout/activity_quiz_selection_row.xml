@@ -7,7 +7,7 @@
     android:layout_marginVertical="30dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
-    app:cardBackgroundColor="@color/white">
+    app:cardBackgroundColor="@color/colorWhite">
 
     <TextView
         android:id="@+id/quiz_selection_item_title"
@@ -19,6 +19,6 @@
         android:text=""
         android:textSize="65sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/colorWhite"
         android:background="@color/colorBlue"/>
 </androidx.cardview.widget.CardView>

@@ -1,7 +1,11 @@
 package comp3350.quizrus.presentation.adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import comp3350.quizrus.R;
+import comp3350.quizrus.presentation.MCQuestionActivity;
 
 public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleViewAdapter.MyViewHolder> {
     Context context;
@@ -50,14 +55,20 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     itemTextView.setAlpha(0.9f); // Fade when pressed
-                    return true;
                 } else if (motionEvent.getAction() == MotionEvent.ACTION_UP || motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
                     itemTextView.setAlpha(1.0f); // Restore when released
-                    return true;
                 }
                 return false;
             }
         });
+
+        holder.itemView.setOnClickListener(view -> {
+            Log.e("Shit", "asd");
+            Intent intent = new Intent(context, MCQuestionActivity.class);
+            intent.putExtra("quizTitle", quizTitles.get(position));  // Pass data to the question activity
+            context.startActivity(intent);
+        });
+
     }
 
     @Override

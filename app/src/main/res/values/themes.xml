@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="Theme.A02g11realengineers" parent="Theme.MaterialComponents.Light" />
+
+    <style name="Theme.A02g11realengineers.Fullscreen" parent="Theme.A02g11realengineers">
+        <item name="android:actionBarStyle">
+            @style/Widget.Theme.A02g11realengineers.ActionBar.Fullscreen
+        </item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="ThemeOverlay.A02g11realengineers.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+</resources>
