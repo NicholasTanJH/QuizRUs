@@ -16,5 +16,3 @@
 ### Iteration 3
 
 - #### [Features](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/issues/?sort=created_date&state=opened&label_name%5B%5D=Feature&milestone_title=Iteration%203&first_page_size=20)
-
-### New changes made
