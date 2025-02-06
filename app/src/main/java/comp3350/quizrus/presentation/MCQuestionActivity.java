@@ -14,13 +14,22 @@ import androidx.core.view.WindowInsetsCompat;
 import comp3350.quizrus.R;
 
 public class MCQuestionActivity extends AppCompatActivity {
+    //integer to keep track the option buttons
+    //eg. 1 will be the first option button, and 4 is the forth
+    final int OPTION_BUTTON_1_ORDER_NUM = 1;
+    final int OPTION_BUTTON_2_ORDER_NUM = 2;
+    final int OPTION_BUTTON_3_ORDER_NUM = 3;
+    final int OPTION_BUTTON_4_ORDER_NUM = 4;
     private Button optionButton1;
     private Button optionButton2;
     private Button optionButton3;
     private Button optionButton4;
-    //keep track of which button is last pressed before clicking submit button
-    private int lastPressedButtonId = -1;
+    //A button for submit and next
     private Button proceedButton;
+    //keep track of which button is last pressed before clicking submit button
+    private int lastPressedButtonOrderNum = -1;
+    //The button that is the right answer
+    private int rightAnswerButtonOrderNum = -1;
     private boolean isSubmitted = false;
 
 
@@ -35,15 +44,9 @@ public class MCQuestionActivity extends AppCompatActivity {
             return insets;
         });
 
-        setQuestionText("Question: How cold is today?");
         setUpOptionButtons();
         setUpProceedButton();
-    }
-
-    //set the question text
-    private void setQuestionText(String questionText) {
-        TextView questionTv = findViewById(R.id.questionTV);
-        questionTv.setText(questionText);
+        reset();
     }
 
     /*
@@ -60,9 +63,9 @@ public class MCQuestionActivity extends AppCompatActivity {
         optionButton4 = findViewById(R.id.button4);
 
         optionButton1.setOnClickListener(b -> {
-            if(!isSubmitted)
+            if (!isSubmitted)
                 setProceedButtonToSubmitMode();
-            lastPressedButtonId = b.getId();
+            lastPressedButtonOrderNum = OPTION_BUTTON_1_ORDER_NUM;
             b.setBackgroundResource(R.drawable.question_option_button_clicked_color);
             optionButton2.setBackgroundResource(R.drawable.question_option_button_default_color);
             optionButton3.setBackgroundResource(R.drawable.question_option_button_default_color);
@@ -70,9 +73,9 @@ public class MCQuestionActivity extends AppCompatActivity {
         });
 
         optionButton2.setOnClickListener(b -> {
-            if(!isSubmitted)
+            if (!isSubmitted)
                 setProceedButtonToSubmitMode();
-            lastPressedButtonId = b.getId();
+            lastPressedButtonOrderNum = OPTION_BUTTON_2_ORDER_NUM;
             b.setBackgroundResource(R.drawable.question_option_button_clicked_color);
             optionButton1.setBackgroundResource(R.drawable.question_option_button_default_color);
             optionButton3.setBackgroundResource(R.drawable.question_option_button_default_color);
@@ -80,9 +83,9 @@ public class MCQuestionActivity extends AppCompatActivity {
         });
 
         optionButton3.setOnClickListener(b -> {
-            if(!isSubmitted)
+            if (!isSubmitted)
                 setProceedButtonToSubmitMode();
-            lastPressedButtonId = b.getId();
+            lastPressedButtonOrderNum = OPTION_BUTTON_3_ORDER_NUM;
             b.setBackgroundResource(R.drawable.question_option_button_clicked_color);
             optionButton1.setBackgroundResource(R.drawable.question_option_button_default_color);
             optionButton2.setBackgroundResource(R.drawable.question_option_button_default_color);
@@ -90,19 +93,14 @@ public class MCQuestionActivity extends AppCompatActivity {
         });
 
         optionButton4.setOnClickListener(b -> {
-            if(!isSubmitted)
+            if (!isSubmitted)
                 setProceedButtonToSubmitMode();
-            lastPressedButtonId = b.getId();
+            lastPressedButtonOrderNum = OPTION_BUTTON_4_ORDER_NUM;
             b.setBackgroundResource(R.drawable.question_option_button_clicked_color);
             optionButton1.setBackgroundResource(R.drawable.question_option_button_default_color);
             optionButton2.setBackgroundResource(R.drawable.question_option_button_default_color);
             optionButton3.setBackgroundResource(R.drawable.question_option_button_default_color);
         });
-    }
-
-    //set the option button text
-    private void setOptionsText(String optionText, Button button) {
-        button.setText(optionText);
     }
 
     /*
@@ -112,7 +110,20 @@ public class MCQuestionActivity extends AppCompatActivity {
      */
     private void setUpProceedButton() {
         proceedButton = findViewById(R.id.buttonProceed);
+    }
+
+    //reset the whole page including the tracker for last pressed and right answer button
+    //and reset the UI to default, remove any color markings on the buttons and reset the proceed button
+    private void reset() {
         setProceedButtonToInvisibleMode();
+        lastPressedButtonOrderNum = -1;
+        rightAnswerButtonOrderNum = 1; //TODO: get it from data
+        TextView questionTV = findViewById(R.id.questionTV);
+        questionTV.setText("How cold is today?");
+        optionButton1.setText("10");
+        optionButton2.setText("0");
+        optionButton3.setText("-10");
+        optionButton4.setText("-20");
     }
 
     //set the proceed button to invisible and unclickable
@@ -132,6 +143,8 @@ public class MCQuestionActivity extends AppCompatActivity {
         proceedButton.setOnClickListener(proceedButton -> {
             //set the proceed button from the submit mode to next mode
             setProceedButtonToNextMode();
+            //indicate which is the right answer by changing the color of the selection item
+            indicateRightAndWrongAnswer();
             //set the answer option buttons to unusable
             optionButton1.setClickable(false);
             optionButton2.setClickable(false);
@@ -147,7 +160,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         proceedButton.setBackgroundResource(R.drawable.question_proceed_button_next);
         proceedButton.setOnClickListener(proceedButton -> {
             //set the proceed button from next mode to invisible mode
-            setProceedButtonToInvisibleMode();
+            reset();
             //clear the color of the selected option answer
             optionButton1.setBackgroundResource(R.drawable.question_option_button_default_color);
             optionButton2.setBackgroundResource(R.drawable.question_option_button_default_color);
@@ -159,5 +172,26 @@ public class MCQuestionActivity extends AppCompatActivity {
             optionButton3.setClickable(true);
             optionButton4.setClickable(true);
         });
+    }
+
+    //mark the right answer option button to green, and red for the user's wrong answer option button
+    private void indicateRightAndWrongAnswer() {
+        getButtonByOrderNum(rightAnswerButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_wrong);
+        getButtonByOrderNum(lastPressedButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_right);
+    }
+
+    //find the Button using the given constant
+    private Button getButtonByOrderNum(int optionOrderNum) {
+        if (optionOrderNum == OPTION_BUTTON_1_ORDER_NUM) {
+            return optionButton1;
+        } else if (optionOrderNum == OPTION_BUTTON_2_ORDER_NUM) {
+            return optionButton2;
+        } else if (optionOrderNum == OPTION_BUTTON_3_ORDER_NUM) {
+            return optionButton3;
+        } else if (optionOrderNum == OPTION_BUTTON_4_ORDER_NUM) {
+            return optionButton4;
+        } else {
+            return null; //something is wrong
+        }
     }
 }
