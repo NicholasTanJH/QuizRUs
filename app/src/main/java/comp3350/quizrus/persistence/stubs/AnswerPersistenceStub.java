@@ -17,18 +17,18 @@ public class AnswerPersistenceStub implements AnswerPersistence {
         // Answers must be associated with a question.
         User user1 = new User("kakashi", "password1");
         Quiz quiz1 = new Quiz("Flags of Countries", user1);
-        Question question1 = new Question("Which of these countries has a white flag?", quiz1);
+        Question question1 = new Question("Which of these countries have white in their flag?", quiz1);
         Question question2 = new Question("In which country was the first flag created?", quiz1);
 
-        answers.add(new Answer("USA", question1));
-        answers.add(new Answer("Armenia", question1));
-        answers.add(new Answer("China", question1));
-        answers.add(new Answer("Canada", question1));
+        answers.add(new Answer("Morocco", false, question1));
+        answers.add(new Answer("Malawi", false, question1));
+        answers.add(new Answer("Bangladesh", false, question1));
+        answers.add(new Answer("Canada", true, question1));
 
-        answers.add(new Answer("Nigeria", question2));
-        answers.add(new Answer("South Korea", question2));
-        answers.add(new Answer("United Kingdoms", question2));
-        answers.add(new Answer("Pakistan", question2));
+        answers.add(new Answer("United States of America", false, question2));
+        answers.add(new Answer("South Korea", false, question2));
+        answers.add(new Answer("United Kingdom", false, question2));
+        answers.add(new Answer("China", true, question2));
     }
 
     @Override
@@ -41,5 +41,18 @@ public class AnswerPersistenceStub implements AnswerPersistence {
             }
         }
         return Collections.unmodifiableList(answersToQuestion);
+    }
+
+    @Override
+    public List<Answer> getCorrectAnswers(Question question) {
+        List<Answer> correctAnswers = new ArrayList<>();
+
+        for (Answer answer : answers) {
+            if (answer.question.equals(question) &&
+                    answer.isCorrect == true) {
+                correctAnswers.add(answer);
+            }
+        }
+        return Collection.unmodifiableList(correctAnswers);
     }
 }
