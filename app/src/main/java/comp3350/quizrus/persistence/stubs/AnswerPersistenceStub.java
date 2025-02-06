@@ -14,7 +14,7 @@ public class AnswerPersistenceStub implements AnswerPersistence {
     public AnswerPersistenceStub() {
         this.answers = new ArrayList<>();
 
-        // Answers must be associated to a question.
+        // Answers must be associated with a question.
         User user1 = new User("kakashi", "password1");
         Quiz quiz1 = new Quiz("Flags of Countries", user1);
         Question question1 = new Question("Which of these countries has a white flag?", quiz1);
