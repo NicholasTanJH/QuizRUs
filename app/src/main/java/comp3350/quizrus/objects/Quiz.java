@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class Quiz {
     private final String quizID;
-    private final String userID;
+    private final User myUser;
     private final String title;
 
     public Quiz(final String newID)
     {
         this.quizID = newID;
-        this.userID = null;
+        this.myUser = null;
         this.title = null;
     }
 
-    public Quiz(final String newQuizID, final String newUserID, final String newTitle)
+    public Quiz(final String newQuizID, final String newTitle, final User newUser)
     {
         this.quizID = newQuizID;
-        this.userID = newUserID;
+        this.myUser = newUser;
         this.title = newTitle;
     }
 
@@ -26,9 +26,9 @@ public class Quiz {
         return this.quizID;
     }
 
-    public String getUserID()
+    public User getUser()
     {
-        return this.userID;
+        return this.myUser;
     }
 
     public String getTitle()
@@ -38,12 +38,12 @@ public class Quiz {
 
     public String toString()
     {
-        return String.format("Quiz: %s %s %s", quizID, userID, title);
+        return String.format("Quiz: %s %s %s", quizID, myUser != null ? myUser.getUserID() : "null", title);
     }
 
     public int hashCode()
     {
-        return Objects.hash(quizID, userID, title);
+        return Objects.hash(quizID, myUser, title);
     }
 
     public boolean equals(Object other)

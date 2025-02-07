@@ -30,7 +30,7 @@ public class AccessUsers {
 
     public List<User> getUsers()
     {
-        users = userPersistence.getUserSequential();
+        users = userPersistence.getAllUsers();
         return Collections.unmodifiableList(users);
     }
 
@@ -38,7 +38,7 @@ public class AccessUsers {
     {
         if (users == null)
         {
-            users = userPersistence.getUserSequential();
+            users = userPersistence.getAllUsers();
             currentUser = 0;
         }
         if (currentUser < users.size())
@@ -55,37 +55,21 @@ public class AccessUsers {
         return user;
     }
 
-    public User getRandom(String userID)
-    {
-        user = null;
-        if(userID.trim().equals(""))
-        {
-            //System.out.println("*** Invalid user ID");
-        }
-        else
-        {
-            users = userPersistence.getUserRandom(new User(userID));
-            if(users.size() == 1)
-            {
-                user = (User) users.get(0);
-            }
-        }
-        return user;
-    }
-
-    public User insertUser(User currentUser)
-    {
-        return userPersistence.insertUser(currentUser);
-    }
-
-    public User updateUser(User currentUser)
-    {
-        return userPersistence.updateUser(currentUser);
-    }
-
-    public void deleteUser(User currentUser)
-    {
-        userPersistence.deleteUser(currentUser);
-    }
-
+//    public User getRandom(String userID)
+//    {
+//        user = null;
+//        if(userID.trim().equals(""))
+//        {
+//            //System.out.println("*** Invalid user ID");
+//        }
+//        else
+//        {
+//            users = userPersistence.getUserRandom(new User(userID));
+//            if(users.size() == 1)
+//            {
+//                user = (User) users.get(0);
+//            }
+//        }
+//        return user;
+//    }
 }

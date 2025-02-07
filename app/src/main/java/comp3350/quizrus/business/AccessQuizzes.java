@@ -29,7 +29,7 @@ public class AccessQuizzes {
 
     public List<Quiz> getQuizzes()
     {
-        quizzes = quizPersistence.getQuizSequential();
+        quizzes = quizPersistence.getAllQuizzes();
         return Collections.unmodifiableList(quizzes);
     }
 
@@ -37,7 +37,7 @@ public class AccessQuizzes {
     {
         if(quizzes == null)
         {
-            quizzes = quizPersistence.getQuizSequential();
+            quizzes = quizPersistence.getAllQuizzes();
             currentQuiz = 0;
         }
         if(currentQuiz < quizzes.size())
@@ -52,38 +52,5 @@ public class AccessQuizzes {
             currentQuiz = 0;
         }
         return quiz;
-    }
-
-    public Quiz getRandom(String quizID)
-    {
-        quiz = null;
-        if(quizID.trim().equals(""))
-        {
-            //System.out.println("*** Invalid quiz ID");
-        }
-        else
-        {
-            quizzes = quizPersistence.getQuizRandom(new Quiz(quizID));
-            if(quizzes.size() == 1)
-            {
-                quiz = (Quiz) quizzes.get(0);
-            }
-        }
-        return quiz;
-    }
-
-    public Quiz insertQuiz(Quiz currentQuiz)
-    {
-        return quizPersistence.insertQuiz(currentQuiz);
-    }
-
-    public Quiz updateQuiz(Quiz currentQuiz)
-    {
-        return quizPersistence.updateQuiz(currentQuiz);
-    }
-
-    public void deleteQuiz(Quiz currentQuiz)
-    {
-        quizPersistence.deleteQuiz(currentQuiz);
     }
 }

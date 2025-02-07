@@ -29,6 +29,13 @@ public class Answer {
         this.isCorrect = true;
     }
 
+    public Answer(final int newAnswerID, final String newAnswerText, final boolean newIsCorrect, final Question newMyQuestion){
+        this.answerID = newAnswerID;
+        this.answerText = newAnswerText;
+        this.myQuestion = newMyQuestion;
+        this.isCorrect = newIsCorrect;
+    }
+
     // Getters
     public int getAnswerID() {
         return this.answerID;

@@ -14,18 +14,18 @@ public class QuizPersistenceStub implements QuizPersistence {
     public QuizPersistenceStub() {
         this.quizzes = new ArrayList<>();
 
-        User user1 = new User("kakashi", "password1");
-        User user2 = new User("nazgul", "password1");
+        User user1 = new User("1", "kakashi", "password1");
+        User user2 = new User("2", "nazgul", "password1");
 
-        quizzes.add(new Quiz("Flags of Countries", user1));
-        quizzes.add(new Quiz("Celebrity Partners", user1));
-        quizzes.add(new Quiz("Software Engineering I", user1));
-        quizzes.add(new Quiz("Amazon Interview", user2));
-        quizzes.add(new Quiz("Songs by Famous Artists", user2));
+        quizzes.add(new Quiz("1", "Flags of Countries", user1));
+        quizzes.add(new Quiz("2","Celebrity Partners", user1));
+        quizzes.add(new Quiz("3","Software Engineering I", user1));
+        quizzes.add(new Quiz("4","Amazon Interview", user2));
+        quizzes.add(new Quiz("5","Songs by Famous Artists", user2));
     }
 
     @Override
-    public List<Quiz> getQuizzes() {
+    public List<Quiz> getAllQuizzes() {
         return Collections.unmodifiableList(quizzes);
     }
 
@@ -34,7 +34,7 @@ public class QuizPersistenceStub implements QuizPersistence {
         List<Quiz> userQuizzes = new ArrayList<>();
 
         for (Quiz quiz : quizzes) {
-            if (quiz.user.equals(user)) {
+            if (quiz.getUser().equals(user)) {
                 userQuizzes.add(quiz);
             }
         }
