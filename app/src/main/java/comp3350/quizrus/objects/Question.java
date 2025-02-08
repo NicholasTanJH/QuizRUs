@@ -45,6 +45,9 @@ public class Question {
         return this.questionType;
     }
 
+    public String getQuestionText(){return this.questionText;}
+
+
     @Override
     //toString Method
     public String toString(){

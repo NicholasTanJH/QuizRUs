@@ -26,10 +26,7 @@ public class AccessQuestions {
         this.questionPersistence = questionPersistence;
     }
 
-
-
     public List<Question> getQuestions(final Quiz quiz) {
-
         questions = questionPersistence.getQuestionsForQuiz(quiz);
         return Collections.unmodifiableList(questions);
     }

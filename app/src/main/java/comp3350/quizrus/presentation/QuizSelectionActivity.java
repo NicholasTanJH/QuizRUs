@@ -2,6 +2,8 @@ package comp3350.quizrus.presentation;
 
 import comp3350.quizrus.R;
 import comp3350.quizrus.application.Main;
+import comp3350.quizrus.business.AccessQuizzes;
+import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.presentation.adapter.QuizRecycleViewAdapter;
 
 import android.app.Activity;
@@ -22,37 +24,27 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuizSelectionActivity extends Activity {
-    //(Demo) A List for the quiz titles
-    //Hard coded for now
-    ArrayList<String> quizTitles = new ArrayList<>();
+    List<Quiz> quizzes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_selection);
 
-        //init for quizTitles, again this is just hard coded
-        quizTitles.add("First");
-        quizTitles.add("Sec");
-        quizTitles.add("Thirdabhsdjfhajslhdfjsaasdfasdfasdfasdf");
-        quizTitles.add("");
-        quizTitles.add("4");
-        quizTitles.add("µ∆˜å∆ø∂˜∆ßøå");
-        quizTitles.add("asdf asdf asdf asdf ");
-        quizTitles.add("Hello World!");
-        quizTitles.add("Hello World!");
-        quizTitles.add("End");
+        addQuizTitles();
 
         //Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.listQuiz);
-        QuizRecycleViewAdapter adapter = new QuizRecycleViewAdapter(this,quizTitles);
+        QuizRecycleViewAdapter adapter = new QuizRecycleViewAdapter(this,quizzes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-//        copyDatabaseToDevice(); //from prof's sample
-
+    private void addQuizTitles() {
+        quizzes = new AccessQuizzes().getQuizzes();
     }
 
     @Override
@@ -73,59 +65,6 @@ public class QuizSelectionActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         return super.onOptionsItemSelected(item);
     }
-//
-//    private void copyDatabaseToDevice() {
-//        final String DB_PATH = "db";
-//
-//        String[] assetNames;
-//        Context context = getApplicationContext();
-//        File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
-//        AssetManager assetManager = getAssets();
-//
-//        try {
-//
-//            assetNames = assetManager.list(DB_PATH);
-//            for (int i = 0; i < assetNames.length; i++) {
-//                assetNames[i] = DB_PATH + "/" + assetNames[i];
-//            }
-//
-//            copyAssetsToDirectory(assetNames, dataDirectory);
-//
-//            Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
-//
-//        } catch (final IOException ioe) {
-//            Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
-//        }
-//    }
-//
-//    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
-//        AssetManager assetManager = getAssets();
-//
-//        for (String asset : assets) {
-//            String[] components = asset.split("/");
-//            String copyPath = directory.toString() + "/" + components[components.length - 1];
-//
-//            char[] buffer = new char[1024];
-//            int count;
-//
-//            File outFile = new File(copyPath);
-//
-//            if (!outFile.exists()) {
-//                InputStreamReader in = new InputStreamReader(assetManager.open(asset));
-//                FileWriter out = new FileWriter(outFile);
-//
-//                count = in.read(buffer);
-//                while (count != -1) {
-//                    out.write(buffer, 0, count);
-//                    count = in.read(buffer);
-//                }
-//
-//                out.close();
-//                in.close();
-//            }
-//        }
-//    }
 }

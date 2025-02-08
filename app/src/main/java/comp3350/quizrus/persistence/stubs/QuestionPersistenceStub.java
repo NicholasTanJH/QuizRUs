@@ -19,7 +19,7 @@ public class QuestionPersistenceStub implements QuestionPersistence {
         Quiz quiz1 = new Quiz("1", "Flags of Countries", user1);
         Quiz quiz2 = new Quiz("2", "Celebrity Partners", user1);
 
-        questions.add(new Question("Which of these countries has a white flag?", quiz1));
+        questions.add(new Question("Which of these countries have white in their flag?", quiz1));
         questions.add(new Question("In which country was the first flag created?", quiz1));
         questions.add(new Question("Who is Kim Kardashian's current partner?", quiz1));
         questions.add(new Question("How many people has The Weekend dated?", quiz2));

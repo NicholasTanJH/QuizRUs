@@ -11,27 +11,42 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.List;
+
 import comp3350.quizrus.R;
+import comp3350.quizrus.business.AccessAnswers;
+import comp3350.quizrus.business.AccessQuestions;
+import comp3350.quizrus.business.AccessQuizzes;
+import comp3350.quizrus.objects.Answer;
+import comp3350.quizrus.objects.Question;
+import comp3350.quizrus.objects.Quiz;
 
 public class MCQuestionActivity extends AppCompatActivity {
     //integer to keep track the option buttons
     //eg. 1 will be the first option button, and 4 is the forth
-    final int OPTION_BUTTON_1_ORDER_NUM = 1;
-    final int OPTION_BUTTON_2_ORDER_NUM = 2;
-    final int OPTION_BUTTON_3_ORDER_NUM = 3;
-    final int OPTION_BUTTON_4_ORDER_NUM = 4;
+    private final int OPTION_BUTTON_1_ORDER_NUM = 0;
+    private final int OPTION_BUTTON_2_ORDER_NUM = 1;
+    private final int OPTION_BUTTON_3_ORDER_NUM = 2;
+    private final int OPTION_BUTTON_4_ORDER_NUM = 3;
+
+    //For getting data
+    private final AccessAnswers accessAnswers = new AccessAnswers();
+    private List<Question> questions;
+    //Number of question in this quiz
+    private int totalQuestionCount;
+    //Track the question no.
+    private int questionNum = 0;
+    //The button last pressed
+    private int lastPressedButtonOrderNum = -1;
+    //The right answer button
+    private int rightAnswerButtonOrderNum = -1;
+    private boolean isSubmitted = false;
     private Button optionButton1;
     private Button optionButton2;
     private Button optionButton3;
     private Button optionButton4;
     //A button for submit and next
     private Button proceedButton;
-    //keep track of which button is last pressed before clicking submit button
-    private int lastPressedButtonOrderNum = -1;
-    //The button that is the right answer
-    private int rightAnswerButtonOrderNum = -1;
-    private boolean isSubmitted = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +59,31 @@ public class MCQuestionActivity extends AppCompatActivity {
             return insets;
         });
 
+        setUpQuestions();
         setUpOptionButtons();
         setUpProceedButton();
         reset();
     }
 
+    //get the quiz number from last activity, find the quiz by the quiz number
+    //get the questions from the quiz
+    //get the total question count
+    private void setUpQuestions() {
+        AccessQuizzes quizzes = new AccessQuizzes();
+        List<Quiz> quizList = quizzes.getQuizzes();
+        int quizNum = getIntent().getIntExtra("quizNum", -1); //get the quiz number user pressed from last activity
+        Quiz quiz = quizList.get(quizNum);
+        AccessQuestions accessQuestions = new AccessQuestions();
+        questions = accessQuestions.getQuestions(quiz);
+        totalQuestionCount = questions.size();
+    }
+
     /*
     initialize the option buttons
     add onclick listener that:
-        track the last pressed button id
-        change the option button color when pressed
-        make the proceed button into submit mode once any of the option button is pressed
+        - track the last pressed button id
+        - change the option button color when pressed
+        - make the proceed button into submit mode once any of the option button is pressed
      */
     private void setUpOptionButtons() {
         optionButton1 = findViewById(R.id.button1);
@@ -112,18 +141,45 @@ public class MCQuestionActivity extends AppCompatActivity {
         proceedButton = findViewById(R.id.buttonProceed);
     }
 
-    //reset the whole page including the tracker for last pressed and right answer button
-    //and reset the UI to default, remove any color markings on the buttons and reset the proceed button
+    //reset the tracker for last pressed and right answer button
+    //reset the UI to default, remove any color markings on the buttons
+    //reset the proceed button to invisible mode
+    //get the following question and it's answers, and update the text of the question and the answer option buttons
+    //
     private void reset() {
         setProceedButtonToInvisibleMode();
         lastPressedButtonOrderNum = -1;
-        rightAnswerButtonOrderNum = 1; //TODO: get it from data
+
+        //get the current question and it's answers
+        Question currentQuestion = questions.get(questionNum);
+        List<Answer> currentAnswers = accessAnswers.getAnswers(currentQuestion);
+
+        //get the position of the correct answer
+        rightAnswerButtonOrderNum = accessAnswers.getCorrectAnswerPosition(currentAnswers);
+
+        //set question text
         TextView questionTV = findViewById(R.id.questionTV);
-        questionTV.setText("How cold is today?");
-        optionButton1.setText("10");
-        optionButton2.setText("0");
-        optionButton3.setText("-10");
-        optionButton4.setText("-20");
+        questionTV.setText(currentQuestion.getQuestionText());
+
+        //set answer button text
+        optionButton1.setText(currentAnswers.get(OPTION_BUTTON_1_ORDER_NUM).getAnswerText());
+        optionButton2.setText(currentAnswers.get(OPTION_BUTTON_2_ORDER_NUM).getAnswerText());
+        optionButton3.setText(currentAnswers.get(OPTION_BUTTON_3_ORDER_NUM).getAnswerText());
+        optionButton4.setText(currentAnswers.get(OPTION_BUTTON_4_ORDER_NUM).getAnswerText());
+
+        //clear the color of the selected option answer
+        optionButton1.setBackgroundResource(R.drawable.question_option_button_default_color);
+        optionButton2.setBackgroundResource(R.drawable.question_option_button_default_color);
+        optionButton3.setBackgroundResource(R.drawable.question_option_button_default_color);
+        optionButton4.setBackgroundResource(R.drawable.question_option_button_default_color);
+
+        //set the option button clickable
+        optionButton1.setClickable(true);
+        optionButton2.setClickable(true);
+        optionButton3.setClickable(true);
+        optionButton4.setClickable(true);
+
+        questionNum++;
     }
 
     //set the proceed button to invisible and unclickable
@@ -134,6 +190,7 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     //make the proceed button visible and usable
     //make it as a submit button
+    //indicate which is the right answer and wrong if any
     private void setProceedButtonToSubmitMode() {
         isSubmitted = true;
         proceedButton.setText(R.string.submit);
@@ -154,30 +211,26 @@ public class MCQuestionActivity extends AppCompatActivity {
     }
 
     //make it as a next button
+    //set if the last question is reached and the proceed button is pressed, back out to the quiz selection page,
+    //else, reset this page
     private void setProceedButtonToNextMode() {
         isSubmitted = false;
         proceedButton.setText(R.string.next);
         proceedButton.setBackgroundResource(R.drawable.question_proceed_button_next);
         proceedButton.setOnClickListener(proceedButton -> {
-            //set the proceed button from next mode to invisible mode
-            reset();
-            //clear the color of the selected option answer
-            optionButton1.setBackgroundResource(R.drawable.question_option_button_default_color);
-            optionButton2.setBackgroundResource(R.drawable.question_option_button_default_color);
-            optionButton3.setBackgroundResource(R.drawable.question_option_button_default_color);
-            optionButton4.setBackgroundResource(R.drawable.question_option_button_default_color);
-            //set the option button clickable
-            optionButton1.setClickable(true);
-            optionButton2.setClickable(true);
-            optionButton3.setClickable(true);
-            optionButton4.setClickable(true);
+            if(totalQuestionCount == questionNum){
+                finish(); //get back to quiz selection page once reached the last question
+            }else{
+                //reset when still have more questions
+                reset();
+            }
         });
     }
 
     //mark the right answer option button to green, and red for the user's wrong answer option button
     private void indicateRightAndWrongAnswer() {
-        getButtonByOrderNum(rightAnswerButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_wrong);
-        getButtonByOrderNum(lastPressedButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_right);
+        getButtonByOrderNum(rightAnswerButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_right);
+        getButtonByOrderNum(lastPressedButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_wrong);
     }
 
     //find the Button using the given constant
