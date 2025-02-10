@@ -229,8 +229,8 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     //mark the right answer option button to green, and red for the user's wrong answer option button
     private void indicateRightAndWrongAnswer() {
-        getButtonByOrderNum(rightAnswerButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_right);
         getButtonByOrderNum(lastPressedButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_wrong);
+        getButtonByOrderNum(rightAnswerButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_right);
     }
 
     //find the Button using the given constant
