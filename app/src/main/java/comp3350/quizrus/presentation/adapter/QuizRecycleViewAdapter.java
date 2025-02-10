@@ -1,12 +1,8 @@
 package comp3350.quizrus.presentation.adapter;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,19 +12,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.quizrus.R;
+import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.presentation.MCQuestionActivity;
 
 public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleViewAdapter.MyViewHolder> {
     Context context;
-    ArrayList<String> quizTitles;
+    List<Quiz> quizzes;
 
     //quizTitles passed in from QuizSelectionActivity
-    public QuizRecycleViewAdapter(Context context, ArrayList<String> quizTitles){
+    public QuizRecycleViewAdapter(Context context, List<Quiz> quizzes){
         this.context = context;
-        this.quizTitles = quizTitles;
+        this.quizzes = quizzes;
     }
 
     @NonNull
@@ -43,11 +40,10 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
     public void onBindViewHolder(@NonNull QuizRecycleViewAdapter.MyViewHolder holder, int position) {
         //Changing the values of the recycle view items (implementing the quiz tiles string to each item)
         //The "position" from the parameter where the user is scrolled to, we can change the title accordingly
-
         TextView itemTextView = holder.quizTitle;
 
         //Changing the name of the item according to the position
-        itemTextView.setText(quizTitles.get(position));
+        itemTextView.setText(quizzes.get(position).getTitle());
 
         //set the quiz item fade animation when touched
         holder.itemView.setOnTouchListener(new View.OnTouchListener(){
@@ -62,26 +58,24 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
             }
         });
 
+        //start new activity page when the quiz item is pressed
         holder.itemView.setOnClickListener(view -> {
-            Log.e("Shit", "asd");
             Intent intent = new Intent(context, MCQuestionActivity.class);
-            intent.putExtra("quizTitle", quizTitles.get(position));  // Pass data to the question activity
+            intent.putExtra("quizNum", position);  // Pass the data (which quiz used pressed) to the question activity
             context.startActivity(intent);
         });
-
     }
 
     @Override
     //Number of items in the recycle view (rows of selectable quiz)
     //Defined by the size of the quizTitles arraylist
     public int getItemCount() {
-        return quizTitles.size();
+        return quizzes.size();
     }
 
 
     //==============================ViewHolder Class==========================================================
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-
         TextView quizTitle;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

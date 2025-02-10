@@ -6,6 +6,7 @@ import java.util.List;
 
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
+import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.QuestionPersistence;
 
 public class QuestionPersistenceStub implements QuestionPersistence {
@@ -14,11 +15,11 @@ public class QuestionPersistenceStub implements QuestionPersistence {
     public QuestionPersistenceStub() {
         this.questions = new ArrayList<>();
 
-        User user1 = new User("kakashi", "password1");
-        Quiz quiz1 = new Quiz("Flags of Countries", user1);
-        Quiz quiz2 = new Quiz("Celebrity Partners", user1);
+        User user1 = new User("1", "kakashi", "password1");
+        Quiz quiz1 = new Quiz("1", "Flags of Countries", user1);
+        Quiz quiz2 = new Quiz("2", "Celebrity Partners", user1);
 
-        questions.add(new Question("Which of these countries has a white flag?", quiz1));
+        questions.add(new Question("Which of these countries have white in their flag?", quiz1));
         questions.add(new Question("In which country was the first flag created?", quiz1));
         questions.add(new Question("Who is Kim Kardashian's current partner?", quiz1));
         questions.add(new Question("How many people has The Weekend dated?", quiz2));
@@ -30,7 +31,7 @@ public class QuestionPersistenceStub implements QuestionPersistence {
         List<Question> quizQuestions = new ArrayList<>();
 
         for (Question question : questions) {
-            if (question.quiz.equals(quiz)) {
+            if (question.getMyQuiz().equals(quiz)) {
                 quizQuestions.add(question);
             }
         }
