@@ -1,29 +1,18 @@
 package comp3350.quizrus.presentation;
 
 import comp3350.quizrus.R;
-import comp3350.quizrus.application.Main;
 import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.presentation.adapter.QuizRecycleViewAdapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuizSelectionActivity extends Activity {
