@@ -41,7 +41,7 @@ public class RandomTest {
     private boolean isSorted(List<Integer> integerList){
         boolean isSorted = true;
         for(int i = 0; i < integerList.size(); i++){
-            if(integerList.get(i) == i){
+            if(integerList.get(i) != i){
                 isSorted = false;
             }
         }
