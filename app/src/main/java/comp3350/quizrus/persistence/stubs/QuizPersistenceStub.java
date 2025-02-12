@@ -14,14 +14,14 @@ public class QuizPersistenceStub implements QuizPersistence {
     public QuizPersistenceStub() {
         this.quizzes = new ArrayList<>();
 
-        User user1 = new User("1", "kakashi", "password1");
-        User user2 = new User("2", "nazgul", "password1");
+        User user1 = new User(1, "kakashi", "password1");
+        User user2 = new User(2, "nazgul", "password1");
 
-        quizzes.add(new Quiz("1", "Flags of Countries", user1));
-        quizzes.add(new Quiz("2","Celebrity Partners", user1));
-        quizzes.add(new Quiz("3","Software Engineering I", user1));
-        quizzes.add(new Quiz("4","Amazon Interview", user2));
-        quizzes.add(new Quiz("5","Songs by Famous Artists", user2));
+        quizzes.add(new Quiz(1, "Flags of Countries", user1));
+        quizzes.add(new Quiz(2,"Celebrity Partners", user1));
+        quizzes.add(new Quiz(3,"Software Engineering I", user1));
+        quizzes.add(new Quiz(4,"Amazon Interview", user2));
+        quizzes.add(new Quiz(5,"Songs by Famous Artists", user2));
     }
 
     @Override

@@ -8,31 +8,13 @@ public class Question {
     private final String questionText;
     private final String questionType;
 
-    public Question(final int newQuestionID){
-        this.questionID = newQuestionID;
-        this.questionText = null;
-        this.myQuiz = null;
-        this.questionType = null;
-    }
-
-    // Constructor for minimal initialization
-    public Question(final String newQuestionText, final Quiz newMyQuiz){
-        this.questionText = newQuestionText;
-        this.myQuiz = newMyQuiz;
-        this.questionID = -1;
-        this.questionType = null;
-    }
-
-    // Constructor for full initialization
-    public Question(final String newQuestionText, final Quiz newMyQuiz, final String newQuestionType,
-                    final int newQuestionID){
+    public Question(final int newQuestionID, final String newQuestionText, final Quiz newMyQuiz, final String newQuestionType){
         this.questionText = newQuestionText;
         this.myQuiz = newMyQuiz;
         this.questionID = newQuestionID;
         this.questionType = newQuestionType;
     }
 
-    //Getters
     public int getQuestionID(){
         return this.questionID;
     }
@@ -41,12 +23,11 @@ public class Question {
         return this.myQuiz;
     }
 
-    public String getQuestionType(){
-        return this.questionType;
-    }
-
     public String getQuestionText(){return this.questionText;}
 
+    public String getQuestionType() {
+        return this.questionType;
+    }
 
     @Override
     //toString Method
@@ -56,21 +37,17 @@ public class Question {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(questionID, myQuiz, questionText, questionType);
-    }
-
-    @Override
-    public boolean equals(Object other)
-    {
-        boolean equal = false;
-
-        if(other instanceof Question)
-        {
-            final Question otherQuestion = (Question) other;
-            equal = Objects.equals(this.questionID, otherQuestion.questionID);
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
         }
-
-        return equal;
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        Question otherQuestion = (Question) other;
+        return Objects.equals(this.questionID, otherQuestion.questionID) &&
+                Objects.equals(this.myQuiz, otherQuestion.myQuiz) &&
+                Objects.equals(this.questionText, otherQuestion.questionText) &&
+                Objects.equals(this.questionType, otherQuestion.questionType);
     }
 }

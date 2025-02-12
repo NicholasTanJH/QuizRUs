@@ -3,25 +3,18 @@ package comp3350.quizrus.objects;
 import java.util.Objects;
 public class User {
 
-    private final String userID;
+    private final int userID;
     private final String username;
     private final String password;
 
-    public User(final String newID)
-    {
-        this.userID = newID;
-        this.username = null;
-        this.password = null;
-    }
-
-    public User(final String newID, final String newUsername, final String newPassword)
+    public User(final int newID, final String newUsername, final String newPassword)
     {
         this.userID = newID;
         this.username = newUsername;
         this.password = newPassword;
     }
 
-    public String getUserID()
+    public int getUserID()
     {
         return this.userID;
     }
@@ -36,16 +29,13 @@ public class User {
         return this.password;
     }
 
+    @Override
     public String toString()
     {
-        return String.format("User: %s %s %s", this.userID, this.username, this.password);
+        return String.format("User: [UserID: %s, Username: %s, Password: %s]", this.userID, this.username, this.password);
     }
 
-    public int hashCode()
-    {
-        return Objects.hash(userID, username, password);
-    }
-
+    @Override
     public boolean equals(Object other)
     {
         boolean equal = false;

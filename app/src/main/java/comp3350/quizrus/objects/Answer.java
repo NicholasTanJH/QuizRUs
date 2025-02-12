@@ -8,35 +8,13 @@ public class Answer {
     private final Question myQuestion;
     private final boolean isCorrect;
 
-    public Answer(final int newAnswerID){
-        this.answerID = newAnswerID;
-        this.answerText = null;
-        this.myQuestion = null;
-        this.isCorrect = false;
-    }
-    public Answer(final String newAnswerText, final Question newMyQuestion){
-        this.answerText = newAnswerText;
-        this.myQuestion = newMyQuestion;
-        this.answerID = 0;
-        this.isCorrect = true;
-    }
-
-    public Answer(final String newAnswerText, final Question newMyQuestion, final int
-    newAnswerID){
-        this.answerText = newAnswerText;
-        this.myQuestion = newMyQuestion;
-        this.answerID = newAnswerID;
-        this.isCorrect = true;
-    }
-
-    public Answer(final int newAnswerID, final String newAnswerText, final boolean newIsCorrect, final Question newMyQuestion){
+    public Answer(final int newAnswerID, final String newAnswerText, final boolean newIsCorrect, final Question newMyQuestion) {
         this.answerID = newAnswerID;
         this.answerText = newAnswerText;
         this.myQuestion = newMyQuestion;
         this.isCorrect = newIsCorrect;
     }
 
-    // Getters
     public int getAnswerID() {
         return this.answerID;
     }
@@ -53,31 +31,24 @@ public class Answer {
         return this.isCorrect;
     }
 
-    // toString method
     @Override
     public String toString() {
         return String.format("Answer: [ID: %s, Text: %s, Question ID: %s, Correct: %b]",
                 answerID, answerText, myQuestion != null ? myQuestion.getQuestionID() : "null", isCorrect);
     }
 
-    // hashCode method
     @Override
-    public int hashCode() {
-        return Objects.hash(answerID, answerText, myQuestion, isCorrect);
-    }
-
-    // equals method
-    @Override
-    public boolean equals(Object other)
-    {
-        boolean equal = false;
-
-        if(other instanceof Question)
-        {
-            final Question otherQuestion = (Question) other;
-            equal = Objects.equals(this.answerID, otherQuestion.getQuestionID());
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
         }
-
-        return equal;
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        Answer otherAnswer = (Answer) other;
+        return Objects.equals(this.answerID, otherAnswer.answerID) &&
+                Objects.equals(this.answerText, otherAnswer.answerText) &&
+                Objects.equals(this.myQuestion, otherAnswer.myQuestion) &&
+                this.isCorrect == otherAnswer.isCorrect;
     }
 }

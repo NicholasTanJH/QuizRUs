@@ -3,25 +3,18 @@ package comp3350.quizrus.objects;
 import java.util.Objects;
 
 public class Quiz {
-    private final String quizID;
+    private final int quizID;
     private final User myUser;
     private final String title;
 
-    public Quiz(final String newID)
-    {
-        this.quizID = newID;
-        this.myUser = null;
-        this.title = null;
-    }
-
-    public Quiz(final String newQuizID, final String newTitle, final User newUser)
+    public Quiz(final int newQuizID, final String newTitle, final User newUser)
     {
         this.quizID = newQuizID;
         this.myUser = newUser;
         this.title = newTitle;
     }
 
-    public String getQuizID()
+    public int getQuizID()
     {
         return this.quizID;
     }
@@ -36,16 +29,13 @@ public class Quiz {
         return this.title;
     }
 
+    @Override
     public String toString()
     {
-        return String.format("Quiz: %s %s %s", quizID, myUser != null ? myUser.getUserID() : "null", title);
+        return String.format("Quiz: [quizID: %s, User: %s, Title: %s]", quizID, myUser != null ? myUser.getUserID() : "null", title);
     }
 
-    public int hashCode()
-    {
-        return Objects.hash(quizID, myUser, title);
-    }
-
+    @Override
     public boolean equals(Object other)
     {
         boolean equal = false;

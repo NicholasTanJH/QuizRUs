@@ -17,13 +17,13 @@ public class AnswerPersistenceStub implements AnswerPersistence {
         this.answers = new ArrayList<>();
 
         // Answers must be associated with a question.
-        User user1 = new User("1", "kakashi", "password1");
-        Quiz quiz1 = new Quiz("1", "Flags of Countries", user1);
-        Question question1 = new Question("Which of these countries have white in their flag?", quiz1);
-        Question question2 = new Question("In which country was the first flag created?", quiz1);
-        Question question3 = new Question("The flag of Canada is commonly known as:", quiz1);
-        Question question4 = new Question("How many stars are there on the flag of the United States of America?", quiz1);
-        Question question5 = new Question("The flag of Australia contains which other country’s flag in its top left corner?", quiz1);
+        User user1 = new User(1, "kakashi", "password1");
+        Quiz quiz1 = new Quiz(1, "Flags of Countries", user1);
+        Question question1 = new Question(1, "Which of these countries have white in their flag?", quiz1, "MULTIPLE_CHOICE");
+        Question question2 = new Question(2, "In which country was the first flag created?", quiz1, "MULTIPLE_CHOICE");
+        Question question3 = new Question(3, "The flag of Canada is commonly known as:", quiz1, "MULTIPLE_CHOICE");
+        Question question4 = new Question(4, "How many stars are there on the flag of the United States of America?", quiz1, "MULTIPLE_CHOICE");
+        Question question5 = new Question(5, "The flag of Australia contains which other country’s flag in its top left corner?", quiz1, "MULTIPLE_CHOICE");
 
         answers.add(new Answer(1, "Morocco", false, question1));
         answers.add(new Answer(2, "Malawi", false, question1));
