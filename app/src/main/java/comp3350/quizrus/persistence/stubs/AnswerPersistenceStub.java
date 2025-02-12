@@ -75,7 +75,6 @@ public class AnswerPersistenceStub implements AnswerPersistence {
         answers.add(new Answer(14, "78", false, question7));
         answers.add(new Answer(15,"1", true, question7));
         answers.add(new Answer(16,"China", false, question7));
-
     }
 
     @Override
