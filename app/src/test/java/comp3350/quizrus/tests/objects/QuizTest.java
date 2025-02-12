@@ -11,9 +11,8 @@ public class QuizTest {
     @Test
     public void testQuiz()
     {
-        User user1 = new User(10);
+        User user1 = new User(10, "naruto", "ilovesasuke");
         Quiz quiz1;
-
 
         System.out.println("\nStarting QuizTest");
 
