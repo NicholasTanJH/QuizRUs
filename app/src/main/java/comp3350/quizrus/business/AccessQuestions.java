@@ -30,38 +30,4 @@ public class AccessQuestions {
         questions = questionPersistence.getQuestionsForQuiz(quiz);
         return questions;
     }
-
-//    public List<Question> getQuestions() {
-//        questions = questionPersistence.getQuestionSequential();
-//        return Collections.unmodifiableList(questions);
-//    }
-
-//    public Question getSequential() {
-//        if (questions == null) {
-//            questions = questionPersistence.getQuestionSequential();
-//            currentQuestion = 0;
-//        }
-//        if (currentQuestion < questions.size()) {
-//            question = questions.get(currentQuestion);
-//            currentQuestion++;
-//        } else {
-//            questions = null;
-//            question = null;
-//            currentQuestion = 0;
-//        }
-//        return question;
-//    }
-
-//    public Question getRandom(int questionID) {
-//        question = null;
-//        if (questionID <= 0) {
-//            // System.out.println("*** Invalid question ID");
-//        } else {
-//            questions = questionPersistence.getQuestionRandom(new Question(questionID));
-//            if (questions.size() == 1) {
-//                question = questions.get(0);
-//            }
-//        }
-//        return question;
-//    }
 }
