@@ -7,8 +7,6 @@ import comp3350.quizrus.presentation.adapter.QuizRecycleViewAdapter;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

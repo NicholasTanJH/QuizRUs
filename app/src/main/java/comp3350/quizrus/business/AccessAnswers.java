@@ -1,8 +1,5 @@
 package comp3350.quizrus.business;
 
-import org.hsqldb.lib.Collection;
-
-import java.util.Collections;
 import java.util.List;
 
 import comp3350.quizrus.application.Services;
