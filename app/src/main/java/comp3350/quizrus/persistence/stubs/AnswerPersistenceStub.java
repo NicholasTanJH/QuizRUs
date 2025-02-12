@@ -42,7 +42,7 @@ public class AnswerPersistenceStub implements AnswerPersistence {
                 answersToQuestions.add(answer);
             }
         }
-        return Collections.unmodifiableList(answersToQuestions);
+        return answersToQuestions;
     }
 
     @Override
