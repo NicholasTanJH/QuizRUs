@@ -15,11 +15,13 @@ import java.util.List;
 public class AccessUserTest {
     private AccessUsers accessUsers;
 
+    @Before
     public void setUp()
     {
         this.accessUsers = new AccessUsers(new UserPersistenceStub());
     }
 
+    @Test
     public void test()
     {
         List<User> users = accessUsers.getUsers();

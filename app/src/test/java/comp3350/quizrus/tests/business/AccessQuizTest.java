@@ -15,11 +15,13 @@ import java.util.List;
 public class AccessQuizTest {
     private AccessQuizzes accessQuizzes;
 
+    @Before
     public void setUp()
     {
         this.accessQuizzes = new AccessQuizzes(new QuizPersistenceStub());
     }
 
+    @Test
     public void test()
     {
         List<Quiz> quizzes = accessQuizzes.getQuizzes();
