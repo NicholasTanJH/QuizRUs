@@ -13,16 +13,16 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 public class AccessQuizTest {
-    private AccessQuizzes accessUsers;
+    private AccessQuizzes accessQuizzes;
 
     public void setUp()
     {
-        this.accessUsers = new AccessQuizzes(new QuizPersistenceStub());
+        this.accessQuizzes = new AccessQuizzes(new QuizPersistenceStub());
     }
 
     public void test()
     {
-        List<Quiz> quizzes = accessUsers.getQuizzes();
+        List<Quiz> quizzes = accessQuizzes.getQuizzes();
 
         System.out.println("Testing that a list of users is returned correctly");
         assertNotNull(quizzes);
