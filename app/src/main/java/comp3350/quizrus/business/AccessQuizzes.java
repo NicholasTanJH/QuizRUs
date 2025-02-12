@@ -32,25 +32,4 @@ public class AccessQuizzes {
         quizzes = quizPersistence.getAllQuizzes();
         return Collections.unmodifiableList(quizzes);
     }
-
-    public Quiz getSequential()
-    {
-        if(quizzes == null)
-        {
-            quizzes = quizPersistence.getAllQuizzes();
-            currentQuiz = 0;
-        }
-        if(currentQuiz < quizzes.size())
-        {
-            quiz = quizzes.get(currentQuiz);
-            currentQuiz++;
-        }
-        else
-        {
-            quizzes = null;
-            quiz = null;
-            currentQuiz = 0;
-        }
-        return quiz;
-    }
 }
