@@ -4,7 +4,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Random {
-    public static <T> void randomizeListItem(List<T> list){
-        Collections.shuffle(list);
+    public static <T> boolean randomizeListItem(List<T> list){
+        if(list == null || list.isEmpty()){
+            return false;
+        }else{
+            Collections.shuffle(list);
+            return true; // null list
+        }
     }
 }
