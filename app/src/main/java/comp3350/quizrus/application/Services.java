@@ -1,12 +1,5 @@
 package comp3350.quizrus.application;
 
-//import comp3350.quizrus.persistence.CoursePersistence;
-//import comp3350.quizrus.persistence.SCPersistence;
-//import comp3350.quizrus.persistence.StudentPersistence;
-//import comp3350.quizrus.persistence.hsqldb.CoursePersistenceHSQLDB;
-//import comp3350.quizrus.persistence.hsqldb.SCPersistenceHSQLDB;
-//import comp3350.quizrus.persistence.hsqldb.StudentPersistenceHSQLDB;
-
 import comp3350.quizrus.persistence.UserPersistence;
 import comp3350.quizrus.persistence.QuizPersistence;
 import comp3350.quizrus.persistence.QuestionPersistence;
@@ -18,10 +11,6 @@ import comp3350.quizrus.persistence.stubs.AnswerPersistenceStub;
 
 public class Services
 {
-//	private static StudentPersistence studentPersistence = null;
-//	private static CoursePersistence coursePersistence = null;
-//	private static SCPersistence scPersistence = null;
-
     private static UserPersistence userPersistence = null;
     private static QuizPersistence quizPersistence = null;
     private static QuestionPersistence questionPersistence = null;

@@ -1,6 +1,5 @@
 package comp3350.quizrus.objects;
 
-
 import java.util.Objects;
 public class Question {
     private final int questionID;
