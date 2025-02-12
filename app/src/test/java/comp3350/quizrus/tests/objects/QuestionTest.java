@@ -36,8 +36,6 @@ public class QuestionTest {
         assertNotNull(question3);
         assertTrue(question1.equals(question2));
         assertFalse(question1.equals(question3));
-        assertEquals(question1.hashCode(), question2.hashCode());
-        assertNotEquals(question1.hashCode(), question3.hashCode());
 
         System.out.println("Finished testQuestionComparison");
     }

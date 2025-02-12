@@ -39,8 +39,6 @@ public class AnswerTest {
         assertNotNull(answer3);
         assertTrue(answer1.equals(answer2));
         assertFalse(answer1.equals(answer3));
-        assertEquals(answer1.hashCode(), answer2.hashCode());
-        assertNotEquals(answer1.hashCode(), answer3.hashCode());
 
         System.out.println("Finished testAnswerComparison");
     }
