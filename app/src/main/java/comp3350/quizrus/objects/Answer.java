@@ -68,17 +68,16 @@ public class Answer {
 
     // equals method
     @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
+    public boolean equals(Object other)
+    {
+        boolean equal = false;
+
+        if(other instanceof Question)
+        {
+            final Question otherQuestion = (Question) other;
+            equal = Objects.equals(this.answerID, otherQuestion.getQuestionID());
         }
-        if (other == null || getClass() != other.getClass()) {
-            return false;
-        }
-        Answer otherAnswer = (Answer) other;
-        return Objects.equals(this.answerID, otherAnswer.answerID) &&
-                Objects.equals(this.answerText, otherAnswer.answerText) &&
-                Objects.equals(this.myQuestion, otherAnswer.myQuestion) &&
-                this.isCorrect == otherAnswer.isCorrect;
+
+        return equal;
     }
 }
