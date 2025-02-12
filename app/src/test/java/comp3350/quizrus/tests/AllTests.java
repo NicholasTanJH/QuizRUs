@@ -8,7 +8,6 @@ import org.junit.runners.Suite;
 import comp3350.quizrus.tests.business.AccessUserTest;
 import comp3350.quizrus.tests.business.AccessQuizTest;
 import comp3350.quizrus.tests.business.AccessQuestionTest;
-import comp3350.quizrus.tests.business.AccessAnswerTest;
 
 import comp3350.quizrus.tests.objects.UserTest;
 import comp3350.quizrus.tests.objects.QuizTest;
@@ -28,8 +27,7 @@ import comp3350.quizrus.tests.business.RandomTest;
 
         AccessUserTest.class,
         AccessQuizTest.class,
-        AccessQuestionTest.class,
-        AccessAnswerTest.class
+        AccessQuestionTest.class
 })
 public class AllTests
 {
