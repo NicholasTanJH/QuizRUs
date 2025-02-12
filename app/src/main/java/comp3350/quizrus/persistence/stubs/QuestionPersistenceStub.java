@@ -27,8 +27,8 @@ public class QuestionPersistenceStub implements QuestionPersistence {
         questions.add(
                 new Question(5, "The flag of Australia contains which other country’s flag in its top left corner?",
                         quiz1, "MULTIPLE_CHOICE"));
-        questions.add(new Question(6, "How many people has The Weekend dated?", quiz2, "mc"));
-        questions.add(new Question(7, "Beyonce is married to who?s", quiz2, "mc"));
+        questions.add(new Question(6, "Who is the partner of J.K. Rowling?", quiz2, "MULTIPLE_CHOICE"));
+        questions.add(new Question(7, "How many partners did Drake date in 2024?", quiz2, "MULTIPLE_CHOICE"));
     }
 
     @Override
