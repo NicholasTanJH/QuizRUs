@@ -29,7 +29,6 @@ public class MCQuestionActivity extends AppCompatActivity {
     private final int OPTION_BUTTON_2_ORDER_NUM = 1;
     private final int OPTION_BUTTON_3_ORDER_NUM = 2;
     private final int OPTION_BUTTON_4_ORDER_NUM = 3;
-
     //For getting data
     private final AccessAnswers accessAnswers = new AccessAnswers();
     private List<Question> questions;
@@ -47,6 +46,7 @@ public class MCQuestionActivity extends AppCompatActivity {
     private Button optionButton3;
     private Button optionButton4;
     //A button for submit and next
+    //proceed button is either in invisible mode, submit, or next mode
     private Button proceedButton;
 
     @Override
@@ -137,8 +137,6 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     /*
     initialize the proceedButton by finding the id
-    make it into invisible mode
-    **proceed button is either in invisible mode, submit, or next mode**
      */
     private void setUpProceedButton() {
         proceedButton = findViewById(R.id.buttonProceed);
@@ -221,9 +219,9 @@ public class MCQuestionActivity extends AppCompatActivity {
         proceedButton.setText(R.string.next);
         proceedButton.setBackgroundResource(R.drawable.question_proceed_button_next);
         proceedButton.setOnClickListener(proceedButton -> {
-            if(totalQuestionCount == questionNum){
+            if (totalQuestionCount == questionNum) {
                 finish(); //get back to quiz selection page once reached the last question
-            }else{
+            } else {
                 //reset when still have more questions
                 reset();
             }
