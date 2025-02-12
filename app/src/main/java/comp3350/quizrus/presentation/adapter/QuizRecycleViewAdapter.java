@@ -21,8 +21,8 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
     Context context;
     List<Quiz> quizzes;
 
-    //quizTitles passed in from QuizSelectionActivity
-    public QuizRecycleViewAdapter(Context context, List<Quiz> quizzes){
+    // quizTitles passed in from QuizSelectionActivity
+    public QuizRecycleViewAdapter(Context context, List<Quiz> quizzes) {
         this.context = context;
         this.quizzes = quizzes;
     }
@@ -37,45 +37,49 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
 
     @Override
     public void onBindViewHolder(@NonNull QuizRecycleViewAdapter.MyViewHolder holder, int position) {
-        //Changing the values of the recycle view items (implementing the quiz tiles string to each item)
-        //The "position" from the parameter where the user is scrolled to, we can change the title accordingly
+        // Changing the values of the recycle view items (implementing the quiz tiles
+        // string to each item)
+        // The "position" from the parameter where the user is scrolled to, we can
+        // change the title accordingly
         TextView itemTextView = holder.quizTitle;
 
-        //Changing the name of the item according to the position
+        // Changing the name of the item according to the position
         itemTextView.setText(quizzes.get(position).getTitle());
 
-        //set the quiz item fade animation when touched
-        holder.itemView.setOnTouchListener(new View.OnTouchListener(){
+        // set the quiz item fade animation when touched
+        holder.itemView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     itemTextView.setAlpha(0.9f); // Fade when pressed
-                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP || motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP
+                        || motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
                     itemTextView.setAlpha(1.0f); // Restore when released
                 }
                 return false;
             }
         });
 
-        //start new activity page when the quiz item is pressed
+        // start new activity page when the quiz item is pressed
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, MCQuestionActivity.class);
-            intent.putExtra("quizNum", position);  // Pass the data (which quiz used pressed) to the question activity
+            intent.putExtra("quizNum", position); // Pass the data (which quiz used pressed) to the question activity
             context.startActivity(intent);
         });
     }
 
     @Override
-    //Number of items in the recycle view (rows of selectable quiz)
-    //Defined by the size of the quizTitles arraylist
+    // Number of items in the recycle view (rows of selectable quiz)
+    // Defined by the size of the quizTitles arraylist
     public int getItemCount() {
         return quizzes.size();
     }
 
-
-    //==============================ViewHolder Class==========================================================
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    // ==============================ViewHolder
+    // Class==========================================================
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView quizTitle;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             quizTitle = itemView.findViewById(R.id.quiz_selection_item_title);

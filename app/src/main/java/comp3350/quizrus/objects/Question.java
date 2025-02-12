@@ -29,7 +29,6 @@ public class Question {
     }
 
     @Override
-    //toString Method
     public String toString(){
         return String.format("Question: [ID: %s, Quiz: %s, Text: %s, Type: %s]",
                 questionID, myQuiz != null ? myQuiz.getQuizID() : "null", questionText, questionType);

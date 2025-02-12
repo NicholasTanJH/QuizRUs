@@ -23,9 +23,9 @@ public class QuizSelectionActivity extends Activity {
 
         addQuizTitles();
 
-        //Setting up the recycle view
+        // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.listQuiz);
-        QuizRecycleViewAdapter adapter = new QuizRecycleViewAdapter(this,quizzes);
+        QuizRecycleViewAdapter adapter = new QuizRecycleViewAdapter(this, quizzes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
