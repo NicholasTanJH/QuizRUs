@@ -30,7 +30,7 @@ public class AccessAnswers {
 
     public List<Answer> getAnswers(final Question question){
         answers = answerPersistence.getAnswersForQuestions(question);
-        return Collections.unmodifiableList(answers);
+        return answers;
     }
 
     //find the position of the correct answer in the list

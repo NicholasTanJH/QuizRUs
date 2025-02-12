@@ -21,7 +21,11 @@ public class QuestionPersistenceStub implements QuestionPersistence {
 
         questions.add(new Question("Which of these countries have white in their flag?", quiz1));
         questions.add(new Question("In which country was the first flag created?", quiz1));
-        questions.add(new Question("Who is Kim Kardashian's current partner?", quiz1));
+        questions.add(new Question("The flag of Canada is commonly known as:", quiz1));
+        questions.add(new Question("How many stars are there on the flag of the United States of America?", quiz1));
+        questions.add(new Question("The flag of Australia contains which other country’s flag in its top left corner?", quiz1));
+
+//        questions.add(new Question("Who is Kim Kardashian's current partner?", quiz1));
         questions.add(new Question("How many people has The Weekend dated?", quiz2));
         questions.add(new Question("Beyonce is married to who?s", quiz2));
     }
@@ -35,6 +39,6 @@ public class QuestionPersistenceStub implements QuestionPersistence {
                 quizQuestions.add(question);
             }
         }
-        return Collections.unmodifiableList(quizQuestions);
+        return quizQuestions;
     }
 }

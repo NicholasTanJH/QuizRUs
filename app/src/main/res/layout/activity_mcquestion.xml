@@ -12,14 +12,14 @@
     <TextView
         android:id="@+id/questionTV"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="350dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:gravity="center"
         android:text="Question, Just for testing"
         android:textColor="@color/colorWhite"
-        android:textSize="60sp"
+        android:textSize="55sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

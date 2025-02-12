@@ -17,6 +17,7 @@ import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessAnswers;
 import comp3350.quizrus.business.AccessQuestions;
 import comp3350.quizrus.business.AccessQuizzes;
+import comp3350.quizrus.business.Random;
 import comp3350.quizrus.objects.Answer;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
@@ -67,6 +68,7 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     //get the quiz number from last activity, find the quiz by the quiz number
     //get the questions from the quiz
+    //randomize the questions
     //get the total question count
     private void setUpQuestions() {
         AccessQuizzes quizzes = new AccessQuizzes();
@@ -75,6 +77,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         Quiz quiz = quizList.get(quizNum);
         AccessQuestions accessQuestions = new AccessQuestions();
         questions = accessQuestions.getQuestions(quiz);
+        Random.randomizeListItem(questions); //randomize
         totalQuestionCount = questions.size();
     }
 
@@ -145,7 +148,6 @@ public class MCQuestionActivity extends AppCompatActivity {
     //reset the UI to default, remove any color markings on the buttons
     //reset the proceed button to invisible mode
     //get the following question and it's answers, and update the text of the question and the answer option buttons
-    //
     private void reset() {
         setProceedButtonToInvisibleMode();
         lastPressedButtonOrderNum = -1;
@@ -153,6 +155,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         //get the current question and it's answers
         Question currentQuestion = questions.get(questionNum);
         List<Answer> currentAnswers = accessAnswers.getAnswers(currentQuestion);
+        Random.randomizeListItem(currentAnswers); //randomize the answers
 
         //get the position of the correct answer
         rightAnswerButtonOrderNum = accessAnswers.getCorrectAnswerPosition(currentAnswers);
