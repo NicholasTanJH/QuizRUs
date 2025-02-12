@@ -19,9 +19,6 @@ public class QuizPersistenceStub implements QuizPersistence {
 
         quizzes.add(new Quiz(1, "Flags of Countries", user1));
         quizzes.add(new Quiz(2, "Celebrity Partners", user1));
-        quizzes.add(new Quiz(3, "Software Engineering I", user1));
-        quizzes.add(new Quiz(4, "Amazon Interview", user2));
-        quizzes.add(new Quiz(5, "Songs by Famous Artists", user2));
     }
 
     @Override
