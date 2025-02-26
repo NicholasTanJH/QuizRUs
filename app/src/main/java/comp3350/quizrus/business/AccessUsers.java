@@ -13,7 +13,6 @@ public class AccessUsers {
     private User user;
     private int currentUser;
 
-
     public AccessUsers()
     {
         this.userPersistence = Services.getUserPersistence();
