@@ -3,6 +3,7 @@ package comp3350.quizrus.business;
 import java.util.List;
 
 import comp3350.quizrus.application.Services;
+import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.persistence.QuestionPersistence;
 
@@ -28,5 +29,22 @@ public class AccessQuestions {
     public List<Question> getQuestions(final Quiz quiz) {
         questions = questionPersistence.getQuestionsForQuiz(quiz);
         return questions;
+    }
+
+    public Question createQuestion(final Quiz quiz, final String questionText, final String questionType)
+    {
+        Question newQuestion = new Question(questionText, quiz, questionType);
+
+//        int questionID = questionPersistence.createQuestion(newQuestion);
+//        if(questionID != -1)
+//        {
+//            newQuestion.setQuestionID(questionID);
+//        }
+//        else
+//        {
+//            return null;
+//        }
+
+        return newQuestion;
     }
 }
