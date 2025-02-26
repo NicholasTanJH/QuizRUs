@@ -33,4 +33,43 @@ public class AccessUsers {
         users = userPersistence.getAllUsers();
         return Collections.unmodifiableList(users);
     }
+
+    public User createUser(final String username, final String password, final String email, final String firstname, final String lastname)
+    {
+        User newUser = new User(username.toLowerCase(), password, email, firstname, lastname);
+
+//        int userID = userPersistence.createUser(newUser);
+//        newUser.setUserID(userID);
+
+        return newUser;
+    }
+
+    public User getUser(final String username, final String password){
+//        return userPersistence.getUser(username, password);
+        return null;
+    }
+
+    public boolean authenticateUsername(String username)
+    {
+        return username.length() <= 20;
+    }
+
+    public boolean authenticatePassword(String password)
+    {
+        String upperCase = ".*[A-Z].*";
+        String lowerCase = ".*[a-z].*";
+        String numbers = ".*\\d.*";
+        String specials = ".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*";
+
+        if(password.length() < 8
+        || !password.matches(upperCase)
+        || !password.matches(lowerCase)
+        || !password.matches(numbers)
+        || !password.matches(specials))
+        {
+            return false;
+        }
+
+        return true;
+    }
 }
