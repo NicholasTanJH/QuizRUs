@@ -4,8 +4,10 @@ import java.util.Collections;
 import java.util.List;
 
 import comp3350.quizrus.application.Services;
+import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.QuizPersistence;
+
 
 public class AccessQuizzes {
     private QuizPersistence quizPersistence;
@@ -31,5 +33,22 @@ public class AccessQuizzes {
     {
         quizzes = quizPersistence.getAllQuizzes();
         return Collections.unmodifiableList(quizzes);
+    }
+
+    public Quiz createQuiz(final User user, final String title, final long timer)
+    {
+        Quiz newQuiz = new Quiz(title, user, timer);
+
+//        int quizID = quizPersistence.createQuiz(newQuiz);
+//        if(quizID != -1)
+//        {
+//            newQuiz.setQuizID(quizID);
+//        }
+//        else
+//        {
+//            return null;
+//        }
+
+        return newQuiz;
     }
 }

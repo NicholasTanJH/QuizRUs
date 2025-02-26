@@ -13,7 +13,6 @@ public class AccessUsers {
     private User user;
     private int currentUser;
 
-
     public AccessUsers()
     {
         this.userPersistence = Services.getUserPersistence();
@@ -34,12 +33,19 @@ public class AccessUsers {
         return Collections.unmodifiableList(users);
     }
 
-    public User createUser(final String username, final String password, final String email, final String firstname, final String lastname)
+    public User createUser(String username, final String password, final String email, final String firstname, final String lastname)
     {
         User newUser = new User(username.toLowerCase(), password, email, firstname, lastname);
 
 //        int userID = userPersistence.createUser(newUser);
-//        newUser.setUserID(userID);
+//        if(userID != -1)
+//        {
+//            newUser.setUserID(userID);
+//        }
+//        else
+//        {
+//            return null;
+//        }
 
         return newUser;
     }
