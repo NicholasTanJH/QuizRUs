@@ -3,7 +3,7 @@ package comp3350.quizrus.objects;
 import java.util.Objects;
 
 public class Quiz {
-    private final int quizID;
+    private int quizID;
     private final User myUser;
     private final String title;
 
@@ -17,6 +17,10 @@ public class Quiz {
     public int getQuizID()
     {
         return this.quizID;
+    }
+
+    public void setQuizID(int newID){
+        this.quizID = newID;
     }
 
     public User getUser()

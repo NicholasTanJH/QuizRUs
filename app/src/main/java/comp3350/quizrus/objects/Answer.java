@@ -3,7 +3,7 @@ package comp3350.quizrus.objects;
 import java.util.Objects;
 
 public class Answer {
-    private final int answerID;
+    private int answerID;
     private final String answerText;
     private final Question myQuestion;
     private final boolean isCorrect;
@@ -17,6 +17,10 @@ public class Answer {
 
     public int getAnswerID() {
         return this.answerID;
+    }
+
+    public void setAnswerID(int newID){
+        this.answerID = newID;
     }
 
     public String getAnswerText() {
