@@ -20,6 +20,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessUsers;
+import comp3350.quizrus.objects.User;
 
 public class UserLoginActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextUsername;
@@ -57,30 +58,30 @@ public class UserLoginActivity extends AppCompatActivity {
         String logInPassword = textInputEditTextPassword.getText().toString();
 
         AccessUsers accessUsers = new AccessUsers();
+        User user = accessUsers.getUser(logInUsername,logInPassword);
+//        boolean isLoginInfoCorrect = user != null;
         boolean isLoginInfoCorrect = true; //TODO
+        logInAnimation(isLoginInfoCorrect);
+    }
 
+    //animation for changing the button text when registering
+    private void logInAnimation(boolean isLoginInfoCorrect) {
         buttonLogIn.setText("Loging In...");
-
         if(isLoginInfoCorrect){
-            successfulLogInAnimation();
+            new Handler().postDelayed(() -> {
+                buttonLogIn.setText("✓");
+            }, 1000);
+            new Handler().postDelayed(() -> {
+                Intent intent = new Intent(this, QuizSelectionActivity.class);
+                this.startActivity(intent);
+                finish();
+            }, 1500);
         }else{
             new Handler().postDelayed(() -> {
                 setAlertMessage("Failed to Log In", "Incorrect username or password. Please try again.");
                 buttonLogIn.setText("Log In");
             }, 1000);
         }
-    }
-
-    //animation for changing the button text when registering
-    private void successfulLogInAnimation() {
-        new Handler().postDelayed(() -> {
-            buttonLogIn.setText("✓");
-        }, 1000);
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(this, QuizSelectionActivity.class);
-            this.startActivity(intent);
-            finish();
-        }, 1500);
     }
 
     private void setAlertMessage(String alertTitle, String alertMessage) {

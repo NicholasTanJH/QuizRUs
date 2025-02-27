@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -25,7 +26,8 @@ public class SignUpActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextUsername;
     TextInputEditText textInputEditTextPassword;
     TextInputEditText textInputEditTextEmail;
-    TextInputEditText textInputEditTextName;
+    TextInputEditText textInputEditTextFirstName;
+    TextInputEditText textInputEditTextLastName;
     Button buttonCreateAccount;
     ImageButton buttonBack;
 
@@ -41,7 +43,8 @@ public class SignUpActivity extends AppCompatActivity {
             textInputEditTextUsername = findViewById(R.id.textInputETUsername);
             textInputEditTextPassword = findViewById(R.id.textInputETPassword);
             textInputEditTextEmail = findViewById(R.id.textInputETEmail);
-            textInputEditTextName = findViewById(R.id.textInputETName);
+            textInputEditTextFirstName = findViewById(R.id.textInputETFirstName);
+            textInputEditTextLastName = findViewById(R.id.textInputETLastName);
             buttonCreateAccount = findViewById(R.id.buttonCreateAccount);
             buttonBack = findViewById(R.id.buttonBack);
 
@@ -60,7 +63,8 @@ public class SignUpActivity extends AppCompatActivity {
         String newUsername = textInputEditTextUsername.getText().toString();
         String newPassword = textInputEditTextPassword.getText().toString();
         String newEmail = textInputEditTextEmail.getText().toString();
-        String newName = textInputEditTextName.getText().toString();
+        String newFirstName = textInputEditTextFirstName.getText().toString();
+        String newLastName = textInputEditTextLastName.getText().toString();
 
         AccessUsers accessUsers = new AccessUsers();
         boolean isValidUsername = accessUsers.authenticateUsername(newUsername);
@@ -68,7 +72,8 @@ public class SignUpActivity extends AppCompatActivity {
         String errorMessagePassword = accessUsers.authenticatePassword(newPassword);
         boolean isValidPassword = errorMessagePassword.isEmpty();
         boolean isValidEmail = accessUsers.authenticateEmail(newEmail);
-        boolean isValidName = accessUsers.authenticateName(newName);
+        boolean isValidFirstName = accessUsers.authenticateName(newFirstName);
+        boolean isValidLastName = accessUsers.authenticateName(newLastName);
 
         if (!isValidUsername) {
             setAlertMessage("Invalid Username", "Please fill in your username and it must be 20 characters or shorter");
@@ -79,11 +84,14 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (!isValidEmail) {
             setAlertMessage("Invalid Email", "Please fill in your email");
             return;
-        } else if (!isValidName) {
-            setAlertMessage("Invalid Name", "Please fill in your name");
+        } else if (!isValidFirstName) {
+            setAlertMessage("Invalid First Name", "Please fill in your first name");
+            return;
+        }else if (!isValidLastName) {
+            setAlertMessage("Invalid Last Name", "Please fill in your last name");
             return;
         } else {
-            //accessUsers.createUser(newUsername, newPassword, newEmail, newName);
+            accessUsers.createUser(newUsername, newPassword, newEmail, newFirstName, newLastName);
             successfulSignUpAnimation();
         }
     }
