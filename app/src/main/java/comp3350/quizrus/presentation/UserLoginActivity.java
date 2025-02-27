@@ -1,10 +1,16 @@
 package comp3350.quizrus.presentation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -53,10 +59,43 @@ public class UserLoginActivity extends AppCompatActivity {
         AccessUsers accessUsers = new AccessUsers();
         boolean isLoginInfoCorrect = true; //TODO
 
+        buttonLogIn.setText("Loging In...");
+
         if(isLoginInfoCorrect){
+            successfulLogInAnimation();
+        }else{
+            new Handler().postDelayed(() -> {
+                setAlertMessage("Failed to Log In", "Incorrect username or password. Please try again.");
+                buttonLogIn.setText("Log In");
+            }, 1000);
+        }
+    }
+
+    //animation for changing the button text when registering
+    private void successfulLogInAnimation() {
+        new Handler().postDelayed(() -> {
+            buttonLogIn.setText("✓");
+        }, 1000);
+        new Handler().postDelayed(() -> {
             Intent intent = new Intent(this, QuizSelectionActivity.class);
             this.startActivity(intent);
             finish();
-        }
+        }, 1500);
+    }
+
+    private void setAlertMessage(String alertTitle, String alertMessage) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        SpannableString spannableMessage = new SpannableString(alertMessage);
+        spannableMessage.setSpan(new AbsoluteSizeSpan(30, true), 0, alertMessage.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        builder.setTitle(alertTitle)
+                .setMessage(spannableMessage)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss(); // Dismiss dialog on OK click
+                    }
+                })
+                .show();
     }
 }
