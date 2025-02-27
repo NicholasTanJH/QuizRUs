@@ -36,7 +36,7 @@ public class QuizPersistenceHSQLDBTest {
         dbHandler.dropTables();
     }
 
-    // Unit tests.
+    // Integration tests.
 
     @Test
     public void testInsertQuiz() {
