@@ -24,4 +24,19 @@ public class UserPersistenceStub implements UserPersistence {
     public List<User> getAllUsers() {
         return Collections.unmodifiableList(users);
     }
+
+    @Override
+    public User getUserByID(int userID) {
+        return null;
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public int insertUser(User newUser) {
+        return -1;
+    }
 }
