@@ -2,6 +2,7 @@ package comp3350.quizrus.presentation;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
@@ -45,11 +46,11 @@ public class SignUpActivity extends AppCompatActivity {
             buttonBack = findViewById(R.id.buttonBack);
 
             buttonCreateAccount.setOnClickListener(button ->
-                checkSignInInfo()
+                    checkSignInInfo()
             );
 
             buttonBack.setOnClickListener(button ->
-                finish()
+                    finish()
             );
             return insets;
         });
@@ -69,21 +70,33 @@ public class SignUpActivity extends AppCompatActivity {
         boolean isValidEmail = accessUsers.authenticateEmail(newEmail);
         boolean isValidName = accessUsers.authenticateName(newName);
 
-        if(!isValidUsername){
-            setAlertMessage("Invalid Username","Please fill in your username and it must be 20 characters or shorter");
+        if (!isValidUsername) {
+            setAlertMessage("Invalid Username", "Please fill in your username and it must be 20 characters or shorter");
             return;
-        }else if(!isValidPassword){
+        } else if (!isValidPassword) {
             setAlertMessage("Invalid Password", "Password must have:" + errorMessagePassword);
             return;
-        }else if(!isValidEmail){
+        } else if (!isValidEmail) {
             setAlertMessage("Invalid Email", "Please fill in your email");
             return;
-        }else if(!isValidName){
+        } else if (!isValidName) {
             setAlertMessage("Invalid Name", "Please fill in your name");
             return;
-        }else{
-//            accessUsers.createUser(newUsername, newPassword, newEmail, newName);
+        } else {
+            //accessUsers.createUser(newUsername, newPassword, newEmail, newName);
+            successfulSignUpAnimation();
         }
+    }
+
+    //animation for changing the button text when registering
+    private void successfulSignUpAnimation() {
+        buttonCreateAccount.setText("Registering...");
+        new Handler().postDelayed(() -> {
+            buttonCreateAccount.setText("✓");
+        }, 1000);
+        new Handler().postDelayed(() -> {
+            finish();
+        }, 1500);
     }
 
     private void setAlertMessage(String alertTitle, String alertMessage) {
