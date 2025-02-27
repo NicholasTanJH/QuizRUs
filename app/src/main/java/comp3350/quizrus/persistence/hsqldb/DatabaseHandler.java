@@ -27,7 +27,7 @@ public class DatabaseHandler {
     }
 
     public DatabaseHandler() {
-        // Call three-parameter constructor with nulls for all values
+        // Call the three-parameter constructor with nulls for all values
         // by default.
         this(null, null, null);
     }
