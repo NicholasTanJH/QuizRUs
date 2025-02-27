@@ -60,24 +60,31 @@ public class AccessUsers {
         return !username.isEmpty() && username.length() <= 20;
     }
 
-    public boolean authenticatePassword(String password)
+    public String authenticatePassword(String password)
     {
         String upperCase = ".*[A-Z].*";
         String lowerCase = ".*[a-z].*";
         String numbers = ".*\\d.*";
         String specials = ".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*";
 
-        if(password.isEmpty()
-        ||password.length() < 8
-        || !password.matches(upperCase)
-        || !password.matches(lowerCase)
-        || !password.matches(numbers)
-        || !password.matches(specials))
-        {
-            return false;
+        String errorMessage = "";
+        if(password.length() < 8){
+            errorMessage += "\n \t - 8 or more characters";
+        }
+        if(!password.matches(upperCase)){
+            errorMessage += "\n \t - Upper case (A-Z)";
+        }
+        if(!password.matches(lowerCase)){
+            errorMessage += "\n \t - Smaller case (a-z)";
+        }
+        if(!password.matches(numbers)){
+            errorMessage += "\n \t - Number (0-9)";
+        }
+        if(!password.matches(specials)){
+            errorMessage += "\n \t - Special character (eg. !@#$%^&*()_+)";
         }
 
-        return true;
+        return errorMessage;
     }
 
     public boolean authenticateEmail(String email)
