@@ -37,4 +37,9 @@ public class QuizPersistenceStub implements QuizPersistence {
         }
         return Collections.unmodifiableList(userQuizzes);
     }
+
+    @Override
+    public int insertQuiz(Quiz quiz, User user) {
+        return -1;
+    }
 }
