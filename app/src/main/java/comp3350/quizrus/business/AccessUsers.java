@@ -13,7 +13,6 @@ public class AccessUsers {
     private User user;
     private int currentUser;
 
-
     public AccessUsers()
     {
         this.userPersistence = Services.getUserPersistence();
@@ -32,5 +31,69 @@ public class AccessUsers {
     {
         users = userPersistence.getAllUsers();
         return Collections.unmodifiableList(users);
+    }
+
+    public User createUser(String username, final String password, final String email, final String firstname, final String lastname)
+    {
+        User newUser = new User(username.toLowerCase(), password, email, firstname, lastname);
+
+//        int userID = userPersistence.createUser(newUser);
+//        if(userID != -1)
+//        {
+//            newUser.setUserID(userID);
+//        }
+//        else
+//        {
+//            return null;
+//        }
+
+        return newUser;
+    }
+
+    public User getUser(final String username, final String password){
+//        return userPersistence.getUser(username, password);
+        return null;
+    }
+
+    public boolean authenticateUsername(String username)
+    {
+        return !username.isEmpty() && username.length() <= 20;
+    }
+
+    public String authenticatePassword(String password)
+    {
+        String upperCase = ".*[A-Z].*";
+        String lowerCase = ".*[a-z].*";
+        String numbers = ".*\\d.*";
+        String specials = ".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*";
+
+        String errorMessage = "";
+        if(password.length() < 8){
+            errorMessage += "\n \t - 8 or more characters";
+        }
+        if(!password.matches(upperCase)){
+            errorMessage += "\n \t - Upper case (A-Z)";
+        }
+        if(!password.matches(lowerCase)){
+            errorMessage += "\n \t - Smaller case (a-z)";
+        }
+        if(!password.matches(numbers)){
+            errorMessage += "\n \t - Number (0-9)";
+        }
+        if(!password.matches(specials)){
+            errorMessage += "\n \t - Special character (eg. !@#$%^&*()_+)";
+        }
+
+        return errorMessage;
+    }
+
+    public boolean authenticateEmail(String email)
+    {
+        return !email.isEmpty();
+    }
+
+    public boolean authenticateName(String name)
+    {
+        return !name.isEmpty();
     }
 }

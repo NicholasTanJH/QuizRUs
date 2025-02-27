@@ -40,4 +40,21 @@ public class AccessAnswers {
         }
         return correctAnswerPosition;
     }
+
+    public Answer createAnswer(final String answerText, final Question question, final boolean isCorrect)
+    {
+        Answer newAnswer = new Answer(answerText, isCorrect, question);
+
+//        int answerID = answerPersistence.createAnswer(newAnswer);
+//        if(answerID != -1)
+//        {
+//            newAnswer.setAnswerID(answerID);
+//        }
+//        else
+//        {
+//            return null;
+//        }
+
+        return newAnswer;
+    }
 }

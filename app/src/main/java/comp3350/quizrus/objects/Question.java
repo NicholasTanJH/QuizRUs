@@ -2,7 +2,7 @@ package comp3350.quizrus.objects;
 
 import java.util.Objects;
 public class Question {
-    private final int questionID;
+    private int questionID;
     private final Quiz myQuiz;
     private final String questionText;
     private final String questionType;
@@ -14,8 +14,19 @@ public class Question {
         this.questionType = newQuestionType;
     }
 
+    public Question(final String newQuestionText, final Quiz newMyQuiz, final String newQuestionType){
+        this.questionText = newQuestionText;
+        this.myQuiz = newMyQuiz;
+        this.questionID = -1;
+        this.questionType = newQuestionType;
+    }
+
     public int getQuestionID(){
         return this.questionID;
+    }
+
+    public void setQuestionID(int newID){
+        this.questionID = newID;
     }
 
     public Quiz getMyQuiz(){
