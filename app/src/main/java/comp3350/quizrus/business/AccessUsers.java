@@ -57,7 +57,7 @@ public class AccessUsers {
 
     public boolean authenticateUsername(String username)
     {
-        return username.length() <= 20;
+        return !username.isEmpty() && username.length() <= 20;
     }
 
     public boolean authenticatePassword(String password)
@@ -67,7 +67,8 @@ public class AccessUsers {
         String numbers = ".*\\d.*";
         String specials = ".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*";
 
-        if(password.length() < 8
+        if(password.isEmpty()
+        ||password.length() < 8
         || !password.matches(upperCase)
         || !password.matches(lowerCase)
         || !password.matches(numbers)
@@ -77,5 +78,15 @@ public class AccessUsers {
         }
 
         return true;
+    }
+
+    public boolean authenticateEmail(String email)
+    {
+        return !email.isEmpty();
+    }
+
+    public boolean authenticateName(String name)
+    {
+        return !name.isEmpty();
     }
 }
