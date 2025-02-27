@@ -63,7 +63,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         AccessUsers accessUsers = new AccessUsers();
         boolean isValidUsername = accessUsers.authenticateUsername(newUsername);
-        boolean isValidPassword = accessUsers.authenticatePassword(newPassword);
+
+        String errorMessagePassword = accessUsers.authenticatePassword(newPassword);
+        boolean isValidPassword = errorMessagePassword.isEmpty();
         boolean isValidEmail = accessUsers.authenticateEmail(newEmail);
         boolean isValidName = accessUsers.authenticateName(newName);
 
@@ -71,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
             setAlertMessage("Invalid Username","Please fill in your username and it must be 20 characters or shorter");
             return;
         }else if(!isValidPassword){
-            setAlertMessage("Invalid Password", "Password must have:\n \t - 8 or more characters\n \t - Upper case (A-Z)\n \t - Smaller case (a-z)\n \t - Number (0-9)\n \t - Special character (eg. !@#$%^&*()_+)");
+            setAlertMessage("Invalid Password", "Password must have:" + errorMessagePassword);
             return;
         }else if(!isValidEmail){
             setAlertMessage("Invalid Email", "Please fill in your email");
