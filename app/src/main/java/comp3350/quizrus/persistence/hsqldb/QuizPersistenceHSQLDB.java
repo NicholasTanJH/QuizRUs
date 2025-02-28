@@ -12,14 +12,14 @@ import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.QuizPersistence;
 
 public class QuizPersistenceHSQLDB implements QuizPersistence {
-    private final DatabaseHandler dbHandler;
+    private final DatabaseManager dbManager;
 
     public QuizPersistenceHSQLDB() {
-        this.dbHandler = new DatabaseHandler();
+        this.dbManager = new DatabaseManager();
     }
 
-    public QuizPersistenceHSQLDB(DatabaseHandler dbHandler) {
-        this.dbHandler = dbHandler;
+    public QuizPersistenceHSQLDB(DatabaseManager dbManager) {
+        this.dbManager = dbManager;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         List<Quiz> quizzes = new ArrayList<>();
         String query = "SELECT * FROM quiz";
 
-        try (Connection conn = this.dbHandler.connection();
+        try (Connection conn = this.dbManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 ResultSet rs = pstmt.executeQuery()) {
 
@@ -48,7 +48,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         List<Quiz> quizzes = new ArrayList<>();
         String query = "SELECT * FROM quiz WHERE userID = ?";
 
-        try (Connection conn = this.dbHandler.connection();
+        try (Connection conn = this.dbManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 ResultSet rs = pstmt.executeQuery()) {
 
@@ -71,7 +71,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         int quizID = -1;
         String query = "INSERT INTO quiz (title, userID) VALUES (?, ?)";
 
-        try (Connection conn = this.dbHandler.connection();
+        try (Connection conn = this.dbManager.connection();
              PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new quiz.
@@ -103,7 +103,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         int userID = rs.getInt("userID");
 
         // Grab the user associated with the quiz.
-        UserPersistenceHSQLDB userPersistence = new UserPersistenceHSQLDB(this.dbHandler);
+        UserPersistenceHSQLDB userPersistence = new UserPersistenceHSQLDB(this.dbManager);
         User user = userPersistence.getUserByID(userID);
 
         return new Quiz(quizID, title, user);
