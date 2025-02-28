@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
 
-public class DatabaseHandler {
+public class DatabaseManager {
     private static final String DEFAULT_DB_PATH = "src/main/java/comp3350/quizrus/persistence/hsqldb/db/quizrusdb";
     private static final String DEFAULT_INIT_PATH = "src/main/assets/db/init.sql";
     private static final String DEFAULT_DROP_TABLES_PATH = "src/main/assets/db/drop_tables.sql";
@@ -18,7 +18,7 @@ public class DatabaseHandler {
     private final String initPath;
     private final String dropTablesPath;
 
-    public DatabaseHandler(String dbPath, String initPath, String dropTablesPath) {
+    public DatabaseManager(String dbPath, String initPath, String dropTablesPath) {
         this.dbPath = (dbPath != null) ? getAbsPath(dbPath) : getAbsPath(DEFAULT_DB_PATH);
         this.initPath = (initPath != null) ? getAbsPath(initPath) : getAbsPath(DEFAULT_INIT_PATH);
         this.dropTablesPath = (dropTablesPath != null) ? getAbsPath(dropTablesPath)
@@ -26,7 +26,7 @@ public class DatabaseHandler {
         initializeTables();
     }
 
-    public DatabaseHandler() {
+    public DatabaseManager() {
         // Call the three-parameter constructor with nulls for all values
         // by default.
         this(null, null, null);

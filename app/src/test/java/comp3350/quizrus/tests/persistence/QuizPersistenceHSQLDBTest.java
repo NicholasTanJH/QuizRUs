@@ -12,7 +12,7 @@ import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.hsqldb.QuizPersistenceHSQLDB;
 import comp3350.quizrus.persistence.hsqldb.UserPersistenceHSQLDB;
 import comp3350.quizrus.persistence.hsqldb.PersistenceException;
-import comp3350.quizrus.persistence.hsqldb.DatabaseHandler;
+import comp3350.quizrus.persistence.hsqldb.DatabaseManager;
 
 public class QuizPersistenceHSQLDBTest {
     // Set the path to the database and the path to the SQL file that creates
@@ -20,20 +20,20 @@ public class QuizPersistenceHSQLDBTest {
     private static final String dbPath = "src/test/java/comp3350/quizrus/tests/persistence/db/testdb";
     private static final String initPath = "src/main/assets/db/test.sql";
 
-    private DatabaseHandler dbHandler;
+    private DatabaseManager dbManager;
     private QuizPersistenceHSQLDB quizPersistenceHSQLDB;
     private UserPersistenceHSQLDB userPersistenceHSQLDB;
 
     @Before
     public void setup() {
-        dbHandler = new DatabaseHandler(dbPath, initPath, null);
-        quizPersistenceHSQLDB = new QuizPersistenceHSQLDB(dbHandler);
-        userPersistenceHSQLDB = new UserPersistenceHSQLDB(dbHandler);
+        dbManager = new DatabaseManager(dbPath, initPath, null);
+        quizPersistenceHSQLDB = new QuizPersistenceHSQLDB(dbManager);
+        userPersistenceHSQLDB = new UserPersistenceHSQLDB(dbManager);
     }
 
     @After
     public void tearDown() {
-        dbHandler.dropTables();
+        dbManager.dropTables();
     }
 
     // Integration tests.

@@ -11,14 +11,14 @@ import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.UserPersistence;
 
 public class UserPersistenceHSQLDB implements UserPersistence {
-    private final DatabaseHandler dbHandler;
+    private final DatabaseManager dbManager;
 
     public UserPersistenceHSQLDB() {
-        this.dbHandler = new DatabaseHandler();
+        this.dbManager = new DatabaseManager();
     }
 
-    public UserPersistenceHSQLDB(DatabaseHandler dbHandler) {
-        this.dbHandler = dbHandler;
+    public UserPersistenceHSQLDB(DatabaseManager dbManager) {
+        this.dbManager = dbManager;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         User user = null;
         String query = "SELECT * FROM user WHERE userID = ?";
 
-        try (Connection conn = this.dbHandler.connection();
+        try (Connection conn = this.dbManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, userID);
@@ -48,7 +48,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         User user = null;
         String query = "SELECT * FROM user WHERE username = ?";
 
-        try (Connection conn = this.dbHandler.connection();
+        try (Connection conn = this.dbManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, username);
@@ -70,7 +70,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM user";
 
-        try (Connection conn = this.dbHandler.connection();
+        try (Connection conn = this.dbManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 ResultSet rs = pstmt.executeQuery()) {
 
@@ -91,7 +91,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         int userID = -1;
         String query = "INSERT INTO user (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = this.dbHandler.connection();
+        try (Connection conn = this.dbManager.connection();
              PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new user.
