@@ -58,7 +58,7 @@ public class UserLoginActivity extends AppCompatActivity {
         String logInPassword = textInputEditTextPassword.getText().toString();
 
         AccessUsers accessUsers = new AccessUsers();
-        User user = accessUsers.getUser(logInUsername,logInPassword);
+        User user = accessUsers.loginUser(logInUsername,logInPassword);
 //        boolean isLoginInfoCorrect = user != null;
         boolean isLoginInfoCorrect = true; //TODO
         logInAnimation(isLoginInfoCorrect);

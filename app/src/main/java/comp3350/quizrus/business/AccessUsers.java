@@ -36,26 +36,42 @@ public class AccessUsers {
     public User createUser(String username, final String password, final String email, final String firstname, final String lastname) {
         User newUser = new User(username.toLowerCase(), password, email, firstname, lastname);
 
-//        int userID = userPersistence.createUser(newUser);
-//        if(userID != -1)
-//        {
-//            newUser.setUserID(userID);
-//        }
-//        else
-//        {
-//            return null;
-//        }
+        int userID = userPersistence.insertUser(newUser);
+        if(userID != -1)
+        {
+            newUser.setUserID(userID);
+        }
+        else
+        {
+            return null;
+        }
 
         return newUser;
     }
 
-    public User getUser(final String username, final String password) {
-//        return userPersistence.getUser(username, password);
+    public User loginUser(final String username, final String password) {
+        User user = userPersistence.getUserByUsername(username);
+        if(password.equals(user.getPassword()))
+        {
+            return user;
+        }
         return null;
     }
 
-    public boolean authenticateUsername(String username) {
-        return !username.isEmpty() && username.length() <= 20;
+    public String authenticateUsername(String username) {
+
+        String errorMessage = "";
+        User user = userPersistence.getUserByUsername(username);
+        boolean found = (user != null);
+        if(found)
+        {
+            errorMessage += "\n \t - Username is taken";
+        }
+        if(!username.isEmpty() && username.length() <= 20)
+        {
+            errorMessage += "\n \t - 20 characters or shorter";
+        }
+        return errorMessage;
     }
 
     public String authenticatePassword(String password) {

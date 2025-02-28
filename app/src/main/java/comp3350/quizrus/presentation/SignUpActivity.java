@@ -67,16 +67,18 @@ public class SignUpActivity extends AppCompatActivity {
         String newLastName = textInputEditTextLastName.getText().toString();
 
         AccessUsers accessUsers = new AccessUsers();
-        boolean isValidUsername = accessUsers.authenticateUsername(newUsername);
 
+        String errorMessageUsername = accessUsers.authenticateUsername(newUsername);
         String errorMessagePassword = accessUsers.authenticatePassword(newPassword);
+
+        boolean isValidUsername = errorMessageUsername.isEmpty();
         boolean isValidPassword = errorMessagePassword.isEmpty();
         boolean isValidEmail = accessUsers.authenticateEmail(newEmail);
         boolean isValidFirstName = accessUsers.authenticateName(newFirstName);
         boolean isValidLastName = accessUsers.authenticateName(newLastName);
 
         if (!isValidUsername) {
-            setAlertMessage("Invalid Username", "Please fill in your username and it must be 20 characters or shorter");
+            setAlertMessage("Invalid Username", "Username must be:" + errorMessageUsername);
             return;
         } else if (!isValidPassword) {
             setAlertMessage("Invalid Password", "Password must have:" + errorMessagePassword);
