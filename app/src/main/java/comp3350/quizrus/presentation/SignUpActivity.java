@@ -82,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
             setAlertMessage("Invalid Password", "Password must have:" + errorMessagePassword);
             return;
         } else if (!isValidEmail) {
-            setAlertMessage("Invalid Email", "Please fill in your email");
+            setAlertMessage("Invalid Email", "Invalid email");
             return;
         } else if (!isValidFirstName) {
             setAlertMessage("Invalid First Name", "Please fill in your first name");
