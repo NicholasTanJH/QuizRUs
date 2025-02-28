@@ -67,7 +67,7 @@ public class AccessUsers {
         {
             errorMessage += "\n \t - Username is taken";
         }
-        if(!username.isEmpty() && username.length() <= 20)
+        if(username.isEmpty() || username.length() > 20)
         {
             errorMessage += "\n \t - 20 characters or shorter";
         }
