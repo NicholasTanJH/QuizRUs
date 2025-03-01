@@ -1,25 +1,17 @@
 package comp3350.quizrus.application;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import comp3350.quizrus.persistence.UserPersistence;
 import comp3350.quizrus.persistence.QuizPersistence;
 import comp3350.quizrus.persistence.QuestionPersistence;
 import comp3350.quizrus.persistence.AnswerPersistence;
-import comp3350.quizrus.persistence.hsqldb.PersistenceException;
 import comp3350.quizrus.persistence.stubs.UserPersistenceStub;
 import comp3350.quizrus.persistence.stubs.QuizPersistenceStub;
 import comp3350.quizrus.persistence.stubs.QuestionPersistenceStub;
 import comp3350.quizrus.persistence.stubs.AnswerPersistenceStub;
-
 import comp3350.quizrus.persistence.hsqldb.UserPersistenceHSQLDB;
 import comp3350.quizrus.persistence.hsqldb.QuizPersistenceHSQLDB;
-
+import comp3350.quizrus.persistence.hsqldb.QuestionPersistenceHSQLDB;
+import comp3350.quizrus.persistence.hsqldb.AnswerPersistenceHSQLDB;
 
 public class Services {
     private static UserPersistence userPersistence = null;
@@ -29,7 +21,7 @@ public class Services {
 
     public static synchronized UserPersistence getUserPersistence() {
         if (userPersistence == null) {
-            userPersistence = new UserPersistenceStub();
+            userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
         }
 
         return userPersistence;
@@ -37,7 +29,7 @@ public class Services {
 
     public static synchronized QuizPersistence getQuizPersistence() {
         if (quizPersistence == null) {
-            quizPersistence = new QuizPersistenceStub();
+            quizPersistence = new QuizPersistenceHSQLDB(Main.getDBPathName());
         }
 
         return quizPersistence;
@@ -45,7 +37,7 @@ public class Services {
 
     public static synchronized QuestionPersistence getQuestionPersistence() {
         if (questionPersistence == null) {
-            questionPersistence = new QuestionPersistenceStub();
+            questionPersistence = new QuestionPersistenceHSQLDB(Main.getDBPathName());
         }
 
         return questionPersistence;
@@ -53,7 +45,7 @@ public class Services {
 
     public static synchronized AnswerPersistence getAnswerPersistence() {
         if (answerPersistence == null) {
-            answerPersistence = new AnswerPersistenceStub();
+            answerPersistence = new AnswerPersistenceHSQLDB(Main.getDBPathName());
         }
 
         return answerPersistence;

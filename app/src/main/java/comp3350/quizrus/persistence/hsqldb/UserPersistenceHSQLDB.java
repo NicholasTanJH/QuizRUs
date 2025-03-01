@@ -1,6 +1,7 @@
 package comp3350.quizrus.persistence.hsqldb;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,14 +12,14 @@ import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.UserPersistence;
 
 public class UserPersistenceHSQLDB implements UserPersistence {
-    private final DatabaseManager dbManager;
+    private final String dbPath;
 
-    public UserPersistenceHSQLDB() {
-        this.dbManager = new DatabaseManager();
+    public UserPersistenceHSQLDB(final String dbPath) {
+        this.dbPath = dbPath;
     }
 
-    public UserPersistenceHSQLDB(DatabaseManager dbManager) {
-        this.dbManager = dbManager;
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
     @Override
@@ -26,7 +27,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         User user = null;
         String query = "SELECT * FROM user WHERE userID = ?";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, userID);
@@ -48,7 +49,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         User user = null;
         String query = "SELECT * FROM user WHERE username = ?";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, username);
@@ -70,7 +71,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM user";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 ResultSet rs = pstmt.executeQuery()) {
 
@@ -91,7 +92,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         int userID = -1;
         String query = "INSERT INTO user (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new user.

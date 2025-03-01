@@ -28,6 +28,10 @@ public class AccessUsers {
         this.userPersistence = userPersistence;
     }
 
+    public User getUser(int userID) {
+        return userPersistence.getUserByID(userID);
+    }
+
     public List<User> getUsers() {
         users = userPersistence.getAllUsers();
         return Collections.unmodifiableList(users);

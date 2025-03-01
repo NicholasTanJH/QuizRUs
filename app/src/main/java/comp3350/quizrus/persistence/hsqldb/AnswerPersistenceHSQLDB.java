@@ -1,25 +1,29 @@
 package comp3350.quizrus.persistence.hsqldb;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.quizrus.business.AccessQuestions;
+import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Answer;
+import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.AnswerPersistence;
 
 public class AnswerPersistenceHSQLDB implements AnswerPersistence{
-    private final DatabaseManager dbManager;
+    private final String dbPath;
 
-    public AnswerPersistenceHSQLDB() {
-        this.dbManager = new DatabaseManager();
+    public AnswerPersistenceHSQLDB(final String dbPath) {
+        this.dbPath = dbPath;
     }
 
-    public AnswerPersistenceHSQLDB(DatabaseManager dbManager) {
-        this.dbManager = dbManager;
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
     @Override
@@ -27,7 +31,7 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence{
         List<Answer> answers = new ArrayList<>();
         String query = "SELECT * FROM answer where answerID = ?";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -50,7 +54,7 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence{
         int answerID = -1;
         String query = "INSERT INTO answer (answerText, isCorrect, questionID) VALUES (?, ?, ?)";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new answer.
@@ -84,8 +88,8 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence{
         int questionID = rs.getInt("questionID");
 
         // Grab the question associated with the answer.
-        QuestionPersistenceHSQLDB questionPersistence = new QuestionPersistenceHSQLDB(this.dbManager);
-        Question question = questionPersistence.getQuestionByID(questionID);
+        AccessQuestions accessQuestions = new AccessQuestions();
+        Question question = accessQuestions.getQuestion(questionID);
 
         return new Answer(answerID, answerText, isCorrect, question);
     }

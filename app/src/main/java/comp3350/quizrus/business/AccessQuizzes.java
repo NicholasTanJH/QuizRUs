@@ -29,6 +29,10 @@ public class AccessQuizzes {
         this.quizPersistence = quizPersistence;
     }
 
+    public Quiz getQuiz(int quizID) {
+        return quizPersistence.getQuizByID(quizID);
+    }
+
     public List<Quiz> getQuizzes()
     {
         quizzes = quizPersistence.getAllQuizzes();
