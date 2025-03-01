@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import android.content.DialogInterface;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -68,8 +69,8 @@ public class UserLoginActivity extends AppCompatActivity {
 
         AccessUsers accessUsers = new AccessUsers();
         User user = accessUsers.loginUser(logInUsername,logInPassword);
-//        boolean isLoginInfoCorrect = user != null;
-        boolean isLoginInfoCorrect = true; //TODO
+        boolean isLoginInfoCorrect = user != null;
+//        boolean isLoginInfoCorrect = true; //TODO
         logInAnimation(isLoginInfoCorrect);
     }
 
