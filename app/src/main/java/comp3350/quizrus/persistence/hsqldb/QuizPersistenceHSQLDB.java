@@ -23,6 +23,28 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
     }
 
     @Override
+    public Quiz getQuizByID(int quizID) {
+        Quiz quiz = null;
+        String query = "SELECT * FROM quiz WHERE quizID = ?";
+
+        try (Connection conn = this.dbManager.connection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, quizID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    quiz = buildQuizFromResultSet(rs);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return quiz;
+    }
+
+    @Override
     public List<Quiz> getAllQuizzes() {
         List<Quiz> quizzes = new ArrayList<>();
         String query = "SELECT * FROM quiz";
@@ -78,7 +100,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
             pstmt.setString(1, quiz.getTitle());
             pstmt.setInt(2, user.getUserID());
 
-            // Execute the query, then check that the user was inserted.
+            // Execute the query, then check that the quiz was inserted.
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Creating quiz failed, no rows affected.");

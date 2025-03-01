@@ -90,15 +90,7 @@ public class AnswerPersistenceStub implements AnswerPersistence {
     }
 
     @Override
-    public List<Answer> getCorrectAnswers(Question question) {
-        List<Answer> correctAnswers = new ArrayList<>();
-
-        for (Answer answer : answers) {
-            if (answer.getMyQuestion().equals(question) &&
-                    answer.isCorrect()) {
-                correctAnswers.add(answer);
-            }
-        }
-        return Collections.unmodifiableList(correctAnswers);
+    public int insertAnswer(Answer answer, Question question) {
+        return -1;
     }
 }
