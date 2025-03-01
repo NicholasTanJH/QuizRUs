@@ -42,4 +42,9 @@ public class QuestionPersistenceStub implements QuestionPersistence {
         }
         return quizQuestions;
     }
+
+    @Override
+    public int insertQuestion(Question question, Quiz quiz) {
+        return -1;
+    }
 }

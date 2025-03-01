@@ -8,4 +8,5 @@ import comp3350.quizrus.objects.Quiz;
 public interface QuestionPersistence {
     List<Question> getQuestionsForQuiz(Quiz quiz);
 
+    int insertQuestion(Question question, Quiz quiz);
 }
