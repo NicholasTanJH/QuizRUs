@@ -22,6 +22,11 @@ public class QuizPersistenceStub implements QuizPersistence {
     }
 
     @Override
+    public Quiz getQuizByID(int quizID){
+        return null;
+    }
+
+    @Override
     public List<Quiz> getAllQuizzes() {
         return Collections.unmodifiableList(quizzes);
     }

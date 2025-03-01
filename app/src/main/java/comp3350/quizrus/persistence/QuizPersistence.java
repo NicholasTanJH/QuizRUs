@@ -8,6 +8,8 @@ import comp3350.quizrus.objects.User;
 public interface QuizPersistence {
     List<Quiz> getAllQuizzes();
 
+    Quiz getQuizByID(int quizID);
+
     List<Quiz> getUserQuizzes(User user);
 
     int insertQuiz(Quiz quiz, User user);

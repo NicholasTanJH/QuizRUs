@@ -24,6 +24,28 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
     }
 
     @Override
+    public Question getQuestionByID(int questionID){
+        Question question = null;
+        String query = "SELECT * FROM question WHERE questionID = ?";
+
+        try (Connection conn = this.dbManager.connection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, questionID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    question = buildQuestionFromResultSet(rs);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return question;
+    }
+
+    @Override
     public List<Question> getQuestionsForQuiz(Quiz quiz)
     {
         List <Question> questions = new ArrayList<>();
@@ -50,7 +72,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
     @Override
     public int insertQuestion(Question question, Quiz quiz) {
         int questionID = -1;
-        String query = "INSERT INTO question (questionText, questionType, quizID) VALUES (?, ?)";
+        String query = "INSERT INTO question (questionText, questionType, quizID) VALUES (?, ?, ?)";
 
         try (Connection conn = this.dbManager.connection();
              PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {

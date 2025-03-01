@@ -32,6 +32,11 @@ public class QuestionPersistenceStub implements QuestionPersistence {
     }
 
     @Override
+    public Question getQuestionByID(int questionID){
+        return null;
+    }
+
+    @Override
     public List<Question> getQuestionsForQuiz(Quiz quiz) {
         List<Question> quizQuestions = new ArrayList<>();
 

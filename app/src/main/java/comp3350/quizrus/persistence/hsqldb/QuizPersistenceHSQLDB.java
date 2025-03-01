@@ -22,6 +22,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         this.dbManager = dbManager;
     }
 
+    @Override
     public Quiz getQuizByID(int quizID) {
         Quiz quiz = null;
         String query = "SELECT * FROM quiz WHERE quizID = ?";
