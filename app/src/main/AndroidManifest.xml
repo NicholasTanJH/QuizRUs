@@ -10,6 +10,7 @@
         <activity
             android:name=".presentation.SignUpActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".presentation.UserLoginActivity"
