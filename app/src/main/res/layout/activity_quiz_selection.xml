@@ -14,16 +14,29 @@
         android:layout_height="80dp"
         android:gravity="center_vertical">
 
+        <ImageButton
+            android:id="@+id/accountImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/account_circle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@android:color/transparent"/>
+
         <ImageView
             android:id="@+id/logoImageView"
-            android:minHeight="40dp"
-            android:maxHeight="80dp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/quizruslogo"
+            android:maxHeight="80dp"
+            android:minHeight="40dp"
             android:scaleType="fitCenter"
-            tools:ignore="MissingConstraints"
-            />
+            android:src="@drawable/quizruslogo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

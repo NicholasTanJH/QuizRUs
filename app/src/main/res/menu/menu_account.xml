@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_username"
+        android:checkable="false"
+        android:title="Welcome, Obama Bald Hot Baby Girl Ong" />
+    <item
+        android:id="@+id/menu_sign_out"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:title="Sign Out" />
+</menu>
