@@ -26,6 +26,10 @@ public class AccessQuestions {
         this.questionPersistence = questionPersistence;
     }
 
+    public Question getQuestion(int questionID) {
+        return questionPersistence.getQuestionByID(questionID);
+    }
+
     public List<Question> getQuestions(final Quiz quiz) {
         questions = questionPersistence.getQuestionsForQuiz(quiz);
         return questions;

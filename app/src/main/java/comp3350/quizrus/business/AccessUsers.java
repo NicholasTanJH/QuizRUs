@@ -28,6 +28,10 @@ public class AccessUsers {
         this.userPersistence = userPersistence;
     }
 
+    public User getUser(int userID) {
+        return userPersistence.getUserByID(userID);
+    }
+
     public List<User> getUsers() {
         users = userPersistence.getAllUsers();
         return Collections.unmodifiableList(users);
@@ -51,7 +55,7 @@ public class AccessUsers {
 
     public User loginUser(final String username, final String password) {
         User user = userPersistence.getUserByUsername(username);
-        if(password.equals(user.getPassword()))
+        if(user != null && password.equals(user.getPassword()))
         {
             return user;
         }

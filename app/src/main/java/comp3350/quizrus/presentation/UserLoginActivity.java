@@ -1,7 +1,14 @@
 package comp3350.quizrus.presentation;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.SpannableString;
@@ -21,6 +28,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.User;
+import comp3350.quizrus.application.Main;
+import comp3350.quizrus.persistence.hsqldb.DatabaseManager;
 
 public class UserLoginActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextUsername;
@@ -31,6 +40,7 @@ public class UserLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        copyDatabaseToDevice();
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -57,10 +67,10 @@ public class UserLoginActivity extends AppCompatActivity {
         String logInUsername = textInputEditTextUsername.getText().toString();
         String logInPassword = textInputEditTextPassword.getText().toString();
 
-//        AccessUsers accessUsers = new AccessUsers();
-//        User user = accessUsers.loginUser(logInUsername,logInPassword);
-//        boolean isLoginInfoCorrect = user != null;
-        boolean isLoginInfoCorrect = true; //TODO
+        AccessUsers accessUsers = new AccessUsers();
+        User user = accessUsers.loginUser(logInUsername,logInPassword);
+        boolean isLoginInfoCorrect = user != null;
+//        boolean isLoginInfoCorrect = true; //TODO
         logInAnimation(isLoginInfoCorrect);
     }
 
@@ -98,5 +108,42 @@ public class UserLoginActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    private void copyDatabaseToDevice() {
+        final String DB_PATH = "db";
+
+        String[] assetNames;
+        Context context = getApplicationContext();
+        File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
+        AssetManager assetManager = getAssets();
+
+        try {
+
+            assetNames = assetManager.list(DB_PATH);
+            for (int i = 0; i < assetNames.length; i++) {
+                assetNames[i] = DB_PATH + "/" + assetNames[i];
+            }
+
+            List<String> paths = getAssetPaths(assetNames, dataDirectory);
+
+            Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
+            DatabaseManager.executeSQLFromFile(paths.get(0));
+
+        } catch (final IOException ioe) {
+            System.err.println("Unable to access application data: " + ioe.getMessage());
+        }
+    }
+
+    public List<String> getAssetPaths(String[] assets, File directory) throws IOException {
+        List<String> paths = new ArrayList<>();
+
+        for (String asset : assets) {
+            String[] components = asset.split("/");
+            String copyPath = directory.toString() + "/" + components[components.length - 1];
+
+            paths.add(copyPath);
+        }
+        return paths;
     }
 }

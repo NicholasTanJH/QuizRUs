@@ -26,14 +26,14 @@ public class QuizPersistenceHSQLDBTest {
 
     @Before
     public void setup() {
-        dbManager = new DatabaseManager(dbPath, initPath, null);
-        quizPersistenceHSQLDB = new QuizPersistenceHSQLDB(dbManager);
-        userPersistenceHSQLDB = new UserPersistenceHSQLDB(dbManager);
+//        dbManager = new DatabaseManager(dbPath, initPath, null);
+//        quizPersistenceHSQLDB = new QuizPersistenceHSQLDB(dbManager);
+//        userPersistenceHSQLDB = new UserPersistenceHSQLDB(dbManager);
     }
 
     @After
     public void tearDown() {
-        dbManager.dropTables();
+//        dbManager.dropTables();
     }
 
     // Integration tests.

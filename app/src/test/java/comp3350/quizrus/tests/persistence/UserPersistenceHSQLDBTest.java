@@ -23,14 +23,14 @@ public class UserPersistenceHSQLDBTest {
 
     @Before
     public void setup() {
-        dbManager = new DatabaseManager(dbPath, initPath, null);
-        userPersistenceHSQLDB = new UserPersistenceHSQLDB(dbManager);
+//        dbManager = new DatabaseManager(dbPath, initPath, null);
+//        userPersistenceHSQLDB = new UserPersistenceHSQLDB(dbManager);
     }
 
     @After
-    public void tearDown() {
-        dbManager.dropTables();
-    }
+//    public void tearDown() {
+//        dbManager.dropTables();
+//    }
 
     // Unit tests.
 

@@ -1,34 +1,38 @@
 package comp3350.quizrus.persistence.hsqldb;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.quizrus.business.AccessQuestions;
+import comp3350.quizrus.business.AccessQuizzes;
+import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.Question;
+import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.QuestionPersistence;
 
 
 public class QuestionPersistenceHSQLDB implements QuestionPersistence {
-    private final DatabaseManager dbManager;
+    private final String dbPath;
 
-    public QuestionPersistenceHSQLDB() {
-        this.dbManager = new DatabaseManager();
+    public QuestionPersistenceHSQLDB(final String dbPath) {
+        this.dbPath = dbPath;
     }
 
-    public QuestionPersistenceHSQLDB(DatabaseManager dbManager) {
-        this.dbManager = dbManager;
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
-
     @Override
     public Question getQuestionByID(int questionID){
         Question question = null;
         String query = "SELECT * FROM question WHERE questionID = ?";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, questionID);
@@ -51,7 +55,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
         List <Question> questions = new ArrayList<>();
         String query = "SELECT * FROM question where quizID = ?";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
 
@@ -74,7 +78,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
         int questionID = -1;
         String query = "INSERT INTO question (questionText, questionType, quizID) VALUES (?, ?, ?)";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new question.
@@ -108,8 +112,8 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
         int quizID = rs.getInt("quizID");
 
         // Grab the quiz associated with the question.
-        QuizPersistenceHSQLDB quizPersistence = new QuizPersistenceHSQLDB(this.dbManager);
-        Quiz quiz = quizPersistence.getQuizByID(quizID);
+        AccessQuizzes accessQuizzes = new AccessQuizzes();
+        Quiz quiz = accessQuizzes.getQuiz(quizID);
 
         return new Question(questionID, questionText, quiz, questionType);
     }

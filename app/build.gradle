@@ -35,7 +35,7 @@ dependencies {
     testImplementation group: 'com.google.guava', name: 'guava', version: '32.0.1-jre'
     androidTestImplementation 'androidx.test:core:1.6.1'
     // https://mvnrepository.com/artifact/org.hsqldb/hsqldb
-    implementation group: 'org.hsqldb', name: 'hsqldb', version: '2.7.4'
+    implementation group: 'org.hsqldb', name: 'hsqldb', version: '2.4.1'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.28.2'
 

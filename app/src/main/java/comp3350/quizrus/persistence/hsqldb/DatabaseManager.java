@@ -1,7 +1,6 @@
 package comp3350.quizrus.persistence.hsqldb;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,44 +8,15 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
 
+import comp3350.quizrus.application.Main;
+
 public class DatabaseManager {
-    private static final String DEFAULT_DB_PATH = "src/main/java/comp3350/quizrus/persistence/hsqldb/db/quizrusdb";
-    private static final String DEFAULT_INIT_PATH = "src/main/assets/db/init.sql";
-    private static final String DEFAULT_DROP_TABLES_PATH = "src/main/assets/db/drop_tables.sql";
+    private static final String dbPath = Main.getDBPathName();
 
-    private final String dbPath;
-    private final String initPath;
-    private final String dropTablesPath;
-
-    public DatabaseManager(String dbPath, String initPath, String dropTablesPath) {
-        this.dbPath = (dbPath != null) ? getAbsPath(dbPath) : getAbsPath(DEFAULT_DB_PATH);
-        this.initPath = (initPath != null) ? getAbsPath(initPath) : getAbsPath(DEFAULT_INIT_PATH);
-        this.dropTablesPath = (dropTablesPath != null) ? getAbsPath(dropTablesPath)
-                : getAbsPath(DEFAULT_DROP_TABLES_PATH);
-        initializeTables();
+    public static Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
-
-    public DatabaseManager() {
-        // Call the three-parameter constructor with nulls for all values
-        // by default.
-        this(null, null, null);
-    }
-
-    public void initializeTables() {
-        executeSQLFromFile(this.initPath);
-        System.out.println("Database initialized.");
-    }
-
-    public void dropTables() {
-        executeSQLFromFile(this.dropTablesPath);
-        System.out.println("All tables dropped.");
-    }
-
-    public Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + this.dbPath + ";shutdown=true", "SA", "");
-    }
-
-    private void executeSQLFromFile(String filePath) {
+    public static void executeSQLFromFile(String filePath) {
         Connection conn = null;
         try {
             conn = connection();
@@ -92,9 +62,5 @@ public class DatabaseManager {
                 }
             }
         }
-    }
-
-    private String getAbsPath(String path) {
-        return new File(path).getAbsolutePath();
     }
 }

@@ -1,25 +1,27 @@
 package comp3350.quizrus.persistence.hsqldb;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.QuizPersistence;
 
 public class QuizPersistenceHSQLDB implements QuizPersistence {
-    private final DatabaseManager dbManager;
+    private final String dbPath;
 
-    public QuizPersistenceHSQLDB() {
-        this.dbManager = new DatabaseManager();
+    public QuizPersistenceHSQLDB(final String dbPath) {
+        this.dbPath = dbPath;
     }
 
-    public QuizPersistenceHSQLDB(DatabaseManager dbManager) {
-        this.dbManager = dbManager;
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
     @Override
@@ -27,7 +29,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         Quiz quiz = null;
         String query = "SELECT * FROM quiz WHERE quizID = ?";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, quizID);
@@ -49,7 +51,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         List<Quiz> quizzes = new ArrayList<>();
         String query = "SELECT * FROM quiz";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 ResultSet rs = pstmt.executeQuery()) {
 
@@ -70,7 +72,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         List<Quiz> quizzes = new ArrayList<>();
         String query = "SELECT * FROM quiz WHERE userID = ?";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 ResultSet rs = pstmt.executeQuery()) {
 
@@ -93,7 +95,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         int quizID = -1;
         String query = "INSERT INTO quiz (title, userID) VALUES (?, ?)";
 
-        try (Connection conn = this.dbManager.connection();
+        try (Connection conn = connection();
              PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new quiz.
@@ -125,8 +127,8 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         int userID = rs.getInt("userID");
 
         // Grab the user associated with the quiz.
-        UserPersistenceHSQLDB userPersistence = new UserPersistenceHSQLDB(this.dbManager);
-        User user = userPersistence.getUserByID(userID);
+        AccessUsers accessUsers = new AccessUsers();
+        User user = accessUsers.getUser(userID);
 
         return new Quiz(quizID, title, user);
     }
