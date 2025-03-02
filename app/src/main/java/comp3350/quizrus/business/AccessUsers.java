@@ -55,7 +55,7 @@ public class AccessUsers {
 
     public User loginUser(final String username, final String password) {
         User user = userPersistence.getUserByUsername(username);
-        if(password.equals(user.getPassword()))
+        if(user != null && password.equals(user.getPassword()))
         {
             return user;
         }
