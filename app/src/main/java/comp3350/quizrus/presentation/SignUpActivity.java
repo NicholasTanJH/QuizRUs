@@ -25,6 +25,7 @@ import comp3350.quizrus.business.AccessUsers;
 public class SignUpActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextUsername;
     TextInputEditText textInputEditTextPassword;
+    TextInputEditText textInputEditTextConfirmPassword;
     TextInputEditText textInputEditTextEmail;
     TextInputEditText textInputEditTextFirstName;
     TextInputEditText textInputEditTextLastName;
@@ -42,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             textInputEditTextUsername = findViewById(R.id.textInputETUsername);
             textInputEditTextPassword = findViewById(R.id.textInputETPassword);
+            textInputEditTextConfirmPassword = findViewById(R.id.textInputETConfirmPassword);
             textInputEditTextEmail = findViewById(R.id.textInputETEmail);
             textInputEditTextFirstName = findViewById(R.id.textInputETFirstName);
             textInputEditTextLastName = findViewById(R.id.textInputETLastName);
@@ -62,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void checkSignInInfo() {
         String newUsername = textInputEditTextUsername.getText().toString();
         String newPassword = textInputEditTextPassword.getText().toString();
+        String newConfirmPassword = textInputEditTextConfirmPassword.getText().toString();
         String newEmail = textInputEditTextEmail.getText().toString();
         String newFirstName = textInputEditTextFirstName.getText().toString();
         String newLastName = textInputEditTextLastName.getText().toString();
@@ -73,6 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         boolean isValidUsername = errorMessageUsername.isEmpty();
         boolean isValidPassword = errorMessagePassword.isEmpty();
+        boolean isValidConfirmPassword = newPassword.equals(newConfirmPassword);
         boolean isValidEmail = accessUsers.authenticateEmail(newEmail);
         boolean isValidFirstName = accessUsers.authenticateName(newFirstName);
         boolean isValidLastName = accessUsers.authenticateName(newLastName);
@@ -83,14 +87,17 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (!isValidPassword) {
             setAlertMessage("Invalid Password", "Password must have:" + errorMessagePassword);
             return;
+        } else if (!isValidConfirmPassword) {
+            setAlertMessage("Invalid Confirm Password", "Please ensure the confirm password matches your password.");
+            return;
         } else if (!isValidEmail) {
-            setAlertMessage("Invalid Email", "Invalid email");
+            setAlertMessage("Invalid Email", "Invalid email.");
             return;
         } else if (!isValidFirstName) {
-            setAlertMessage("Invalid First Name", "Please fill in your first name");
+            setAlertMessage("Invalid First Name", "Please fill in your first name.");
             return;
         }else if (!isValidLastName) {
-            setAlertMessage("Invalid Last Name", "Please fill in your last name");
+            setAlertMessage("Invalid Last Name", "Please fill in your last name.");
             return;
         } else {
             accessUsers.createUser(newUsername, newPassword, newEmail, newFirstName, newLastName);
