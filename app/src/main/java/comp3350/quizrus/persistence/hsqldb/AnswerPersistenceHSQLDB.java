@@ -15,15 +15,11 @@ import comp3350.quizrus.objects.Answer;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.AnswerPersistence;
 
-public class AnswerPersistenceHSQLDB implements AnswerPersistence{
+public class AnswerPersistenceHSQLDB implements AnswerPersistence {
     private final String dbPath;
 
     public AnswerPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
-    }
-
-    private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
     @Override
@@ -31,9 +27,9 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence{
         List<Answer> answers = new ArrayList<>();
         String query = "SELECT * FROM answer where answerID = ?";
 
-        try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query);
+                ResultSet rs = pstmt.executeQuery()) {
 
             pstmt.setInt(1, question.getQuestionID());
 
@@ -54,8 +50,8 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence{
         int answerID = -1;
         String query = "INSERT INTO answer (answerText, isCorrect, questionID) VALUES (?, ?, ?)";
 
-        try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new answer.
             pstmt.setString(1, answer.getAnswerText());

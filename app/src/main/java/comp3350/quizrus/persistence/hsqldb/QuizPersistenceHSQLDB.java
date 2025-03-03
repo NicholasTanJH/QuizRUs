@@ -20,17 +20,13 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         this.dbPath = dbPath;
     }
 
-    private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-    }
-
     @Override
     public Quiz getQuizByID(int quizID) {
         Quiz quiz = null;
         String query = "SELECT * FROM quiz WHERE quizID = ?";
 
-        try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, quizID);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -51,7 +47,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         List<Quiz> quizzes = new ArrayList<>();
         String query = "SELECT * FROM quiz";
 
-        try (Connection conn = connection();
+        try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 ResultSet rs = pstmt.executeQuery()) {
 
@@ -72,7 +68,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         List<Quiz> quizzes = new ArrayList<>();
         String query = "SELECT * FROM quiz WHERE userID = ?";
 
-        try (Connection conn = connection();
+        try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 ResultSet rs = pstmt.executeQuery()) {
 
@@ -95,8 +91,8 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         int quizID = -1;
         String query = "INSERT INTO quiz (title, userID) VALUES (?, ?)";
 
-        try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new quiz.
             pstmt.setString(1, quiz.getTitle());

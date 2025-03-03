@@ -16,6 +16,7 @@ public class DatabaseManager {
     public static Connection connection() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
+
     public static void executeSQLFromFile(String filePath) {
         Connection conn = null;
         try {

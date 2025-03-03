@@ -42,7 +42,7 @@ public class UserLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        instantiateDatabase();
+        initializeDatabase();
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -115,7 +115,7 @@ public class UserLoginActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void instantiateDatabase() {
+    private void initializeDatabase() {
         final String DB_PATH = "db";
 
         String[] assetNames;
@@ -131,6 +131,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
             copyAssetsToDirectory(assetNames, dataDirectory);
 
+            // Main steps for initializing the database.
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
             DatabaseManager.executeSQLFromFile(dataDirectory + "/" + "init.sql");
 

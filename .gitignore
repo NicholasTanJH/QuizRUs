@@ -16,3 +16,6 @@
 .cxx
 local.properties
 .vscode
+.idea/
+*db.script
+*db.properties
