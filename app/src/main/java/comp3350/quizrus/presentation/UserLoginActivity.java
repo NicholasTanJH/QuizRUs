@@ -69,11 +69,14 @@ public class UserLoginActivity extends AppCompatActivity {
         String logInUsername = textInputEditTextUsername.getText().toString();
         String logInPassword = textInputEditTextPassword.getText().toString();
 
-        AccessUsers accessUsers = new AccessUsers();
-        User user = accessUsers.loginUser(logInUsername,logInPassword);
-        boolean isLoginInfoCorrect = user != null;
-//        boolean isLoginInfoCorrect = true; //TODO
-        logInAnimation(isLoginInfoCorrect);
+        if(logInUsername.isEmpty()||logInPassword.isEmpty()){
+            setAlertMessage("Failed to Log In", "Login information cannot be empty");
+        }else{
+            AccessUsers accessUsers = new AccessUsers();
+            User user = accessUsers.loginUser(logInUsername,logInPassword);
+            boolean isLoginInfoCorrect = user != null;
+            logInAnimation(isLoginInfoCorrect);
+        }
     }
 
     //animation for changing the button text when registering
