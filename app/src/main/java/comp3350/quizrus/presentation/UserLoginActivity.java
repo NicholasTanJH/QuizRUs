@@ -44,7 +44,7 @@ public class UserLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (!databaseInitialized) {
-            instantiateDatabase();
+            initializeDatabase();
             databaseInitialized = true;
         }
         EdgeToEdge.enable(this);
@@ -116,7 +116,7 @@ public class UserLoginActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void instantiateDatabase() {
+    private void initializeDatabase() {
         final String DB_PATH = "db";
 
         String[] assetNames;
