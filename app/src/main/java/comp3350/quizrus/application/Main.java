@@ -2,7 +2,7 @@ package comp3350.quizrus.application;
 
 public class Main
 {
-    private static String dbName="db";
+    private static String dbName="quizrusdb";
 
     public static void setDBPathName(final String name) {
         try {

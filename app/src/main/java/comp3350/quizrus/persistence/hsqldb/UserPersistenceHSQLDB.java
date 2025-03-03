@@ -18,16 +18,12 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         this.dbPath = dbPath;
     }
 
-    private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-    }
-
     @Override
     public User getUserByID(int userID) {
         User user = null;
         String query = "SELECT * FROM user WHERE userID = ?";
 
-        try (Connection conn = connection();
+        try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, userID);
@@ -49,7 +45,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         User user = null;
         String query = "SELECT * FROM user WHERE username = ?";
 
-        try (Connection conn = connection();
+        try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, username);
@@ -71,7 +67,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM user";
 
-        try (Connection conn = connection();
+        try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 ResultSet rs = pstmt.executeQuery()) {
 
@@ -92,8 +88,8 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         int userID = -1;
         String query = "INSERT INTO user (username, password, email, firstname, lastname) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new user.
             pstmt.setString(1, newUser.getUsername());

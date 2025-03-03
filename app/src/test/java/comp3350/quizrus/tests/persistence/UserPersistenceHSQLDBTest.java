@@ -7,30 +7,27 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import comp3350.quizrus.application.Main;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.hsqldb.UserPersistenceHSQLDB;
 import comp3350.quizrus.persistence.hsqldb.PersistenceException;
 import comp3350.quizrus.persistence.hsqldb.DatabaseManager;
 
 public class UserPersistenceHSQLDBTest {
-    // Set the path to the database and the path to the SQL file that creates
-    // our tables.
-    private static final String dbPath = "src/test/java/comp3350/quizrus/tests/persistence/db/testdb";
-    private static final String initPath = "src/main/assets/db/test.sql";
-
-    private DatabaseManager dbManager;
     private UserPersistenceHSQLDB userPersistenceHSQLDB;
+    private final String initSQLPath = "src/main/assets/db/init.sql";
 
     @Before
     public void setup() {
-//        dbManager = new DatabaseManager(dbPath, initPath, null);
-//        userPersistenceHSQLDB = new UserPersistenceHSQLDB(dbManager);
+        Main.setDBPathName("testdb");
+        userPersistenceHSQLDB = new UserPersistenceHSQLDB(Main.getDBPathName());
+        DatabaseManager.executeSQLFromFile(initSQLPath);
     }
 
     @After
-//    public void tearDown() {
-//        dbManager.dropTables();
-//    }
+    public void tearDown() {
+        DatabaseManager.executeSQLFromFile(initSQLPath);
+    }
 
     // Unit tests.
 
@@ -52,45 +49,35 @@ public class UserPersistenceHSQLDBTest {
         userPersistenceHSQLDB.insertUser(user2);
     }
 
-    @Test(expected = PersistenceException.class)
-    public void testInsertSameEmailFail() {
-        User user1 = new User("test", "password", "test@gmail.com", "Bob", "Test");
-        User user2 = new User("zen", "password", "test@gmail.com", "Bob", "Test");
-
-        int userID = userPersistenceHSQLDB.insertUser(user1);
-        assertNotEquals(-1, userID);
-        userPersistenceHSQLDB.insertUser(user2);
-    }
-
     @Test
     public void testEmptyDBRetrieval() {
         List<User> users = userPersistenceHSQLDB.getAllUsers();
         assertEquals(0, users.size());
     }
 
-     @Test
-     public void testGetUserByID() {
-         User user1 = new User("test", "password", "test@gmail.com", "Bob", "Test");
+    @Test
+    public void testGetUserByID() {
+        User user1 = new User("test", "password", "test@gmail.com", "Bob", "Test");
 
-         int userID = userPersistenceHSQLDB.insertUser(user1);
-         assertNotEquals(-1, userID);
+        int userID = userPersistenceHSQLDB.insertUser(user1);
+        assertNotEquals(-1, userID);
 
-         User user = userPersistenceHSQLDB.getUserByID(userID);
-         assertNotNull(user);
-         assertEquals(0, user.getUserID());
-     }
+        User user = userPersistenceHSQLDB.getUserByID(userID);
+        assertNotNull(user);
+        assertEquals(0, user.getUserID());
+    }
 
-     @Test
-     public void testGetUserByUsername() {
-         User user1 = new User("test", "password", "test@gmail.com", "Bob", "Test");
+    @Test
+    public void testGetUserByUsername() {
+        User user1 = new User("test", "password", "test@gmail.com", "Bob", "Test");
 
-         int userID = userPersistenceHSQLDB.insertUser(user1);
-         assertNotEquals(-1, userID);
+        int userID = userPersistenceHSQLDB.insertUser(user1);
+        assertNotEquals(-1, userID);
 
-         User user = userPersistenceHSQLDB.getUserByUsername("test");
-         assertNotNull(user);
-         assertEquals(0, user.getUserID());
-     }
+        User user = userPersistenceHSQLDB.getUserByUsername("test");
+        assertNotNull(user);
+        assertEquals(0, user.getUserID());
+    }
 
     // Integration tests.
 

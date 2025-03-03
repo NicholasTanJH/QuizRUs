@@ -34,6 +34,7 @@ import comp3350.quizrus.application.Main;
 import comp3350.quizrus.persistence.hsqldb.DatabaseManager;
 
 public class UserLoginActivity extends AppCompatActivity {
+    private static boolean databaseInitialized = false;
     TextInputEditText textInputEditTextUsername;
     TextInputEditText textInputEditTextPassword;
     Button buttonLogIn;
@@ -42,7 +43,10 @@ public class UserLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        instantiateDatabase();
+        if (!databaseInitialized) {
+            instantiateDatabase();
+            databaseInitialized = true;
+        }
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -128,6 +132,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
             copyAssetsToDirectory(assetNames, dataDirectory);
 
+            // Main steps for initializing the database.
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
             DatabaseManager.executeSQLFromFile(dataDirectory + "/" + "init.sql");
 

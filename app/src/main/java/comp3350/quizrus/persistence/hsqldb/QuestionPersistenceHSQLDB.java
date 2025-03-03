@@ -16,7 +16,6 @@ import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.QuestionPersistence;
 
-
 public class QuestionPersistenceHSQLDB implements QuestionPersistence {
     private final String dbPath;
 
@@ -24,16 +23,13 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
         this.dbPath = dbPath;
     }
 
-    private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-    }
     @Override
-    public Question getQuestionByID(int questionID){
+    public Question getQuestionByID(int questionID) {
         Question question = null;
         String query = "SELECT * FROM question WHERE questionID = ?";
 
-        try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, questionID);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -50,14 +46,13 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
     }
 
     @Override
-    public List<Question> getQuestionsForQuiz(Quiz quiz)
-    {
-        List <Question> questions = new ArrayList<>();
+    public List<Question> getQuestionsForQuiz(Quiz quiz) {
+        List<Question> questions = new ArrayList<>();
         String query = "SELECT * FROM question where quizID = ?";
 
-        try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query);
-             ResultSet rs = pstmt.executeQuery()) {
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query);
+                ResultSet rs = pstmt.executeQuery()) {
 
             pstmt.setInt(1, quiz.getQuizID());
 
@@ -78,8 +73,8 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
         int questionID = -1;
         String query = "INSERT INTO question (questionText, questionType, quizID) VALUES (?, ?, ?)";
 
-        try (Connection conn = connection();
-             PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new question.
             pstmt.setString(1, question.getQuestionText());
@@ -105,7 +100,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
         }
     }
 
-    private Question buildQuestionFromResultSet(ResultSet rs) throws SQLException{
+    private Question buildQuestionFromResultSet(ResultSet rs) throws SQLException {
         int questionID = rs.getInt("questionID");
         String questionText = rs.getString("questionText");
         String questionType = rs.getString("questionType");
