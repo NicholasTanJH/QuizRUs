@@ -1,7 +1,6 @@
 package comp3350.quizrus.persistence.hsqldb;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.quizrus.business.AccessQuestions;
-import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Answer;
-import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.AnswerPersistence;
 
 public class AnswerPersistenceHSQLDB implements AnswerPersistence {

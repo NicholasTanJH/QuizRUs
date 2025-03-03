@@ -17,5 +17,5 @@
 local.properties
 .vscode
 .idea/
-*db.script
-*db.properties
+testdb.script
+testdb.properties

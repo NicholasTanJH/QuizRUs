@@ -131,16 +131,14 @@ public class UserLoginActivity extends AppCompatActivity {
 
             copyAssetsToDirectory(assetNames, dataDirectory);
 
-            // Main steps for initializing the database.
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
-            DatabaseManager.executeSQLFromFile(dataDirectory + "/" + "init.sql");
 
         } catch (final IOException ioe) {
             System.err.println("Unable to access application data: " + ioe.getMessage());
         }
     }
 
-    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
+    private void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
         AssetManager assetManager = getAssets();
 
         for (String asset : assets) {
@@ -164,6 +162,22 @@ public class UserLoginActivity extends AppCompatActivity {
 
                 out.close();
                 in.close();
+            }
+        }
+    }
+
+    private void resetDB(File dataDirectory) {
+        if (dataDirectory.exists() && dataDirectory.isDirectory()) {
+            // Get all files in the directory.
+            File[] files = dataDirectory.listFiles();
+
+            if (files != null) {
+                for (File file : files) {
+                    // Delete each file in the directory.
+                    if (file.isFile()) {
+                        file.delete();
+                    }
+                }
             }
         }
     }

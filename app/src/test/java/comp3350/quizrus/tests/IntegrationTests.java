@@ -1,4 +1,5 @@
 package comp3350.quizrus.tests;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

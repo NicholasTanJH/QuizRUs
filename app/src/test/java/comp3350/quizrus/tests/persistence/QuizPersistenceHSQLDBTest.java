@@ -15,19 +15,20 @@ import comp3350.quizrus.persistence.hsqldb.DatabaseManager;
 public class QuizPersistenceHSQLDBTest {
     private QuizPersistenceHSQLDB quizPersistenceHSQLDB;
     private UserPersistenceHSQLDB userPersistenceHSQLDB;
-    private final String initSQLPath = "src/main/assets/db/init.sql";
 
     @Before
     public void setup() {
         Main.setDBPathName("testdb");
         quizPersistenceHSQLDB = new QuizPersistenceHSQLDB(Main.getDBPathName());
         userPersistenceHSQLDB = new UserPersistenceHSQLDB(Main.getDBPathName());
-        DatabaseManager.executeSQLFromFile(initSQLPath);
+        String initSQLPath = "src/main/assets/db/init.sql";
+        // DatabaseManager.executeSQLFromFile(initSQLPath);
     }
 
     @After
     public void tearDown() {
-        DatabaseManager.executeSQLFromFile(initSQLPath);
+        String dropTablesPath = "src/main/assets/db/drop_tables.sql";
+        // DatabaseManager.executeSQLFromFile(dropTablesPath);
     }
 
     // Integration tests.
