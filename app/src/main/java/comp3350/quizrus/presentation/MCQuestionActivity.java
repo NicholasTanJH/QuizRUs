@@ -1,6 +1,10 @@
 package comp3350.quizrus.presentation;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
@@ -10,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -49,6 +55,8 @@ public class MCQuestionActivity extends AppCompatActivity {
     // proceed button is either in invisible mode, submit, or next mode
     private Button proceedButton;
 
+    private long timeLeftInMillis;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +71,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         setUpQuestions();
         setUpOptionButtons();
         setUpProceedButton();
+        startTimer(100000);
         reset();
     }
 
@@ -252,5 +261,41 @@ public class MCQuestionActivity extends AppCompatActivity {
         } else {
             return null; // something is wrong
         }
+    }
+
+    //Responsible for the count down timer, and go back to main page when time's up
+    private void startTimer(long startTime) {
+        TextView timerTV = findViewById(R.id.timerTV);
+        timeLeftInMillis = startTime;
+
+        new CountDownTimer(timeLeftInMillis, 1000) { // Tick every second
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                int seconds = (int) (timeLeftInMillis / 1000);
+                timerTV.setText(seconds + " s");
+            }
+
+            public void onFinish() {
+                timerTV.setText("Time's up!");
+                startFlashingEffect(timerTV);
+                setProceedButtonToInvisibleMode();
+
+                // Finish activity after 2 seconds (2000ms)
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish(); // Close activity
+                    }
+                }, 2000);
+            }
+        }.start();
+    }
+
+    private void startFlashingEffect(TextView timerTV) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(timerTV, "alpha", 1f, 0f);
+        animator.setDuration(500); // 500ms per blink
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.start();
     }
 }
