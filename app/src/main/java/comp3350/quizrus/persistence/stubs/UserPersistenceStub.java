@@ -9,13 +9,15 @@ import comp3350.quizrus.persistence.UserPersistence;
 
 public class UserPersistenceStub implements UserPersistence {
     private List<User> users;
+    private int numUsers;
 
     public UserPersistenceStub() {
         this.users = new ArrayList<>();
+        numUsers = 0;
 
         // Add users.
-        users.add(new User(0, "demo", "Password0!", "demo@test.com", "Jessie", "Andrade"));
-        users.add(new User(1, "kakashi", "Password1!", "kakashi@test.com", "Saige", "Santana"));
+        insertUser(new User(0, "demo", "Password0!", "demo@test.com", "Jessie", "Andrade"));
+        insertUser(new User(1, "kakashi", "Password1!", "kakashi@test.com", "Saige", "Santana"));
     }
 
     @Override
@@ -25,16 +27,29 @@ public class UserPersistenceStub implements UserPersistence {
 
     @Override
     public User getUserByID(int userID) {
+        for(User user : users) {
+            if (user.getUserID() == userID){
+                return user;
+            }
+        }
         return null;
     }
 
     @Override
     public User getUserByUsername(String username) {
+        for(User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
         return null;
     }
 
     @Override
     public int insertUser(User newUser) {
-        return -1;
+        newUser.setUserID(numUsers);
+        users.add(newUser);
+        numUsers++;
+        return newUser.getUserID();
     }
 }
