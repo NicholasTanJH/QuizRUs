@@ -83,7 +83,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
                 throw new SQLException("Creating question failed, no rows affected.");
             }
 
-            // Get the auto-incremented questionID of the inserted question
+            // Get the auto-incremented questionID of the inserted question.
             try (ResultSet rs = pstmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     questionID = rs.getInt("questionID");

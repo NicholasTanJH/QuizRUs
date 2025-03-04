@@ -174,7 +174,7 @@ public class UserLoginActivity extends AppCompatActivity {
             if (files != null) {
                 for (File file : files) {
                     // Delete each file in the directory.
-                    if (file.isFile()) {
+                    if (file.isFile() && file.getName().endsWith(".script")) {
                         file.delete();
                     }
                 }

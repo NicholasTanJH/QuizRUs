@@ -88,7 +88,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
     @Override
     public int insertQuiz(Quiz quiz, User user) {
         int quizID = -1;
-        String query = "INSERT INTO quiz (title, userID) VALUES (?, ?)";
+        String query = "INSERT INTO quiz (title, userID, timeLimit) VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -96,6 +96,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
             // Set the values for the new quiz.
             pstmt.setString(1, quiz.getTitle());
             pstmt.setInt(2, user.getUserID());
+            pstmt.setInt(3, quiz.getTimeLimit());
 
             // Execute the query, then check that the quiz was inserted.
             int affectedRows = pstmt.executeUpdate();
@@ -120,11 +121,12 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         int quizID = rs.getInt("quizID");
         String title = rs.getString("title");
         int userID = rs.getInt("userID");
+        int timeLimit = rs.getInt("timeLimit");
 
         // Grab the user associated with the quiz.
         AccessUsers accessUsers = new AccessUsers();
         User user = accessUsers.getUser(userID);
 
-        return new Quiz(quizID, title, user);
+        return new Quiz(quizID, title, user, timeLimit);
     }
 }
