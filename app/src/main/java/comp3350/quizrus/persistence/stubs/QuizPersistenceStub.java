@@ -14,11 +14,18 @@ public class QuizPersistenceStub implements QuizPersistence {
     public QuizPersistenceStub() {
         this.quizzes = new ArrayList<>();
 
-        User user1 = new User(1, "kakashi", "password1");
-        User user2 = new User(2, "nazgul", "password1");
+        // A quiz must be associated with a user.
+        User user1 = new User(0, "demo", "Password0!", "demo@test.com", "Jessie", "Andrade");
+        User user2 = new User(1, "kakashi", "Password1!", "kakashi@test.com", "Saige", "Santana");
 
-        quizzes.add(new Quiz(1, "Flags of Countries", user1));
-        quizzes.add(new Quiz(2, "Celebrity Partners", user1));
+        // Add quizzes.
+        quizzes.add(new Quiz(0, "Flags of Countries", user1, 120));
+        quizzes.add(new Quiz(1, "Celebrity Partners", user2, 120));
+    }
+
+    @Override
+    public Quiz getQuizByID(int quizID) {
+        return null;
     }
 
     @Override
@@ -36,5 +43,10 @@ public class QuizPersistenceStub implements QuizPersistence {
             }
         }
         return Collections.unmodifiableList(userQuizzes);
+    }
+
+    @Override
+    public int insertQuiz(Quiz quiz, User user) {
+        return -1;
     }
 }

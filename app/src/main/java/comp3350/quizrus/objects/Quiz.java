@@ -7,30 +7,30 @@ public class Quiz {
     private final User myUser;
     private final String title;
 
-    private final long timer;
+    private final int timeLimit;
 
     public Quiz(final int newQuizID, final String newTitle, final User newUser)
     {
         this.quizID = newQuizID;
         this.myUser = newUser;
         this.title = newTitle;
-        this.timer = 0;
+        this.timeLimit = 0;
     }
 
-    public Quiz(final String newTitle, final User newUser, final long newTimer)
+    public Quiz(final String newTitle, final User newUser, final int newtimeLimit)
     {
         this.quizID = -1;
         this.myUser = newUser;
         this.title = newTitle;
-        this.timer = newTimer;
+        this.timeLimit = newtimeLimit;
     }
 
-    public Quiz(final int newQuizID, final String newTitle, final User newUser, final long newTimer)
+    public Quiz(final int newQuizID, final String newTitle, final User newUser, final int newtimeLimit)
     {
         this.quizID = newQuizID;
         this.myUser = newUser;
         this.title = newTitle;
-        this.timer = newTimer;
+        this.timeLimit = newtimeLimit;
     }
 
     public int getQuizID()
@@ -51,11 +51,15 @@ public class Quiz {
     {
         return this.title;
     }
+    
+    public int getTimeLimit() {
+        return this.timeLimit;
+    }
 
     @Override
     public String toString()
     {
-        return String.format("Quiz: [quizID: %s, User: %s, Title: %s, Timer: %s]", quizID, myUser != null ? myUser.getUserID() : "null", title, this.timer);
+        return String.format("Quiz: [quizID: %s, User: %s, Title: %s, timeLimit: %s]", quizID, myUser != null ? myUser.getUserID() : "null", title, this.timeLimit);
     }
 
     @Override

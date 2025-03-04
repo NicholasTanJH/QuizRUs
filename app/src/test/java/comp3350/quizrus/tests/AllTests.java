@@ -1,7 +1,5 @@
-
 package comp3350.quizrus.tests;
-import junit.framework.Test;
-import junit.framework.TestSuite;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -18,17 +16,14 @@ import comp3350.quizrus.tests.business.RandomTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        UserTest.class,
-        QuizTest.class,
-        QuestionTest.class,
-        AnswerTest.class,
-
-        RandomTest.class,
-
-        AccessUserTest.class,
-        AccessQuizTest.class,
-        AccessQuestionTest.class
+                UserTest.class,
+                QuizTest.class,
+                QuestionTest.class,
+                AnswerTest.class,
+                RandomTest.class,
+                AccessUserTest.class,
+                AccessQuizTest.class,
+                AccessQuestionTest.class
 })
-public class AllTests
-{
+public class AllTests {
 }

@@ -8,6 +8,5 @@ import comp3350.quizrus.objects.Question;
 public interface AnswerPersistence {
     List<Answer> getAnswersForQuestions(Question question);
 
-    List<Answer> getCorrectAnswers(Question question);
-
+    int insertAnswer(Answer answer, Question question);
 }
