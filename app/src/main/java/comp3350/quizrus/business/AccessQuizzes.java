@@ -39,19 +39,19 @@ public class AccessQuizzes {
         return Collections.unmodifiableList(quizzes);
     }
 
-    public Quiz createQuiz(final User user, final String title, final long timer)
+    public Quiz createQuiz(final User user, final String title, final int timer)
     {
         Quiz newQuiz = new Quiz(title, user, timer);
 
-//        int quizID = quizPersistence.createQuiz(newQuiz);
-//        if(quizID != -1)
-//        {
-//            newQuiz.setQuizID(quizID);
-//        }
-//        else
-//        {
-//            return null;
-//        }
+        int quizID = quizPersistence.insertQuiz(newQuiz, user);
+        if(quizID != -1)
+        {
+            newQuiz.setQuizID(quizID);
+        }
+        else
+        {
+            return null;
+        }
 
         return newQuiz;
     }

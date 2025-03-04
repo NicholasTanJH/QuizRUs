@@ -1,4 +1,4 @@
-package comp3350.quizrus.tests.persistence;
+package comp3350.quizrus.tests.business;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.hsqldb.PersistenceException;
 import comp3350.quizrus.tests.utils.TestUtils;
 
-public class UserPersistenceHSQLDBTest {
+public class AccessUserIT {
     private AccessUsers accessUsers;
     private File tempDB;
 
@@ -26,11 +26,9 @@ public class UserPersistenceHSQLDBTest {
 
     @After
     public void tearDown() {
-        // reset the database.
+        // Clear the database.
         this.tempDB.delete();
     }
-
-    // Unit tests.
 
     @Test
     public void testInsertUser() {
@@ -48,12 +46,10 @@ public class UserPersistenceHSQLDBTest {
     }
 
     @Test
-    public void testEmptyDBRetrieval() {
+    public void testInitialData() {
         List<User> users = accessUsers.getUsers();
-        assertEquals(1, users.size());
+        assertEquals(2, users.size());
     }
-
-    // Integration tests.
 
     @Test
     public void testGetUserByID() {
@@ -78,10 +74,10 @@ public class UserPersistenceHSQLDBTest {
         assertNotEquals(-1, user2.getUserID());
 
         users = accessUsers.getUsers();
-        assertEquals(3, users.size());
+        assertEquals(4, users.size());
         for (User user : users) {
             assertTrue(user.getUsername().equals("bob") || user.getUsername().equals("zen") ||
-                    user.getUsername().equals("tiger"));
+                    user.getUsername().equals("demo") || user.getUsername().equals("kakashi"));
         }
     }
 
