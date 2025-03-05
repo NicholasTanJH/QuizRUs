@@ -44,7 +44,7 @@ public class AccessAnswerIT {
     @Test
     public void testInsertAnswers() {
         // Create a new user.
-        User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
+        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
 
@@ -77,7 +77,7 @@ public class AccessAnswerIT {
     @Test
     public void testGetAnswersForQuestions() {
         // Create a new user.
-        User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
+        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
 

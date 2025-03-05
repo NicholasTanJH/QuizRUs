@@ -37,8 +37,8 @@ public class AccessUsers {
         return Collections.unmodifiableList(users);
     }
 
-    public User createUser(String username, final String password, final String email, final String firstname, final String lastname) {
-        User newUser = new User(username.toLowerCase(), password, email, firstname, lastname);
+    public User createUser(String username, final String password, final String firstname, final String lastname) {
+        User newUser = new User(username.toLowerCase(), password, firstname, lastname);
 
         int userID = userPersistence.insertUser(newUser);
         if(userID != -1)
@@ -102,14 +102,6 @@ public class AccessUsers {
         }
 
         return errorMessage;
-    }
-
-    public boolean authenticateEmail(String email) {
-        String EMAIL_REGEX =
-                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-
-        Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-        return !email.isEmpty() && EMAIL_PATTERN.matcher(email).matches();
     }
 
     public boolean authenticateName(String name) {

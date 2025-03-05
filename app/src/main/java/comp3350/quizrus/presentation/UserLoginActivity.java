@@ -81,7 +81,7 @@ public class UserLoginActivity extends AppCompatActivity {
 
     //animation for changing the button text when registering
     private void logInAnimation(boolean isLoginInfoCorrect) {
-        buttonLogIn.setText("Loging In...");
+        buttonLogIn.setText("Logging In...");
         if(isLoginInfoCorrect){
             new Handler().postDelayed(() -> {
                 buttonLogIn.setText("✓");

@@ -32,19 +32,19 @@ public class AccessUserIT {
 
     @Test
     public void testInsertUser() {
-        User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
+        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
     }
 
     @Test(expected = PersistenceException.class)
     public void testInsertSameUsernameFail() {
-        User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
+        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
 
         // Try inserting a user with the same username into the database.
-        accessUsers.createUser("bob", "password", "zen@gmail.com", "Zen", "Test");
+        accessUsers.createUser("bob", "password", "Zen", "Test");
     }
 
     @Test
@@ -55,7 +55,7 @@ public class AccessUserIT {
 
     @Test
     public void testGetUserByID() {
-        User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
+        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
 
@@ -68,10 +68,10 @@ public class AccessUserIT {
     public void testGetAllUsers() {
         List<User> users;
 
-        User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
+        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
-        User user2 = accessUsers.createUser("zen", "password", "zen@gmail.com", "Zen", "Test");
+        User user2 = accessUsers.createUser("zen", "password", "Zen", "Test");
         assertNotNull(user2);
         assertNotEquals(-1, user2.getUserID());
 
