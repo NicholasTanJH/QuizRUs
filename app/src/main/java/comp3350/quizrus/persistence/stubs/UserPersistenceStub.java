@@ -14,8 +14,8 @@ public class UserPersistenceStub implements UserPersistence {
         this.users = new ArrayList<>();
 
         // Add users.
-        users.add(new User(0, "demo", "Password0!", "demo@test.com", "Jessie", "Andrade"));
-        users.add(new User(1, "kakashi", "Password1!", "kakashi@test.com", "Saige", "Santana"));
+        users.add(new User(0, "demo", "Password0!", "Jessie", "Andrade"));
+        users.add(new User(1, "kakashi", "Password1!", "Saige", "Santana"));
     }
 
     @Override

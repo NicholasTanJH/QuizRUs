@@ -16,8 +16,8 @@ public class QuestionPersistenceStub implements QuestionPersistence {
         this.questions = new ArrayList<>();
 
         // A quiz must be associated with a user.
-        User user1 = new User(0, "demo", "Password0!", "demo@test.com", "Jessie", "Andrade");
-        User user2 = new User(1, "kakashi", "Password1!", "kakashi@test.com", "Saige", "Santana");
+        User user1 = new User(0, "demo", "Password0!", "Jessie", "Andrade");
+        User user2 = new User(1, "kakashi", "Password1!", "Saige", "Santana");
 
         // A question must be associated with a quiz.
         Quiz quiz1 = new Quiz(0, "Flags of Countries", user1);

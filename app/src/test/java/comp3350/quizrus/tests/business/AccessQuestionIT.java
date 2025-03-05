@@ -40,7 +40,7 @@ public class AccessQuestionIT {
     @Test
     public void testInsertQuiz() {
         // Create a new user.
-        User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
+        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
 
@@ -59,7 +59,7 @@ public class AccessQuestionIT {
     @Test
     public void testGetQuestionsForQuiz() {
         // Create a new user.
-        User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
+        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
 
