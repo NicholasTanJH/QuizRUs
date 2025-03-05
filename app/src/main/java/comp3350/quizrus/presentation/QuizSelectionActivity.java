@@ -38,6 +38,21 @@ public class QuizSelectionActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_selection);
 
+        Intent intent = getIntent();
+        currUser = (User) intent.getSerializableExtra("loggedInUser");
+
+        showQuizzes();
+        setUpUserIcon();
+        setUpAddQuizIcon();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showQuizzes();
+    }
+
+    private void showQuizzes() {
         addQuizTitles();
 
         // Setting up the recycle view
@@ -45,15 +60,15 @@ public class QuizSelectionActivity extends Activity {
         QuizRecycleViewAdapter adapter = new QuizRecycleViewAdapter(this, quizzes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        // User Account
+    private void addQuizTitles() {
+        quizzes = new AccessQuizzes().getQuizzes();
+    }
+
+    private void setUpUserIcon() {
         ImageButton accountButton = findViewById(R.id.accountImageButton);
-        ImageButton createQuizButton = findViewById(R.id.newQuizButton);
         accountButton.setOnClickListener(button -> showPopupSignOutMenu(button));
-        createQuizButton.setOnClickListener(button -> startCreatingNewQuiz());
-
-        Intent intent = getIntent();
-        currUser = (User) intent.getSerializableExtra("loggedInUser");
     }
 
     private void showPopupSignOutMenu(View view) {
@@ -85,15 +100,16 @@ public class QuizSelectionActivity extends Activity {
         signOutPopUp.show();
     }
 
+    private void setUpAddQuizIcon() {
+        ImageButton createQuizButton = findViewById(R.id.newQuizButton);
+        createQuizButton.setOnClickListener(button -> startCreatingNewQuiz());
+    }
+
     private void startCreatingNewQuiz()
     {
         Intent intent = new Intent(this, QuizCreationActivity.class);
         intent.putExtra("loggedInUser", currUser);
         this.startActivity(intent);
-    }
-
-    private void addQuizTitles() {
-        quizzes = new AccessQuizzes().getQuizzes();
     }
 
     @Override

@@ -3,6 +3,7 @@ package comp3350.quizrus.presentation;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
@@ -21,7 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.quizrus.R;
-import comp3350.quizrus.objects.Answer;
+import comp3350.quizrus.business.AccessAnswers;
+import comp3350.quizrus.business.AccessQuestions;
+import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
@@ -39,16 +42,14 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
     String quizName;
     int timerAmount;
 
-    List<String> newQuestions;
-    List<String> newAnswers;
+    List<String[]> newQuestionAndAnswersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        newQuestions = new ArrayList<>();
-        newAnswers = new ArrayList<>();
+        newQuestionAndAnswersList = new ArrayList<>();
 
         setContentView(R.layout.activity_quiz_modify_question);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -60,6 +61,7 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
             wrongAnswerOneEditText = findViewById(R.id.WrongAnswerInputOne);
             wrongAnswerTwoEditText = findViewById(R.id.WrongAnswerInputTwo);
             wrongAnswerThreeEditText = findViewById(R.id.WrongAnswerInputThree);
+            saveQuestionButton = findViewById(R.id.buttonSave);
             doneQuestionsButton = findViewById(R.id.buttonDoneEditQuestion);
 
             Intent intent = getIntent();
@@ -98,27 +100,70 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
         }
         else
         {
+            String[] questionAndAnswers = new String[5];
 
+            questionAndAnswers[0] = question;
+            questionAndAnswers[1] = correctAnswer;
+            questionAndAnswers[2] = wrongAnswerOne;
+            questionAndAnswers[3] = wrongAnswerTwo;
+            questionAndAnswers[4] = wrongAnswerThree;
+
+            newQuestionAndAnswersList.add(questionAndAnswers);
+
+            reset();
         }
     }
+
+    //animation for button when question is saved successfully
+    //clear out all the edit text
+    private void reset() {
+        questionEditText.setText("");
+        correctAnswerEditText.setText("");
+        wrongAnswerOneEditText.setText("");
+        wrongAnswerTwoEditText.setText("");
+        wrongAnswerThreeEditText.setText("");
+
+        saveQuestionButton.setText("✓");
+        new Handler().postDelayed(() -> {
+            saveQuestionButton.setText("Save Question");
+        }, 1000);
+    }
+
     private void setupQuestions()
     {
-        if(newQuestions.isEmpty() || newAnswers.isEmpty())
+        if(newQuestionAndAnswersList.isEmpty())
         {
             setAlertMessage("No questions entered", "Sorry, please enter at least one question with answers.");
         }
         else
         {
-            for(String question : newQuestions)
+            //make new quiz
+            AccessQuizzes accessQuizzes = new AccessQuizzes();
+            Quiz newQuiz = accessQuizzes.createQuiz(currUser, quizName, timerAmount);
+
+            //make new questions and answers
+            AccessQuestions accessQuestions = new AccessQuestions();
+            AccessAnswers accessAnswers = new AccessAnswers();
+            for(String[] questionAndAnswers : newQuestionAndAnswersList)
             {
+                String newQuestionName = questionAndAnswers[0];
+                String newCorrectAnswer = questionAndAnswers[1];
+                String newWrongAnswerOne = questionAndAnswers[2];
+                String newWrongAnswerTwo = questionAndAnswers[3];
+                String newWrongAnswerThree = questionAndAnswers[4];
 
+                Question newQuestion = accessQuestions.createQuestion(newQuiz, newQuestionName, "MULTIPLE_CHOICE");
+                accessAnswers.createAnswer(newCorrectAnswer, newQuestion, true);
+                accessAnswers.createAnswer(newWrongAnswerOne, newQuestion, false);
+                accessAnswers.createAnswer(newWrongAnswerTwo, newQuestion, false);
+                accessAnswers.createAnswer(newWrongAnswerThree, newQuestion, false);
             }
-            for(String answer : newAnswers)
-            {
 
-            }
-
-            finish();
+            //return to QuizSelection page
+            doneQuestionsButton.setText("✓");
+            new Handler().postDelayed(() -> {
+                finish();
+            }, 500);
         }
 
     }

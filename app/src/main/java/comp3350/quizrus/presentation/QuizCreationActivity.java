@@ -73,7 +73,6 @@ public class QuizCreationActivity extends AppCompatActivity {
         String timerString = timerAmountEditText.getText().toString();
 
         int timerAmount;
-        AccessQuizzes accessQuiz = new AccessQuizzes();
 
         if(quizName.isEmpty())
         {
