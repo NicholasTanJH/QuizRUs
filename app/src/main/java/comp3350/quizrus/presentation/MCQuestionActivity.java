@@ -3,6 +3,7 @@ package comp3350.quizrus.presentation;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -277,6 +278,7 @@ public class MCQuestionActivity extends AppCompatActivity {
                 timerTV.setText("Time's up!");
                 startFlashingEffect(timerTV);
                 setProceedButtonToInvisibleMode();
+                setSound();
 
                 // Finish activity after 2 seconds (2000ms)
                 new Handler().postDelayed(new Runnable() {
@@ -295,5 +297,10 @@ public class MCQuestionActivity extends AppCompatActivity {
         animator.setRepeatMode(ValueAnimator.REVERSE);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.start();
+    }
+
+    private void setSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.rooster);
+        mediaPlayer.start();
     }
 }
