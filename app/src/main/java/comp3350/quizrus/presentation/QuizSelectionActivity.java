@@ -3,6 +3,7 @@ package comp3350.quizrus.presentation;
 import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.objects.Quiz;
+import comp3350.quizrus.objects.User;
 import comp3350.quizrus.presentation.adapter.QuizRecycleViewAdapter;
 
 import android.app.Activity;
@@ -30,12 +31,28 @@ import java.util.List;
 
 public class QuizSelectionActivity extends Activity {
     List<Quiz> quizzes;
+    User currUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_selection);
 
+        Intent intent = getIntent();
+        currUser = (User) intent.getSerializableExtra("loggedInUser");
+
+        showQuizzes();
+        setUpUserIcon();
+        setUpAddQuizIcon();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showQuizzes();
+    }
+
+    private void showQuizzes() {
         addQuizTitles();
 
         // Setting up the recycle view
@@ -43,12 +60,15 @@ public class QuizSelectionActivity extends Activity {
         QuizRecycleViewAdapter adapter = new QuizRecycleViewAdapter(this, quizzes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        // User Account
+    private void addQuizTitles() {
+        quizzes = new AccessQuizzes().getQuizzes();
+    }
+
+    private void setUpUserIcon() {
         ImageButton accountButton = findViewById(R.id.accountImageButton);
-        ImageButton createQuizButton = findViewById(R.id.newQuizButton);
         accountButton.setOnClickListener(button -> showPopupSignOutMenu(button));
-        createQuizButton.setOnClickListener(button -> startCreatingNewQuiz());
     }
 
     private void showPopupSignOutMenu(View view) {
@@ -56,14 +76,10 @@ public class QuizSelectionActivity extends Activity {
         MenuInflater inflater = signOutPopUp.getMenuInflater();
         inflater.inflate(R.menu.menu_account, signOutPopUp.getMenu());
 
-        // Retrieve the username from SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "Guest");
-
         // Set the username in the popup menu
         MenuItem userMenuItem = signOutPopUp.getMenu().findItem(R.id.menu_username);
         if (userMenuItem != null) {
-            userMenuItem.setTitle(username);
+            userMenuItem.setTitle(currUser.getUsername());
         }
 
         signOutPopUp.setOnMenuItemClickListener(item -> {
@@ -80,14 +96,16 @@ public class QuizSelectionActivity extends Activity {
         signOutPopUp.show();
     }
 
+    private void setUpAddQuizIcon() {
+        ImageButton createQuizButton = findViewById(R.id.newQuizButton);
+        createQuizButton.setOnClickListener(button -> startCreatingNewQuiz());
+    }
+
     private void startCreatingNewQuiz()
     {
         Intent intent = new Intent(this, QuizCreationActivity.class);
+        intent.putExtra("loggedInUser", currUser);
         this.startActivity(intent);
-    }
-
-    private void addQuizTitles() {
-        quizzes = new AccessQuizzes().getQuizzes();
     }
 
     @Override

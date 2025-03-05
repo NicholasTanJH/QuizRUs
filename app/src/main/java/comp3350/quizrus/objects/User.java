@@ -1,7 +1,9 @@
 package comp3350.quizrus.objects;
 
+import java.io.Serializable;
 import java.util.Objects;
-public class User {
+
+public class User implements Serializable {
 
     private int userID;
     private final String username;
