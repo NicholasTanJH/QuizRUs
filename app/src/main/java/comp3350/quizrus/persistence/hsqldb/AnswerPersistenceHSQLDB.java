@@ -25,14 +25,14 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
         String query = "SELECT * FROM answer where answerID = ?";
 
         try (Connection conn = DatabaseManager.connection();
-                PreparedStatement pstmt = conn.prepareStatement(query);
-                ResultSet rs = pstmt.executeQuery()) {
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, question.getQuestionID());
-
-            while (rs.next()) {
-                Answer curr_answer = buildAnswerFromResultSet(rs);
-                answers.add(curr_answer);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Answer curr_answer = buildAnswerFromResultSet(rs);
+                    answers.add(curr_answer);
+                }
             }
 
         } catch (SQLException e) {

@@ -42,6 +42,8 @@ public class AccessUserIT {
         User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
+
+        // Try inserting a user with the same username into the database.
         accessUsers.createUser("bob", "password", "zen@gmail.com", "Zen", "Test");
     }
 

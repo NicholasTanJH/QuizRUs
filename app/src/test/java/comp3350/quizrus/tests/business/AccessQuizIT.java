@@ -52,7 +52,29 @@ public class AccessQuizIT {
          // Create a new user without inserting them into the database..
          User user1 = new User("bob", "password", "test@gmail.com", "Bob", "Test");
 
-         // Insert a quiz into the database.
+         // Try inserting a quiz with the invalid user into the database.
          accessQuizzes.createQuiz(user1, "What is the life expectancy in Canada?", 120);
+     }
+
+     @Test
+     public void testGetQuizByID() {
+         // Create a new user.
+         User user1 = accessUsers.createUser("bob", "password", "test@gmail.com", "Bob", "Test");
+         assertNotNull(user1);
+         assertNotEquals(-1, user1.getUserID());
+
+         // Insert a quiz into the database.
+         Quiz quiz1 = accessQuizzes.createQuiz(user1, "What is the life expectancy in Canada?", 120);
+         assertNotNull(quiz1);
+         int quiz1ID = quiz1.getQuizID();
+         assertNotEquals(-1, quiz1ID);
+
+         // Retrieve the quiz from the database.
+         Quiz quiz2 = accessQuizzes.getQuiz(quiz1ID);
+         assertNotNull(quiz2);
+         assertEquals(quiz1.getQuizID(), quiz2.getQuizID());
+         assertEquals(user1.getUserID(), quiz2.getUser().getUserID());
+         assertEquals("What is the life expectancy in Canada?", quiz2.getTitle());
+         assertEquals(120, quiz2.getTimeLimit());
      }
 }
