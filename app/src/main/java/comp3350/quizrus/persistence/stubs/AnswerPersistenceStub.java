@@ -17,8 +17,6 @@ public class AnswerPersistenceStub implements AnswerPersistence {
     public AnswerPersistenceStub() {
         this.answers = new ArrayList<>();
 
-        numAnswers = 0;
-
         // A quiz must be associated with a user.
         User user1 = new User(0, "demo", "Password0!", "Jessie", "Andrade");
         User user2 = new User(1, "kakashi", "Password1!", "Saige", "Santana");
@@ -28,11 +26,15 @@ public class AnswerPersistenceStub implements AnswerPersistence {
         Quiz quiz2 = new Quiz(1, "Celebrity Partners", user2, 120);
 
         // List of questions for quiz 1.
-        Question question1 = new Question(1, "Which of these countries have white in their flag?", quiz1, "MULTIPLE_CHOICE");
+        Question question1 = new Question(1, "Which of these countries have white in their flag?", quiz1,
+                "MULTIPLE_CHOICE");
         Question question2 = new Question(2, "In which country was the first flag created?", quiz1, "MULTIPLE_CHOICE");
         Question question3 = new Question(3, "The flag of Canada is commonly known as:", quiz1, "MULTIPLE_CHOICE");
-        Question question4 = new Question(4, "How many stars are there on the flag of the United States of America?", quiz1, "MULTIPLE_CHOICE");
-        Question question5 = new Question(5, "The flag of Australia contains which other country’s flag in its top left corner?", quiz1, "MULTIPLE_CHOICE");
+        Question question4 = new Question(4, "How many stars are there on the flag of the United States of America?",
+                quiz1, "MULTIPLE_CHOICE");
+        Question question5 = new Question(5,
+                "The flag of Australia contains which other country’s flag in its top left corner?", quiz1,
+                "MULTIPLE_CHOICE");
 
         // List of questions for quiz 2.
         Question question6 = new Question(6, "Who is the partner of J.K. Rowling?", quiz2, "MULTIPLE_CHOICE");
@@ -58,7 +60,7 @@ public class AnswerPersistenceStub implements AnswerPersistence {
 
         // Answers for quiz 1 question 4.
         insertAnswer(new Answer(12, "50", true, question4), question4);
-        insertAnswer(new Answer(13, "52", false, question4),question4);
+        insertAnswer(new Answer(13, "52", false, question4), question4);
         insertAnswer(new Answer(14, "48", false, question4), question4);
         insertAnswer(new Answer(15, "51", false, question4), question4);
 
@@ -79,13 +81,15 @@ public class AnswerPersistenceStub implements AnswerPersistence {
         insertAnswer(new Answer(25, "78", false, question7), question7);
         insertAnswer(new Answer(26, "1", true, question7), question7);
         insertAnswer(new Answer(27, "China", false, question7), question7);
+
+        this.numAnswers = 28;
     }
 
     @Override
     public List<Answer> getAnswersForQuestions(Question question) {
         List<Answer> answersToQuestions = new ArrayList<>();
 
-        for (Answer answer : answers) {
+        for (Answer answer : this.answers) {
             if (answer.getMyQuestion().equals(question)) {
                 answersToQuestions.add(answer);
             }
@@ -95,9 +99,9 @@ public class AnswerPersistenceStub implements AnswerPersistence {
 
     @Override
     public int insertAnswer(Answer answer, Question question) {
-        answer.setAnswerID(numAnswers);
-        answers.add(answer);
-        numAnswers++;
+        answer.setAnswerID(this.numAnswers);
+        this.answers.add(answer);
+        this.numAnswers++;
         return answer.getAnswerID();
     }
 }

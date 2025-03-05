@@ -16,8 +16,6 @@ public class QuestionPersistenceStub implements QuestionPersistence {
     public QuestionPersistenceStub() {
         this.questions = new ArrayList<>();
 
-        numQuestions = 0;
-
         // A quiz must be associated with a user.
         User user1 = new User(0, "demo", "Password0!", "Jessie", "Andrade");
         User user2 = new User(1, "kakashi", "Password1!", "Saige", "Santana");
@@ -27,23 +25,29 @@ public class QuestionPersistenceStub implements QuestionPersistence {
         Quiz quiz2 = new Quiz(1, "Celebrity Partners", user2, 120);
 
         // Add questions for the first quiz.
-        insertQuestion(new Question(0, "Which of these countries have white in their flag?", quiz1, "MULTIPLE_CHOICE"), quiz1);
-        insertQuestion(new Question(1, "In which country was the first flag created?", quiz1, "MULTIPLE_CHOICE"), quiz1);
+        insertQuestion(new Question(0, "Which of these countries have white in their flag?", quiz1, "MULTIPLE_CHOICE"),
+                quiz1);
+        insertQuestion(new Question(1, "In which country was the first flag created?", quiz1, "MULTIPLE_CHOICE"),
+                quiz1);
         insertQuestion(new Question(2, "The flag of Canada is commonly known as", quiz1, "MULTIPLE_CHOICE"), quiz1);
-        insertQuestion(new Question(3, "How many stars are there on the flag of the United States of America?", quiz1, "MULTIPLE_CHOICE"), quiz1);
-        insertQuestion(new Question(4, "The flag of Australia contains which other country’s flag in its top left corner?", quiz1, "MULTIPLE_CHOICE"), quiz1);
+        insertQuestion(new Question(3, "How many stars are there on the flag of the United States of America?", quiz1,
+                "MULTIPLE_CHOICE"), quiz1);
+        insertQuestion(
+                new Question(4, "The flag of Australia contains which other country’s flag in its top left corner?",
+                        quiz1, "MULTIPLE_CHOICE"),
+                quiz1);
 
         // Add questions for the second quiz.
         insertQuestion(new Question(5, "Who is the partner of J.K. Rowling?", quiz2, "MULTIPLE_CHOICE"), quiz2);
         insertQuestion(new Question(6, "How many partners did Drake date in 2024?", quiz2, "MULTIPLE_CHOICE"), quiz2);
+
+        this.numQuestions = 7;
     }
 
     @Override
     public Question getQuestionByID(int questionID) {
-        for(Question question : questions)
-        {
-            if(question.getQuestionID() == questionID)
-            {
+        for (Question question : this.questions) {
+            if (question.getQuestionID() == questionID) {
                 return question;
             }
         }
@@ -54,7 +58,7 @@ public class QuestionPersistenceStub implements QuestionPersistence {
     public List<Question> getQuestionsForQuiz(Quiz quiz) {
         List<Question> quizQuestions = new ArrayList<>();
 
-        for (Question question : questions) {
+        for (Question question : this.questions) {
             if (question.getMyQuiz().equals(quiz)) {
                 quizQuestions.add(question);
             }
@@ -64,9 +68,9 @@ public class QuestionPersistenceStub implements QuestionPersistence {
 
     @Override
     public int insertQuestion(Question question, Quiz quiz) {
-        question.setQuestionID(numQuestions);
-        questions.add(question);
-        numQuestions++;
+        question.setQuestionID(this.numQuestions);
+        this.questions.add(question);
+        this.numQuestions++;
         return question.getQuestionID();
     }
 }

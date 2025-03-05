@@ -12,7 +12,7 @@ import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
-import comp3350.quizrus.persistence.hsqldb.PersistenceException;
+import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.tests.utils.TestUtils;
 
 public class AccessQuizIT {

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.quizrus.objects.User;
+import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.UserPersistence;
 
 public class UserPersistenceHSQLDB implements UserPersistence {

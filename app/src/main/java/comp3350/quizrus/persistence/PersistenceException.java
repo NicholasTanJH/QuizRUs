@@ -1,4 +1,4 @@
-package comp3350.quizrus.persistence.hsqldb;
+package comp3350.quizrus.persistence;
 
 /**
  * java.sql.SQLException is a checked exception, but our interface doesn't have

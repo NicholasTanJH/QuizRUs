@@ -11,6 +11,7 @@ import comp3350.quizrus.business.AccessQuestions;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Answer;
 import comp3350.quizrus.persistence.AnswerPersistence;
+import comp3350.quizrus.persistence.PersistenceException;
 
 public class AnswerPersistenceHSQLDB implements AnswerPersistence {
     private final String dbPath;
