@@ -1,8 +1,9 @@
 package comp3350.quizrus.objects;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Quiz {
+public class Quiz implements Serializable {
     private int quizID;
     private final User myUser;
     private final String title;

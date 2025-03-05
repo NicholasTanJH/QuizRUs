@@ -10,28 +10,49 @@
     tools:context=".presentation.MCQuestionActivity">
 
     <TextView
+        android:id="@+id/timerTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100 s"
+        android:textSize="40sp"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingHorizontal="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/questionTV"
+        android:background="@drawable/timer_background" />
+
+    <TextView
         android:id="@+id/questionTV"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:gravity="center"
         android:text="Question, Just for testing"
         android:textColor="@color/colorWhite"
-        android:textSize="55sp"
+        android:textSize="40sp"
+        android:maxLines="5"
+        android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/timerTV"
+        app:layout_constraintBottom_toTopOf="@id/answerLinearLayout"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/answerLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="20dp"
+        android:paddingVertical="10dp"
         android:background="@drawable/question_option_panel_color"
         android:orientation="vertical"
+        android:weightSum="4"
         app:layout_constraintBottom_toTopOf="@id/buttonProceed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,59 +61,60 @@
         <Button
             android:id="@+id/button1"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/question_option_button_default_color"
             android:text="Option 1"
             android:textColor="@color/colorWhite"
-            android:textSize="45sp"
-            app:layout_constraintBottom_toTopOf="@+id/button2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="50sp" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/question_option_button_default_color"
             android:text="Option 2"
             android:textColor="@color/colorWhite"
-            android:textSize="45sp"
-            app:layout_constraintBottom_toTopOf="@+id/button3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button1" />
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="50sp" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/question_option_button_default_color"
             android:text="Option 3"
             android:textColor="@color/colorWhite"
-            android:textSize="45sp"
-            app:layout_constraintBottom_toTopOf="@+id/button4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="50sp" />
 
         <Button
             android:id="@+id/button4"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/question_option_button_default_color"
             android:text="Option 4"
             android:textColor="@color/colorWhite"
-            android:textSize="45sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button3" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="50sp" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonProceed"
@@ -108,6 +130,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/answerLinearLayout"
         android:clickable="false"
         android:visibility="invisible"/>
 

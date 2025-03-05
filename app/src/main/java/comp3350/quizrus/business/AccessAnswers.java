@@ -45,15 +45,15 @@ public class AccessAnswers {
     {
         Answer newAnswer = new Answer(answerText, isCorrect, question);
 
-//        int answerID = answerPersistence.createAnswer(newAnswer);
-//        if(answerID != -1)
-//        {
-//            newAnswer.setAnswerID(answerID);
-//        }
-//        else
-//        {
-//            return null;
-//        }
+        int answerID = answerPersistence.insertAnswer(newAnswer, question);
+        if(answerID != -1)
+        {
+            newAnswer.setAnswerID(answerID);
+        }
+        else
+        {
+            return null;
+        }
 
         return newAnswer;
     }
