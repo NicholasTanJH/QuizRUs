@@ -21,6 +21,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.content.SharedPreferences;
+import android.view.MenuItem;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -54,9 +56,25 @@ public class QuizSelectionActivity extends Activity {
         MenuInflater inflater = signOutPopUp.getMenuInflater();
         inflater.inflate(R.menu.menu_account, signOutPopUp.getMenu());
 
+        // Retrieve the username from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "Guest");
+
+        // Set the username in the popup menu
+        MenuItem userMenuItem = signOutPopUp.getMenu().findItem(R.id.menu_username);
+        if (userMenuItem != null) {
+            userMenuItem.setTitle(username);
+        }
+
         signOutPopUp.setOnMenuItemClickListener(item -> {
-            //TODO: go back to login page, look up how to go to next activity, Intent and startActivity()
-            return true;
+            if (item.getItemId() == R.id.menu_sign_out) {
+                Intent intent = new Intent(QuizSelectionActivity.this, UserLoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear back stack
+                startActivity(intent);
+                finish(); // Close current activity
+                return true;
+            }
+            return false;
         });
 
         signOutPopUp.show();

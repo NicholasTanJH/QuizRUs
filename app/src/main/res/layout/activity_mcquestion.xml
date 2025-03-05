@@ -17,7 +17,7 @@
         android:textSize="40sp"
         android:textColor="@color/colorWhite"
         android:gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:paddingHorizontal="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,15 +29,15 @@
         android:id="@+id/questionTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="300dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintHeight_percent="0.5"
         android:gravity="center"
         android:text="Question, Just for testing"
         android:textColor="@color/colorWhite"
-        android:textSize="55sp"
+        android:textSize="40sp"
+        android:maxLines="5"
+        android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/timerTV"
@@ -49,6 +49,7 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="20dp"
+        android:paddingVertical="10dp"
         android:background="@drawable/question_option_panel_color"
         android:orientation="vertical"
         android:weightSum="4"
@@ -62,48 +63,56 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_margin="30dp"
+            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/question_option_button_default_color"
             android:text="Option 1"
             android:textColor="@color/colorWhite"
-            android:textSize="45sp" />
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="50sp" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_margin="30dp"
+            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/question_option_button_default_color"
             android:text="Option 2"
             android:textColor="@color/colorWhite"
-            android:textSize="45sp" />
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="50sp" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_margin="30dp"
+            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/question_option_button_default_color"
             android:text="Option 3"
             android:textColor="@color/colorWhite"
-            android:textSize="45sp" />
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="50sp" />
 
         <Button
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_margin="30dp"
+            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/question_option_button_default_color"
             android:text="Option 4"
             android:textColor="@color/colorWhite"
-            android:textSize="45sp" />
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="20sp"
+            android:autoSizeMaxTextSize="50sp" />
 
     </LinearLayout>
 
