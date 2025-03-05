@@ -14,6 +14,7 @@ public class QuizPersistenceStub implements QuizPersistence {
 
     public QuizPersistenceStub() {
         this.quizzes = new ArrayList<>();
+        this.numQuizzes = 0;
 
         // A quiz must be associated with a user.
         User user1 = new User(0, "demo", "Password0!", "Jessie", "Andrade");
@@ -22,8 +23,6 @@ public class QuizPersistenceStub implements QuizPersistence {
         // Add quizzes.
         insertQuiz(new Quiz(0, "Flags of Countries", user1, 120), user1);
         insertQuiz(new Quiz(1, "Celebrity Partners", user2, 120), user2);
-
-        this.numQuizzes = 2;
     }
 
     @Override

@@ -15,6 +15,7 @@ public class QuestionPersistenceStub implements QuestionPersistence {
 
     public QuestionPersistenceStub() {
         this.questions = new ArrayList<>();
+        this.numQuestions = 0;
 
         // A quiz must be associated with a user.
         User user1 = new User(0, "demo", "Password0!", "Jessie", "Andrade");
@@ -40,8 +41,6 @@ public class QuestionPersistenceStub implements QuestionPersistence {
         // Add questions for the second quiz.
         insertQuestion(new Question(5, "Who is the partner of J.K. Rowling?", quiz2, "MULTIPLE_CHOICE"), quiz2);
         insertQuestion(new Question(6, "How many partners did Drake date in 2024?", quiz2, "MULTIPLE_CHOICE"), quiz2);
-
-        this.numQuestions = 7;
     }
 
     @Override

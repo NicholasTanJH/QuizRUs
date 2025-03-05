@@ -14,12 +14,11 @@ public class UserPersistenceStub implements UserPersistence {
 
     public UserPersistenceStub() {
         this.users = new ArrayList<>();
+        this.numUsers = 0;
 
         // Add users.
-        users.add(new User(0, "demo", "Password0!", "Jessie", "Andrade"));
-        users.add(new User(1, "kakashi", "Password1!", "Saige", "Santana"));
-
-        this.numUsers = 2;
+        insertUser(new User(0, "demo", "Password0!", "Jessie", "Andrade"));
+        insertUser(new User(1, "kakashi", "Password1!", "Saige", "Santana"));
     }
 
     @Override

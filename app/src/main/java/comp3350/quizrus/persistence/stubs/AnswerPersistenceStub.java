@@ -16,6 +16,7 @@ public class AnswerPersistenceStub implements AnswerPersistence {
 
     public AnswerPersistenceStub() {
         this.answers = new ArrayList<>();
+        this.numAnswers = 0;
 
         // A quiz must be associated with a user.
         User user1 = new User(0, "demo", "Password0!", "Jessie", "Andrade");
@@ -81,8 +82,6 @@ public class AnswerPersistenceStub implements AnswerPersistence {
         insertAnswer(new Answer(25, "78", false, question7), question7);
         insertAnswer(new Answer(26, "1", true, question7), question7);
         insertAnswer(new Answer(27, "China", false, question7), question7);
-
-        this.numAnswers = 28;
     }
 
     @Override
