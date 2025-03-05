@@ -3,6 +3,7 @@ package comp3350.quizrus.presentation;
 import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.objects.Quiz;
+import comp3350.quizrus.objects.User;
 import comp3350.quizrus.presentation.adapter.QuizRecycleViewAdapter;
 
 import android.app.Activity;
@@ -30,6 +31,7 @@ import java.util.List;
 
 public class QuizSelectionActivity extends Activity {
     List<Quiz> quizzes;
+    User currUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,9 @@ public class QuizSelectionActivity extends Activity {
         ImageButton createQuizButton = findViewById(R.id.newQuizButton);
         accountButton.setOnClickListener(button -> showPopupSignOutMenu(button));
         createQuizButton.setOnClickListener(button -> startCreatingNewQuiz());
+
+        Intent intent = getIntent();
+        currUser = (User) intent.getSerializableExtra("loggedInUser");
     }
 
     private void showPopupSignOutMenu(View view) {
@@ -83,6 +88,7 @@ public class QuizSelectionActivity extends Activity {
     private void startCreatingNewQuiz()
     {
         Intent intent = new Intent(this, QuizCreationActivity.class);
+        intent.putExtra("loggedInUser", currUser);
         this.startActivity(intent);
     }
 

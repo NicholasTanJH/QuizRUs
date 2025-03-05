@@ -77,7 +77,7 @@ public class UserLoginActivity extends AppCompatActivity {
             AccessUsers accessUsers = new AccessUsers();
             User user = accessUsers.loginUser(logInUsername,logInPassword);
             boolean isLoginInfoCorrect = user != null;
-            logInAnimation(isLoginInfoCorrect);
+            logInAnimation(isLoginInfoCorrect, user);
 
             if (isLoginInfoCorrect) {
                 // Save the username in SharedPreferences
@@ -86,12 +86,11 @@ public class UserLoginActivity extends AppCompatActivity {
                 editor.putString("username", logInUsername);
                 editor.apply();
             }
-
         }
     }
 
     //animation for changing the button text when registering
-    private void logInAnimation(boolean isLoginInfoCorrect) {
+    private void logInAnimation(boolean isLoginInfoCorrect, User user) {
         buttonLogIn.setText("Logging In...");
         if(isLoginInfoCorrect){
             new Handler().postDelayed(() -> {
@@ -99,6 +98,7 @@ public class UserLoginActivity extends AppCompatActivity {
             }, 1000);
             new Handler().postDelayed(() -> {
                 Intent intent = new Intent(this, QuizSelectionActivity.class);
+                intent.putExtra("loggedInUser", user);
                 this.startActivity(intent);
                 finish();
             }, 1500);
