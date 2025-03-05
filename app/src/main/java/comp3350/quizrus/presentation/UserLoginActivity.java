@@ -78,14 +78,6 @@ public class UserLoginActivity extends AppCompatActivity {
             User user = accessUsers.loginUser(logInUsername,logInPassword);
             boolean isLoginInfoCorrect = user != null;
             logInAnimation(isLoginInfoCorrect, user);
-
-            if (isLoginInfoCorrect) {
-                // Save the username in SharedPreferences
-                SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("username", logInUsername);
-                editor.apply();
-            }
         }
     }
 

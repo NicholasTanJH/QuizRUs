@@ -76,14 +76,10 @@ public class QuizSelectionActivity extends Activity {
         MenuInflater inflater = signOutPopUp.getMenuInflater();
         inflater.inflate(R.menu.menu_account, signOutPopUp.getMenu());
 
-        // Retrieve the username from SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "Guest");
-
         // Set the username in the popup menu
         MenuItem userMenuItem = signOutPopUp.getMenu().findItem(R.id.menu_username);
         if (userMenuItem != null) {
-            userMenuItem.setTitle(username);
+            userMenuItem.setTitle(currUser.getUsername());
         }
 
         signOutPopUp.setOnMenuItemClickListener(item -> {
