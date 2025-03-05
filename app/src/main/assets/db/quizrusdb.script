@@ -20,6 +20,8 @@ INSERT INTO QUESTION VALUES(1, 'In which country was the first flag created?', 0
 INSERT INTO QUESTION VALUES(2, 'The flag of Canada is commonly known as', 0, 'MULTIPLE_CHOICE')
 INSERT INTO QUESTION VALUES(3, 'How many stars are there on the flag of the United States of America?', 0, 'MULTIPLE_CHOICE')
 INSERT INTO QUESTION VALUES(4, 'The flag of Australia contains which other country’s flag in its top left corner?', 0, 'MULTIPLE_CHOICE')
+INSERT INTO QUESTION VALUES(5, 'Who is the partner of J.K. Rowling?', 1, 'MULTIPLE_CHOICE')
+INSERT INTO QUESTION VALUES(6, 'How many partners did Drake date in 2024?', 1, 'MULTIPLE_CHOICE')
 INSERT INTO ANSWER VALUES(0, 'Morocco', FALSE, 0)
 INSERT INTO ANSWER VALUES(1, 'Malawi', FALSE, 0)
 INSERT INTO ANSWER VALUES(2, 'Bangladesh', FALSE, 0)

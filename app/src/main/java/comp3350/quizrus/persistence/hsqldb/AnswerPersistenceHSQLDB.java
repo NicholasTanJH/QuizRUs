@@ -22,7 +22,7 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
     @Override
     public List<Answer> getAnswersForQuestions(Question question) {
         List<Answer> answers = new ArrayList<>();
-        String query = "SELECT * FROM answer where answerID = ?";
+        String query = "SELECT * FROM answer where questionID = ?";
 
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
