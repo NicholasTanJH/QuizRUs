@@ -32,12 +32,14 @@ import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.application.Main;
 import comp3350.quizrus.persistence.hsqldb.DatabaseManager;
+import android.content.SharedPreferences;
 
 public class UserLoginActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextUsername;
     TextInputEditText textInputEditTextPassword;
     Button buttonLogIn;
     Button buttonSignUp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,15 @@ public class UserLoginActivity extends AppCompatActivity {
             User user = accessUsers.loginUser(logInUsername,logInPassword);
             boolean isLoginInfoCorrect = user != null;
             logInAnimation(isLoginInfoCorrect);
+
+            if (isLoginInfoCorrect) {
+                // Save the username in SharedPreferences
+                SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("username", logInUsername);
+                editor.apply();
+            }
+
         }
     }
 
