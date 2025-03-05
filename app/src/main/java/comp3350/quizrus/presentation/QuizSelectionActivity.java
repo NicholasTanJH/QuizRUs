@@ -6,23 +6,23 @@ import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.presentation.adapter.QuizRecycleViewAdapter;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
@@ -44,7 +44,9 @@ public class QuizSelectionActivity extends Activity {
 
         // User Account
         ImageButton accountButton = findViewById(R.id.accountImageButton);
+        ImageButton createQuizButton = findViewById(R.id.newQuizButton);
         accountButton.setOnClickListener(button -> showPopupSignOutMenu(button));
+        createQuizButton.setOnClickListener(button -> startCreatingNewQuiz());
     }
 
     private void showPopupSignOutMenu(View view) {
@@ -58,6 +60,12 @@ public class QuizSelectionActivity extends Activity {
         });
 
         signOutPopUp.show();
+    }
+
+    private void startCreatingNewQuiz()
+    {
+        Intent intent = new Intent(this, QuizCreationActivity.class);
+        this.startActivity(intent);
     }
 
     private void addQuizTitles() {
