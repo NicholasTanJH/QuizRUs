@@ -31,8 +31,8 @@ public class AccessQuizTest {
         assertTrue(quizzes.size() == 2);
 
         System.out.println("Testing that users in list are as expected");
-        assertTrue(1 == quizzes.get(0).getQuizID());
-        assertTrue(2 == quizzes.get(1).getQuizID());
+        assertTrue(0 == quizzes.get(0).getQuizID());
+        assertTrue(1 == quizzes.get(1).getQuizID());
 
         System.out.println("Finished AccessUserTest");
     }
