@@ -40,23 +40,15 @@ public class Question {
     }
 
     @Override
-    public String toString(){
-        return String.format("Question: [ID: %s, Quiz: %s, Text: %s, Type: %s]",
-                questionID, myQuiz != null ? myQuiz.getQuizID() : "null", questionText, questionType);
-    }
-
-    @Override
     public boolean equals(Object other) {
-        if (this == other) {
-            return true;
+        boolean equal = false;
+
+        if(other instanceof Question)
+        {
+            Question otherQuestion = (Question) other;
+            equal = Objects.equals(this.questionID, otherQuestion.questionID);
         }
-        if (other == null || getClass() != other.getClass()) {
-            return false;
-        }
-        Question otherQuestion = (Question) other;
-        return Objects.equals(this.questionID, otherQuestion.questionID) &&
-                Objects.equals(this.myQuiz, otherQuestion.myQuiz) &&
-                Objects.equals(this.questionText, otherQuestion.questionText) &&
-                Objects.equals(this.questionType, otherQuestion.questionType);
+
+        return equal;
     }
 }

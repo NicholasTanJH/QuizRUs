@@ -12,18 +12,45 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_marginTop="30dp"
         android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/accountImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/account_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/logoImageView"
+            android:background="@android:color/transparent"/>
 
         <ImageView
             android:id="@+id/logoImageView"
-            android:minHeight="40dp"
-            android:maxHeight="80dp"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/quizruslogo"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:maxHeight="80dp"
+            android:minHeight="40dp"
             android:scaleType="fitCenter"
-            tools:ignore="MissingConstraints"
-            />
+            android:src="@drawable/quizruslogo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/newQuizButton"
+            app:layout_constraintStart_toEndOf="@+id/accountImageButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/newQuizButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/new_quiz_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/logoImageView"
+            android:background="@android:color/transparent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

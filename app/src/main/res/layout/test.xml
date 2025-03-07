@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".presentation.QuizCreationActivity">
+
+    <ImageButton
+        android:id="@+id/buttonBackCreateQuiz"
+        android:layout_width="79dp"
+        android:layout_height="55dp"
+        android:background="@android:color/transparent"
+        android:maxHeight="80dp"
+        android:minHeight="40dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/arrow_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002" />
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="155dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center"
+        android:maxHeight="80dp"
+        android:minHeight="40dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/quizruslogo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buttonBackCreateQuiz"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <TextView
+        android:id="@+id/quizMakeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Your Quiz:"
+        android:textColor="@color/colorWhite"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="565dp"
+        tools:layout_editor_absoluteY="113dp" />
+
+    <TextView
+        android:id="@+id/quizMakeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quiz Name:"
+        android:textColor="@color/colorWhite"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="644dp" />
+
+    <TextView
+        android:id="@+id/NumQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Questions:"
+        android:textColor="@color/colorWhite"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="505dp"
+        tools:layout_editor_absoluteY="140dp" />
+
+    <TextView
+        android:id="@+id/numTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer (In Minutes):"
+        android:textColor="@color/colorWhite"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="540dp"
+        tools:layout_editor_absoluteY="281dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/QuizNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="..."
+        android:inputType="text"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/colorWhite"
+        tools:layout_editor_absoluteY="90dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputBoxNumQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="..."
+        android:inputType="text"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="181dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputBoxNumTime"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="..."
+        android:inputType="text"
+        tools:layout_editor_absoluteY="1170dp" />
+
+    <Button
+        android:id="@+id/buttonCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_button_background"
+        android:text="Edit Questions"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

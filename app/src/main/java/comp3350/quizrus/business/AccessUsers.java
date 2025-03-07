@@ -2,10 +2,13 @@ package comp3350.quizrus.business;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
+
 
 import comp3350.quizrus.application.Services;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.UserPersistence;
+
 
 public class AccessUsers {
     private UserPersistence userPersistence;
@@ -13,87 +16,95 @@ public class AccessUsers {
     private User user;
     private int currentUser;
 
-    public AccessUsers()
-    {
+    public AccessUsers() {
         this.userPersistence = Services.getUserPersistence();
         this.users = null;
         this.user = null;
         this.currentUser = 0;
     }
 
-    public AccessUsers(final UserPersistence userPersistence)
-    {
+    public AccessUsers(final UserPersistence userPersistence) {
         this();
         this.userPersistence = userPersistence;
     }
 
-    public List<User> getUsers()
-    {
+    public User getUser(int userID) {
+        return userPersistence.getUserByID(userID);
+    }
+
+    public List<User> getUsers() {
         users = userPersistence.getAllUsers();
         return Collections.unmodifiableList(users);
     }
 
-    public User createUser(String username, final String password, final String email, final String firstname, final String lastname)
-    {
-        User newUser = new User(username.toLowerCase(), password, email, firstname, lastname);
+    public User createUser(String username, final String password, final String firstname, final String lastname) {
+        User newUser = new User(username.toLowerCase(), password, firstname, lastname);
 
-//        int userID = userPersistence.createUser(newUser);
-//        if(userID != -1)
-//        {
-//            newUser.setUserID(userID);
-//        }
-//        else
-//        {
-//            return null;
-//        }
+        int userID = userPersistence.insertUser(newUser);
+        if(userID != -1)
+        {
+            newUser.setUserID(userID);
+        }
+        else
+        {
+            return null;
+        }
 
         return newUser;
     }
 
-    public User getUser(final String username, final String password){
-//        return userPersistence.getUser(username, password);
+    public User loginUser(final String username, final String password) {
+        User user = userPersistence.getUserByUsername(username);
+        if(user != null && password.equals(user.getPassword()))
+        {
+            return user;
+        }
         return null;
     }
 
-    public boolean authenticateUsername(String username)
-    {
-        return !username.isEmpty() && username.length() <= 20;
+    public String authenticateUsername(String username) {
+
+        String errorMessage = "";
+        User user = userPersistence.getUserByUsername(username);
+        boolean found = (user != null);
+        if(found)
+        {
+            errorMessage += "\n \t - Username is taken";
+        }
+        if(username.isEmpty() || username.length() > 20)
+        {
+            errorMessage += "\n \t - 20 characters or shorter";
+        }
+        return errorMessage;
     }
 
-    public String authenticatePassword(String password)
-    {
+    public String authenticatePassword(String password) {
         String upperCase = ".*[A-Z].*";
         String lowerCase = ".*[a-z].*";
         String numbers = ".*\\d.*";
         String specials = ".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?].*";
 
         String errorMessage = "";
-        if(password.length() < 8){
+        if (password.length() < 8) {
             errorMessage += "\n \t - 8 or more characters";
         }
-        if(!password.matches(upperCase)){
+        if (!password.matches(upperCase)) {
             errorMessage += "\n \t - Upper case (A-Z)";
         }
-        if(!password.matches(lowerCase)){
+        if (!password.matches(lowerCase)) {
             errorMessage += "\n \t - Smaller case (a-z)";
         }
-        if(!password.matches(numbers)){
+        if (!password.matches(numbers)) {
             errorMessage += "\n \t - Number (0-9)";
         }
-        if(!password.matches(specials)){
+        if (!password.matches(specials)) {
             errorMessage += "\n \t - Special character (eg. !@#$%^&*()_+)";
         }
 
         return errorMessage;
     }
 
-    public boolean authenticateEmail(String email)
-    {
-        return !email.isEmpty();
-    }
-
-    public boolean authenticateName(String name)
-    {
+    public boolean authenticateName(String name) {
         return !name.isEmpty();
     }
 }

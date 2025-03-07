@@ -2,9 +2,11 @@ package comp3350.quizrus.presentation;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -23,8 +25,9 @@ import comp3350.quizrus.business.AccessUsers;
 public class SignUpActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextUsername;
     TextInputEditText textInputEditTextPassword;
-    TextInputEditText textInputEditTextEmail;
-    TextInputEditText textInputEditTextName;
+    TextInputEditText textInputEditTextConfirmPassword;
+    TextInputEditText textInputEditTextFirstName;
+    TextInputEditText textInputEditTextLastName;
     Button buttonCreateAccount;
     ImageButton buttonBack;
 
@@ -39,17 +42,18 @@ public class SignUpActivity extends AppCompatActivity {
 
             textInputEditTextUsername = findViewById(R.id.textInputETUsername);
             textInputEditTextPassword = findViewById(R.id.textInputETPassword);
-            textInputEditTextEmail = findViewById(R.id.textInputETEmail);
-            textInputEditTextName = findViewById(R.id.textInputETName);
+            textInputEditTextConfirmPassword = findViewById(R.id.textInputETConfirmPassword);
+            textInputEditTextFirstName = findViewById(R.id.textInputETFirstName);
+            textInputEditTextLastName = findViewById(R.id.textInputETLastName);
             buttonCreateAccount = findViewById(R.id.buttonCreateAccount);
             buttonBack = findViewById(R.id.buttonBack);
 
             buttonCreateAccount.setOnClickListener(button ->
-                checkSignInInfo()
+                    checkSignInInfo()
             );
 
             buttonBack.setOnClickListener(button ->
-                finish()
+                    finish()
             );
             return insets;
         });
@@ -58,32 +62,51 @@ public class SignUpActivity extends AppCompatActivity {
     private void checkSignInInfo() {
         String newUsername = textInputEditTextUsername.getText().toString();
         String newPassword = textInputEditTextPassword.getText().toString();
-        String newEmail = textInputEditTextEmail.getText().toString();
-        String newName = textInputEditTextName.getText().toString();
+        String newConfirmPassword = textInputEditTextConfirmPassword.getText().toString();
+        String newFirstName = textInputEditTextFirstName.getText().toString();
+        String newLastName = textInputEditTextLastName.getText().toString();
 
         AccessUsers accessUsers = new AccessUsers();
-        boolean isValidUsername = accessUsers.authenticateUsername(newUsername);
 
+        String errorMessageUsername = accessUsers.authenticateUsername(newUsername);
         String errorMessagePassword = accessUsers.authenticatePassword(newPassword);
-        boolean isValidPassword = errorMessagePassword.isEmpty();
-        boolean isValidEmail = accessUsers.authenticateEmail(newEmail);
-        boolean isValidName = accessUsers.authenticateName(newName);
 
-        if(!isValidUsername){
-            setAlertMessage("Invalid Username","Please fill in your username and it must be 20 characters or shorter");
+        boolean isValidUsername = errorMessageUsername.isEmpty();
+        boolean isValidPassword = errorMessagePassword.isEmpty();
+        boolean isValidConfirmPassword = newPassword.equals(newConfirmPassword);
+        boolean isValidFirstName = accessUsers.authenticateName(newFirstName);
+        boolean isValidLastName = accessUsers.authenticateName(newLastName);
+
+        if (!isValidUsername) {
+            setAlertMessage("Invalid Username", "Username must be:" + errorMessageUsername);
             return;
-        }else if(!isValidPassword){
+        } else if (!isValidPassword) {
             setAlertMessage("Invalid Password", "Password must have:" + errorMessagePassword);
             return;
-        }else if(!isValidEmail){
-            setAlertMessage("Invalid Email", "Please fill in your email");
+        } else if (!isValidConfirmPassword) {
+            setAlertMessage("Invalid Confirm Password", "Please ensure the confirm password matches your password.");
             return;
-        }else if(!isValidName){
-            setAlertMessage("Invalid Name", "Please fill in your name");
+        } else if (!isValidFirstName) {
+            setAlertMessage("Invalid First Name", "Please fill in your first name.");
             return;
-        }else{
-//            accessUsers.createUser(newUsername, newPassword, newEmail, newName);
+        }else if (!isValidLastName) {
+            setAlertMessage("Invalid Last Name", "Please fill in your last name.");
+            return;
+        } else {
+            accessUsers.createUser(newUsername, newPassword, newFirstName, newLastName);
+            successfulSignUpAnimation();
         }
+    }
+
+    //animation for changing the button text when registering
+    private void successfulSignUpAnimation() {
+        buttonCreateAccount.setText("Registering...");
+        new Handler().postDelayed(() -> {
+            buttonCreateAccount.setText("✓");
+        }, 1000);
+        new Handler().postDelayed(() -> {
+            finish();
+        }, 1500);
     }
 
     private void setAlertMessage(String alertTitle, String alertMessage) {

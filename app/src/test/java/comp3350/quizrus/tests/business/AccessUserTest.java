@@ -28,14 +28,16 @@ public class AccessUserTest {
 
         System.out.println("Testing that a list of users is returned correctly");
         assertNotNull(users);
-        assertTrue(users.size() == 5);
+        assertTrue(users.size() == 2);
 
         System.out.println("Testing that users in list are as expected");
-        assertTrue(1 == users.get(0).getUserID());
-        assertTrue(2 == users.get(1).getUserID());
-        assertTrue(3 == users.get(2).getUserID());
-        assertTrue(4 == users.get(3).getUserID());
-        assertTrue(5 == users.get(4).getUserID());
+        assertTrue(0 == users.get(0).getUserID());
+        assertTrue(1 == users.get(1).getUserID());
+
+        System.out.println("Testing that users are not the same");
+        User user1 = users.get(0);
+        User user2 = users.get(1);
+        assertTrue(!(user1.equals(user2)));
 
         System.out.println("Finished AccessUserTest");
     }

@@ -1,6 +1,12 @@
 package comp3350.quizrus.presentation;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
@@ -16,7 +22,6 @@ import java.util.List;
 import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessAnswers;
 import comp3350.quizrus.business.AccessQuestions;
-import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.business.Random;
 import comp3350.quizrus.objects.Answer;
 import comp3350.quizrus.objects.Question;
@@ -31,6 +36,7 @@ public class MCQuestionActivity extends AppCompatActivity {
     private final int OPTION_BUTTON_4_ORDER_NUM = 3;
     // For getting data
     private final AccessAnswers accessAnswers = new AccessAnswers();
+    private Quiz quiz;
     private List<Question> questions;
     // Number of question in this quiz
     private int totalQuestionCount;
@@ -49,6 +55,10 @@ public class MCQuestionActivity extends AppCompatActivity {
     // proceed button is either in invisible mode, submit, or next mode
     private Button proceedButton;
 
+    private long timeLeftInMillis;
+
+    private MediaPlayer quizzingMusic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,19 +73,24 @@ public class MCQuestionActivity extends AppCompatActivity {
         setUpQuestions();
         setUpOptionButtons();
         setUpProceedButton();
+        startTimer();
+        startQuizMusic();
         reset();
     }
 
-    // get the quiz number from last activity, find the quiz by the quiz number
-    // get the questions from the quiz
-    // randomize the questions
-    // get the total question count
+    @Override
+    protected void onPause() {
+        super.onPause();
+        quizzingMusic.stop();
+        quizzingMusic.release();
+    }
+
+    //get the Quiz object that is pressed and set up the page
     private void setUpQuestions() {
-        AccessQuizzes quizzes = new AccessQuizzes();
-        List<Quiz> quizList = quizzes.getQuizzes();
-        int quizNum = getIntent().getIntExtra("quizNum", -1); // get the quiz number user pressed from last activity
-        Quiz quiz = quizList.get(quizNum);
         AccessQuestions accessQuestions = new AccessQuestions();
+        Intent intent = getIntent();
+
+        quiz = (Quiz) intent.getSerializableExtra("currQuiz");
         questions = accessQuestions.getQuestions(quiz);
         Random.randomizeListItem(questions); // randomize
         totalQuestionCount = questions.size();
@@ -136,11 +151,14 @@ public class MCQuestionActivity extends AppCompatActivity {
         });
     }
 
-    /*
-     * initialize the proceedButton by finding the id
-     */
     private void setUpProceedButton() {
         proceedButton = findViewById(R.id.buttonProceed);
+    }
+
+    private void startQuizMusic() {
+        quizzingMusic = MediaPlayer.create(this, R.raw.quiz_music);
+        quizzingMusic.setLooping(true);
+        quizzingMusic.start();
     }
 
     // reset the tracker for last pressed and right answer button
@@ -237,6 +255,20 @@ public class MCQuestionActivity extends AppCompatActivity {
     private void indicateRightAndWrongAnswer() {
         getButtonByOrderNum(lastPressedButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_wrong);
         getButtonByOrderNum(rightAnswerButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_right);
+
+        boolean isRight = (lastPressedButtonOrderNum == rightAnswerButtonOrderNum);
+        putRightOrWrongSound(isRight);
+    }
+
+    private void putRightOrWrongSound(boolean isRight) {
+        MediaPlayer mediaPlayer;
+        if(isRight){
+            mediaPlayer = MediaPlayer.create(this, R.raw.yay);
+        }else{
+            mediaPlayer = MediaPlayer.create(this, R.raw.wrong);
+        }
+
+        mediaPlayer.start();
     }
 
     // find the Button using the given constant
@@ -252,5 +284,47 @@ public class MCQuestionActivity extends AppCompatActivity {
         } else {
             return null; // something is wrong
         }
+    }
+
+    //Responsible for the count down timer, and go back to main page when time's up
+    private void startTimer() {
+        TextView timerTV = findViewById(R.id.timerTV);
+        timeLeftInMillis = quiz.getTimeLimit() * 1000L;
+
+        new CountDownTimer(timeLeftInMillis, 1000) { // Tick every second
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                int seconds = (int) (timeLeftInMillis / 1000);
+                timerTV.setText(seconds + " s");
+            }
+
+            public void onFinish() {
+                timerTV.setText("Time's up!");
+                startFlashingEffect(timerTV);
+                setProceedButtonToInvisibleMode();
+                setSound();
+
+                // Finish activity after 2 seconds (2000ms)
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish(); // Close activity
+                    }
+                }, 2000);
+            }
+        }.start();
+    }
+
+    private void startFlashingEffect(TextView timerTV) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(timerTV, "alpha", 1f, 0f);
+        animator.setDuration(500); // 500ms per blink
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.start();
+    }
+
+    private void setSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.rooster);
+        mediaPlayer.start();
     }
 }

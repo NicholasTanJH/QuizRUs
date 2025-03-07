@@ -8,7 +8,6 @@
     android:background="@color/colorPrimary"
     android:gravity="center_horizontal">
 
-    <!-- ConstraintLayout for Logo -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -22,16 +21,18 @@
             android:id="@+id/buttonBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:background="@android:color/transparent"
+            android:padding="10dp"
             android:src="@drawable/arrow_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/logoImageView"
+            />
 
         <ImageView
             android:id="@+id/logoImageView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxHeight="80dp"
             android:minHeight="40dp"
@@ -39,144 +40,172 @@
             android:src="@drawable/quizruslogo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/buttonBack"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Main LinearLayout with form elements -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:gravity="center"
-        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-        <!-- Title TextView -->
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:text="Sign Up"
-            android:textColor="@color/colorWhite"
-            android:textSize="60sp"
-            android:textStyle="bold" />
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginBottom="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <!-- Username TextInputLayout -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:background="@drawable/login_text_input_layout_background"
-            android:hint="Username"
-            android:padding="10dp"
-            android:textColorHint="@color/colorWhite">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputETUsername"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/white"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="60sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginVertical="15dp"
+                android:text="Sign Up"
+                android:textColor="@color/colorWhite"
+                android:textSize="60sp"
+                android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:background="@drawable/login_text_input_layout_background"
-            android:gravity="center"
-            android:hint="Password"
-            android:padding="10dp"
-            android:textColorHint="@color/colorWhite">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputETPassword"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/white"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="60sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/login_text_input_layout_background"
+                android:hint="Username"
+                android:padding="10dp"
+                android:textColorHint="@color/colorWhite">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:background="@drawable/login_text_input_layout_background"
-            android:gravity="center"
-            android:hint="Email"
-            android:padding="10dp"
-            android:textColorHint="@color/colorWhite">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputETUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputETEmail"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/white"
-                android:imeOptions="actionDone"
-                android:inputType="textEmailAddress"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="60sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/login_text_input_layout_background"
+                android:gravity="center"
+                android:hint="Password"
+                android:padding="10dp"
+                android:textColorHint="@color/colorWhite">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:background="@drawable/login_text_input_layout_background"
-            android:gravity="center"
-            android:hint="Name"
-            android:padding="10dp"
-            android:textColorHint="@color/colorWhite">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputETPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputETName"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/white"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="60sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/login_text_input_layout_background"
+                android:gravity="center"
+                android:hint="Confirm Password"
+                android:padding="10dp"
+                android:textColorHint="@color/colorWhite">
 
-        <Button
-            android:id="@+id/buttonCreateAccount"
-            android:layout_width="400dp"
-            android:layout_height="100dp"
-            android:layout_marginVertical="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/login_button_background"
-            android:text="Create Account"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="45sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputETConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/login_text_input_layout_background"
+                android:gravity="center"
+                android:hint="First Name"
+                android:padding="10dp"
+                android:textColorHint="@color/colorWhite">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputETFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp"
+                android:background="@drawable/login_text_input_layout_background"
+                android:gravity="center"
+                android:hint="Last Name"
+                android:padding="10dp"
+                android:textColorHint="@color/colorWhite">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputETLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buttonCreateAccount"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/login_button_background"
+                android:text="Sign Up"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="35sp" />
+        </LinearLayout>
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

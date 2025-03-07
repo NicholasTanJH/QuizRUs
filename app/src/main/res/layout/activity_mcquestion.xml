@@ -10,106 +10,136 @@
     tools:context=".presentation.MCQuestionActivity">
 
     <TextView
-        android:id="@+id/questionTV"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:id="@+id/timerTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/timer_background"
         android:gravity="center"
-        android:text="Question, Just for testing"
+        android:paddingHorizontal="50dp"
+        android:text="100 s"
         android:textColor="@color/colorWhite"
-        android:textSize="55sp"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/MCQBody"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/answerLinearLayout"
+    <LinearLayout
+        android:id="@+id/MCQBody"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp"
-        android:background="@drawable/question_option_panel_color"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/buttonProceed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questionTV">
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/question_option_button_default_color"
-            android:text="Option 1"
-            android:textColor="@color/colorWhite"
-            android:textSize="45sp"
-            app:layout_constraintBottom_toTopOf="@+id/button2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/question_option_button_default_color"
-            android:text="Option 2"
-            android:textColor="@color/colorWhite"
-            android:textSize="45sp"
-            app:layout_constraintBottom_toTopOf="@+id/button3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button1" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/question_option_button_default_color"
-            android:text="Option 3"
-            android:textColor="@color/colorWhite"
-            android:textSize="45sp"
-            app:layout_constraintBottom_toTopOf="@+id/button4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/question_option_button_default_color"
-            android:text="Option 4"
-            android:textColor="@color/colorWhite"
-            android:textSize="45sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button3" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/buttonProceed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginVertical="40dp"
-        android:padding="20dp"
-        android:textColor="@color/colorWhite"
-        android:textSize="50sp"
-        android:background="@drawable/question_proceed_button_submit"
+        android:weightSum="10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:clickable="false"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toBottomOf="@+id/timerTV">
+
+        <TextView
+            android:id="@+id/questionTV"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="2"
+            android:autoSizeMaxTextSize="40sp"
+            android:autoSizeMinTextSize="5sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="5"
+            android:text="Question, Just for testing"
+            android:textColor="@color/colorWhite" />
+
+        <LinearLayout
+            android:id="@+id/answerLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
+            android:layout_weight="7"
+            android:background="@drawable/question_option_panel_color"
+            android:orientation="vertical"
+            android:paddingVertical="10dp"
+            android:weightSum="4">
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/question_option_button_default_color"
+                android:text="Option 1"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/question_option_button_default_color"
+                android:text="Option 2"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/question_option_button_default_color"
+                android:text="Option 3"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/question_option_button_default_color"
+                android:text="Option 4"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonProceed"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginVertical="20dp"
+            android:layout_weight="1"
+            android:autoSizeMaxTextSize="40sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/question_proceed_button_submit"
+            android:clickable="false"
+            android:padding="5dp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:visibility="invisible" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
