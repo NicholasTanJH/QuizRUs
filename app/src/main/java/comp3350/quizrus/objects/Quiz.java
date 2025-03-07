@@ -58,12 +58,6 @@ public class Quiz implements Serializable {
     }
 
     @Override
-    public String toString()
-    {
-        return String.format("Quiz: [quizID: %s, User: %s, Title: %s, timeLimit: %s]", quizID, myUser != null ? myUser.getUserID() : "null", title, this.timeLimit);
-    }
-
-    @Override
     public boolean equals(Object other)
     {
         boolean equal = false;

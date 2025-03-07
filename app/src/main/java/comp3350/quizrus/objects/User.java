@@ -68,12 +68,6 @@ public class User implements Serializable {
     }
 
     @Override
-    public String toString()
-    {
-        return String.format("User: [UserID: %s, Username: %s, Password: %s, Firstname: %s, Lastname: %s]", this.userID, this.username, this.password, this.firstname, this.lastname);
-    }
-
-    @Override
     public boolean equals(Object other)
     {
         boolean equal = false;

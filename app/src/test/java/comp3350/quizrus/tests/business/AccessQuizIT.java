@@ -17,6 +17,8 @@ import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuizPersistence;
 import comp3350.quizrus.persistence.UserPersistence;
+import comp3350.quizrus.persistence.stubs.QuizPersistenceStub;
+import comp3350.quizrus.persistence.stubs.UserPersistenceStub;
 import comp3350.quizrus.tests.utils.TestUtils;
 
 public class AccessQuizIT {
@@ -27,8 +29,18 @@ public class AccessQuizIT {
     @Before
     public void setUp() throws IOException {
         this.tempDB = TestUtils.copyDB();
-        this.accessQuizzes = new AccessQuizzes();
-        this.accessUsers = new AccessUsers();
+        UserPersistence userPersistence = Services.getUserPersistence();
+        if(userPersistence instanceof UserPersistenceStub)
+        {
+            userPersistence = new UserPersistenceStub();
+        }
+        QuizPersistence quizPersistence = Services.getQuizPersistence();
+        if(quizPersistence instanceof QuizPersistenceStub)
+        {
+            quizPersistence = new QuizPersistenceStub();
+        }
+        this.accessQuizzes = new AccessQuizzes(quizPersistence);
+        this.accessUsers = new AccessUsers(userPersistence);
     }
 
     @After
@@ -50,15 +62,6 @@ public class AccessQuizIT {
         int quiz1ID = quiz1.getQuizID();
         assertNotEquals(-1, quiz1ID);
     }
-
-//    @Test(expected = PersistenceException.class)
-//    public void testInsertQuizInvalidUser() {
-//        // Create a new user without inserting them into the database..
-//        User user1 = new User("bob", "password", "Bob", "Test");
-//
-//        // Try inserting a quiz with the invalid user into the database.
-//        accessQuizzes.createQuiz(user1, "What is the life expectancy in Canada?", 120);
-//    }
 
     @Test
     public void testGetQuizByID() {
