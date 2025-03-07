@@ -34,6 +34,11 @@ public class AccessUserTest {
         assertTrue(0 == users.get(0).getUserID());
         assertTrue(1 == users.get(1).getUserID());
 
+        System.out.println("Testing that users are not the same");
+        User user1 = users.get(0);
+        User user2 = users.get(1);
+        assertTrue(!(user1.equals(user2)));
+
         System.out.println("Finished AccessUserTest");
     }
 }
