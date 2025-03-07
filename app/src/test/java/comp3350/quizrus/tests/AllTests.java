@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import comp3350.quizrus.tests.business.AccessAnswerIT;
+import comp3350.quizrus.tests.business.AccessAnswerTest;
 import comp3350.quizrus.tests.business.AccessQuestionIT;
 import comp3350.quizrus.tests.business.AccessQuizIT;
 import comp3350.quizrus.tests.business.AccessUserIT;
@@ -28,6 +29,7 @@ import comp3350.quizrus.tests.business.RandomTest;
                 AccessUserTest.class,
                 AccessQuizTest.class,
                 AccessQuestionTest.class,
+                AccessAnswerTest.class,
                 AccessAnswerIT.class,
                 AccessQuestionIT.class,
                 AccessQuizIT.class,

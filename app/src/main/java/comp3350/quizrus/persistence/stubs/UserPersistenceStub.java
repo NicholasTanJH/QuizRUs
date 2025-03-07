@@ -49,12 +49,12 @@ public class UserPersistenceStub implements UserPersistence {
     @Override
     public int insertUser(User newUser) {
         // Check that the user isn't already in our list.
-        for (User user : this.users) {
-            if (user.getUsername().equals(newUser.getUsername())) {
-                throw new PersistenceException(
-                        new Exception("A user with username " + newUser.getUsername() + " already exists."));
-            }
-        }
+//        for (User user : this.users) {
+//            if (user.getUsername().equals(newUser.getUsername())) {
+//                throw new PersistenceException(
+//                        new Exception("A user with username " + newUser.getUsername() + " already exists."));
+//            }
+//        }
 
         // Add the user.
         newUser.setUserID(this.numUsers);

@@ -21,7 +21,7 @@ public class Services {
 
     public static synchronized UserPersistence getUserPersistence() {
         if (userPersistence == null) {
-            userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
+            userPersistence = new UserPersistenceStub();
         }
 
         return userPersistence;
@@ -29,7 +29,7 @@ public class Services {
 
     public static synchronized QuizPersistence getQuizPersistence() {
         if (quizPersistence == null) {
-            quizPersistence = new QuizPersistenceHSQLDB(Main.getDBPathName());
+            quizPersistence = new QuizPersistenceStub();
         }
 
         return quizPersistence;
@@ -37,7 +37,7 @@ public class Services {
 
     public static synchronized QuestionPersistence getQuestionPersistence() {
         if (questionPersistence == null) {
-            questionPersistence = new QuestionPersistenceHSQLDB(Main.getDBPathName());
+            questionPersistence = new QuestionPersistenceStub();
         }
 
         return questionPersistence;
@@ -45,7 +45,7 @@ public class Services {
 
     public static synchronized AnswerPersistence getAnswerPersistence() {
         if (answerPersistence == null) {
-            answerPersistence = new AnswerPersistenceHSQLDB(Main.getDBPathName());
+            answerPersistence = new AnswerPersistenceStub();
         }
 
         return answerPersistence;
