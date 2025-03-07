@@ -31,12 +31,18 @@ public class QuizCreationActivity extends AppCompatActivity {
     Button editQuestionButton;
     TextInputEditText quizNameEditText;
     TextInputEditText timerAmountEditText;
+    User currUser;
+    Quiz currQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_quiz_creation);
+
+        Intent intent = getIntent();
+        currUser = (User) intent.getSerializableExtra("loggedInUser");
+        currQuiz = null;
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -66,8 +72,7 @@ public class QuizCreationActivity extends AppCompatActivity {
         String quizName = quizNameEditText.getText().toString();
         String timerString = timerAmountEditText.getText().toString();
 
-        long timerAmount;
-        //        AccessQuizzes accessQuiz = new AccessQuizzes();
+        int timerAmount;
 
         if(quizName.isEmpty())
         {
@@ -80,9 +85,12 @@ public class QuizCreationActivity extends AppCompatActivity {
         else
         {
             timerAmount = Integer.parseInt(timerString);
-            //            accessQuiz.createQuiz(,quizName,timerAmount);
             intent = new Intent(this, QuizModifyQuestionActivity.class);
-            //        intent.putExtra("quiz",accessQuiz.createQuiz(,quizName,timerAmount));
+
+            intent.putExtra("loggedInUser", currUser);
+            intent.putExtra("quizName", quizName);
+            intent.putExtra("timerAmount", timerAmount);
+
             this.startActivity(intent);
             finish();
         }

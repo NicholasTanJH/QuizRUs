@@ -87,4 +87,30 @@ public class AccessQuestionIT {
             assertEquals("MULTIPLE_CHOICE", question.getQuestionType());
         }
     }
+
+    @Test
+    public void testGetQuestionByID() {
+        // Create a new user.
+        User user1 = accessUsers.createUser("alice", "password", "Alice", "Test");
+        assertNotNull(user1);
+        assertNotEquals(-1, user1.getUserID());
+
+        // Create a new quiz.
+        Quiz quiz1 = accessQuizzes.createQuiz(user1, "Geography Quiz", 90);
+        assertNotNull(quiz1);
+        assertNotEquals(-1, quiz1.getQuizID());
+
+        // Create a new question.
+        Question question1 = accessQuestions.createQuestion(quiz1, "What is the capital of France?", "MULTIPLE_CHOICE");
+        assertNotNull(question1);
+        assertNotEquals(-1, question1.getQuestionID());
+
+        // Retrieve the question using its ID.
+        Question retrievedQuestion = accessQuestions.getQuestion(question1.getQuestionID());
+        assertNotNull(retrievedQuestion);
+        assertEquals(question1.getQuestionID(), retrievedQuestion.getQuestionID());
+        assertEquals("What is the capital of France?", retrievedQuestion.getQuestionText());
+        assertEquals("MULTIPLE_CHOICE", retrievedQuestion.getQuestionType());
+    }
+
 }
