@@ -10,9 +10,13 @@
     - [Question](#question)
     - [Answer](#answer)
   - [Presentation Layer](#presentation-layer)
-    - [QuizSelectionActivity](#quizselectionactivity)
     - [QuizRecycleViewAdapter](#quizrecycleviewadapter)
     - [MCQuestionAcitivity](#mcquestionacitivity)
+    - [QuizCreationActivity](#quizcreationactivity)
+    - [QuizModifyQuestionActivity](#quizmodifyquestionactivity)
+    - [QuizSelectionActivity](#quizselectionactivity)
+    - [SignUpActivity](#signupactivity)
+    - [UserLoginActivity](#userloginactivity)
   - [Business Layer](#business-layer)
     - [AccessUsers](#accessusers)
     - [AccessQuizzes](#accessquizzes)
@@ -56,16 +60,28 @@ An `Answer` represents a response to a question. It can be correct or incorrect,
 ## Presentation Layer
 This section is resposible for all of the UI.
 
-**Package**: `comp3350.quizrus.presentation;`
-
-### QuizSelectionActivity
-The Main page of the app, where it shows a list of quizzes, and user can select which quiz they want to play 
+**Package**: `comp3350.quizrus.presentation;` 
 
 ### QuizRecycleViewAdapter
 A recycle view adapter is responsible for setting up the quiz items in the QuizSelectionActivity UI page
 
 ### MCQuestionAcitivity
 A multiple choice questions UI page that opens up when the user select a quiz in the quiz selection page UI, responsible for showing the questions and it's available answer after user submiting the answer. r
+
+### QuizCreationActivity
+This is a customizable quiz page that opens when the user presses the + button in the top right corner of the screen. This is responsible for creating the quiz name and the length of time the quiz will be.
+
+### QuizModifyQuestionActivity
+This page focuses on editing the questions that will be contained within each quiz. This opesn after the user selects "Edit Questions" on the bottom of the Quiz creation page. This is resposible for setting each set of the questions and the answers associated with them.
+
+### QuizSelectionActivity
+The Main page of the app, where it shows a list of quizzes, and user can select which quiz they want to play
+
+### SignUpActivity
+It is a sign up page where the user can create a new account.
+
+### UserLoginActivity
+This is the first page that opens up when the app runs, it prompts user login info.
 
 ## Business Layer
 This section is responsible for communication between the UI and database layers.
