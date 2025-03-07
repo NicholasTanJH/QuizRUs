@@ -3,6 +3,10 @@ package comp3350.quizrus.tests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import comp3350.quizrus.tests.business.AccessAnswerIT;
+import comp3350.quizrus.tests.business.AccessQuestionIT;
+import comp3350.quizrus.tests.business.AccessQuizIT;
+import comp3350.quizrus.tests.business.AccessUserIT;
 import comp3350.quizrus.tests.business.AccessUserTest;
 import comp3350.quizrus.tests.business.AccessQuizTest;
 import comp3350.quizrus.tests.business.AccessQuestionTest;
@@ -23,7 +27,11 @@ import comp3350.quizrus.tests.business.RandomTest;
                 RandomTest.class,
                 AccessUserTest.class,
                 AccessQuizTest.class,
-                AccessQuestionTest.class
+                AccessQuestionTest.class,
+                AccessAnswerIT.class,
+                AccessQuestionIT.class,
+                AccessQuizIT.class,
+                AccessUserIT.class
 })
 public class AllTests {
 }

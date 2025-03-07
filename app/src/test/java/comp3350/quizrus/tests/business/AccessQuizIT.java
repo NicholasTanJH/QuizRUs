@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.List;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,5 +77,14 @@ public class AccessQuizIT {
         assertEquals(user1.getUserID(), quiz2.getUser().getUserID());
         assertEquals("What is the life expectancy in Canada?", quiz2.getTitle());
         assertEquals(120, quiz2.getTimeLimit());
+    }
+
+    @Test
+    public void testGetQuizzesEmptyList() {
+        // Ensure the database is empty.
+        List<Quiz> quizzes = accessQuizzes.getQuizzes();
+        assertNotNull(quizzes);
+        // 2 Default quizzes
+        assertEquals(2, quizzes.size());
     }
 }

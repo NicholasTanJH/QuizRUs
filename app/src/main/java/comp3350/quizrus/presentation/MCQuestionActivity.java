@@ -2,6 +2,8 @@ package comp3350.quizrus.presentation;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -27,6 +29,7 @@ import comp3350.quizrus.business.Random;
 import comp3350.quizrus.objects.Answer;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
+import comp3350.quizrus.objects.User;
 
 public class MCQuestionActivity extends AppCompatActivity {
     // integer to keep track the option buttons
@@ -37,6 +40,7 @@ public class MCQuestionActivity extends AppCompatActivity {
     private final int OPTION_BUTTON_4_ORDER_NUM = 3;
     // For getting data
     private final AccessAnswers accessAnswers = new AccessAnswers();
+    private Quiz quiz;
     private List<Question> questions;
     // Number of question in this quiz
     private int totalQuestionCount;
@@ -71,20 +75,18 @@ public class MCQuestionActivity extends AppCompatActivity {
         setUpQuestions();
         setUpOptionButtons();
         setUpProceedButton();
-        startTimer(100000);
+        startTimer();
         reset();
     }
 
-    // get the quiz number from last activity, find the quiz by the quiz number
-    // get the questions from the quiz
-    // randomize the questions
-    // get the total question count
+
+
+    //get the Quiz object that is pressed and set up the page
     private void setUpQuestions() {
-        AccessQuizzes quizzes = new AccessQuizzes();
-        List<Quiz> quizList = quizzes.getQuizzes();
-        int quizNum = getIntent().getIntExtra("quizNum", -1); // get the quiz number user pressed from last activity
-        Quiz quiz = quizList.get(quizNum);
         AccessQuestions accessQuestions = new AccessQuestions();
+        Intent intent = getIntent();
+
+        quiz = (Quiz) intent.getSerializableExtra("currQuiz");
         questions = accessQuestions.getQuestions(quiz);
         Random.randomizeListItem(questions); // randomize
         totalQuestionCount = questions.size();
@@ -145,9 +147,6 @@ public class MCQuestionActivity extends AppCompatActivity {
         });
     }
 
-    /*
-     * initialize the proceedButton by finding the id
-     */
     private void setUpProceedButton() {
         proceedButton = findViewById(R.id.buttonProceed);
     }
@@ -264,9 +263,9 @@ public class MCQuestionActivity extends AppCompatActivity {
     }
 
     //Responsible for the count down timer, and go back to main page when time's up
-    private void startTimer(long startTime) {
+    private void startTimer() {
         TextView timerTV = findViewById(R.id.timerTV);
-        timeLeftInMillis = startTime;
+        timeLeftInMillis = quiz.getTimeLimit() * 1000L;
 
         new CountDownTimer(timeLeftInMillis, 1000) { // Tick every second
             public void onTick(long millisUntilFinished) {
@@ -279,6 +278,7 @@ public class MCQuestionActivity extends AppCompatActivity {
                 timerTV.setText("Time's up!");
                 startFlashingEffect(timerTV);
                 setProceedButtonToInvisibleMode();
+                setSound();
 
                 // Finish activity after 2 seconds (2000ms)
                 new Handler().postDelayed(new Runnable() {
@@ -297,5 +297,10 @@ public class MCQuestionActivity extends AppCompatActivity {
         animator.setRepeatMode(ValueAnimator.REVERSE);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.start();
+    }
+
+    private void setSound() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.rooster);
+        mediaPlayer.start();
     }
 }

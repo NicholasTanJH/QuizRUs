@@ -95,4 +95,62 @@ public class AccessUserIT {
     // assertEquals(user1.getUserID(), user2.getUserID());
     // assertEquals("bob", user2.getUsername());
     // }
+
+    @Test
+    public void testLoginUserSuccess() {
+        User user1 = accessUsers.createUser("bob", "Password1!", "Bob", "Test");
+        assertNotNull(user1);
+
+        User loggedInUser = accessUsers.loginUser("bob", "Password1!");
+        assertNotNull(loggedInUser);
+        assertEquals(user1.getUserID(), loggedInUser.getUserID());
+    }
+
+    @Test
+    public void testLoginUserFailure() {
+        User user1 = accessUsers.createUser("bob", "Password1!", "Bob", "Test");
+        assertNotNull(user1);
+
+        User loggedInUser = accessUsers.loginUser("bob", "wrongPassword");
+        assertNull(loggedInUser);
+    }
+
+    @Test
+    public void testAuthenticateUsernameTaken() {
+        accessUsers.createUser("bob", "Password1!", "Bob", "Test");
+        String errorMessage = accessUsers.authenticateUsername("bob");
+        assertTrue(errorMessage.contains("Username is taken"));
+    }
+
+    @Test
+    public void testAuthenticateUsernameValid() {
+        String errorMessage = accessUsers.authenticateUsername("newuser");
+        assertEquals("", errorMessage);
+    }
+
+    @Test
+    public void testAuthenticatePasswordValid() {
+        String errorMessage = accessUsers.authenticatePassword("Password1!");
+        assertEquals("", errorMessage);
+    }
+
+    @Test
+    public void testAuthenticatePasswordInvalid() {
+        String errorMessage = accessUsers.authenticatePassword("pass");
+        assertTrue(errorMessage.contains("8 or more characters"));
+        assertTrue(errorMessage.contains("Upper case (A-Z)"));
+        assertTrue(errorMessage.contains("Number (0-9)"));
+        assertTrue(errorMessage.contains("Special character"));
+    }
+
+    @Test
+    public void testAuthenticateNameValid() {
+        assertTrue(accessUsers.authenticateName("Bob"));
+    }
+
+    @Test
+    public void testAuthenticateNameInvalid() {
+        assertFalse(accessUsers.authenticateName(""));
+    }
+
 }
