@@ -17,19 +17,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessAnswers;
 import comp3350.quizrus.business.AccessQuestions;
-import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.business.Random;
 import comp3350.quizrus.objects.Answer;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
-import comp3350.quizrus.objects.User;
 
 public class MCQuestionActivity extends AppCompatActivity {
     // integer to keep track the option buttons
@@ -61,6 +57,8 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     private long timeLeftInMillis;
 
+    private MediaPlayer quizzingMusic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +74,16 @@ public class MCQuestionActivity extends AppCompatActivity {
         setUpOptionButtons();
         setUpProceedButton();
         startTimer();
+        startQuizMusic();
         reset();
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        quizzingMusic.stop();
+        quizzingMusic.release();
+    }
 
     //get the Quiz object that is pressed and set up the page
     private void setUpQuestions() {
@@ -149,6 +153,12 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     private void setUpProceedButton() {
         proceedButton = findViewById(R.id.buttonProceed);
+    }
+
+    private void startQuizMusic() {
+        quizzingMusic = MediaPlayer.create(this, R.raw.quiz_music);
+        quizzingMusic.setLooping(true);
+        quizzingMusic.start();
     }
 
     // reset the tracker for last pressed and right answer button
@@ -245,6 +255,20 @@ public class MCQuestionActivity extends AppCompatActivity {
     private void indicateRightAndWrongAnswer() {
         getButtonByOrderNum(lastPressedButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_wrong);
         getButtonByOrderNum(rightAnswerButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_right);
+
+        boolean isRight = (lastPressedButtonOrderNum == rightAnswerButtonOrderNum);
+        putRightOrWrongSound(isRight);
+    }
+
+    private void putRightOrWrongSound(boolean isRight) {
+        MediaPlayer mediaPlayer;
+        if(isRight){
+            mediaPlayer = MediaPlayer.create(this, R.raw.yay);
+        }else{
+            mediaPlayer = MediaPlayer.create(this, R.raw.wrong);
+        }
+
+        mediaPlayer.start();
     }
 
     // find the Button using the given constant
