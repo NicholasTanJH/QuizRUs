@@ -168,20 +168,4 @@ public class UserLoginActivity extends AppCompatActivity {
             }
         }
     }
-
-    private void resetDB(File dataDirectory) {
-        if (dataDirectory.exists() && dataDirectory.isDirectory()) {
-            // Get all files in the directory.
-            File[] files = dataDirectory.listFiles();
-
-            if (files != null) {
-                for (File file : files) {
-                    // Delete each file in the directory.
-                    if (file.isFile() && file.getName().endsWith(".script")) {
-                        file.delete();
-                    }
-                }
-            }
-        }
-    }
 }
