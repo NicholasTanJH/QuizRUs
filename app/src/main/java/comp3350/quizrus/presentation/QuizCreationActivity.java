@@ -3,7 +3,6 @@ package comp3350.quizrus.presentation;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
@@ -20,8 +19,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.textfield.TextInputEditText;
 
 import comp3350.quizrus.R;
-import comp3350.quizrus.business.AccessQuizzes;
-import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
 
