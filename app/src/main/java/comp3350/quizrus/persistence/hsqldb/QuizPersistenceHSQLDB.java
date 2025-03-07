@@ -10,6 +10,7 @@ import java.util.List;
 import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.Quiz;
+import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuizPersistence;
 
 public class QuizPersistenceHSQLDB implements QuizPersistence {

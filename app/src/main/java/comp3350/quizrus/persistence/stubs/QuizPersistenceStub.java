@@ -10,34 +10,41 @@ import comp3350.quizrus.persistence.QuizPersistence;
 
 public class QuizPersistenceStub implements QuizPersistence {
     private List<Quiz> quizzes;
+    private int numQuizzes;
 
     public QuizPersistenceStub() {
         this.quizzes = new ArrayList<>();
+        this.numQuizzes = 0;
 
         // A quiz must be associated with a user.
         User user1 = new User(0, "demo", "Password0!", "Jessie", "Andrade");
         User user2 = new User(1, "kakashi", "Password1!", "Saige", "Santana");
 
         // Add quizzes.
-        quizzes.add(new Quiz(0, "Flags of Countries", user1, 120));
-        quizzes.add(new Quiz(1, "Celebrity Partners", user2, 120));
+        insertQuiz(new Quiz(0, "Flags of Countries", user1, 120), user1);
+        insertQuiz(new Quiz(1, "Celebrity Partners", user2, 120), user2);
     }
 
     @Override
     public Quiz getQuizByID(int quizID) {
+        for (Quiz quiz : this.quizzes) {
+            if (quiz.getQuizID() == quizID) {
+                return quiz;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Quiz> getAllQuizzes() {
-        return Collections.unmodifiableList(quizzes);
+        return Collections.unmodifiableList(this.quizzes);
     }
 
     @Override
     public List<Quiz> getUserQuizzes(User user) {
         List<Quiz> userQuizzes = new ArrayList<>();
 
-        for (Quiz quiz : quizzes) {
+        for (Quiz quiz : this.quizzes) {
             if (quiz.getUser().equals(user)) {
                 userQuizzes.add(quiz);
             }
@@ -47,6 +54,9 @@ public class QuizPersistenceStub implements QuizPersistence {
 
     @Override
     public int insertQuiz(Quiz quiz, User user) {
-        return -1;
+        quiz.setQuizID(this.numQuizzes);
+        this.quizzes.add(quiz);
+        this.numQuizzes++;
+        return quiz.getQuizID();
     }
 }

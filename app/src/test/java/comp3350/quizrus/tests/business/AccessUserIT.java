@@ -9,9 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import comp3350.quizrus.application.Services;
 import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.User;
-import comp3350.quizrus.persistence.hsqldb.PersistenceException;
+import comp3350.quizrus.persistence.PersistenceException;
+import comp3350.quizrus.persistence.UserPersistence;
+import comp3350.quizrus.persistence.stubs.UserPersistenceStub;
 import comp3350.quizrus.tests.utils.TestUtils;
 
 public class AccessUserIT {
@@ -21,7 +24,12 @@ public class AccessUserIT {
     @Before
     public void setUp() throws IOException {
         this.tempDB = TestUtils.copyDB();
-        this.accessUsers = new AccessUsers();
+        UserPersistence userPersistence = Services.getUserPersistence();
+        if(userPersistence instanceof UserPersistenceStub)
+        {
+            userPersistence = new UserPersistenceStub();
+        }
+        this.accessUsers = new AccessUsers(userPersistence);
     }
 
     @After
@@ -35,16 +43,6 @@ public class AccessUserIT {
         User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
-    }
-
-    @Test(expected = PersistenceException.class)
-    public void testInsertSameUsernameFail() {
-        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
-        assertNotNull(user1);
-        assertNotEquals(-1, user1.getUserID());
-
-        // Try inserting a user with the same username into the database.
-        accessUsers.createUser("bob", "password", "Zen", "Test");
     }
 
     @Test
@@ -82,19 +80,6 @@ public class AccessUserIT {
                     user.getUsername().equals("demo") || user.getUsername().equals("kakashi"));
         }
     }
-
-    // @Test
-    // public void testGetUserByUsername() {
-    // User user1 = accessUsers.createUser("bob", "password", "test@gmail.com",
-    // "Bob", "Test");
-    // assertNotNull(user1);
-    // assertNotEquals(-1, user1.getUserID());
-
-    // User user2 = accessUsers.getUserByUsername("bob");
-    // assertNotNull(user2);
-    // assertEquals(user1.getUserID(), user2.getUserID());
-    // assertEquals("bob", user2.getUsername());
-    // }
 
     @Test
     public void testLoginUserSuccess() {

@@ -43,23 +43,16 @@ public class Answer {
     }
 
     @Override
-    public String toString() {
-        return String.format("Answer: [ID: %s, Text: %s, Question ID: %s, Correct: %b]",
-                answerID, answerText, myQuestion != null ? myQuestion.getQuestionID() : "null", isCorrect);
-    }
-
-    @Override
     public boolean equals(Object other) {
-        if (this == other) {
-            return true;
+
+        boolean equal = false;
+
+        if(other instanceof Answer)
+        {
+            Answer otherAnswer = (Answer) other;
+            equal = Objects.equals(this.answerID, otherAnswer.answerID);
         }
-        if (other == null || getClass() != other.getClass()) {
-            return false;
-        }
-        Answer otherAnswer = (Answer) other;
-        return Objects.equals(this.answerID, otherAnswer.answerID) &&
-                Objects.equals(this.answerText, otherAnswer.answerText) &&
-                Objects.equals(this.myQuestion, otherAnswer.myQuestion) &&
-                this.isCorrect == otherAnswer.isCorrect;
+
+        return equal;
     }
 }
