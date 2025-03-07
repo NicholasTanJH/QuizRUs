@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 

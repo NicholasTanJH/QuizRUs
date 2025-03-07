@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.content.DialogInterface;
 import android.content.Context;
@@ -31,8 +29,6 @@ import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.application.Main;
-import comp3350.quizrus.persistence.hsqldb.DatabaseManager;
-import android.content.SharedPreferences;
 
 public class UserLoginActivity extends AppCompatActivity {
     TextInputEditText textInputEditTextUsername;
