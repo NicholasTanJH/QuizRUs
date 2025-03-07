@@ -29,217 +29,224 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:id="@+id/main"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="30dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
-        <TextView
-            android:id="@+id/quizMakeTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Add questions:"
-            android:textColor="@color/colorWhite"
-            android:textSize="40dp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Question"
+        <LinearLayout
+            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/login_text_input_layout_background"
-            android:hint="Question..."
-            android:inputType="text"
-            android:maxLength="25"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColorHint="@color/colorHint"
-            android:textSize="40sp">
+            android:layout_marginHorizontal="30dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/QuestionInput"
+            <TextView
+                android:id="@+id/quizMakeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Add questions:"
+                android:textColor="@color/colorWhite"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/Question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:backgroundTint="@android:color/white"
-                android:imeOptions="actionDone"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_text_input_layout_background"
+                android:gravity="center"
+                android:hint="Question..."
                 android:inputType="text"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="40sp" />
+                android:textColorHint="@color/colorHint"
+                android:textSize="40sp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/QuestionInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/CorrectAnswerHolder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/login_text_input_layout_background"
-            android:hint="Correct Answer..."
-            android:inputType="text"
-            android:maxLength="25"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColorHint="@color/colorHint"
-            android:textSize="40sp">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/CorrectAnswerInput"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/CorrectAnswerHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:backgroundTint="@android:color/white"
-                android:imeOptions="actionDone"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_text_input_layout_background"
+                android:gravity="center"
+                android:hint="Correct Answer..."
                 android:inputType="text"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="40sp" />
+                android:textColorHint="@color/colorHint"
+                android:textSize="40sp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/CorrectAnswerInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/WrongAnswerHolderOne"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/login_text_input_layout_background"
-            android:hint="Wrong Answer..."
-            android:inputType="text"
-            android:maxLength="25"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColorHint="@color/colorHint"
-            android:textSize="40sp">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/WrongAnswerInputOne"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/WrongAnswerHolderOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:backgroundTint="@android:color/white"
-                android:imeOptions="actionDone"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_text_input_layout_background"
+                android:gravity="center"
+                android:hint="Wrong Answer..."
                 android:inputType="text"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="40sp" />
+                android:textColorHint="@color/colorHint"
+                android:textSize="40sp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/WrongAnswerInputOne"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/WrongAnswerHolderTwo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/login_text_input_layout_background"
-            android:hint="Wrong Answer..."
-            android:inputType="text"
-            android:maxLength="25"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColorHint="@color/colorHint"
-            android:textSize="40sp">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/WrongAnswerInputTwo"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/WrongAnswerHolderTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:backgroundTint="@android:color/white"
-                android:imeOptions="actionDone"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_text_input_layout_background"
+                android:gravity="center"
+                android:hint="Wrong Answer..."
                 android:inputType="text"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="40sp" />
+                android:textColorHint="@color/colorHint"
+                android:textSize="40sp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/WrongAnswerInputTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/WrongAnswerHolderThree"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/login_text_input_layout_background"
-            android:hint="Wrong Answer..."
-            android:inputType="text"
-            android:maxLength="25"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColorHint="@color/colorHint"
-            android:textSize="40sp">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/WrongAnswerInputThree"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/WrongAnswerHolderThree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:backgroundTint="@android:color/white"
-                android:imeOptions="actionDone"
+                android:layout_weight="1"
+                android:background="@drawable/login_text_input_layout_background"
+                android:gravity="center"
+                android:hint="Wrong Answer..."
                 android:inputType="text"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorHint"
+                android:textSize="40sp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/WrongAnswerInputThree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:backgroundTint="@android:color/white"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_button_background"
+                android:gravity="center"
+                android:text="Save Question"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
                 android:textSize="40sp" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/buttonDoneEditQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="200dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_button_background"
+                android:gravity="center"
+                android:text="Done"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="40sp" />
 
-
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/login_button_background"
-            android:text="Save Question"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="40sp" />
-
-        <Button
-            android:id="@+id/buttonDoneEditQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/login_button_background"
-            android:text="Done"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="40sp" />
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
