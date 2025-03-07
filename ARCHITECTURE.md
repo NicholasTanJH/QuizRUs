@@ -26,12 +26,16 @@
   - [Persistence Layer](#persistence-layer)
     - [UserPersistence](#userpersistence)
       - [UserPersistenceStub](#userpersistencestub)
+      - [UserPersistenceHSQLDB](#userpersistencehsqldb)
     - [QuizPersistence](#quizpersistence)
       - [QuizPersistenceStub](#quizpersistencestub)
+      - [QuizPersistenceHSQLDB](#quizpersistencehsqldb)
     - [QuestionPersistence](#questionpersistence)
       - [QuestionPersistenceStub](#questionpersistencestub)
+      - [QuestionPersistenceHSQLDB](#questionpersistencehsqldb)
     - [AnswerPersistence](#answerpersistence)
       - [AnswerPersistenceStub](#answerpersistencestub)
+      - [AnswerPersistenceHSQLDB](#answerpersistencehsqldb)
   - [Architecure Diagram](#architecure-diagram)
   - [ER Diagram](#er-diagram)
 
@@ -114,11 +118,17 @@ Handles user-related data operations, such as registration, login, and profile m
 #### UserPersistenceStub
 A mock implementation for testing `User` operations.
 
+#### UserPersistenceHSQLDB
+A class that implements `UserPersistence` and handles SQL-based database operations for the `User` entity using HSQLDB.
+
 ### QuizPersistence
 Manages quiz-related storage.
 
 #### QuizPersistenceStub
 A mock implementation for testing `Quiz` operations.
+
+#### QuizPersistenceHSQLDB
+A class that implements `QuizPersistence` and handles SQL-based database operations for the `Quiz` entity using HSQLDB.
 
 ### QuestionPersistence
 Manages question-related storage.
@@ -126,11 +136,17 @@ Manages question-related storage.
 #### QuestionPersistenceStub
 A mock implementation for testing `Question` operations.
 
+#### QuestionPersistenceHSQLDB
+A class that implements `QuestionPersistence` and handles SQL-based database operations for the `Question` entity using HSQLDB.
+
 ### AnswerPersistence
 Manages answer-related storage.
 
 #### AnswerPersistenceStub
 A mock implementation for testing `Answer` operations.
+
+#### AnswerPersistenceHSQLDB
+A class that implements `AnswerPersistence` and handles SQL-based database operations for the `Answer` entity using HSQLDB.
 
 ## Architecure Diagram
 
