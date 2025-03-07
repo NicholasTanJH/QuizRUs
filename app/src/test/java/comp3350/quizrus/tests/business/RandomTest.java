@@ -10,11 +10,11 @@ import comp3350.quizrus.business.Random;
 
 public class RandomTest {
     @Test
-    public void testRandom(){
+    public void testRandom() {
         System.out.println("\nStarting RandomTest");
         List<Integer> intList1 = new ArrayList<>();
-        //add it from 1 to 100, so the list will be [1,2,3,...,100]
-        for(int i = 0; i < 100; i++){
+        // Add it from 1 to 100, so the list will be [1,2,3,...,100]
+        for (int i = 0; i < 100; i++) {
             intList1.add(i);
         }
         System.out.println("Testing if it shuffle");
@@ -37,11 +37,10 @@ public class RandomTest {
         System.out.println();
     }
 
-
-    private boolean isSorted(List<Integer> integerList){
+    private boolean isSorted(List<Integer> integerList) {
         boolean isSorted = true;
-        for(int i = 0; i < integerList.size(); i++){
-            if(integerList.get(i) != i){
+        for (int i = 0; i < integerList.size(); i++) {
+            if (integerList.get(i) != i) {
                 isSorted = false;
             }
         }

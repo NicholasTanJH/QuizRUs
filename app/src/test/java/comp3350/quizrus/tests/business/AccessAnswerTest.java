@@ -10,11 +10,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-
 public class AccessAnswerTest {
 
     @Test
-    public void testGetCorrectAnswerPosition(){
+    public void testGetCorrectAnswerPosition() {
         List<Answer> answerList = new ArrayList<>();
         AccessAnswers test = new AccessAnswers();
         Answer answer1 = new Answer(0, "Answer A", true, null);

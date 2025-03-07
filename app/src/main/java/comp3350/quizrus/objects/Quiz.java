@@ -10,60 +10,52 @@ public class Quiz implements Serializable {
 
     private final int timeLimit;
 
-    public Quiz(final int newQuizID, final String newTitle, final User newUser)
-    {
+    public Quiz(final int newQuizID, final String newTitle, final User newUser) {
         this.quizID = newQuizID;
         this.myUser = newUser;
         this.title = newTitle;
         this.timeLimit = 0;
     }
 
-    public Quiz(final String newTitle, final User newUser, final int newtimeLimit)
-    {
+    public Quiz(final String newTitle, final User newUser, final int newtimeLimit) {
         this.quizID = -1;
         this.myUser = newUser;
         this.title = newTitle;
         this.timeLimit = newtimeLimit;
     }
 
-    public Quiz(final int newQuizID, final String newTitle, final User newUser, final int newtimeLimit)
-    {
+    public Quiz(final int newQuizID, final String newTitle, final User newUser, final int newtimeLimit) {
         this.quizID = newQuizID;
         this.myUser = newUser;
         this.title = newTitle;
         this.timeLimit = newtimeLimit;
     }
 
-    public int getQuizID()
-    {
+    public int getQuizID() {
         return this.quizID;
     }
 
-    public void setQuizID(int newID){
+    public void setQuizID(int newID) {
         this.quizID = newID;
     }
 
-    public User getUser()
-    {
+    public User getUser() {
         return this.myUser;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return this.title;
     }
-    
+
     public int getTimeLimit() {
         return this.timeLimit;
     }
 
     @Override
-    public boolean equals(Object other)
-    {
+    public boolean equals(Object other) {
         boolean equal = false;
 
-        if(other instanceof Quiz)
-        {
+        if (other instanceof Quiz) {
             final Quiz otherQuiz = (Quiz) other;
             equal = Objects.equals(this.quizID, otherQuiz.quizID);
         }

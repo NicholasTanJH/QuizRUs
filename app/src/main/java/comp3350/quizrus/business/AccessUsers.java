@@ -2,13 +2,10 @@ package comp3350.quizrus.business;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
-
 
 import comp3350.quizrus.application.Services;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.persistence.UserPersistence;
-
 
 public class AccessUsers {
     private UserPersistence userPersistence;
@@ -41,12 +38,9 @@ public class AccessUsers {
         User newUser = new User(username.toLowerCase(), password, firstname, lastname);
 
         int userID = userPersistence.insertUser(newUser);
-        if(userID != -1)
-        {
+        if (userID != -1) {
             newUser.setUserID(userID);
-        }
-        else
-        {
+        } else {
             return null;
         }
 
@@ -55,8 +49,7 @@ public class AccessUsers {
 
     public User loginUser(final String username, final String password) {
         User user = userPersistence.getUserByUsername(username);
-        if(user != null && password.equals(user.getPassword()))
-        {
+        if (user != null && password.equals(user.getPassword())) {
             return user;
         }
         return null;
@@ -67,12 +60,10 @@ public class AccessUsers {
         String errorMessage = "";
         User user = userPersistence.getUserByUsername(username);
         boolean found = (user != null);
-        if(found)
-        {
+        if (found) {
             errorMessage += "\n \t - Username is taken";
         }
-        if(username.isEmpty() || username.length() > 20)
-        {
+        if (username.isEmpty() || username.length() > 20) {
             errorMessage += "\n \t - 20 characters or shorter";
         }
         return errorMessage;

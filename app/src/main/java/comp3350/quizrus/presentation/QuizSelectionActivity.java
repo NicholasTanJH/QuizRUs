@@ -18,8 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 
-import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.List;
 
 public class QuizSelectionActivity extends Activity {
@@ -94,8 +92,7 @@ public class QuizSelectionActivity extends Activity {
         createQuizButton.setOnClickListener(button -> startCreatingNewQuiz());
     }
 
-    private void startCreatingNewQuiz()
-    {
+    private void startCreatingNewQuiz() {
         Intent intent = new Intent(this, QuizCreationActivity.class);
         intent.putExtra("loggedInUser", currUser);
         this.startActivity(intent);

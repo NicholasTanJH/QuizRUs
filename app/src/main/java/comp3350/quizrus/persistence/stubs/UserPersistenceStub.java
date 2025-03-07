@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import comp3350.quizrus.objects.User;
-import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.UserPersistence;
 
 public class UserPersistenceStub implements UserPersistence {
@@ -48,15 +47,6 @@ public class UserPersistenceStub implements UserPersistence {
 
     @Override
     public int insertUser(User newUser) {
-        // Check that the user isn't already in our list.
-//        for (User user : this.users) {
-//            if (user.getUsername().equals(newUser.getUsername())) {
-//                throw new PersistenceException(
-//                        new Exception("A user with username " + newUser.getUsername() + " already exists."));
-//            }
-//        }
-
-        // Add the user.
         newUser.setUserID(this.numUsers);
         this.users.add(newUser);
         this.numUsers++;
