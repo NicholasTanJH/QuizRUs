@@ -27,19 +27,19 @@ public class AnswerPersistenceStub implements AnswerPersistence {
         Quiz quiz2 = new Quiz(1, "Celebrity Partners", user2, 120);
 
         // List of questions for quiz 1.
-        Question question1 = new Question(1, "Which of these countries have white in their flag?", quiz1,
+        Question question1 = new Question(0, "Which of these countries have white in their flag?", quiz1,
                 "MULTIPLE_CHOICE");
-        Question question2 = new Question(2, "In which country was the first flag created?", quiz1, "MULTIPLE_CHOICE");
-        Question question3 = new Question(3, "The flag of Canada is commonly known as:", quiz1, "MULTIPLE_CHOICE");
-        Question question4 = new Question(4, "How many stars are there on the flag of the United States of America?",
+        Question question2 = new Question(1, "In which country was the first flag created?", quiz1, "MULTIPLE_CHOICE");
+        Question question3 = new Question(2, "The flag of Canada is commonly known as:", quiz1, "MULTIPLE_CHOICE");
+        Question question4 = new Question(3, "How many stars are there on the flag of the United States of America?",
                 quiz1, "MULTIPLE_CHOICE");
-        Question question5 = new Question(5,
+        Question question5 = new Question(4,
                 "The flag of Australia contains which other country’s flag in its top left corner?", quiz1,
                 "MULTIPLE_CHOICE");
 
         // List of questions for quiz 2.
-        Question question6 = new Question(6, "Who is the partner of J.K. Rowling?", quiz2, "MULTIPLE_CHOICE");
-        Question question7 = new Question(7, "How many partners did Drake date in 2024?", quiz2, "MULTIPLE_CHOICE");
+        Question question6 = new Question(5, "Who is the partner of J.K. Rowling?", quiz2, "MULTIPLE_CHOICE");
+        Question question7 = new Question(6, "How many partners did Drake date in 2024?", quiz2, "MULTIPLE_CHOICE");
 
         // Answers for quiz 1 question 1.
         insertAnswer(new Answer(0, "Morocco", false, question1), question1);
