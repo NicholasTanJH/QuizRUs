@@ -25,33 +25,29 @@ public class AccessAnswers {
         this.answerPersistence = answerPersistence;
     }
 
-    public List<Answer> getAnswers(final Question question){
+    public List<Answer> getAnswers(final Question question) {
         answers = answerPersistence.getAnswersForQuestions(question);
         return answers;
     }
 
-    //find the position of the correct answer in the list
-    public int getCorrectAnswerPosition(List<Answer> answers){
+    public int getCorrectAnswerPosition(List<Answer> answers) {
+        // Find the position of the correct answer in the list.
         int correctAnswerPosition = -1;
-        for(int position = 0; position < answers.size(); position++){
-            if(answers.get(position).isCorrect()){
+        for (int position = 0; position < answers.size(); position++) {
+            if (answers.get(position).isCorrect()) {
                 correctAnswerPosition = position;
             }
         }
         return correctAnswerPosition;
     }
 
-    public Answer createAnswer(final String answerText, final Question question, final boolean isCorrect)
-    {
+    public Answer createAnswer(final String answerText, final Question question, final boolean isCorrect) {
         Answer newAnswer = new Answer(answerText, isCorrect, question);
 
         int answerID = answerPersistence.insertAnswer(newAnswer, question);
-        if(answerID != -1)
-        {
+        if (answerID != -1) {
             newAnswer.setAnswerID(answerID);
-        }
-        else
-        {
+        } else {
             return null;
         }
 

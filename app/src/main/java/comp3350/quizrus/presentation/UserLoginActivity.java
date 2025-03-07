@@ -36,7 +36,6 @@ public class UserLoginActivity extends AppCompatActivity {
     Button buttonLogIn;
     Button buttonSignUp;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,20 +66,20 @@ public class UserLoginActivity extends AppCompatActivity {
         String logInUsername = textInputEditTextUsername.getText().toString();
         String logInPassword = textInputEditTextPassword.getText().toString();
 
-        if(logInUsername.isEmpty()||logInPassword.isEmpty()){
+        if (logInUsername.isEmpty() || logInPassword.isEmpty()) {
             setAlertMessage("Failed to Log In", "Login information cannot be empty");
-        }else{
+        } else {
             AccessUsers accessUsers = new AccessUsers();
-            User user = accessUsers.loginUser(logInUsername,logInPassword);
+            User user = accessUsers.loginUser(logInUsername, logInPassword);
             boolean isLoginInfoCorrect = user != null;
             logInAnimation(isLoginInfoCorrect, user);
         }
     }
 
-    //animation for changing the button text when registering
+    // animation for changing the button text when registering
     private void logInAnimation(boolean isLoginInfoCorrect, User user) {
         buttonLogIn.setText("Logging In...");
-        if(isLoginInfoCorrect){
+        if (isLoginInfoCorrect) {
             new Handler().postDelayed(() -> {
                 buttonLogIn.setText("✓");
             }, 1000);
@@ -90,7 +89,7 @@ public class UserLoginActivity extends AppCompatActivity {
                 this.startActivity(intent);
                 finish();
             }, 1500);
-        }else{
+        } else {
             new Handler().postDelayed(() -> {
                 setAlertMessage("Failed to Log In", "Incorrect username or password. Please try again.");
                 buttonLogIn.setText("Log In");
@@ -101,7 +100,8 @@ public class UserLoginActivity extends AppCompatActivity {
     private void setAlertMessage(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         SpannableString spannableMessage = new SpannableString(alertMessage);
-        spannableMessage.setSpan(new AbsoluteSizeSpan(30, true), 0, alertMessage.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableMessage.setSpan(new AbsoluteSizeSpan(30, true), 0, alertMessage.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         builder.setTitle(alertTitle)
                 .setMessage(spannableMessage)

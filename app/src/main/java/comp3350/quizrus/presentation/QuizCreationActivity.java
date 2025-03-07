@@ -49,38 +49,27 @@ public class QuizCreationActivity extends AppCompatActivity {
             quizNameEditText = findViewById(R.id.QuizNameInput);
             timerAmountEditText = findViewById(R.id.TimerInput);
 
-            buttonBack.setOnClickListener(button ->
-                    finish()
-            );
+            buttonBack.setOnClickListener(button -> finish());
 
-            editQuestionButton.setOnClickListener(button ->
-                    setupQuizInfo()
-            );
+            editQuestionButton.setOnClickListener(button -> setupQuizInfo());
 
             return insets;
         });
 
     }
 
-
-    private void setupQuizInfo()
-    {
+    private void setupQuizInfo() {
         Intent intent;
         String quizName = quizNameEditText.getText().toString();
         String timerString = timerAmountEditText.getText().toString();
 
         int timerAmount;
 
-        if(quizName.isEmpty())
-        {
+        if (quizName.isEmpty()) {
             setAlertMessage("No Quiz Name", "Please enter a quiz name");
-        }
-        else if(timerString.isEmpty())
-        {
+        } else if (timerString.isEmpty()) {
             setAlertMessage("Not a number", "Please enter a number into the timer field");
-        }
-        else
-        {
+        } else {
             timerAmount = Integer.parseInt(timerString);
             intent = new Intent(this, QuizModifyQuestionActivity.class);
 
@@ -96,7 +85,8 @@ public class QuizCreationActivity extends AppCompatActivity {
     private void setAlertMessage(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         SpannableString spannableMessage = new SpannableString(alertMessage);
-        spannableMessage.setSpan(new AbsoluteSizeSpan(30, true), 0, alertMessage.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableMessage.setSpan(new AbsoluteSizeSpan(30, true), 0, alertMessage.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         builder.setTitle(alertTitle)
                 .setMessage(spannableMessage)

@@ -64,7 +64,7 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
         // start new activity page when the quiz item is pressed
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, MCQuestionActivity.class);
-            intent.putExtra("currQuiz", currQuiz); //pass the Quiz object that is pressed
+            intent.putExtra("currQuiz", currQuiz); // pass the Quiz object that is pressed
             context.startActivity(intent);
         });
     }

@@ -69,37 +69,28 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
             quizName = intent.getStringExtra("quizName");
             timerAmount = intent.getIntExtra("timerAmount", 0);
 
-            saveQuestionButton.setOnClickListener(button ->
-                setupQuestion()
-            );
+            saveQuestionButton.setOnClickListener(button -> setupQuestion());
 
-            doneQuestionsButton.setOnClickListener(button ->
-                setupQuestions()
-            );
+            doneQuestionsButton.setOnClickListener(button -> setupQuestions());
 
             return insets;
         });
     }
 
-    private void setupQuestion()
-    {
-        //add the questions to the list
+    private void setupQuestion() {
+        // add the questions to the list
         String question = questionEditText.getText().toString();
         String correctAnswer = correctAnswerEditText.getText().toString();
         String wrongAnswerOne = wrongAnswerOneEditText.getText().toString();
         String wrongAnswerTwo = wrongAnswerTwoEditText.getText().toString();
         String wrongAnswerThree = wrongAnswerThreeEditText.getText().toString();
 
-        if(question.isEmpty())
-        {
+        if (question.isEmpty()) {
             setAlertMessage("No question entered", "Sorry, please enter a question for this quiz.");
-        }
-        else if(correctAnswer.isEmpty() || wrongAnswerOne.isEmpty() || wrongAnswerTwo.isEmpty() || wrongAnswerThree.isEmpty())
-        {
+        } else if (correctAnswer.isEmpty() || wrongAnswerOne.isEmpty() || wrongAnswerTwo.isEmpty()
+                || wrongAnswerThree.isEmpty()) {
             setAlertMessage("Missing answer", "Sorry, please enter all answers to this question.");
-        }
-        else
-        {
+        } else {
             String[] questionAndAnswers = new String[5];
 
             questionAndAnswers[0] = question;
@@ -114,8 +105,8 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
         }
     }
 
-    //animation for button when question is saved successfully
-    //clear out all the edit text
+    // animation for button when question is saved successfully
+    // clear out all the edit text
     private void reset() {
         questionEditText.setText("");
         correctAnswerEditText.setText("");
@@ -129,23 +120,18 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
         }, 1000);
     }
 
-    private void setupQuestions()
-    {
-        if(newQuestionAndAnswersList.isEmpty())
-        {
+    private void setupQuestions() {
+        if (newQuestionAndAnswersList.isEmpty()) {
             setAlertMessage("No questions entered", "Sorry, please enter at least one question with answers.");
-        }
-        else
-        {
-            //make new quiz
+        } else {
+            // make new quiz
             AccessQuizzes accessQuizzes = new AccessQuizzes();
             Quiz newQuiz = accessQuizzes.createQuiz(currUser, quizName, timerAmount);
 
-            //make new questions and answers
+            // make new questions and answers
             AccessQuestions accessQuestions = new AccessQuestions();
             AccessAnswers accessAnswers = new AccessAnswers();
-            for(String[] questionAndAnswers : newQuestionAndAnswersList)
-            {
+            for (String[] questionAndAnswers : newQuestionAndAnswersList) {
                 String newQuestionName = questionAndAnswers[0];
                 String newCorrectAnswer = questionAndAnswers[1];
                 String newWrongAnswerOne = questionAndAnswers[2];
@@ -159,7 +145,7 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
                 accessAnswers.createAnswer(newWrongAnswerThree, newQuestion, false);
             }
 
-            //return to QuizSelection page
+            // return to QuizSelection page
             doneQuestionsButton.setText("✓");
             new Handler().postDelayed(() -> {
                 finish();
@@ -171,7 +157,8 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
     private void setAlertMessage(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         SpannableString spannableMessage = new SpannableString(alertMessage);
-        spannableMessage.setSpan(new AbsoluteSizeSpan(30, true), 0, alertMessage.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableMessage.setSpan(new AbsoluteSizeSpan(30, true), 0, alertMessage.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         builder.setTitle(alertTitle)
                 .setMessage(spannableMessage)

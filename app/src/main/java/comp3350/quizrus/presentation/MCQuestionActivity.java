@@ -85,7 +85,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         quizzingMusic.release();
     }
 
-    //get the Quiz object that is pressed and set up the page
+    // get the Quiz object that is pressed and set up the page
     private void setUpQuestions() {
         AccessQuestions accessQuestions = new AccessQuestions();
         Intent intent = getIntent();
@@ -262,9 +262,9 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     private void putRightOrWrongSound(boolean isRight) {
         MediaPlayer mediaPlayer;
-        if(isRight){
+        if (isRight) {
             mediaPlayer = MediaPlayer.create(this, R.raw.yay);
-        }else{
+        } else {
             mediaPlayer = MediaPlayer.create(this, R.raw.wrong);
         }
 
@@ -286,7 +286,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         }
     }
 
-    //Responsible for the count down timer, and go back to main page when time's up
+    // Responsible for the count down timer, and go back to main page when time's up
     private void startTimer() {
         TextView timerTV = findViewById(R.id.timerTV);
         timeLeftInMillis = quiz.getTimeLimit() * 1000L;

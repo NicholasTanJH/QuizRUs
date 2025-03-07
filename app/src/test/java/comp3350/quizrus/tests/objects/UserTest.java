@@ -8,8 +8,7 @@ import static org.junit.Assert.*;
 public class UserTest {
 
     @Test
-    public void testUser()
-    {
+    public void testUser() {
         User user1;
         System.out.println("\nStarting UserTest");
 
@@ -33,7 +32,6 @@ public class UserTest {
 
         System.out.println("Finished testUser");
         System.out.println();
-
 
     }
 }
