@@ -58,6 +58,7 @@ public class MCQuestionActivity extends AppCompatActivity {
     private long timeLeftInMillis;
 
     private MediaPlayer quizzingMusic;
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +82,16 @@ public class MCQuestionActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        quizzingMusic.stop();
-        quizzingMusic.release();
+        if (quizzingMusic != null) {
+            if (quizzingMusic.isPlaying()) {
+                quizzingMusic.stop();
+            }
+            quizzingMusic.release();
+            quizzingMusic = null;
+        }
+
+        //stop timer
+        countDownTimer.cancel();
     }
 
     // get the Quiz object that is pressed and set up the page
@@ -291,7 +300,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         TextView timerTV = findViewById(R.id.timerTV);
         timeLeftInMillis = quiz.getTimeLimit() * 1000L;
 
-        new CountDownTimer(timeLeftInMillis, 1000) { // Tick every second
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) { // Tick every second
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;
                 int seconds = (int) (timeLeftInMillis / 1000);
@@ -302,7 +311,7 @@ public class MCQuestionActivity extends AppCompatActivity {
                 timerTV.setText("Time's up!");
                 startFlashingEffect(timerTV);
                 setProceedButtonToInvisibleMode();
-                setSound();
+                startTimesUpMusic();
 
                 // Finish activity after 2 seconds (2000ms)
                 new Handler().postDelayed(new Runnable() {
@@ -315,16 +324,16 @@ public class MCQuestionActivity extends AppCompatActivity {
         }.start();
     }
 
+    private void startTimesUpMusic() {
+        MediaPlayer timesUpMusic = MediaPlayer.create(this, R.raw.rooster);
+        timesUpMusic.start();
+    }
+
     private void startFlashingEffect(TextView timerTV) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(timerTV, "alpha", 1f, 0f);
         animator.setDuration(500); // 500ms per blink
         animator.setRepeatMode(ValueAnimator.REVERSE);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.start();
-    }
-
-    private void setSound() {
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.rooster);
-        mediaPlayer.start();
     }
 }
