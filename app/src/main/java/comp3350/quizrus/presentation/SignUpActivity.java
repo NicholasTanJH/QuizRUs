@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -48,13 +47,9 @@ public class SignUpActivity extends AppCompatActivity {
             buttonCreateAccount = findViewById(R.id.buttonCreateAccount);
             buttonBack = findViewById(R.id.buttonBack);
 
-            buttonCreateAccount.setOnClickListener(button ->
-                    checkSignInInfo()
-            );
+            buttonCreateAccount.setOnClickListener(button -> checkSignInInfo());
 
-            buttonBack.setOnClickListener(button ->
-                    finish()
-            );
+            buttonBack.setOnClickListener(button -> finish());
             return insets;
         });
     }
@@ -89,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (!isValidFirstName) {
             setAlertMessage("Invalid First Name", "Please fill in your first name.");
             return;
-        }else if (!isValidLastName) {
+        } else if (!isValidLastName) {
             setAlertMessage("Invalid Last Name", "Please fill in your last name.");
             return;
         } else {
@@ -98,7 +93,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    //animation for changing the button text when registering
+    // animation for changing the button text when registering
     private void successfulSignUpAnimation() {
         buttonCreateAccount.setText("Registering...");
         new Handler().postDelayed(() -> {
@@ -112,7 +107,8 @@ public class SignUpActivity extends AppCompatActivity {
     private void setAlertMessage(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         SpannableString spannableMessage = new SpannableString(alertMessage);
-        spannableMessage.setSpan(new AbsoluteSizeSpan(30, true), 0, alertMessage.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableMessage.setSpan(new AbsoluteSizeSpan(30, true), 0, alertMessage.length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         builder.setTitle(alertTitle)
                 .setMessage(spannableMessage)

@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/timer_background"
+        android:background="@drawable/white_boarder_background"
         android:gravity="center"
         android:paddingHorizontal="50dp"
         android:text="100 s"

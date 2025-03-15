@@ -8,23 +8,20 @@ import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.QuizPersistence;
 
-
 public class AccessQuizzes {
     private QuizPersistence quizPersistence;
     private List<Quiz> quizzes;
     private Quiz quiz;
     private int currentQuiz;
 
-    public AccessQuizzes()
-    {
+    public AccessQuizzes() {
         quizPersistence = Services.getQuizPersistence();
         quizzes = null;
         quiz = null;
         currentQuiz = 0;
     }
 
-    public AccessQuizzes(final QuizPersistence quizPersistence)
-    {
+    public AccessQuizzes(final QuizPersistence quizPersistence) {
         this();
         this.quizPersistence = quizPersistence;
     }
@@ -33,23 +30,18 @@ public class AccessQuizzes {
         return quizPersistence.getQuizByID(quizID);
     }
 
-    public List<Quiz> getQuizzes()
-    {
+    public List<Quiz> getQuizzes() {
         quizzes = quizPersistence.getAllQuizzes();
         return Collections.unmodifiableList(quizzes);
     }
 
-    public Quiz createQuiz(final User user, final String title, final int timer)
-    {
+    public Quiz createQuiz(final User user, final String title, final int timer) {
         Quiz newQuiz = new Quiz(title, user, timer);
 
         int quizID = quizPersistence.insertQuiz(newQuiz, user);
-        if(quizID != -1)
-        {
+        if (quizID != -1) {
             newQuiz.setQuizID(quizID);
-        }
-        else
-        {
+        } else {
             return null;
         }
 

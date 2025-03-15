@@ -14,7 +14,6 @@ import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
-import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuizPersistence;
 import comp3350.quizrus.persistence.UserPersistence;
 import comp3350.quizrus.persistence.stubs.QuizPersistenceStub;
@@ -30,13 +29,11 @@ public class AccessQuizIT {
     public void setUp() throws IOException {
         this.tempDB = TestUtils.copyDB();
         UserPersistence userPersistence = Services.getUserPersistence();
-        if(userPersistence instanceof UserPersistenceStub)
-        {
+        if (userPersistence instanceof UserPersistenceStub) {
             userPersistence = new UserPersistenceStub();
         }
         QuizPersistence quizPersistence = Services.getQuizPersistence();
-        if(quizPersistence instanceof QuizPersistenceStub)
-        {
+        if (quizPersistence instanceof QuizPersistenceStub) {
             quizPersistence = new QuizPersistenceStub();
         }
         this.accessQuizzes = new AccessQuizzes(quizPersistence);

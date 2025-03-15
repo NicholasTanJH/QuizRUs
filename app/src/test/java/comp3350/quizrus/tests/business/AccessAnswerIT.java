@@ -39,23 +39,19 @@ public class AccessAnswerIT {
     public void setUp() throws IOException {
         this.tempDB = TestUtils.copyDB();
         UserPersistence userPersistence = Services.getUserPersistence();
-        if(userPersistence instanceof UserPersistenceStub)
-        {
+        if (userPersistence instanceof UserPersistenceStub) {
             userPersistence = new UserPersistenceStub();
         }
         QuizPersistence quizPersistence = Services.getQuizPersistence();
-        if(quizPersistence instanceof QuizPersistenceStub)
-        {
+        if (quizPersistence instanceof QuizPersistenceStub) {
             quizPersistence = new QuizPersistenceStub();
         }
         QuestionPersistence questionPersistence = Services.getQuestionPersistence();
-        if(questionPersistence instanceof QuestionPersistenceStub)
-        {
+        if (questionPersistence instanceof QuestionPersistenceStub) {
             questionPersistence = new QuestionPersistenceStub();
         }
         AnswerPersistence answerPersistence = Services.getAnswerPersistence();
-        if(answerPersistence instanceof AnswerPersistenceStub)
-        {
+        if (answerPersistence instanceof AnswerPersistenceStub) {
             answerPersistence = new AnswerPersistenceStub();
         }
         this.accessQuizzes = new AccessQuizzes(quizPersistence);

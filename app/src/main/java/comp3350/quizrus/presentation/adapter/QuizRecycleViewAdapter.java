@@ -15,7 +15,7 @@ import java.util.List;
 
 import comp3350.quizrus.R;
 import comp3350.quizrus.objects.Quiz;
-import comp3350.quizrus.presentation.MCQuestionActivity;
+import comp3350.quizrus.presentation.PreviewActivity;
 
 public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleViewAdapter.MyViewHolder> {
     Context context;
@@ -63,8 +63,8 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
 
         // start new activity page when the quiz item is pressed
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(context, MCQuestionActivity.class);
-            intent.putExtra("currQuiz", currQuiz); //pass the Quiz object that is pressed
+            Intent intent = new Intent(context, PreviewActivity.class);
+            intent.putExtra("currQuiz", currQuiz); // pass the Quiz object that is pressed
             context.startActivity(intent);
         });
     }

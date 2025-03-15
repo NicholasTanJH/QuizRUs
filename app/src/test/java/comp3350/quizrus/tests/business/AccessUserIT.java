@@ -12,7 +12,6 @@ import static org.junit.Assert.*;
 import comp3350.quizrus.application.Services;
 import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.User;
-import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.UserPersistence;
 import comp3350.quizrus.persistence.stubs.UserPersistenceStub;
 import comp3350.quizrus.tests.utils.TestUtils;
@@ -25,8 +24,7 @@ public class AccessUserIT {
     public void setUp() throws IOException {
         this.tempDB = TestUtils.copyDB();
         UserPersistence userPersistence = Services.getUserPersistence();
-        if(userPersistence instanceof UserPersistenceStub)
-        {
+        if (userPersistence instanceof UserPersistenceStub) {
             userPersistence = new UserPersistenceStub();
         }
         this.accessUsers = new AccessUsers(userPersistence);

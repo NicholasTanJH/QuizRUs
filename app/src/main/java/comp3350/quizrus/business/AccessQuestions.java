@@ -7,7 +7,6 @@ import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.persistence.QuestionPersistence;
 
-import comp3350.quizrus.objects.Quiz;
 public class AccessQuestions {
     private QuestionPersistence questionPersistence;
     private List<Question> questions;
@@ -35,17 +34,13 @@ public class AccessQuestions {
         return questions;
     }
 
-    public Question createQuestion(final Quiz quiz, final String questionText, final String questionType)
-    {
+    public Question createQuestion(final Quiz quiz, final String questionText, final String questionType) {
         Question newQuestion = new Question(questionText, quiz, questionType);
 
         int questionID = questionPersistence.insertQuestion(newQuestion, quiz);
-        if(questionID != -1)
-        {
+        if (questionID != -1) {
             newQuestion.setQuestionID(questionID);
-        }
-        else
-        {
+        } else {
             return null;
         }
 

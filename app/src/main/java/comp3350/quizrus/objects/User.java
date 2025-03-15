@@ -11,8 +11,7 @@ public class User implements Serializable {
     private final String firstname;
     private final String lastname;
 
-    public User(final int newID, final String newUsername, final String newPassword)
-    {
+    public User(final int newID, final String newUsername, final String newPassword) {
         this.userID = newID;
         this.username = newUsername;
         this.password = newPassword;
@@ -20,8 +19,8 @@ public class User implements Serializable {
         this.lastname = "";
     }
 
-    public User(final String newUsername, final String newPassword, final String newFirstname, final String newLastname)
-    {
+    public User(final String newUsername, final String newPassword, final String newFirstname,
+            final String newLastname) {
         this.userID = -1;
         this.username = newUsername;
         this.password = newPassword;
@@ -29,8 +28,8 @@ public class User implements Serializable {
         this.lastname = newLastname;
     }
 
-    public User(final int newID, final String newUsername, final String newPassword, final String newFirstname, final String newLastname)
-    {
+    public User(final int newID, final String newUsername, final String newPassword, final String newFirstname,
+            final String newLastname) {
         this.userID = newID;
         this.username = newUsername;
         this.password = newPassword;
@@ -38,42 +37,35 @@ public class User implements Serializable {
         this.lastname = newLastname;
     }
 
-    public int getUserID()
-    {
+    public int getUserID() {
         return this.userID;
     }
 
-    public void setUserID(int newID){
+    public void setUserID(int newID) {
         this.userID = newID;
     }
 
-    public String getUsername()
-    {
+    public String getUsername() {
         return this.username;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return this.password;
     }
 
-    public String getFirstname()
-    {
+    public String getFirstname() {
         return this.firstname;
     }
 
-    public String getLastname()
-    {
+    public String getLastname() {
         return this.lastname;
     }
 
     @Override
-    public boolean equals(Object other)
-    {
+    public boolean equals(Object other) {
         boolean equal = false;
 
-        if(other instanceof User)
-        {
+        if (other instanceof User) {
             User otherUser = (User) other;
             equal = Objects.equals(this.userID, otherUser.userID);
         }

@@ -21,19 +21,19 @@ import comp3350.quizrus.tests.business.RandomTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-                UserTest.class,
-                QuizTest.class,
-                QuestionTest.class,
-                AnswerTest.class,
-                RandomTest.class,
-                AccessUserTest.class,
-                AccessQuizTest.class,
-                AccessQuestionTest.class,
-                AccessAnswerTest.class,
-                AccessAnswerIT.class,
-                AccessQuestionIT.class,
-                AccessQuizIT.class,
-                AccessUserIT.class
+        UserTest.class,
+        QuizTest.class,
+        QuestionTest.class,
+        AnswerTest.class,
+        RandomTest.class,
+        AccessUserTest.class,
+        AccessQuizTest.class,
+        AccessQuestionTest.class,
+        AccessAnswerTest.class,
+        AccessAnswerIT.class,
+        AccessQuestionIT.class,
+        AccessQuizIT.class,
+        AccessUserIT.class
 })
 public class AllTests {
 }

@@ -11,21 +11,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.content.SharedPreferences;
 import android.view.MenuItem;
-
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
@@ -101,8 +92,7 @@ public class QuizSelectionActivity extends Activity {
         createQuizButton.setOnClickListener(button -> startCreatingNewQuiz());
     }
 
-    private void startCreatingNewQuiz()
-    {
+    private void startCreatingNewQuiz() {
         Intent intent = new Intent(this, QuizCreationActivity.class);
         intent.putExtra("loggedInUser", currUser);
         this.startActivity(intent);
