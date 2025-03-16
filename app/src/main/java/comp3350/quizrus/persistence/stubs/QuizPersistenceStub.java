@@ -69,7 +69,7 @@ public class QuizPersistenceStub implements QuizPersistence {
         if (index >= 0) {
             Quiz deletedQuiz = this.quizzes.remove(index);
             if (deletedQuiz == null)
-                throw new PersistenceException(new Exception("Deleting quiz failed, no rows affected."));
+                throw new PersistenceException(new Exception("Deleting quiz failed, no quizzes were affected."));
         }
     }
 }

@@ -130,7 +130,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
             // Execute the query, then check that the quiz was deleted.
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows == 0) {
-                throw new SQLException("Deleting quiz failed, no rows affected.");
+                throw new SQLException("Deleting quiz failed, no quizzes were affected.");
             }
 
         } catch (SQLException e) {
