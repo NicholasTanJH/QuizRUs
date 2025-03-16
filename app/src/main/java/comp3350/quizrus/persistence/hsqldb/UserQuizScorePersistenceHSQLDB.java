@@ -47,7 +47,7 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
 
     @Override
     public int insertScore(User user, Quiz quiz, int score) {
-        int id = -1;
+        int userQuizScoreID = -1;
         String query = "INSERT INTO user_quiz_score (userID, quizID, score) VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseManager.connection();
@@ -71,8 +71,7 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
                 }
             }
 
-            // Return a positive number, indicating that insertion was a success.
-            return id;
+            return userQuizScoreID;
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }
