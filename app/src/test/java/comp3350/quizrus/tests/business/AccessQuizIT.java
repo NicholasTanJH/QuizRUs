@@ -109,4 +109,9 @@ public class AccessQuizIT {
         Quiz quiz2 = accessQuizzes.getQuiz(quiz1.getQuizID());
         assertNull(quiz2);
     }
+
+    @Test
+    public void testQuizOnDeleteCascade() {
+
+    }
 }
