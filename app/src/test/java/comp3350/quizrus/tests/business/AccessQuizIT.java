@@ -105,7 +105,8 @@ public class AccessQuizIT {
         assertNotEquals(-1, quiz1ID);
 
         // Delete the quiz.
-        accessQuizzes.deleteQuiz(quiz1);
+        boolean deleted = accessQuizzes.deleteQuiz(quiz1, user1);
+        assertFalse(deleted);
         Quiz quiz2 = accessQuizzes.getQuiz(quiz1.getQuizID());
         assertNull(quiz2);
     }

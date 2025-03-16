@@ -48,7 +48,15 @@ public class AccessQuizzes {
         return newQuiz;
     }
 
-    public void deleteQuiz(Quiz quiz) {
-        quizPersistence.deleteQuiz(quiz);
+    public boolean deleteQuiz(Quiz quiz, User user) {
+        if(quiz.getUser().getUserID() == user.getUserID())
+        {
+            quizPersistence.deleteQuiz(quiz);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
