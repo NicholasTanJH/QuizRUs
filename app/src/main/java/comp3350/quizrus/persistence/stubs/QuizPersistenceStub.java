@@ -6,6 +6,7 @@ import java.util.List;
 
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
+import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuizPersistence;
 
 public class QuizPersistenceStub implements QuizPersistence {
@@ -58,5 +59,17 @@ public class QuizPersistenceStub implements QuizPersistence {
         this.quizzes.add(quiz);
         this.numQuizzes++;
         return quiz.getQuizID();
+    }
+
+    @Override
+    public void deleteQuiz(Quiz quiz) {
+        int index;
+
+        index = this.quizzes.indexOf(quiz);
+        if (index >= 0) {
+            Quiz deletedQuiz = this.quizzes.remove(index);
+            if (deletedQuiz == null)
+                throw new PersistenceException(new Exception("Deleting quiz failed, no rows affected."));
+        }
     }
 }

@@ -13,4 +13,6 @@ public interface QuizPersistence {
     List<Quiz> getUserQuizzes(User user);
 
     int insertQuiz(Quiz quiz, User user);
+
+    void deleteQuiz(Quiz quiz);
 }

@@ -47,4 +47,8 @@ public class AccessQuizzes {
 
         return newQuiz;
     }
+
+    public void deleteQuiz(Quiz quiz) {
+        quizPersistence.deleteQuiz(quiz);
+    }
 }

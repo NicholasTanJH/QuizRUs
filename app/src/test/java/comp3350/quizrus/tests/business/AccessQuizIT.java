@@ -90,4 +90,23 @@ public class AccessQuizIT {
         // 2 Default quizzes
         assertEquals(2, quizzes.size());
     }
+
+    @Test
+    public void testDeleteQuiz() {
+        // Create a new user.
+        User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
+        assertNotNull(user1);
+        assertNotEquals(-1, user1.getUserID());
+
+        // Insert a quiz into the database.
+        Quiz quiz1 = accessQuizzes.createQuiz(user1, "What is the life expectancy in Canada?", 120);
+        assertNotNull(quiz1);
+        int quiz1ID = quiz1.getQuizID();
+        assertNotEquals(-1, quiz1ID);
+
+        // Delete the quiz.
+        accessQuizzes.deleteQuiz(quiz1);
+        Quiz quiz2 = accessQuizzes.getQuiz(quiz1.getQuizID());
+        assertNull(quiz2);
+    }
 }
