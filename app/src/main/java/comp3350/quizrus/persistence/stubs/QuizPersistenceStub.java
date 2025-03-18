@@ -53,6 +53,22 @@ public class QuizPersistenceStub implements QuizPersistence {
     }
 
     @Override
+    public List<Quiz> getQuizzesByTitle(String quizTitle)
+    {
+        List<Quiz> titledQuizzes = new ArrayList<>();
+
+        for(Quiz quiz : this.quizzes)
+        {
+            if(quiz.getTitle().toLowerCase().contains(quizTitle.toLowerCase()))
+            {
+                titledQuizzes.add(quiz);
+            }
+        }
+
+        return Collections.unmodifiableList(titledQuizzes);
+    }
+
+    @Override
     public int insertQuiz(Quiz quiz, User user) {
         quiz.setQuizID(this.numQuizzes);
         this.quizzes.add(quiz);
