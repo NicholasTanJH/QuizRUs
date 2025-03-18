@@ -2,7 +2,6 @@ package comp3350.quizrus.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -15,18 +14,24 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import comp3350.quizrus.R;
+import comp3350.quizrus.business.AccessQuestions;
+import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.presentation.adapter.LeaderboardRecycleViewAdapter;
-import comp3350.quizrus.presentation.adapter.QuizRecycleViewAdapter;
 
 public class PreviewActivity extends AppCompatActivity {
     Quiz currQuiz;
+    List<Question> questions;
     ImageButton buttonBack;
     TextView quizTitleTV;
     TextView creatorTV;
     TextView timeLimitTV;
+    TextView questionNumberTV;
     Button buttonStart;
+    int totalQuestionNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,9 @@ public class PreviewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         currQuiz = (Quiz) intent.getSerializableExtra("currQuiz");
+
+        AccessQuestions accessQuestions = new AccessQuestions();
+        questions = accessQuestions.getQuestions(currQuiz);
 
         //back button
         buttonBack = findViewById(R.id.buttonBack);
@@ -63,6 +71,12 @@ public class PreviewActivity extends AppCompatActivity {
         timeLimitTV = findViewById(R.id.timeLimitTextView);
         timeLimitTV.setText(timeLimitDisplayText);
 
+        //# of Questions
+        totalQuestionNumber = questions.size();
+        String questionNumberDisplayText = "No. of Question: " + totalQuestionNumber;
+        questionNumberTV = findViewById(R.id.questionNumberTextView);
+        questionNumberTV.setText(questionNumberDisplayText);
+
         //start button
         buttonStart = findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(button -> startQuiz());
@@ -79,11 +93,13 @@ public class PreviewActivity extends AppCompatActivity {
 
     private void showLeaderboard() {
         String[] leaderboardNames = {"Arion", "Nathan", "Huzaifa", "Tega", "Nicholas", "adf", "123", "adsfsdafasdf", "asdf", "a"};
-        int[] leaderboardScores = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] leaderboardScores = {113, 2312, 3231, 324, 35, 16, 7, 383, 913, 1310};
+        int[] leaderboardCorrects = {10, 10, 9, 9, 5, 3, 1, 0, 0, 0};
+        int[] leaderboardTimes = {110, 140, 59, 69, 75, 83, 21, 40, 50, 40};
 
         // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.leaderboardRecyclerView);
-        LeaderboardRecycleViewAdapter adapter = new LeaderboardRecycleViewAdapter(this, leaderboardNames, leaderboardScores);
+        LeaderboardRecycleViewAdapter adapter = new LeaderboardRecycleViewAdapter(this, leaderboardNames, leaderboardScores, leaderboardCorrects, leaderboardTimes, totalQuestionNumber);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

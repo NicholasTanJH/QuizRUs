@@ -1,53 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="1dp"
-    android:background="@drawable/leaderboard_row">
+    android:background="@drawable/leaderboard_row"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/leaderboardOrderNumberTV"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginStart="4dp"
-        android:paddingHorizontal="30dp"
-        android:text=""
-        android:textColor="@color/colorWhite"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginHorizontal="10dp">
 
-    <TextView
-        android:id="@+id/leaderboardNameTV"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/leaderboardOrderNumberTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="1."
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/leaderboardNameTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="30dp"
+            android:text="TEST"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/leaderboardScoreTV"
+            app:layout_constraintStart_toEndOf="@+id/leaderboardOrderNumberTV"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/leaderboardScoreTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="12378"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:paddingHorizontal="30dp"
-        android:text=""
-        android:textColor="@color/colorWhite"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/leaderboardScoreTV"
-        app:layout_constraintStart_toEndOf="@+id/leaderboardOrderNumberTV"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/leaderboardScoreTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:paddingHorizontal="30dp"
-        android:text=""
-        android:textColor="@color/colorWhite"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/leaderboardCorrectTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="30dp"
+            android:text="5/10"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:layout_weight="1"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/leaderboardTimeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="30dp"
+            android:text="120s"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</LinearLayout>
+

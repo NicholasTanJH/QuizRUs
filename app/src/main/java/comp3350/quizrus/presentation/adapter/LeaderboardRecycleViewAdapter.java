@@ -12,15 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import comp3350.quizrus.R;
 
 public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<LeaderboardRecycleViewAdapter.MyViewHolder> {
-    Context context;
-    String[] leaderboardNames;
-    int[] leaderboardScores;
-    boolean isEmptyLeaderboard;
+    private final Context context;
+    private final String[] leaderboardNames;
+    private final int[] leaderboardScores;
+    private final int[] leaderboardCorrects;
+    private final int[] leaderboardTimes;
+    private final int totalQuestionNumber;
+    private boolean isEmptyLeaderboard;
 
-    public LeaderboardRecycleViewAdapter(Context context, String[] leaderboardNames, int[] leaderboardScore) {
+    public LeaderboardRecycleViewAdapter(Context context, String[] leaderboardNames, int[] leaderboardScore, int[] leaderboardCorrects, int[] leaderboardTimes, int totalQuestionNumber) {
         this.context = context;
         this.leaderboardNames = leaderboardNames;
         this.leaderboardScores = leaderboardScore;
+        this.leaderboardCorrects = leaderboardCorrects;
+        this.leaderboardTimes = leaderboardTimes;
+        this.totalQuestionNumber = totalQuestionNumber;
         isEmptyLeaderboard = (leaderboardNames == null || leaderboardNames.length == 0);
     }
 
@@ -37,6 +43,9 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         TextView leaderboardOrderNumberTV = holder.leaderboardOrderNumberTV;
         TextView leaderboardNameTV = holder.leaderboardNameTV;
         TextView leaderboardScoreTV = holder.leaderboardScoreTV;
+        TextView leaderboardCorrectTV = holder.leaderboardCorrectTV;
+        TextView leaderboardTimeTV = holder.leaderboardTimeTV;
+
 
         //show a default leaderboard item if the leaderboard is empty
         if(isEmptyLeaderboard){
@@ -45,11 +54,15 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
             int currOrderNumber = position + 1;
             String currName = leaderboardNames[position];
             int currScore = leaderboardScores[position];
+            int currCorrect = leaderboardCorrects[position];
+            int currTime = leaderboardTimes[position];
 
             // Changing the name of the item according to the position
             leaderboardOrderNumberTV.setText(currOrderNumber + ".");
             leaderboardNameTV.setText(currName);
             leaderboardScoreTV.setText(Integer.toString(currScore));
+            leaderboardCorrectTV.setText(Integer.toString(currCorrect) + "/" + totalQuestionNumber);
+            leaderboardTimeTV.setText(Integer.toString(currTime) + "s");
 
             // Set background color based on order number
             if(currOrderNumber == 1) {
@@ -77,12 +90,16 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         TextView leaderboardOrderNumberTV;
         TextView leaderboardNameTV;
         TextView leaderboardScoreTV;
+        TextView leaderboardCorrectTV;
+        TextView leaderboardTimeTV;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             leaderboardOrderNumberTV = itemView.findViewById(R.id.leaderboardOrderNumberTV);
             leaderboardNameTV = itemView.findViewById(R.id.leaderboardNameTV);
             leaderboardScoreTV = itemView.findViewById(R.id.leaderboardScoreTV);
+            leaderboardCorrectTV = itemView.findViewById(R.id.leaderboardCorrectTV);
+            leaderboardTimeTV = itemView.findViewById(R.id.leaderboardTimeTV);
         }
 
     }

@@ -18,8 +18,8 @@ import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.presentation.PreviewActivity;
 
 public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleViewAdapter.MyViewHolder> {
-    Context context;
-    List<Quiz> quizzes;
+    private final Context context;
+    private final List<Quiz> quizzes;
 
     // quizTitles passed in from QuizSelectionActivity
     public QuizRecycleViewAdapter(Context context, List<Quiz> quizzes) {
