@@ -11,16 +11,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.List;
 
 public class QuizSelectionActivity extends Activity {
+    AccessQuizzes accessQuiz;
     List<Quiz> quizzes;
     User currUser;
 
@@ -31,7 +36,10 @@ public class QuizSelectionActivity extends Activity {
 
         Intent intent = getIntent();
         currUser = (User) intent.getSerializableExtra("loggedInUser");
+        accessQuiz = new AccessQuizzes();
 
+        setUpSearchButton();
+        getQuizzes();
         showQuizzes();
         setUpUserIcon();
         setUpAddQuizIcon();
@@ -40,12 +48,42 @@ public class QuizSelectionActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        getQuizzes();
         showQuizzes();
     }
 
-    private void showQuizzes() {
-        addQuizTitles();
+    private void setUpSearchButton() {
+        EditText searchET = findViewById(R.id.searchInput);
+        ImageButton searchButton = findViewById(R.id.searchButton);
+        LinearLayout searchResult = findViewById(R.id.searchResult);
+        TextView searchResultTV = findViewById(R.id.searchResultTV);
+        ImageButton searchResultCancerButton = findViewById(R.id.searchResultCancerButton);
 
+        searchResult.setVisibility(View.GONE);
+
+        searchButton.setOnClickListener(button -> {
+            String searchText = searchET.getText().toString();
+            searchET.getText().clear();
+
+            if (!searchText.isEmpty()) {
+                quizzes = accessQuiz.searchQuizzes(searchText);
+                showQuizzes();
+
+                searchResult.setVisibility(View.VISIBLE);
+                int resultCount = quizzes.size();
+                String searchResultMessage = resultCount + " results found from \"" + searchText + "\"";
+                searchResultTV.setText(searchResultMessage);
+            }
+        });
+
+        searchResultCancerButton.setOnClickListener(button -> {
+            searchResult.setVisibility(View.GONE);
+            getQuizzes();
+            showQuizzes();
+        });
+    }
+
+    private void showQuizzes() {
         // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.listQuiz);
         QuizRecycleViewAdapter adapter = new QuizRecycleViewAdapter(this, quizzes);
@@ -53,8 +91,8 @@ public class QuizSelectionActivity extends Activity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void addQuizTitles() {
-        quizzes = new AccessQuizzes().getQuizzes();
+    private void getQuizzes() {
+        quizzes = accessQuiz.getQuizzes();
     }
 
     private void setUpUserIcon() {

@@ -35,6 +35,18 @@ public class AccessQuizzes {
         return Collections.unmodifiableList(quizzes);
     }
 
+    public List<Quiz> searchQuizzes(String quizTitle)
+    {
+        if(quizTitle != null)
+        {
+            return quizPersistence.getQuizzesByTitle(quizTitle);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public Quiz createQuiz(final User user, final String title, final int timer) {
         Quiz newQuiz = new Quiz(title, user, timer);
 
@@ -46,5 +58,14 @@ public class AccessQuizzes {
         }
 
         return newQuiz;
+    }
+
+    public boolean deleteQuiz(Quiz quiz, User user) {
+        if (quiz.getUser().getUserID() == user.getUserID()) {
+            quizPersistence.deleteQuiz(quiz);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

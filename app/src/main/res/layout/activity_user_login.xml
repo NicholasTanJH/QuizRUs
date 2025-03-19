@@ -100,7 +100,7 @@
                 android:padding="10dp"
                 android:textColorHint="@color/colorWhite"
                 app:endIconMode="password_toggle"
-                app:endIconDrawable="@drawable/ic_eye">
+                app:endIconDrawable="@drawable/eye_icon">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputETPassword"
@@ -123,7 +123,7 @@
                 android:layout_marginVertical="30dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/login_button_background"
+                android:background="@drawable/button_background"
                 android:text="Log In"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
@@ -164,7 +164,7 @@
                 android:layout_height="80dp"
                 android:layout_marginVertical="30dp"
                 android:layout_marginHorizontal="20dp"
-                android:background="@drawable/login_button_background"
+                android:background="@drawable/button_background"
                 android:text="Sign Up"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"

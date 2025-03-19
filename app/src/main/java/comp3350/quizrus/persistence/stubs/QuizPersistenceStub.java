@@ -6,6 +6,7 @@ import java.util.List;
 
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
+import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuizPersistence;
 
 public class QuizPersistenceStub implements QuizPersistence {
@@ -53,10 +54,38 @@ public class QuizPersistenceStub implements QuizPersistence {
     }
 
     @Override
+    public List<Quiz> getQuizzesByTitle(String quizTitle)
+    {
+        List<Quiz> titledQuizzes = new ArrayList<>();
+
+        for(Quiz quiz : this.quizzes)
+        {
+            if(quiz.getTitle().toLowerCase().contains(quizTitle.toLowerCase()))
+            {
+                titledQuizzes.add(quiz);
+            }
+        }
+
+        return Collections.unmodifiableList(titledQuizzes);
+    }
+
+    @Override
     public int insertQuiz(Quiz quiz, User user) {
         quiz.setQuizID(this.numQuizzes);
         this.quizzes.add(quiz);
         this.numQuizzes++;
         return quiz.getQuizID();
+    }
+
+    @Override
+    public void deleteQuiz(Quiz quiz) {
+        int index;
+
+        index = this.quizzes.indexOf(quiz);
+        if (index >= 0) {
+            Quiz deletedQuiz = this.quizzes.remove(index);
+            if (deletedQuiz == null)
+                throw new PersistenceException(new Exception("Deleting quiz failed, no quizzes were affected."));
+        }
     }
 }

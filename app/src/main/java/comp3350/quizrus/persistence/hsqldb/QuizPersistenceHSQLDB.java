@@ -8,16 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.quizrus.business.AccessUsers;
+import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuizPersistence;
 
 public class QuizPersistenceHSQLDB implements QuizPersistence {
-    private final String dbPath;
 
-    public QuizPersistenceHSQLDB(final String dbPath) {
-        this.dbPath = dbPath;
+    public QuizPersistenceHSQLDB() {
     }
 
     @Override
@@ -87,6 +86,31 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
     }
 
     @Override
+    public List<Quiz> getQuizzesByTitle(String quizTitle)
+    {
+        List<Quiz> quizzes = new ArrayList<>();
+        String query = "SELECT * FROM quiz WHERE LOWER(title) LIKE LOWER(?)";
+
+        try (Connection conn = DatabaseManager.connection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            // Execute the query and retrieve all questions.
+            pstmt.setString(1, "%"+quizTitle+"%");
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Quiz curr_quiz = buildQuizFromResultSet(rs);
+                    quizzes.add(curr_quiz);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return quizzes;
+    }
+
+    @Override
     public int insertQuiz(Quiz quiz, User user) {
         int quizID = -1;
         String query = "INSERT INTO quiz (title, userID, timeLimit) VALUES (?, ?, ?)";
@@ -113,6 +137,26 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
             }
 
             return quizID;
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
+    public void deleteQuiz(Quiz quiz) {
+        String query = "DELETE FROM quiz WHERE quizID = ?";
+
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            pstmt.setInt(1, quiz.getQuizID());
+
+            // Execute the query, then check that the quiz was deleted.
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting quiz failed, no quizzes were affected.");
+            }
+
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }
