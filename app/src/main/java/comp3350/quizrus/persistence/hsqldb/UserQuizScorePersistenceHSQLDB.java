@@ -45,6 +45,35 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
     }
 
     @Override
+    public int getUserHighScore(Quiz quiz, User user)
+    {
+        String query = "SELECT MAX(score) FROM user_quiz_score WHERE quizID = ? AND userID = ?";
+
+        try (Connection conn = DatabaseManager.connection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, quiz.getQuizID());
+            pstmt.setInt(2, user.getUserID());
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    if(rs.wasNull())
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return rs.getInt(1);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+        return 0;
+    }
+
+    @Override
     public double getAverageScore(Quiz quiz, User user)
     {
         String query = "SELECT AVG(score) FROM user_quiz_score WHERE quizID = ? AND userID = ?";

@@ -27,6 +27,11 @@ public class AccessLeaderboard {
         return scorePersistence.getScoresForQuiz(quiz);
     }
 
+    public int getUserHighScore(Quiz quiz, User user)
+    {
+        return scorePersistence.getUserHighScore(quiz, user);
+    }
+
     public double getAverageScore(Quiz quiz, User user)
     {
         double avg = scorePersistence.getAverageScore(quiz, user);
