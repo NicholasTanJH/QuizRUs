@@ -23,7 +23,6 @@ import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
 
 public class QuizCreationActivity extends AppCompatActivity {
-
     ImageButton buttonBack;
     Button editQuestionButton;
     TextInputEditText quizNameEditText;

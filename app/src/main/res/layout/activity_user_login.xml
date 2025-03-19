@@ -100,7 +100,7 @@
                 android:padding="10dp"
                 android:textColorHint="@color/colorWhite"
                 app:endIconMode="password_toggle"
-                app:endIconDrawable="@drawable/ic_eye">
+                app:endIconDrawable="@drawable/eye_icon">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputETPassword"
