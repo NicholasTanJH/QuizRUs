@@ -1,5 +1,9 @@
 package comp3350.quizrus.persistence.stubs;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +11,9 @@ import java.util.List;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.UserQuizScore;
+import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.UserQuizScorePersistence;
+import comp3350.quizrus.persistence.hsqldb.DatabaseManager;
 
 public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
     private List<UserQuizScore> scores;
@@ -36,6 +42,24 @@ public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
         }
 
         return Collections.unmodifiableList(quizScores);
+    }
+
+    @Override
+    public int getUserHighScore(Quiz quiz, User user)
+    {
+        int highestScore = 0;
+
+        for(UserQuizScore score : this.scores)
+        {
+            if(score.getQuiz().getQuizID() == quiz.getQuizID() && score.getUser().getUserID() == user.getUserID())
+            {
+                if(score.getScore() > highestScore)
+                {
+                    highestScore = score.getScore();
+                }
+            }
+        }
+        return highestScore;
     }
 
     @Override
