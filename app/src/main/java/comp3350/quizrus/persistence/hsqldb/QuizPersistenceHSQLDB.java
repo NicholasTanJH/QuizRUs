@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.quizrus.business.AccessUsers;
+import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.PersistenceException;
@@ -52,6 +53,54 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
             while (rs.next()) {
                 Quiz quiz = buildQuizFromResultSet(rs);
                 quizzes.add(quiz);
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return quizzes;
+    }
+
+    @Override
+    public List<Quiz> getUserQuizzes(User user) {
+        List<Quiz> quizzes = new ArrayList<>();
+        String query = "SELECT * FROM quiz WHERE userID = ?";
+
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query);
+                ResultSet rs = pstmt.executeQuery()) {
+
+            pstmt.setInt(1, user.getUserID());
+
+            while (rs.next()) {
+                Quiz curr_quiz = buildQuizFromResultSet(rs);
+                quizzes.add(curr_quiz);
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return quizzes;
+    }
+
+    @Override
+    public List<Quiz> getQuizzesByTitle(String quizTitle)
+    {
+        List<Quiz> quizzes = new ArrayList<>();
+        String query = "SELECT * FROM quiz WHERE LOWER(title) LIKE LOWER(?)";
+
+        try (Connection conn = DatabaseManager.connection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            // Execute the query and retrieve all questions.
+            pstmt.setString(1, "%"+quizTitle+"%");
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Quiz curr_quiz = buildQuizFromResultSet(rs);
+                    quizzes.add(curr_quiz);
+                }
             }
 
         } catch (SQLException e) {
