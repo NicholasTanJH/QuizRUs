@@ -93,10 +93,13 @@ public class AccessQuizIT {
 
     @Test
     public void testDeleteQuiz() {
-        // Create a new user.
+        // Create users.
         User user1 = accessUsers.createUser("bob", "password", "Bob", "Test");
         assertNotNull(user1);
         assertNotEquals(-1, user1.getUserID());
+        User user2 = accessUsers.createUser("zen", "password", "Zen", "Test");
+        assertNotNull(user2);
+        assertNotEquals(-1, user2.getUserID());
 
         // Insert a quiz into the database.
         Quiz quiz1 = accessQuizzes.createQuiz(user1, "What is the life expectancy in Canada?", 120);
@@ -104,9 +107,13 @@ public class AccessQuizIT {
         int quiz1ID = quiz1.getQuizID();
         assertNotEquals(-1, quiz1ID);
 
-        // Delete the quiz.
-        boolean deleted = accessQuizzes.deleteQuiz(quiz1, user1);
+        // Attempt to delete the quiz with the wrong user.
+        boolean deleted = accessQuizzes.deleteQuiz(quiz1, user2);
         assertFalse(deleted);
+
+        // Delete the quiz with the right user.
+        boolean deleted2 = accessQuizzes.deleteQuiz(quiz1, user1);
+        assertTrue(deleted2);
         Quiz quiz2 = accessQuizzes.getQuiz(quiz1.getQuizID());
         assertNull(quiz2);
     }

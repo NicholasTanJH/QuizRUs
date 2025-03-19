@@ -49,13 +49,10 @@ public class AccessQuizzes {
     }
 
     public boolean deleteQuiz(Quiz quiz, User user) {
-        if(quiz.getUser().getUserID() == user.getUserID())
-        {
+        if (quiz.getUser().getUserID() == user.getUserID()) {
             quizPersistence.deleteQuiz(quiz);
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
