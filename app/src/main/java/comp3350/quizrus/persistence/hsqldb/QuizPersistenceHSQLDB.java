@@ -15,10 +15,8 @@ import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuizPersistence;
 
 public class QuizPersistenceHSQLDB implements QuizPersistence {
-    private final String dbPath;
 
-    public QuizPersistenceHSQLDB(final String dbPath) {
-        this.dbPath = dbPath;
+    public QuizPersistenceHSQLDB() {
     }
 
     @Override
