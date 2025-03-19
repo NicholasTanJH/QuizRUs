@@ -17,7 +17,6 @@ import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.UserQuizScorePersistence;
 
 public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence {
-
     public UserQuizScorePersistenceHSQLDB() {
     }
 

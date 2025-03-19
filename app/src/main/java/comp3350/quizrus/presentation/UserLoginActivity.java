@@ -120,7 +120,6 @@ public class UserLoginActivity extends AppCompatActivity {
         String[] assetNames;
         Context context = getApplicationContext();
         File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
-        resetDB(dataDirectory);
         AssetManager assetManager = getAssets();
 
         try {
@@ -162,22 +161,6 @@ public class UserLoginActivity extends AppCompatActivity {
 
                 out.close();
                 in.close();
-            }
-        }
-    }
-
-    private void resetDB(File dataDirectory) {
-        if (dataDirectory.exists() && dataDirectory.isDirectory()) {
-            // Get all files in the directory.
-            File[] files = dataDirectory.listFiles();
-
-            if (files != null) {
-                for (File file : files) {
-                    // Delete each file in the directory.
-                    if (file.isFile()) {
-                        file.delete();
-                    }
-                }
             }
         }
     }
