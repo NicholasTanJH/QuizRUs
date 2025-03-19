@@ -39,6 +39,47 @@ public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
     }
 
     @Override
+    public double getAverageScore(Quiz quiz, User user)
+    {
+        double totalScore = 0;
+        int numAttempts = 0;
+
+        for (UserQuizScore score : this.scores)
+        {
+            if(score.getQuiz().getQuizID() == quiz.getQuizID() && score.getUser().getUserID() == user.getUserID())
+            {
+                totalScore += score.getScore();
+                numAttempts++;
+            }
+        }
+
+        if(numAttempts == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return totalScore / numAttempts;
+        }
+    }
+
+    @Override
+    public int getNumAttempts(Quiz quiz, User user)
+    {
+        int numAttempts = 0;
+
+        for (UserQuizScore score : this.scores)
+        {
+            if(score.getQuiz().getQuizID() == quiz.getQuizID() && score.getUser().getUserID() == user.getUserID())
+            {
+                numAttempts++;
+            }
+        }
+
+        return numAttempts;
+    }
+
+    @Override
     public int insertScore(UserQuizScore userQuizScore, User user, Quiz Quiz) {
         userQuizScore.setUserQuizScoreID(this.numScores);
         this.scores.add(userQuizScore);
