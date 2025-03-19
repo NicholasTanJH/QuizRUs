@@ -92,7 +92,7 @@ public class PreviewActivity extends AppCompatActivity {
     }
 
     private void showLeaderboard() {
-        String[] leaderboardNames = {"Arion", "Nathan", "Huzaifa", "Tega", "Nicholas", "adf", "123", "adsfsdafasdf", "asdf", "a"};
+        String[] leaderboardNames = {"Arion", "Nathan", "Huzaifa", "Tega", "Nicholas", "adf", "123", "12345678901234567890", "asdf", "a"};
         int[] leaderboardScores = {113, 2312, 3231, 324, 35, 16, 7, 383, 913, 1310};
         int[] leaderboardCorrects = {10, 10, 9, 9, 5, 3, 1, 0, 0, 0};
         int[] leaderboardTimes = {110, 140, 59, 69, 75, 83, 21, 40, 50, 40};
