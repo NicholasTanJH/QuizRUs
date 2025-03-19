@@ -11,7 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp">
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp">
 
         <TextView
             android:id="@+id/leaderboardOrderNumberTV"
@@ -19,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="1."
             android:textColor="@color/colorWhite"
-            android:textSize="20sp"
+            android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,61 +29,46 @@
             android:id="@+id/leaderboardNameTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:paddingHorizontal="30dp"
-            android:text="TEST"
+            android:text="Bobby"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/leaderboardScoreTV"
             app:layout_constraintStart_toEndOf="@+id/leaderboardOrderNumberTV"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ScoreLinearLayout"/>
 
-        <TextView
-            android:id="@+id/leaderboardScoreTV"
+        <LinearLayout
+            android:id="@+id/ScoreLinearLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="12378"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/leaderboardScoreTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="12378"
+                android:textColor="@color/colorWhite"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/leaderboardScoreInfoTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="4/5 in 130s"
+                android:textColor="@color/colorPaleWhite"
+                android:textStyle="italic"
+                android:textSize="15sp" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:id="@+id/leaderboardCorrectTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_horizontal"
-            android:paddingHorizontal="30dp"
-            android:text="5/10"
-            android:textColor="@color/colorWhite"
-            android:textSize="15sp"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/leaderboardTimeTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_horizontal"
-            android:paddingHorizontal="30dp"
-            android:text="120s"
-            android:textColor="@color/colorWhite"
-            android:textSize="15sp"
-            android:layout_weight="1"/>
-    </LinearLayout>
 </LinearLayout>
 
