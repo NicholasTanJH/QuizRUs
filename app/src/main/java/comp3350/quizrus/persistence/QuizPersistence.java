@@ -10,9 +10,6 @@ public interface QuizPersistence {
 
     Quiz getQuizByID(int quizID);
 
-    List<Quiz> getUserQuizzes(User user);
-
-
     List<Quiz> getQuizzesByTitle(String quizTitle);
 
     int insertQuiz(Quiz quiz, User user);

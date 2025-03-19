@@ -14,7 +14,6 @@ import comp3350.quizrus.persistence.AnswerPersistence;
 import comp3350.quizrus.persistence.PersistenceException;
 
 public class AnswerPersistenceHSQLDB implements AnswerPersistence {
-
     public AnswerPersistenceHSQLDB() {
     }
 
