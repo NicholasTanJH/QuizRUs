@@ -3,28 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context="comp3350.quizrus.presentation.QuizSelectionActivity"
     android:background="@color/colorPrimary"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context="comp3350.quizrus.presentation.QuizSelectionActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginTop="30dp"
         android:gravity="center_vertical">
 
         <ImageButton
             android:id="@+id/accountImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:src="@drawable/account_icon"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/logoImageView"
-            android:background="@android:color/transparent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/logoImageView"
@@ -45,20 +44,74 @@
             android:id="@+id/newQuizButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:src="@drawable/new_quiz_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/logoImageView"
-            android:background="@android:color/transparent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/search_bar_background"
+            android:hint="Enter search text"
+            android:inputType="text"
+            android:padding="8dp"
+            android:singleLine="true" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/search_icon" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/searchResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_boarder_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp">
+
+        <TextView
+            android:id="@+id/searchResultTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1 search result from ABC"
+            android:textColor="@color/colorPaleWhite"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageButton
+            android:id="@+id/searchResultCancerButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/clear_search_icon" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listQuiz"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 
 </LinearLayout>

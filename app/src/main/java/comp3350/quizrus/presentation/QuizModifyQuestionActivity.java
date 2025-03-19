@@ -30,7 +30,6 @@ import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
 
 public class QuizModifyQuestionActivity extends AppCompatActivity {
-
     Button saveQuestionButton;
     Button doneQuestionsButton;
     TextInputEditText questionEditText;
