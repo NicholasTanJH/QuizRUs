@@ -16,4 +16,6 @@ public interface QuizPersistence {
     List<Quiz> getQuizzesByTitle(String quizTitle);
 
     int insertQuiz(Quiz quiz, User user);
+
+    void deleteQuiz(Quiz quiz);
 }

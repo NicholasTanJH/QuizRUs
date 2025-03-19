@@ -142,6 +142,26 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         }
     }
 
+    @Override
+    public void deleteQuiz(Quiz quiz) {
+        String query = "DELETE FROM quiz WHERE quizID = ?";
+
+        try (Connection conn = DatabaseManager.connection();
+                PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            pstmt.setInt(1, quiz.getQuizID());
+
+            // Execute the query, then check that the quiz was deleted.
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Deleting quiz failed, no quizzes were affected.");
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
     private Quiz buildQuizFromResultSet(ResultSet rs) throws SQLException {
         int quizID = rs.getInt("quizID");
         String title = rs.getString("title");
