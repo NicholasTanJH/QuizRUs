@@ -9,7 +9,5 @@ import comp3350.quizrus.objects.Quiz;
 public interface UserQuizScorePersistence {
     List<UserQuizScore> getScoresForQuiz(Quiz quiz);
 
-    List<UserQuizScore> getScoresForUser(User user);
-
     int insertScore(UserQuizScore score, User user, Quiz Quiz);
 }

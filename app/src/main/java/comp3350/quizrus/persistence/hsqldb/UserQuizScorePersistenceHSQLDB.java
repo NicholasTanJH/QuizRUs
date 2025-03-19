@@ -17,10 +17,8 @@ import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.UserQuizScorePersistence;
 
 public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence {
-    private final String dbPath;
 
-    public UserQuizScorePersistenceHSQLDB(final String dbPath) {
-        this.dbPath = dbPath;
+    public UserQuizScorePersistenceHSQLDB() {
     }
 
     @Override
@@ -48,33 +46,9 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
     }
 
     @Override
-    public List<UserQuizScore> getScoresForUser(User user) {
-        List<UserQuizScore> userQuizScores = new ArrayList<>();
-        String query = "SELECT * FROM user_quiz_score WHERE userID = ?"
-                + "ORDER BY score DESC";
-
-        try (Connection conn = DatabaseManager.connection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setInt(1, user.getUserID());
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    UserQuizScore userQuizScore = buildUserQuizScoreFromRS(rs);
-                    userQuizScores.add(userQuizScore);
-                }
-            }
-
-        } catch (SQLException e) {
-            throw new PersistenceException(e);
-        }
-
-        return userQuizScores;
-    }
-
-    @Override
     public int insertScore(UserQuizScore userQuizScore, User user, Quiz quiz) {
         int userQuizScoreID = -1;
-        String query = "INSERT INTO user_quiz_score (userID, quizID, score, numCorrect, timeElapsed, timeAdded) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user_quiz_score (userID, quizID, numCorrect, timeTaken, score) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -82,10 +56,9 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
             // Set the values for the user's quiz score.
             pstmt.setInt(1, user.getUserID());
             pstmt.setInt(2, quiz.getQuizID());
-            pstmt.setInt(3, userQuizScore.getScore());
-            pstmt.setInt(4, userQuizScore.getNumCorrect());
-            pstmt.setInt(5, userQuizScore.getTimeElapsed());
-            pstmt.setTimestamp(6, userQuizScore.getTimeAdded());
+            pstmt.setInt(3, userQuizScore.getNumCorrect());
+            pstmt.setInt(4, userQuizScore.getTimeTaken());
+            pstmt.setInt(5, userQuizScore.getScore());
 
             // Execute the query, then check that the user was inserted.
             int affectedRows = pstmt.executeUpdate();
@@ -110,17 +83,19 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
         int userQuizScoreID = rs.getInt("userQuizScoreID");
         int userID = rs.getInt("userID");
         int quizID = rs.getInt("quizID");
-        int score = rs.getInt("score");
         int numCorrect = rs.getInt("numCorrect");
-        int timeElapsed = rs.getInt("timeElapsed");
+        int timeTaken = rs.getInt("timeTaken");
+        int score = rs.getInt("score");
         Timestamp timeAdded = rs.getTimestamp("timeAdded");
 
+        // Get the associated user.
         AccessUsers accessUsers = new AccessUsers();
         User user = accessUsers.getUser(userID);
 
+        // Get the associated quiz.
         AccessQuizzes accessQuizzes = new AccessQuizzes();
         Quiz quiz = accessQuizzes.getQuiz(quizID);
 
-        return new UserQuizScore(userQuizScoreID, user, quiz, numCorrect, timeElapsed, score, timeAdded);
+        return new UserQuizScore(userQuizScoreID, user, quiz, numCorrect, timeTaken, score, timeAdded);
     }
 }

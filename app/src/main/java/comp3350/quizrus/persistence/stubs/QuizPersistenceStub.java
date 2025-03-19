@@ -41,18 +41,6 @@ public class QuizPersistenceStub implements QuizPersistence {
     }
 
     @Override
-    public List<Quiz> getUserQuizzes(User user) {
-        List<Quiz> userQuizzes = new ArrayList<>();
-
-        for (Quiz quiz : this.quizzes) {
-            if (quiz.getUser().equals(user)) {
-                userQuizzes.add(quiz);
-            }
-        }
-        return Collections.unmodifiableList(userQuizzes);
-    }
-
-    @Override
     public int insertQuiz(Quiz quiz, User user) {
         quiz.setQuizID(this.numQuizzes);
         this.quizzes.add(quiz);

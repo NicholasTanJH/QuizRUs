@@ -65,19 +65,27 @@ public class AccessUserQuizScoreIT {
         Quiz quiz1 = accessQuizzes.getQuiz(0);
 
         // TODO: Replace this with business logic code.
-        List<UserQuizScore> userQuizScores = userQuizScorePersistence.getLeaderboard(quiz1);
-        assertEquals(userQuizScores.getFirst().getUserQuizScoreID(), 1);
-        assertEquals(userQuizScores.getFirst().getUserID(), 0);
-        assertEquals(userQuizScores.getFirst().getQuizID(), 0);
-        assertEquals(userQuizScores.getFirst().getScore(), 320);
-        assertEquals(userQuizScores.getFirst().getUserQuizScoreID(), 1);
-        assertEquals(userQuizScores.getLast().getUserID(), 1);
-        assertEquals(userQuizScores.getFirst().getQuizID(), 0);
-        assertEquals(userQuizScores.getLast().getScore(), 55);
+        List<UserQuizScore> userQuizScores = userQuizScorePersistence.getScoresForQuiz(quiz1);
+
+        // Check that the values for the first user score record are correct.
+        assertEquals(0, userQuizScores.getFirst().getUserQuizScoreID());
+        assertNotNull(userQuizScores.getFirst().getUser());
+        assertEquals(0, userQuizScores.getFirst().getUser().getUserID());
+        assertNotNull(userQuizScores.getFirst().getQuiz());
+        assertEquals(0, userQuizScores.getFirst().getQuiz().getQuizID());
+        assertEquals(371, userQuizScores.getFirst().getScore());
+
+        // Check that the values for the last user score record are correct.
+        assertEquals(2, userQuizScores.getLast().getUserQuizScoreID());
+        assertNotNull(userQuizScores.getLast().getUser());
+        assertEquals(1, userQuizScores.getLast().getUser().getUserID());
+        assertNotNull(userQuizScores.getLast().getQuiz());
+        assertEquals(0, userQuizScores.getLast().getQuiz().getQuizID());
+        assertEquals(142, userQuizScores.getLast().getScore());
     }
 
-    @Test
-    public void testInsertScore() {
+    // @Test
+    // public void testInsertScore() {
 
-    }
+    // }
 }

@@ -12,10 +12,7 @@ import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.UserPersistence;
 
 public class UserPersistenceHSQLDB implements UserPersistence {
-    private final String dbPath;
-
-    public UserPersistenceHSQLDB(final String dbPath) {
-        this.dbPath = dbPath;
+    public UserPersistenceHSQLDB() {
     }
 
     @Override

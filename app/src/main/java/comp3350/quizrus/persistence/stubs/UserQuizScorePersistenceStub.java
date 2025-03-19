@@ -26,14 +26,11 @@ public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
     }
 
     @Override
-    public List<UserQuizScore> getScoresForQuiz(Quiz quiz)
-    {
+    public List<UserQuizScore> getScoresForQuiz(Quiz quiz) {
         List<UserQuizScore> quizScores = new ArrayList<>();
 
-        for(UserQuizScore score : this.scores)
-        {
-            if(score.getQuiz().getQuizID() == quiz.getQuizID())
-            {
+        for (UserQuizScore score : this.scores) {
+            if (score.getQuiz().getQuizID() == quiz.getQuizID()) {
                 quizScores.add(score);
             }
         }
@@ -42,24 +39,7 @@ public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
     }
 
     @Override
-    public List<UserQuizScore> getScoresForUser(User user)
-    {
-        List<UserQuizScore> quizScores = new ArrayList<>();
-
-        for(UserQuizScore score : this.scores)
-        {
-            if(score.getQuiz().getQuizID() == user.getUserID())
-            {
-                quizScores.add(score);
-            }
-        }
-
-        return Collections.unmodifiableList(quizScores);
-    }
-
-    @Override
-    public int insertScore(UserQuizScore userQuizScore, User user, Quiz Quiz)
-    {
+    public int insertScore(UserQuizScore userQuizScore, User user, Quiz Quiz) {
         userQuizScore.setUserQuizScoreID(this.numScores);
         this.scores.add(userQuizScore);
         this.numScores++;

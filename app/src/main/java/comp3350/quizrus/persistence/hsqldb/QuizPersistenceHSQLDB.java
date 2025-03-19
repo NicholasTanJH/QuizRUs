@@ -14,10 +14,8 @@ import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuizPersistence;
 
 public class QuizPersistenceHSQLDB implements QuizPersistence {
-    private final String dbPath;
 
-    public QuizPersistenceHSQLDB(final String dbPath) {
-        this.dbPath = dbPath;
+    public QuizPersistenceHSQLDB() {
     }
 
     @Override
@@ -54,29 +52,6 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
             while (rs.next()) {
                 Quiz quiz = buildQuizFromResultSet(rs);
                 quizzes.add(quiz);
-            }
-
-        } catch (SQLException e) {
-            throw new PersistenceException(e);
-        }
-
-        return quizzes;
-    }
-
-    @Override
-    public List<Quiz> getUserQuizzes(User user) {
-        List<Quiz> quizzes = new ArrayList<>();
-        String query = "SELECT * FROM quiz WHERE userID = ?";
-
-        try (Connection conn = DatabaseManager.connection();
-                PreparedStatement pstmt = conn.prepareStatement(query);
-                ResultSet rs = pstmt.executeQuery()) {
-
-            pstmt.setInt(1, user.getUserID());
-
-            while (rs.next()) {
-                Quiz curr_quiz = buildQuizFromResultSet(rs);
-                quizzes.add(curr_quiz);
             }
 
         } catch (SQLException e) {

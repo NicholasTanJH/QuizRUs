@@ -23,27 +23,18 @@ public class AccessLeaderboard {
         this.scorePersistence = scorePersistence;
     }
 
-    public List<UserQuizScore> getScoresForUser(User user)
-    {
-        return scorePersistence.getScoresForUser(user);
-    }
-
-    public List<UserQuizScore> getScoresForQuiz(Quiz quiz)
-    {
+    public List<UserQuizScore> getScoresForQuiz(Quiz quiz) {
         return scorePersistence.getScoresForQuiz(quiz);
     }
 
-    public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect, final int timeElapsed, final int newScore, final Timestamp timeAdded)
-    {
-        UserQuizScore newUserQuizScore = new UserQuizScore(user, quiz, numCorrect, timeElapsed, newScore, timeAdded);
+    public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect,
+            final int timeTaken, final int newScore, final Timestamp timeAdded) {
+        UserQuizScore newUserQuizScore = new UserQuizScore(user, quiz, numCorrect, timeTaken, newScore, timeAdded);
 
         int userQuizScoreID = scorePersistence.insertScore(newUserQuizScore, user, quiz);
-        if(userQuizScoreID != -1)
-        {
+        if (userQuizScoreID != -1) {
             newUserQuizScore.setUserQuizScoreID(userQuizScoreID);
-        }
-        else
-        {
+        } else {
             return null;
         }
 
@@ -51,5 +42,3 @@ public class AccessLeaderboard {
     }
 
 }
-
-

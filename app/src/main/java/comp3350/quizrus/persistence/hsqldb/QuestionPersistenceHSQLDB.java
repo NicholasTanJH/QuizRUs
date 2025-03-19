@@ -14,10 +14,8 @@ import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuestionPersistence;
 
 public class QuestionPersistenceHSQLDB implements QuestionPersistence {
-    private final String dbPath;
 
-    public QuestionPersistenceHSQLDB(final String dbPath) {
-        this.dbPath = dbPath;
+    public QuestionPersistenceHSQLDB() {
     }
 
     @Override
