@@ -9,25 +9,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import comp3350.quizrus.R;
+import comp3350.quizrus.objects.UserQuizScore;
 
 public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<LeaderboardRecycleViewAdapter.MyViewHolder> {
     private final Context context;
-    private final String[] leaderboardNames;
-    private final int[] leaderboardScores;
-    private final int[] leaderboardCorrects;
-    private final int[] leaderboardTimes;
+    private final List<UserQuizScore> userQuizScoreList;
     private final int totalQuestionNumber;
     private final boolean isEmptyLeaderboard;
 
-    public LeaderboardRecycleViewAdapter(Context context, String[] leaderboardNames, int[] leaderboardScore, int[] leaderboardCorrects, int[] leaderboardTimes, int totalQuestionNumber) {
+    public LeaderboardRecycleViewAdapter(Context context, List<UserQuizScore> userQuizScoreList, int totalQuestionNumber) {
         this.context = context;
-        this.leaderboardNames = leaderboardNames;
-        this.leaderboardScores = leaderboardScore;
-        this.leaderboardCorrects = leaderboardCorrects;
-        this.leaderboardTimes = leaderboardTimes;
+        this.userQuizScoreList = userQuizScoreList;
         this.totalQuestionNumber = totalQuestionNumber;
-        isEmptyLeaderboard = (leaderboardNames == null || leaderboardNames.length == 0);
+        isEmptyLeaderboard = userQuizScoreList.isEmpty();
     }
 
     @NonNull
@@ -50,16 +47,18 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
             leaderboardNameTV.setText("This quiz hasn’t been attempted yet");
         } else {
             int currOrderNumber = position + 1;
-            String currName = leaderboardNames[position];
-            int currScore = leaderboardScores[position];
-            int currCorrect = leaderboardCorrects[position];
-            int currTime = leaderboardTimes[position];
+            UserQuizScore currUserQuizScore = userQuizScoreList.get(position);
+
+            String currName = currUserQuizScore.getUser().getUsername();
+            int currScore = currUserQuizScore.getScore();
+            int currNumCorrect = currUserQuizScore.getNumCorrect();
+            int currTimeTaken = currUserQuizScore.getTimeTaken();
 
             // Changing the name of the item according to the position
             leaderboardOrderNumberTV.setText(currOrderNumber + ".");
             leaderboardNameTV.setText(currName);
             leaderboardScoreTV.setText(Integer.toString(currScore));
-            leaderboardScoreInfoTV.setText(Integer.toString(currCorrect) + "/" + totalQuestionNumber + " in " + currTime + "s");
+            leaderboardScoreInfoTV.setText(currNumCorrect + "/" + totalQuestionNumber + " in " + currTimeTaken + "s");
 
             // Set background color based on order number
             if (currOrderNumber == 1) {
@@ -77,7 +76,7 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         if (isEmptyLeaderboard) {
             return 1;
         } else {
-            return leaderboardNames.length;
+            return userQuizScoreList.size();
         }
     }
 

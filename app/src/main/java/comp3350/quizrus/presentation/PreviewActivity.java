@@ -17,9 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import comp3350.quizrus.R;
+import comp3350.quizrus.business.AccessLeaderboard;
 import comp3350.quizrus.business.AccessQuestions;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
+import comp3350.quizrus.objects.UserQuizScore;
 import comp3350.quizrus.presentation.adapter.LeaderboardRecycleViewAdapter;
 
 public class PreviewActivity extends AppCompatActivity {
@@ -92,14 +94,12 @@ public class PreviewActivity extends AppCompatActivity {
     }
 
     private void showLeaderboard() {
-        String[] leaderboardNames = {"Arion", "Nathan", "Huzaifa", "Tega", "Nicholas", "adf", "123", "12345678901234567890", "asdf", "a"};
-        int[] leaderboardScores = {113, 2312, 3231, 324, 35, 16, 7, 383, 913, 1310};
-        int[] leaderboardCorrects = {10, 10, 9, 9, 5, 3, 1, 0, 0, 0};
-        int[] leaderboardTimes = {110, 140, 59, 69, 75, 83, 21, 40, 50, 40};
+        AccessLeaderboard accessLeaderboard = new AccessLeaderboard();
+        List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz);
 
         // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.leaderboardRecyclerView);
-        LeaderboardRecycleViewAdapter adapter = new LeaderboardRecycleViewAdapter(this, leaderboardNames, leaderboardScores, leaderboardCorrects, leaderboardTimes, totalQuestionNumber);
+        LeaderboardRecycleViewAdapter adapter = new LeaderboardRecycleViewAdapter(this, userQuizScoreList, totalQuestionNumber);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
