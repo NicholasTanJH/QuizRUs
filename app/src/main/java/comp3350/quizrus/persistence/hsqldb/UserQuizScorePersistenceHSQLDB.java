@@ -46,6 +46,50 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
     }
 
     @Override
+    public double getAverageScore(Quiz quiz, User user)
+    {
+        String query = "SELECT AVG(score) FROM user_quiz_score WHERE quizID = ? AND userID = ?";
+
+        try (Connection conn = DatabaseManager.connection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, quiz.getQuizID());
+            pstmt.setInt(2, user.getUserID());
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getDouble(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+        return -1;
+    }
+
+    @Override
+    public int getNumAttempts(Quiz quiz, User user)
+    {
+        String query = "SELECT COUNT(*) FROM user_quiz_score WHERE quizID = ? AND userID = ?";
+
+        try (Connection conn = DatabaseManager.connection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, quiz.getQuizID());
+            pstmt.setInt(2, user.getUserID());
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new PersistenceException(e);
+        }
+        return 0;
+    }
+
+    @Override
     public int insertScore(UserQuizScore userQuizScore, User user, Quiz quiz) {
         int userQuizScoreID = -1;
         String query = "INSERT INTO user_quiz_score (userID, quizID, numCorrect, timeTaken, score) VALUES (?, ?, ?, ?, ?)";

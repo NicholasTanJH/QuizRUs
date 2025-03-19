@@ -9,5 +9,9 @@ import comp3350.quizrus.objects.Quiz;
 public interface UserQuizScorePersistence {
     List<UserQuizScore> getScoresForQuiz(Quiz quiz);
 
+    double getAverageScore(Quiz quiz, User user);
+
+    int getNumAttempts(Quiz quiz, User user);
+
     int insertScore(UserQuizScore score, User user, Quiz Quiz);
 }

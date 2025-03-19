@@ -27,6 +27,17 @@ public class AccessLeaderboard {
         return scorePersistence.getScoresForQuiz(quiz);
     }
 
+    public double getAverageScore(Quiz quiz, User user)
+    {
+        double avg = scorePersistence.getAverageScore(quiz, user);
+        return Double.parseDouble(String.format("%.2f", avg));
+    }
+
+    public int getNumAttempts(Quiz quiz, User user)
+    {
+        return scorePersistence.getNumAttempts(quiz, user);
+    }
+
     public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect,
             final int timeTaken, final int newScore, final Timestamp timeAdded) {
         UserQuizScore newUserQuizScore = new UserQuizScore(user, quiz, numCorrect, timeTaken, newScore, timeAdded);
