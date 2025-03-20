@@ -44,7 +44,7 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
 
         //show a default leaderboard item if the leaderboard is empty
         if (isEmptyLeaderboard) {
-            leaderboardNameTV.setText("This quiz hasn’t been attempted yet");
+            leaderboardNameTV.setText(R.string.this_quiz_hasn_t_been_attempted_yet);
         } else {
             int currOrderNumber = position + 1;
             UserQuizScore currUserQuizScore = userQuizScoreList.get(position);

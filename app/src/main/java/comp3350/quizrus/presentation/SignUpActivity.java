@@ -73,19 +73,19 @@ public class SignUpActivity extends AppCompatActivity {
         boolean isValidLastName = accessUsers.authenticateName(newLastName);
 
         if (!isValidUsername) {
-            setAlertMessage("Invalid Username", "Username must be:" + errorMessageUsername);
+            setAlertMessage(getString(R.string.invalid_username), "Username must be:" + errorMessageUsername);
             return;
         } else if (!isValidPassword) {
-            setAlertMessage("Invalid Password", "Password must have:" + errorMessagePassword);
+            setAlertMessage(getString(R.string.invalid_password), "Password must have:" + errorMessagePassword);
             return;
         } else if (!isValidConfirmPassword) {
-            setAlertMessage("Invalid Confirm Password", "Please ensure the confirm password matches your password.");
+            setAlertMessage(getString(R.string.invalid_confirm_password), getString(R.string.please_ensure_the_confirm_password_matches_your_password));
             return;
         } else if (!isValidFirstName) {
-            setAlertMessage("Invalid First Name", "Please fill in your first name.");
+            setAlertMessage(getString(R.string.invalid_first_name), getString(R.string.please_fill_in_your_first_name));
             return;
         } else if (!isValidLastName) {
-            setAlertMessage("Invalid Last Name", "Please fill in your last name.");
+            setAlertMessage(getString(R.string.invalid_last_name), getString(R.string.please_fill_in_your_last_name));
             return;
         } else {
             accessUsers.createUser(newUsername, newPassword, newFirstName, newLastName);
@@ -95,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     // animation for changing the button text when registering
     private void successfulSignUpAnimation() {
-        buttonCreateAccount.setText("Registering...");
+        buttonCreateAccount.setText(R.string.registering);
         new Handler().postDelayed(() -> {
             buttonCreateAccount.setText("✓");
         }, 1000);

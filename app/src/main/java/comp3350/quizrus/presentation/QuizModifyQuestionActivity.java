@@ -115,13 +115,13 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
 
         saveQuestionButton.setText("✓");
         new Handler().postDelayed(() -> {
-            saveQuestionButton.setText("Save Question");
+            saveQuestionButton.setText(R.string.save_question);
         }, 1000);
     }
 
     private void setupQuestions() {
         if (newQuestionAndAnswersList.isEmpty()) {
-            setAlertMessage("No questions entered", "Sorry, please enter at least one question with answers.");
+            setAlertMessage(getString(R.string.no_questions_entered), getString(R.string.sorry_please_enter_at_least_one_question_with_answers));
         } else {
             // make new quiz
             AccessQuizzes accessQuizzes = new AccessQuizzes();

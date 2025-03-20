@@ -69,9 +69,9 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
         });
     }
 
-    @Override
     // Number of items in the recycle view (rows of selectable quiz)
     // Defined by the size of the quizTitles arraylist
+    @Override
     public int getItemCount() {
         return quizzes.size();
     }

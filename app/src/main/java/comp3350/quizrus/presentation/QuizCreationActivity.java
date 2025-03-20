@@ -65,9 +65,9 @@ public class QuizCreationActivity extends AppCompatActivity {
         int timerAmount;
 
         if (quizName.isEmpty()) {
-            setAlertMessage("No Quiz Name", "Please enter a quiz name");
+            setAlertMessage(getString(R.string.no_quiz_name), getString(R.string.please_enter_a_quiz_name));
         } else if (timerString.isEmpty()) {
-            setAlertMessage("Not a number", "Please enter a number into the timer field");
+            setAlertMessage(getString(R.string.not_a_number), getString(R.string.please_enter_a_number_into_the_timer_field));
         } else {
             timerAmount = Integer.parseInt(timerString);
             intent = new Intent(this, QuizModifyQuestionActivity.class);
