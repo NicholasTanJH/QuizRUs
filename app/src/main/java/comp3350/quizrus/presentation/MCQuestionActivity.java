@@ -308,7 +308,7 @@ public class MCQuestionActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                timerTV.setText("Time's up!");
+                timerTV.setText(R.string.time_s_up);
                 startFlashingEffect(timerTV);
                 setProceedButtonToInvisibleMode();
                 startTimesUpMusic();
