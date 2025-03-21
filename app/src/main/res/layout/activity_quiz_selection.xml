@@ -96,7 +96,7 @@
             android:layout_weight="1"
             android:text="1 search result from ABC"
             android:textColor="@color/colorPaleWhite"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"/>
 
         <ImageButton
