@@ -17,13 +17,6 @@ public class Quiz implements Serializable {
         this.timeLimit = 0;
     }
 
-    public Quiz(final String newTitle, final User newUser, final int newtimeLimit) {
-        this.quizID = -1;
-        this.myUser = newUser;
-        this.title = newTitle;
-        this.timeLimit = newtimeLimit;
-    }
-
     public Quiz(final int newQuizID, final String newTitle, final User newUser, final int newtimeLimit) {
         this.quizID = newQuizID;
         this.myUser = newUser;

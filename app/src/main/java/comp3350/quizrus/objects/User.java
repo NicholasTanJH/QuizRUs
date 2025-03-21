@@ -19,15 +19,6 @@ public class User implements Serializable {
         this.lastname = "";
     }
 
-    public User(final String newUsername, final String newPassword, final String newFirstname,
-            final String newLastname) {
-        this.userID = -1;
-        this.username = newUsername;
-        this.password = newPassword;
-        this.firstname = newFirstname;
-        this.lastname = newLastname;
-    }
-
     public User(final int newID, final String newUsername, final String newPassword, final String newFirstname,
             final String newLastname) {
         this.userID = newID;
