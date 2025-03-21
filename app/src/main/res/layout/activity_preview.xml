@@ -69,7 +69,7 @@
                 android:gravity="center_horizontal"
                 android:text="Hello, I am under the water"
                 android:textColor="@color/colorWhite"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -81,7 +81,7 @@
                 android:paddingVertical="5dp"
                 android:text="Created by Testing"
                 android:textColor="@color/colorPaleWhite"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="italic" />
 
             <LinearLayout
@@ -98,7 +98,7 @@
                     android:paddingVertical="5dp"
                     android:text="Time limit: 100s"
                     android:textColor="@color/colorPaleWhite"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="italic" />
                 <TextView
                     android:id="@+id/questionNumberTextView"
@@ -110,40 +110,9 @@
                     android:paddingVertical="5dp"
                     android:text="No. of questions: 5"
                     android:textColor="@color/colorPaleWhite"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="italic" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="5dp"
-                    android:text="Time limit: 100s"
-                    android:textColor="@color/colorPaleWhite"
-                    android:textSize="20dp"
-                    android:textStyle="italic" />
-                <TextView
-                    android:id="@+id/questionNumberTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="5dp"
-                    android:text="No. of questions: 5"
-                    android:textColor="@color/colorPaleWhite"
-                    android:textSize="20dp"
-                    android:textStyle="italic" />
-            </LinearLayout>
-
 
             <Button
                 android:id="@+id/buttonStart"
@@ -179,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/leaderboard"
                     android:textColor="@color/colorWhite"
-                    android:textSize="40dp" />
+                    android:textSize="40sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/leaderboardRecyclerView"
