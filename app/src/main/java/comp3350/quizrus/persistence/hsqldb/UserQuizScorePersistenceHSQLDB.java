@@ -119,7 +119,7 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
 
 
     @Override
-    public int insertScore(UserQuizScore userQuizScore, User user, Quiz quiz) {
+    public int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score, final Timestamp timeAdded) {
         int userQuizScoreID = -1;
         String query = "INSERT INTO user_quiz_score (userID, quizID, numCorrect, timeTaken, score) VALUES (?, ?, ?, ?, ?)";
 
@@ -129,9 +129,9 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
             // Set the values for the user's quiz score.
             pstmt.setInt(1, user.getUserID());
             pstmt.setInt(2, quiz.getQuizID());
-            pstmt.setInt(3, userQuizScore.getNumCorrect());
-            pstmt.setInt(4, userQuizScore.getTimeTaken());
-            pstmt.setInt(5, userQuizScore.getScore());
+            pstmt.setInt(3, numCorrect);
+            pstmt.setInt(4, timeTaken);
+            pstmt.setInt(5, score);
 
             // Execute the query, then check that the user was inserted.
             int affectedRows = pstmt.executeUpdate();

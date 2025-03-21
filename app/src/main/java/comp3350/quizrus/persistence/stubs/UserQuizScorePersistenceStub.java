@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -104,10 +105,10 @@ public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
     }
 
     @Override
-    public int insertScore(UserQuizScore userQuizScore, User user, Quiz Quiz) {
-        userQuizScore.setUserQuizScoreID(this.numScores);
-        this.scores.add(userQuizScore);
+    public int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score, final Timestamp timeAdded) {
+        UserQuizScore newUserQuizScore = new UserQuizScore(numScores, user, quiz, numCorrect, timeTaken, score, timeAdded);
+        this.scores.add(newUserQuizScore);
         this.numScores++;
-        return userQuizScore.getUserQuizScoreID();
+        return newUserQuizScore.getUserQuizScoreID();
     }
 }

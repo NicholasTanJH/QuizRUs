@@ -9,7 +9,7 @@ public interface UserPersistence {
 
     User getUserByID(int userID);
 
-    User getUserByUsername(String username);
+    User getUserByUsername(final String username);
 
-    int insertUser(final User newUser);
+    int insertUser(final String username, final String password, final String firstname, final String lastname);
 }

@@ -27,10 +27,6 @@ public class Answer {
         return this.answerID;
     }
 
-    public void setAnswerID(int newID) {
-        this.answerID = newID;
-    }
-
     public String getAnswerText() {
         return this.answerText;
     }

@@ -41,10 +41,6 @@ public class User implements Serializable {
         return this.userID;
     }
 
-    public void setUserID(int newID) {
-        this.userID = newID;
-    }
-
     public String getUsername() {
         return this.username;
     }

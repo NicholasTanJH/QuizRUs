@@ -38,7 +38,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
     }
 
     @Override
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(final String username) {
         User user = null;
         String query = "SELECT * FROM user WHERE username = ?";
 
@@ -81,7 +81,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
     }
 
     @Override
-    public int insertUser(User newUser) {
+    public int insertUser(final String username, final String password, final String firstname, final String lastname) {
         int userID = -1;
         String query = "INSERT INTO user (username, password, firstname, lastname) VALUES (?, ?, ?, ?)";
 
@@ -89,10 +89,10 @@ public class UserPersistenceHSQLDB implements UserPersistence {
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new user.
-            pstmt.setString(1, newUser.getUsername());
-            pstmt.setString(2, newUser.getPassword());
-            pstmt.setString(3, newUser.getFirstname());
-            pstmt.setString(4, newUser.getLastname());
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setString(3, firstname);
+            pstmt.setString(4, lastname);
 
             // Execute the query, then check that the user was inserted.
             int affectedRows = pstmt.executeUpdate();

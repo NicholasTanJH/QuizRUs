@@ -27,10 +27,6 @@ public class Question {
         return this.questionID;
     }
 
-    public void setQuestionID(int newID) {
-        this.questionID = newID;
-    }
-
     public Quiz getMyQuiz() {
         return this.myQuiz;
     }

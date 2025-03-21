@@ -35,16 +35,13 @@ public class AccessUsers {
     }
 
     public User createUser(String username, final String password, final String firstname, final String lastname) {
-        User newUser = new User(username.toLowerCase(), password, firstname, lastname);
+        int userID = userPersistence.insertUser(username.toLowerCase(), password, firstname, lastname);
 
-        int userID = userPersistence.insertUser(newUser);
         if (userID != -1) {
-            newUser.setUserID(userID);
+            return new User(userID, username.toLowerCase(), password, firstname, lastname);
         } else {
             return null;
         }
-
-        return newUser;
     }
 
     public User loginUser(final String username, final String password) {

@@ -35,10 +35,6 @@ public class Quiz implements Serializable {
         return this.quizID;
     }
 
-    public void setQuizID(int newID) {
-        this.quizID = newID;
-    }
-
     public User getUser() {
         return this.myUser;
     }

@@ -37,9 +37,6 @@ public class UserQuizScore {
         return this.userQuizScoreID;
     }
 
-    public void setUserQuizScoreID(final int newUserQuizScoreID) {
-        this.userQuizScoreID = newUserQuizScoreID;
-    }
 
     public User getUser() {
         return this.user;
