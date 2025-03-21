@@ -15,16 +15,19 @@ import java.util.List;
 
 import comp3350.quizrus.R;
 import comp3350.quizrus.objects.Quiz;
+import comp3350.quizrus.objects.User;
 import comp3350.quizrus.presentation.PreviewActivity;
 
 public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleViewAdapter.MyViewHolder> {
     private final Context context;
     private final List<Quiz> quizzes;
+    private final User currUser;
 
     // quizTitles passed in from QuizSelectionActivity
-    public QuizRecycleViewAdapter(Context context, List<Quiz> quizzes) {
+    public QuizRecycleViewAdapter(Context context, List<Quiz> quizzes, User currUser) {
         this.context = context;
         this.quizzes = quizzes;
+        this.currUser = currUser;
     }
 
     @NonNull
@@ -65,6 +68,7 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, PreviewActivity.class);
             intent.putExtra("currQuiz", currQuiz); // pass the Quiz object that is pressed
+            intent.putExtra("currUser", currUser);
             context.startActivity(intent);
         });
     }
