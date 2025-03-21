@@ -21,10 +21,13 @@ import comp3350.quizrus.business.AccessLeaderboard;
 import comp3350.quizrus.business.AccessQuestions;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
+import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.UserQuizScore;
 import comp3350.quizrus.presentation.adapter.LeaderboardRecycleViewAdapter;
 
 public class PreviewActivity extends AppCompatActivity {
+    AccessLeaderboard accessLeaderboard;
+    User currUser;
     Quiz currQuiz;
     List<Question> questions;
     ImageButton buttonBack;
@@ -32,6 +35,8 @@ public class PreviewActivity extends AppCompatActivity {
     TextView creatorTV;
     TextView timeLimitTV;
     TextView questionNumberTV;
+    TextView userHighScoreTV;
+    TextView userAttemptsTV;
     Button buttonStart;
     int totalQuestionNumber;
 
@@ -46,8 +51,12 @@ public class PreviewActivity extends AppCompatActivity {
             return insets;
         });
 
+        //accessLeaderboard
+        accessLeaderboard = new AccessLeaderboard();
+
         Intent intent = getIntent();
         currQuiz = (Quiz) intent.getSerializableExtra("currQuiz");
+        currUser = (User) intent.getSerializableExtra("currUser");
 
         AccessQuestions accessQuestions = new AccessQuestions();
         questions = accessQuestions.getQuestions(currQuiz);
@@ -83,6 +92,22 @@ public class PreviewActivity extends AppCompatActivity {
         buttonStart = findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(button -> startQuiz());
 
+        //User top score
+        userHighScoreTV = findViewById(R.id.userHighScoreTV);
+        int userHighScore = accessLeaderboard.getUserHighScore(currQuiz, currUser);
+        //no change; the display will be "-"
+        if (userHighScore != 0) {
+            userHighScoreTV.setText(String.valueOf(userHighScore));
+        }
+
+        //User attempts
+        userAttemptsTV = findViewById(R.id.userAttemptsTV);
+        int userAttempts = accessLeaderboard.getNumAttempts(currQuiz, currUser);
+        //no change; the display will be "-"
+        if (userAttempts != 0) {
+            userAttemptsTV.setText(String.valueOf(userAttempts));
+        }
+
         showLeaderboard();
     }
 
@@ -94,7 +119,6 @@ public class PreviewActivity extends AppCompatActivity {
     }
 
     private void showLeaderboard() {
-        AccessLeaderboard accessLeaderboard = new AccessLeaderboard();
         List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz);
 
         // Setting up the recycle view

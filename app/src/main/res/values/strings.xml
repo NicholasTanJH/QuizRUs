@@ -67,4 +67,7 @@
     <string name="last_name">Last Name</string>
     <string name="or">Or</string>
     <string name="this_quiz_hasn_t_been_attempted_yet">This quiz hasn’t been attempted yet</string>
+    <string name="empty_display">-</string>
+    <string name="attempts">Attempts</string>
+    <string name="your_high_score">Your High Score</string>
 </resources>

@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
-                android:background="@drawable/login_text_input_layout_background"
+                android:background="@drawable/grey_borderless_background"
                 android:hint="@string/username"
                 android:padding="10dp"
                 android:textColorHint="@color/colorWhite">
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
-                android:background="@drawable/login_text_input_layout_background"
+                android:background="@drawable/grey_borderless_background"
                 android:gravity="center"
                 android:hint="@string/password"
                 android:padding="10dp"
