@@ -63,33 +63,17 @@ public class SignUpActivity extends AppCompatActivity {
 
         AccessUsers accessUsers = new AccessUsers();
 
-        String errorMessageUsername = accessUsers.authenticateUsername(newUsername);
-        String errorMessagePassword = accessUsers.authenticatePassword(newPassword);
+        String errorMessage = accessUsers.authenticateUser(newUsername, newPassword, newConfirmPassword, newFirstName, newLastName);
 
-        boolean isValidUsername = errorMessageUsername.isEmpty();
-        boolean isValidPassword = errorMessagePassword.isEmpty();
-        boolean isValidConfirmPassword = newPassword.equals(newConfirmPassword);
-        boolean isValidFirstName = accessUsers.authenticateName(newFirstName);
-        boolean isValidLastName = accessUsers.authenticateName(newLastName);
-
-        if (!isValidUsername) {
-            setAlertMessage(getString(R.string.invalid_username), "Username must be:" + errorMessageUsername);
-            return;
-        } else if (!isValidPassword) {
-            setAlertMessage(getString(R.string.invalid_password), "Password must have:" + errorMessagePassword);
-            return;
-        } else if (!isValidConfirmPassword) {
-            setAlertMessage(getString(R.string.invalid_confirm_password), getString(R.string.please_ensure_the_confirm_password_matches_your_password));
-            return;
-        } else if (!isValidFirstName) {
-            setAlertMessage(getString(R.string.invalid_first_name), getString(R.string.please_fill_in_your_first_name));
-            return;
-        } else if (!isValidLastName) {
-            setAlertMessage(getString(R.string.invalid_last_name), getString(R.string.please_fill_in_your_last_name));
-            return;
-        } else {
+        if(errorMessage.isEmpty())
+        {
             accessUsers.createUser(newUsername, newPassword, newFirstName, newLastName);
             successfulSignUpAnimation();
+        }
+        else
+        {
+            setAlertMessage(getString(R.string.invalid_sign_up), errorMessage);
+            return;
         }
     }
 

@@ -55,6 +55,47 @@ public class AccessUsers {
         return null;
     }
 
+    public String authenticateUser(String newUsername, String newPassword, String newConfirmedPassword, String newFirstname, String newLastname)
+    {
+        String errorMessage = "";
+
+        if(errorMessage.equals(""))
+        {
+            errorMessage = authenticateUsername(newUsername);
+        }
+
+        if(errorMessage.equals(""))
+        {
+            errorMessage = authenticatePassword(newPassword);
+        }
+
+        if(errorMessage.equals(""))
+        {
+            if(!newPassword.equals(newConfirmedPassword))
+            {
+                errorMessage = "Please ensure the confirmed password matches your password.";
+            }
+        }
+
+        if(errorMessage.equals(""))
+        {
+            if(!authenticateName(newFirstname))
+            {
+                errorMessage = "Please fill in your first name.";
+            }
+        }
+
+        if(errorMessage.equals(""))
+        {
+            if(!authenticateName(newLastname))
+            {
+                errorMessage = "Please fill in your last name.";
+            }
+        }
+
+        return errorMessage;
+    }
+
     public String authenticateUsername(String username) {
 
         String errorMessage = "";
@@ -66,7 +107,15 @@ public class AccessUsers {
         if (username.isEmpty() || username.length() > 20) {
             errorMessage += "\n \t - 20 characters or shorter";
         }
-        return errorMessage;
+
+        if(errorMessage.isEmpty())
+        {
+            return errorMessage;
+        }
+        else
+        {
+            return "Username must be:\n" + errorMessage;
+        }
     }
 
     public String authenticatePassword(String password) {
@@ -83,7 +132,7 @@ public class AccessUsers {
             errorMessage += "\n \t - Upper case (A-Z)";
         }
         if (!password.matches(lowerCase)) {
-            errorMessage += "\n \t - Smaller case (a-z)";
+            errorMessage += "\n \t - Lower case (a-z)";
         }
         if (!password.matches(numbers)) {
             errorMessage += "\n \t - Number (0-9)";
@@ -92,7 +141,14 @@ public class AccessUsers {
             errorMessage += "\n \t - Special character (eg. !@#$%^&*()_+)";
         }
 
-        return errorMessage;
+        if(errorMessage.isEmpty())
+        {
+            return errorMessage;
+        }
+        else
+        {
+            return "Password must have:\n" + errorMessage;
+        }
     }
 
     public boolean authenticateName(String name) {
