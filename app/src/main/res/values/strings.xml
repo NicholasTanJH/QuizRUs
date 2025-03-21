@@ -34,14 +34,7 @@
     <string name="no_questions_entered">No questions entered</string>
     <string name="sorry_please_enter_at_least_one_question_with_answers">Sorry, please enter at least one question with answers.</string>
     <string name="registering">Registering...</string>
-    <string name="invalid_username">Invalid Username</string>
-    <string name="invalid_password">Invalid Password</string>
-    <string name="invalid_confirm_password">Invalid Confirm Password</string>
-    <string name="invalid_first_name">Invalid First Name</string>
-    <string name="invalid_last_name">Invalid Last Name</string>
-    <string name="please_ensure_the_confirm_password_matches_your_password">Please ensure the confirm password matches your password.</string>
-    <string name="please_fill_in_your_first_name">Please fill in your first name.</string>
-    <string name="please_fill_in_your_last_name">Please fill in your last name.</string>
+    <string name="invalid_sign_up">Oops, Something\'s Missing...</string>
     <string name="failed_to_log_in">Failed to Log In</string>
     <string name="login_information_cannot_be_empty">Login information cannot be empty</string>
     <string name="logging_in">Logging In...</string>
