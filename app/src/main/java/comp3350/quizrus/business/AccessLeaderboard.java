@@ -32,6 +32,7 @@ public class AccessLeaderboard {
         return scorePersistence.getUserHighScore(quiz, user);
     }
 
+    // No test
     public double getAverageScore(Quiz quiz, User user)
     {
         double avg = scorePersistence.getAverageScore(quiz, user);
