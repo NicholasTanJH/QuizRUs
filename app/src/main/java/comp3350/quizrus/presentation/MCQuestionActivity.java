@@ -17,12 +17,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Collections;
 import java.util.List;
 
 import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessAnswers;
 import comp3350.quizrus.business.AccessQuestions;
-import comp3350.quizrus.business.Random;
 import comp3350.quizrus.objects.Answer;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
@@ -101,7 +101,7 @@ public class MCQuestionActivity extends AppCompatActivity {
 
         quiz = (Quiz) intent.getSerializableExtra("currQuiz");
         questions = accessQuestions.getQuestions(quiz);
-        Random.randomizeListItem(questions); // randomize
+        Collections.shuffle(questions); // randomize
         totalQuestionCount = questions.size();
     }
 
@@ -182,7 +182,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         // get the current question and it's answers
         Question currentQuestion = questions.get(questionNum);
         List<Answer> currentAnswers = accessAnswers.getAnswers(currentQuestion);
-        Random.randomizeListItem(currentAnswers); // randomize the answers
+        Collections.shuffle(currentAnswers); // randomize the answers
 
         // get the position of the correct answer
         rightAnswerButtonOrderNum = accessAnswers.getCorrectAnswerPosition(currentAnswers);
