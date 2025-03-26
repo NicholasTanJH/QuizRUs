@@ -147,6 +147,7 @@ public class PreviewActivity extends AppCompatActivity {
     private void startQuiz() {
         Intent intent = new Intent(this, MCQuestionActivity.class);
         intent.putExtra("currQuiz", currQuiz); // pass the Quiz object that is pressed
+        intent.putExtra("currUser", currUser); // pass the User object that is pressed
         this.startActivity(intent);
         finish();
     }

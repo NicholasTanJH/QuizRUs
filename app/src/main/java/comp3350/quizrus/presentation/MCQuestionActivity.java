@@ -26,6 +26,7 @@ import comp3350.quizrus.business.AccessQuestions;
 import comp3350.quizrus.objects.Answer;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
+import comp3350.quizrus.objects.User;
 
 public class MCQuestionActivity extends AppCompatActivity {
     // integer to keep track the option buttons
@@ -38,10 +39,12 @@ public class MCQuestionActivity extends AppCompatActivity {
     private final AccessAnswers accessAnswers = new AccessAnswers();
     private Quiz quiz;
     private List<Question> questions;
+    private User currUser;
     // Number of question in this quiz
     private int totalQuestionCount;
     // Track the question no.
     private int questionNum = 0;
+    private int score = 0;
     // The button last pressed
     private int lastPressedButtonOrderNum = -1;
     // The right answer button
@@ -71,7 +74,7 @@ public class MCQuestionActivity extends AppCompatActivity {
             return insets;
         });
 
-        setUpQuestions();
+        setUpQuestionsAndUser();
         setUpOptionButtons();
         setUpProceedButton();
         startTimer();
@@ -95,14 +98,16 @@ public class MCQuestionActivity extends AppCompatActivity {
     }
 
     // get the Quiz object that is pressed and set up the page
-    private void setUpQuestions() {
+    private void setUpQuestionsAndUser() {
         AccessQuestions accessQuestions = new AccessQuestions();
         Intent intent = getIntent();
-
         quiz = (Quiz) intent.getSerializableExtra("currQuiz");
         questions = accessQuestions.getQuestions(quiz);
         Collections.shuffle(questions); // randomize
         totalQuestionCount = questions.size();
+
+        //get User
+        currUser = (User) intent.getSerializableExtra("currUser");
     }
 
     /*
@@ -251,7 +256,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         proceedButton.setBackgroundResource(R.drawable.question_proceed_button_next);
         proceedButton.setOnClickListener(proceedButton -> {
             if (totalQuestionCount == questionNum) {
-                finish(); // get back to quiz selection page once reached the last question
+                goToQuizEndPage(); //Go to quiz end page after done
             } else {
                 // reset when still have more questions
                 reset();
@@ -266,6 +271,12 @@ public class MCQuestionActivity extends AppCompatActivity {
         getButtonByOrderNum(rightAnswerButtonOrderNum).setBackgroundResource(R.drawable.question_option_button_right);
 
         boolean isRight = (lastPressedButtonOrderNum == rightAnswerButtonOrderNum);
+
+        if(isRight)
+        {
+            score++;
+        }
+
         putRightOrWrongSound(isRight);
     }
 
@@ -317,7 +328,7 @@ public class MCQuestionActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        finish(); // Close activity
+                        goToQuizEndPage(); //Go to quiz end page after done
                     }
                 }, 2000);
             }
@@ -335,5 +346,17 @@ public class MCQuestionActivity extends AppCompatActivity {
         animator.setRepeatMode(ValueAnimator.REVERSE);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.start();
+    }
+
+    private void goToQuizEndPage(){
+        final int MILLIS_CONVERT = 1000;
+        int timePassed = (int)timeLeftInMillis/MILLIS_CONVERT;
+        Intent intent = new Intent(this, QuizEndActivity.class);
+        intent.putExtra("score", score);
+        intent.putExtra("currQuiz", quiz);
+        intent.putExtra("currUser", currUser);
+        intent.putExtra("timeLeft", timePassed);
+        startActivity(intent);
+        finish();
     }
 }

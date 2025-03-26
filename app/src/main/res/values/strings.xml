@@ -63,5 +63,8 @@
     <string name="empty_display">-</string>
     <string name="attempts">Attempts</string>
     <string name="your_high_score">Your High Score</string>
+    <string name="_1000">1000</string>
+    <string name="_0_1">0/1</string>
+    <string name="_0s">0s</string>
     <string name="deletion_is_disabled_as_you_are_not_the_owner_of_this_quiz">(Deletion is disabled as you are not the owner of this quiz)</string>
 </resources>
