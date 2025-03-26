@@ -65,7 +65,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
     }
 
     @Override
-    public int insertQuestion(Question question, Quiz quiz) {
+    public int insertQuestion(final String questionText, final Quiz quiz, final String questionType) {
         int questionID = -1;
         String query = "INSERT INTO question (questionText, quizID, questionType) VALUES (?, ?, ?)";
 
@@ -73,9 +73,9 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new question.
-            pstmt.setString(1, question.getQuestionText());
+            pstmt.setString(1, questionText);
             pstmt.setInt(2, quiz.getQuizID());
-            pstmt.setString(3, question.getQuestionType());
+            pstmt.setString(3, questionType);
 
             // Execute the query, then check that the question was inserted.
             int affectedRows = pstmt.executeUpdate();

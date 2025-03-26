@@ -7,22 +7,7 @@ public class Quiz implements Serializable {
     private int quizID;
     private final User myUser;
     private final String title;
-
     private final int timeLimit;
-
-    public Quiz(final int newQuizID, final String newTitle, final User newUser) {
-        this.quizID = newQuizID;
-        this.myUser = newUser;
-        this.title = newTitle;
-        this.timeLimit = 0;
-    }
-
-    public Quiz(final String newTitle, final User newUser, final int newtimeLimit) {
-        this.quizID = -1;
-        this.myUser = newUser;
-        this.title = newTitle;
-        this.timeLimit = newtimeLimit;
-    }
 
     public Quiz(final int newQuizID, final String newTitle, final User newUser, final int newtimeLimit) {
         this.quizID = newQuizID;
@@ -33,10 +18,6 @@ public class Quiz implements Serializable {
 
     public int getQuizID() {
         return this.quizID;
-    }
-
-    public void setQuizID(int newID) {
-        this.quizID = newID;
     }
 
     public User getUser() {

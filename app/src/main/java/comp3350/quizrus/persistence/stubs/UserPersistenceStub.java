@@ -16,8 +16,8 @@ public class UserPersistenceStub implements UserPersistence {
         this.numUsers = 0;
 
         // Add users.
-        insertUser(new User(0, "demo", "Password0!", "Jessie", "Andrade"));
-        insertUser(new User(1, "kakashi", "Password1!", "Saige", "Santana"));
+        insertUser("demo", "Password0!", "Jessie", "Andrade");
+        insertUser("kakashi", "Password1!", "Saige", "Santana");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class UserPersistenceStub implements UserPersistence {
     }
 
     @Override
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(final String username) {
         for (User user : this.users) {
             if (user.getUsername().equals(username)) {
                 return user;
@@ -46,8 +46,8 @@ public class UserPersistenceStub implements UserPersistence {
     }
 
     @Override
-    public int insertUser(User newUser) {
-        newUser.setUserID(this.numUsers);
+    public int insertUser(final String username, final String password, final String firstname, final String lastname) {
+        User newUser = new User(numUsers, username, password, firstname, lastname);
         this.users.add(newUser);
         this.numUsers++;
         return newUser.getUserID();

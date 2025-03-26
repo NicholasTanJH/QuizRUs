@@ -11,5 +11,5 @@ public interface QuestionPersistence {
 
     List<Question> getQuestionsForQuiz(Quiz quiz);
 
-    int insertQuestion(Question question, Quiz quiz);
+    int insertQuestion(final String questionText, final Quiz quiz, final String questionType);
 }

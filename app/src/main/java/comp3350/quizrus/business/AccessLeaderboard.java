@@ -44,18 +44,14 @@ public class AccessLeaderboard {
         return scorePersistence.getNumAttempts(quiz, user);
     }
 
-    public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect,
-            final int timeTaken, final int newScore, final Timestamp timeAdded) {
-        UserQuizScore newUserQuizScore = new UserQuizScore(user, quiz, numCorrect, timeTaken, newScore, timeAdded);
+    public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score, final Timestamp timeAdded) {
+        int userQuizScoreID = scorePersistence.insertScore(user, quiz, numCorrect, timeTaken, score, timeAdded);
 
-        int userQuizScoreID = scorePersistence.insertScore(newUserQuizScore, user, quiz);
         if (userQuizScoreID != -1) {
-            newUserQuizScore.setUserQuizScoreID(userQuizScoreID);
+            return new UserQuizScore(userQuizScoreID, user, quiz, numCorrect, timeTaken, score, timeAdded);
         } else {
             return null;
         }
-
-        return newUserQuizScore;
     }
 
 }
