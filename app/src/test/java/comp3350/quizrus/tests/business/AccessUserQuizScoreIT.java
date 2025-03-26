@@ -13,14 +13,12 @@ import comp3350.quizrus.application.Services;
 import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.business.AccessUsers;
 import comp3350.quizrus.objects.Quiz;
-import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.UserQuizScore;
 import comp3350.quizrus.persistence.QuizPersistence;
 import comp3350.quizrus.persistence.UserPersistence;
 import comp3350.quizrus.persistence.UserQuizScorePersistence;
 import comp3350.quizrus.persistence.stubs.QuizPersistenceStub;
 import comp3350.quizrus.persistence.stubs.UserPersistenceStub;
-import comp3350.quizrus.persistence.stubs.UserQuizScorePersistenceStub;
 import comp3350.quizrus.tests.utils.TestUtils;
 
 public class AccessUserQuizScoreIT {

@@ -25,14 +25,13 @@ public class UserQuizScoreTest {
 
     @Test
     public void testConstructorWithID() {
-        UserQuizScore score = new UserQuizScore(1, user, quiz, 5, 120, 80, timestamp);
+        UserQuizScore score = new UserQuizScore(1, user, quiz, 5, 120, 80);
         assertEquals(1, score.getUserQuizScoreID());
         assertEquals(user, score.getUser());
         assertEquals(quiz, score.getQuiz());
         assertEquals(5, score.getNumCorrect());
         assertEquals(120, score.getTimeTaken());
         assertEquals(80, score.getScore());
-        assertEquals(timestamp, score.getTimeAdded());
     }
 }
 
