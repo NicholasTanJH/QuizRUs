@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class QuestionTest {
     @Test
     public void testQuestion1() {
-        Quiz quiz = new Quiz(1, "Sample Quiz", null);
+        Quiz quiz = new Quiz(1, "Sample Quiz", null, 120);
         Question question = new Question(1, "Sample Question", quiz, "Multiple Choice");
 
         System.out.println("\nStarting testQuestion1");
@@ -24,7 +24,7 @@ public class QuestionTest {
 
     @Test
     public void testQuestionComparison() {
-        Quiz quiz = new Quiz(2, "Comparison Quiz", null);
+        Quiz quiz = new Quiz(2, "Comparison Quiz", null, 120);
         Question question1 = new Question(2, "Question A", quiz, "True/False");
         Question question2 = new Question(2, "Question A", quiz, "True/False");
         Question question3 = new Question(3, "Question B", quiz, "Short Answer");
