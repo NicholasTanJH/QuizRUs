@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,7 +97,7 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
     }
 
     @Override
-    public int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score, final Timestamp timeAdded) {
+    public int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score) {
         int userQuizScoreID = -1;
         String query = "INSERT INTO user_quiz_score (userID, quizID, numCorrect, timeTaken, score) VALUES (?, ?, ?, ?, ?)";
 
@@ -138,7 +137,6 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
         int numCorrect = rs.getInt("numCorrect");
         int timeTaken = rs.getInt("timeTaken");
         int score = rs.getInt("score");
-        Timestamp timeAdded = rs.getTimestamp("timeAdded");
 
         // Get the associated user.
         AccessUsers accessUsers = new AccessUsers();
@@ -148,6 +146,6 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
         AccessQuizzes accessQuizzes = new AccessQuizzes();
         Quiz quiz = accessQuizzes.getQuiz(quizID);
 
-        return new UserQuizScore(userQuizScoreID, user, quiz, numCorrect, timeTaken, score, timeAdded);
+        return new UserQuizScore(userQuizScoreID, user, quiz, numCorrect, timeTaken, score);
     }
 }

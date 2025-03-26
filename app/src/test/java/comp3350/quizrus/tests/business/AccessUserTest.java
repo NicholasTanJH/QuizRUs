@@ -12,7 +12,6 @@ import comp3350.quizrus.persistence.stubs.UserPersistenceStub;
 import comp3350.quizrus.tests.utils.TestUtils;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.io.IOException;

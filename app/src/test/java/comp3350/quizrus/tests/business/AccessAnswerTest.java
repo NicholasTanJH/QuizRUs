@@ -6,7 +6,6 @@ import java.util.List;
 import comp3350.quizrus.business.AccessAnswers;
 import comp3350.quizrus.objects.Answer;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

@@ -7,11 +7,9 @@ import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,8 +46,8 @@ public class AccessLeaderboardTest {
         User user2 = new User(2, "user2", "password", "test", "test");
         Quiz quiz = new Quiz(1, "test", user1, 10);
 
-        UserQuizScore score1 = new UserQuizScore(1, user1, quiz, 5, 30, 500, Timestamp.valueOf("2025-03-20 12:00:00"));
-        UserQuizScore score2 = new UserQuizScore(2, user2, quiz, 3, 40, 300, Timestamp.valueOf("2025-03-20 12:05:00"));
+        UserQuizScore score1 = new UserQuizScore(1, user1, quiz, 5, 30, 500);
+        UserQuizScore score2 = new UserQuizScore(2, user2, quiz, 3, 40, 300);
 
         List<UserQuizScore> mockScores = Arrays.asList(score1, score2);
 
@@ -88,33 +86,28 @@ public class AccessLeaderboardTest {
     public void testCreateUserQuizScore() {
         User user = new User(1, "testUser", "password", "test", "test");
         Quiz quiz = new Quiz(1, "test", user, 10);
-        Timestamp timeAdded = Timestamp.valueOf("2025-03-20 12:00:00");
-
-        UserQuizScore mockScore = new UserQuizScore(1, user, quiz, 4, 30, 400, timeAdded);
 
         // Mock behavior: insertScore should return a valid userQuizScoreID
-        when(mockScorePersistence.insertScore(eq(user), eq(quiz), eq(4), eq(30), eq(400), eq(timeAdded))).thenReturn(10);
+        when(mockScorePersistence.insertScore(eq(user), eq(quiz), eq(4), eq(30), eq(400))).thenReturn(10);
 
-        UserQuizScore createdScore = accessLeaderboard.CreateUserQuizScore(user, quiz, 4, 30, 400, timeAdded);
+        UserQuizScore createdScore = accessLeaderboard.CreateUserQuizScore(user, quiz, 4, 30, 400);
 
         assertNotNull(createdScore);
         assertEquals(10, createdScore.getUserQuizScoreID()); // Ensure the returned object has correct ID
         assertEquals(4, createdScore.getNumCorrect());
         assertEquals(30, createdScore.getTimeTaken());
         assertEquals(400, createdScore.getScore());
-        assertEquals(timeAdded, createdScore.getTimeAdded());
     }
 
     @Test
     public void testCreateUserQuizScore_Failure() {
         User user = new User(1, "testUser", "password", "test", "test");
         Quiz quiz = new Quiz(1, "test", user, 10);
-        Timestamp timeAdded = Timestamp.valueOf("2025-03-20 12:00:00");
 
         // Mock behavior: insertScore fails (returns -1)
-        when(mockScorePersistence.insertScore(eq(user), eq(quiz), eq(4), eq(30), eq(400), eq(timeAdded))).thenReturn(-1);
+        when(mockScorePersistence.insertScore(eq(user), eq(quiz), eq(4), eq(30), eq(400))).thenReturn(-1);
 
-        UserQuizScore createdScore = accessLeaderboard.CreateUserQuizScore(user, quiz, 4, 30, 400, timeAdded);
+        UserQuizScore createdScore = accessLeaderboard.CreateUserQuizScore(user, quiz, 4, 30, 400);
 
         assertNull(createdScore); // Should return null if score insertion fails
     }

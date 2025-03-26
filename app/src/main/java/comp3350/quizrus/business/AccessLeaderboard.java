@@ -1,6 +1,5 @@
 package comp3350.quizrus.business;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import comp3350.quizrus.application.Services;
@@ -37,11 +36,11 @@ public class AccessLeaderboard {
         return scorePersistence.getNumAttempts(quiz, user);
     }
 
-    public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score, final Timestamp timeAdded) {
-        int userQuizScoreID = scorePersistence.insertScore(user, quiz, numCorrect, timeTaken, score, timeAdded);
+    public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score) {
+        int userQuizScoreID = scorePersistence.insertScore(user, quiz, numCorrect, timeTaken, score);
 
         if (userQuizScoreID != -1) {
-            return new UserQuizScore(userQuizScoreID, user, quiz, numCorrect, timeTaken, score, timeAdded);
+            return new UserQuizScore(userQuizScoreID, user, quiz, numCorrect, timeTaken, score);
         } else {
             return null;
         }

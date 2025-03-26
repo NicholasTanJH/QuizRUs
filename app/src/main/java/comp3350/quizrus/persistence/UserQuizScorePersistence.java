@@ -1,6 +1,5 @@
 package comp3350.quizrus.persistence;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import comp3350.quizrus.objects.UserQuizScore;
@@ -14,5 +13,5 @@ public interface UserQuizScorePersistence {
 
     int getNumAttempts(Quiz quiz, User user);
 
-    int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score, final Timestamp timeAdded);
+    int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score);
 }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.quizrus.business.AccessUsers;
-import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.persistence.PersistenceException;
