@@ -134,6 +134,29 @@
                 android:layout_marginVertical="30dp"
                 android:background="@android:color/darker_gray" />
 
+            <Button
+                android:id="@+id/buttonDeleteQuiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/question_option_button_wrong"
+                android:gravity="center"
+                android:text="@string/delete"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/deleteTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/deletion_is_disabled_as_you_are_not_the_owner_of_this_quiz"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorPaleWhite"
+                android:textStyle="italic"
+                android:layout_marginTop="15dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
