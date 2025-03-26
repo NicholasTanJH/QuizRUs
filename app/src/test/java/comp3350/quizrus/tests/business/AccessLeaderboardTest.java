@@ -53,9 +53,9 @@ public class AccessLeaderboardTest {
 
         List<UserQuizScore> mockScores = Arrays.asList(score1, score2);
 
-        when(mockScorePersistence.getScoresForQuiz(quiz)).thenReturn(mockScores);
+        when(mockScorePersistence.getScoresForQuiz(quiz, 5)).thenReturn(mockScores);
 
-        List<UserQuizScore> retrievedScores = accessLeaderboard.getScoresForQuiz(quiz);
+        List<UserQuizScore> retrievedScores = accessLeaderboard.getScoresForQuiz(quiz, 5);
         assertNotNull(retrievedScores);
         assertEquals(2, retrievedScores.size());
         assertEquals(500, retrievedScores.get(0).getScore());

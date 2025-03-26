@@ -152,7 +152,7 @@ public class PreviewActivity extends AppCompatActivity {
     }
 
     private void showLeaderboard() {
-        List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz);
+        List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz, 5);
 
         // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.leaderboardRecyclerView);

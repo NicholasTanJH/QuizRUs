@@ -33,12 +33,18 @@ public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
     }
 
     @Override
-    public List<UserQuizScore> getScoresForQuiz(Quiz quiz) {
+    public List<UserQuizScore> getScoresForQuiz(Quiz quiz, int numEntries) {
         List<UserQuizScore> quizScores = new ArrayList<>();
+        int currNumEntries = 0;
 
         for (UserQuizScore score : this.scores) {
             if (score.getQuiz().getQuizID() == quiz.getQuizID()) {
                 quizScores.add(score);
+                currNumEntries++;
+                if(currNumEntries >= numEntries)
+                {
+                    break;
+                }
             }
         }
 
@@ -61,31 +67,6 @@ public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
             }
         }
         return highestScore;
-    }
-
-    @Override
-    public double getAverageScore(Quiz quiz, User user)
-    {
-        double totalScore = 0;
-        int numAttempts = 0;
-
-        for (UserQuizScore score : this.scores)
-        {
-            if(score.getQuiz().getQuizID() == quiz.getQuizID() && score.getUser().getUserID() == user.getUserID())
-            {
-                totalScore += score.getScore();
-                numAttempts++;
-            }
-        }
-
-        if(numAttempts == 0)
-        {
-            return 0;
-        }
-        else
-        {
-            return totalScore / numAttempts;
-        }
     }
 
     @Override

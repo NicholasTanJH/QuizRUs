@@ -21,15 +21,17 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
     }
 
     @Override
-    public List<UserQuizScore> getScoresForQuiz(Quiz quiz) {
+    public List<UserQuizScore> getScoresForQuiz(Quiz quiz, int numEntries) {
         List<UserQuizScore> userQuizScores = new ArrayList<>();
         String query = "SELECT * FROM user_quiz_score WHERE quizID = ?"
-                + "ORDER BY score DESC";
+                + "ORDER BY score DESC LIMIT ?";
 
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, quiz.getQuizID());
+            pstmt.setInt(2, numEntries);
+
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     UserQuizScore userQuizScore = buildUserQuizScoreFromRS(rs);
@@ -74,28 +76,6 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
     }
 
     @Override
-    public double getAverageScore(Quiz quiz, User user)
-    {
-        String query = "SELECT AVG(score) FROM user_quiz_score WHERE quizID = ? AND userID = ?";
-
-        try (Connection conn = DatabaseManager.connection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setInt(1, quiz.getQuizID());
-            pstmt.setInt(2, user.getUserID());
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getDouble(1);
-                }
-            }
-        } catch (SQLException e) {
-            throw new PersistenceException(e);
-        }
-        return -1;
-    }
-
-    @Override
     public int getNumAttempts(Quiz quiz, User user)
     {
         String query = "SELECT COUNT(*) FROM user_quiz_score WHERE quizID = ? AND userID = ?";
@@ -116,7 +96,6 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
         }
         return 0;
     }
-
 
     @Override
     public int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score, final Timestamp timeAdded) {
