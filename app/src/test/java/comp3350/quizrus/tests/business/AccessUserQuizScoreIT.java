@@ -65,7 +65,7 @@ public class AccessUserQuizScoreIT {
         Quiz quiz1 = accessQuizzes.getQuiz(0);
 
         // TODO: Replace this with business logic code.
-        List<UserQuizScore> userQuizScores = userQuizScorePersistence.getScoresForQuiz(quiz1);
+        List<UserQuizScore> userQuizScores = userQuizScorePersistence.getScoresForQuiz(quiz1, 5);
 
         // Check that the values for the first user score record are correct.
         assertEquals(0, userQuizScores.getFirst().getUserQuizScoreID());

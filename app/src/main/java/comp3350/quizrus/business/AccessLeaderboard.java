@@ -23,20 +23,13 @@ public class AccessLeaderboard {
         this.scorePersistence = scorePersistence;
     }
 
-    public List<UserQuizScore> getScoresForQuiz(Quiz quiz) {
-        return scorePersistence.getScoresForQuiz(quiz);
+    public List<UserQuizScore> getScoresForQuiz(Quiz quiz, int numEntries) {
+        return scorePersistence.getScoresForQuiz(quiz, numEntries);
     }
 
     public int getUserHighScore(Quiz quiz, User user)
     {
         return scorePersistence.getUserHighScore(quiz, user);
-    }
-
-    // No test
-    public double getAverageScore(Quiz quiz, User user)
-    {
-        double avg = scorePersistence.getAverageScore(quiz, user);
-        return Double.parseDouble(String.format("%.2f", avg));
     }
 
     public int getNumAttempts(Quiz quiz, User user)
