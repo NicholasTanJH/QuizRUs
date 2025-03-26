@@ -48,20 +48,21 @@ public class AccessQuizzes {
     }
 
     public Quiz createQuiz(final User user, final String title, final int timer) {
-        Quiz newQuiz = new Quiz(title, user, timer);
+        int quizID = quizPersistence.insertQuiz(title, user, timer);
 
-        int quizID = quizPersistence.insertQuiz(newQuiz, user);
         if (quizID != -1) {
-            newQuiz.setQuizID(quizID);
+            return new Quiz(quizID, title, user, timer);
         } else {
             return null;
         }
+    }
 
-        return newQuiz;
+    public boolean isQuizBelongsToUser(Quiz quiz, User user){
+        return quiz.getUser().getUserID() == user.getUserID();
     }
 
     public boolean deleteQuiz(Quiz quiz, User user) {
-        if (quiz.getUser().getUserID() == user.getUserID()) {
+        if (isQuizBelongsToUser(quiz, user)) {
             quizPersistence.deleteQuiz(quiz);
             return true;
         } else {

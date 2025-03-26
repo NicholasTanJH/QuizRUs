@@ -35,15 +35,12 @@ public class AccessQuestions {
     }
 
     public Question createQuestion(final Quiz quiz, final String questionText, final String questionType) {
-        Question newQuestion = new Question(questionText, quiz, questionType);
+        int questionID = questionPersistence.insertQuestion(questionText, quiz, questionType);
 
-        int questionID = questionPersistence.insertQuestion(newQuestion, quiz);
         if (questionID != -1) {
-            newQuestion.setQuestionID(questionID);
+            return new Question(questionID, questionText, quiz, questionType);
         } else {
             return null;
         }
-
-        return newQuestion;
     }
 }

@@ -42,15 +42,12 @@ public class AccessAnswers {
     }
 
     public Answer createAnswer(final String answerText, final Question question, final boolean isCorrect) {
-        Answer newAnswer = new Answer(answerText, isCorrect, question);
+        int answerID = answerPersistence.insertAnswer(answerText, question, isCorrect);
 
-        int answerID = answerPersistence.insertAnswer(newAnswer, question);
         if (answerID != -1) {
-            newAnswer.setAnswerID(answerID);
+            return new Answer(answerID, answerText, isCorrect, question);
         } else {
             return null;
         }
-
-        return newAnswer;
     }
 }

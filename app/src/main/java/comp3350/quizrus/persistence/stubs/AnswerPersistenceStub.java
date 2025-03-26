@@ -41,46 +41,46 @@ public class AnswerPersistenceStub implements AnswerPersistence {
         Question question7 = new Question(6, "How many partners did Drake date in 2024?", quiz2, "MULTIPLE_CHOICE");
 
         // Answers for quiz 1 question 1.
-        insertAnswer(new Answer(0, "Morocco", false, question1), question1);
-        insertAnswer(new Answer(1, "Malawi", false, question1), question1);
-        insertAnswer(new Answer(2, "Bangladesh", false, question1), question1);
-        insertAnswer(new Answer(3, "Canada", true, question1), question1);
+        insertAnswer("Morocco", question1, false);
+        insertAnswer("Malawi", question1, false);
+        insertAnswer("Bangladesh", question1, false);
+        insertAnswer("Canada", question1, true);
 
         // Answers for quiz 1 question 2.
-        insertAnswer(new Answer(4, "United States of America", false, question2), question2);
-        insertAnswer(new Answer(5, "South Korea", false, question2), question2);
-        insertAnswer(new Answer(6, "United Kingdom", false, question2), question2);
-        insertAnswer(new Answer(7, "China", true, question2), question2);
+        insertAnswer("United States of America", question2, false);
+        insertAnswer("South Korea", question2, false);
+        insertAnswer("United Kingdom", question2, false);
+        insertAnswer("China", question2, true);
 
         // Answers for quiz 1 question 3.
-        insertAnswer(new Answer(8, "The Maple Banner", false, question3), question3);
-        insertAnswer(new Answer(9, "The Red Leaf", false, question3), question3);
-        insertAnswer(new Answer(10, "The Maple Leaf", true, question3), question3);
-        insertAnswer(new Answer(11, "The White Cross", false, question3), question3);
+        insertAnswer("The Maple Banner", question3, false);
+        insertAnswer("The Red Leaf", question3, false);
+        insertAnswer("The Maple Leaf", question3, true);
+        insertAnswer("The White Cross", question3, false);
 
         // Answers for quiz 1 question 4.
-        insertAnswer(new Answer(12, "50", true, question4), question4);
-        insertAnswer(new Answer(13, "52", false, question4), question4);
-        insertAnswer(new Answer(14, "48", false, question4), question4);
-        insertAnswer(new Answer(15, "51", false, question4), question4);
+        insertAnswer("50", question4, true);
+        insertAnswer("52", question4, false);
+        insertAnswer("48", question4, false);
+        insertAnswer("51", question4, false);
 
         // Answers for quiz 1 question 5.
-        insertAnswer(new Answer(16, "Canada", false, question5), question5);
-        insertAnswer(new Answer(17, "United Kingdom", true, question5), question5);
-        insertAnswer(new Answer(18, "United States", false, question5), question5);
-        insertAnswer(new Answer(19, "New Zealand", false, question5), question5);
+        insertAnswer("Canada", question5, false);
+        insertAnswer("United Kingdom", question5, true);
+        insertAnswer("United States", question5, false);
+        insertAnswer("New Zealand", question5, false);
 
         // Answers for quiz 2 question 6.
-        insertAnswer(new Answer(20, "Nathan Nyugen", false, question6), question6);
-        insertAnswer(new Answer(21, "Nicholas Edward", false, question6), question6);
-        insertAnswer(new Answer(22, "Huzaifa Smith", false, question6), question6);
-        insertAnswer(new Answer(23, "Neil Murray", true, question6), question6);
+        insertAnswer("Nathan Nyugen", question6, false);
+        insertAnswer("Nicholas Edward", question6, false);
+        insertAnswer("Huzaifa Smith", question6, false);
+        insertAnswer("Neil Murray", question6, true);
 
         // Answers for quiz 2 question 7.
-        insertAnswer(new Answer(24, "101000", false, question7), question7);
-        insertAnswer(new Answer(25, "78", false, question7), question7);
-        insertAnswer(new Answer(26, "1", true, question7), question7);
-        insertAnswer(new Answer(27, "China", false, question7), question7);
+        insertAnswer("101000", question7, false);
+        insertAnswer("78", question7, false);
+        insertAnswer("1", question7, true);
+        insertAnswer("China", question7, false);
     }
 
     @Override
@@ -96,10 +96,10 @@ public class AnswerPersistenceStub implements AnswerPersistence {
     }
 
     @Override
-    public int insertAnswer(Answer answer, Question question) {
-        answer.setAnswerID(this.numAnswers);
-        this.answers.add(answer);
+    public int insertAnswer(final String answerText, final Question question, final boolean isCorrect) {
+        Answer newAnswer = new Answer(numAnswers, answerText, isCorrect, question);
+        this.answers.add(newAnswer);
         this.numAnswers++;
-        return answer.getAnswerID();
+        return newAnswer.getAnswerID();
     }
 }
