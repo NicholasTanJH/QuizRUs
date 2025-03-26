@@ -1,12 +1,15 @@
 package comp3350.quizrus.presentation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,6 +22,7 @@ import java.util.List;
 import comp3350.quizrus.R;
 import comp3350.quizrus.business.AccessLeaderboard;
 import comp3350.quizrus.business.AccessQuestions;
+import comp3350.quizrus.business.AccessQuizzes;
 import comp3350.quizrus.objects.Question;
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
@@ -37,7 +41,9 @@ public class PreviewActivity extends AppCompatActivity {
     TextView questionNumberTV;
     TextView userHighScoreTV;
     TextView userAttemptsTV;
+    TextView deleteTV;
     Button buttonStart;
+    Button buttonDeleteQuiz;
     int totalQuestionNumber;
 
     @Override
@@ -91,6 +97,33 @@ public class PreviewActivity extends AppCompatActivity {
         //start button
         buttonStart = findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(button -> startQuiz());
+
+        //Delete Quiz button
+        AccessQuizzes accessQuizzes = new AccessQuizzes();
+        boolean isQuizBelongsToUser = accessQuizzes.isQuizBelongsToUser(currQuiz, currUser);
+        buttonDeleteQuiz = findViewById(R.id.buttonDeleteQuiz);
+        deleteTV = findViewById(R.id.deleteTV);
+        if (isQuizBelongsToUser) {
+            deleteTV.setVisibility(View.GONE);
+            buttonDeleteQuiz.setOnClickListener(b -> {
+                //popup for delete confirmation
+                new AlertDialog.Builder(this)
+                        .setTitle("Confirm Deletion")
+                        .setMessage("Are you sure you want to delete this quiz? This action cannot be undone.")
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                accessQuizzes.deleteQuiz(currQuiz, currUser);
+                                //exit this page
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            });
+        } else {
+            buttonDeleteQuiz.setEnabled(false);
+            buttonDeleteQuiz.setAlpha(0.5f);
+        }
 
         //User top score
         userHighScoreTV = findViewById(R.id.userHighScoreTV);
