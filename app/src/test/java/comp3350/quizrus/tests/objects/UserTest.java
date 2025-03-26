@@ -12,7 +12,7 @@ public class UserTest {
         User user1;
         System.out.println("\nStarting UserTest");
 
-        user1 = new User(69, "faker", "squidgame");
+        user1 = new User(69, "faker", "squidgame", "lee", "sanghyeok");
         User user2 = user1;
 
         System.out.println("Testing if a user can be created.");

@@ -57,17 +57,17 @@ public class AccessQuizTest {
 
     @Test
     public void testDeleteQuiz_Success() {
-        User user = new User(1, "testUser", "password");
-        Quiz quiz = new Quiz(1, "test", user);
+        User user = new User(1, "testUser", "password", "test", "test");
+        Quiz quiz = new Quiz(1, "test", user, 10);
         boolean result = accessQuizzes.deleteQuiz(quiz, user);
         assertTrue(result);
     }
 
     @Test
     public void testDeleteQuiz_Failure_UnauthorizedUser() {
-        User owner = new User(1, "ownerUser", "password");
-        User anotherUser = new User(2, "anotherUser", "password");
-        Quiz quiz = new Quiz(1, "test", owner);
+        User owner = new User(1, "ownerUser", "password", "test", "test");
+        User anotherUser = new User(2, "anotherUser", "password", "test", "test");
+        Quiz quiz = new Quiz(1, "test", owner, 10);
         boolean result = accessQuizzes.deleteQuiz(quiz, anotherUser);
         assertFalse(result);
     }

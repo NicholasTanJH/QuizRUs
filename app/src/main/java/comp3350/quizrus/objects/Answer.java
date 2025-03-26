@@ -16,19 +16,8 @@ public class Answer {
         this.isCorrect = newIsCorrect;
     }
 
-    public Answer(final String newAnswerText, final boolean newIsCorrect, final Question newMyQuestion) {
-        this.answerID = -1;
-        this.answerText = newAnswerText;
-        this.myQuestion = newMyQuestion;
-        this.isCorrect = newIsCorrect;
-    }
-
     public int getAnswerID() {
         return this.answerID;
-    }
-
-    public void setAnswerID(int newID) {
-        this.answerID = newID;
     }
 
     public String getAnswerText() {

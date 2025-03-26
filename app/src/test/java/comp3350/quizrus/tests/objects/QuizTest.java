@@ -10,12 +10,12 @@ public class QuizTest {
 
     @Test
     public void testQuiz() {
-        User user1 = new User(10, "naruto", "ilovesasuke");
+        User user1 = new User(10, "naruto", "ilovesasuke", "naruto", "uzumaki");
         Quiz quiz1;
 
         System.out.println("\nStarting QuizTest");
 
-        quiz1 = new Quiz(420, "history of fortnite", user1);
+        quiz1 = new Quiz(420, "history of fortnite", user1, 120);
         Quiz quiz2 = quiz1;
 
         System.out.println("Testing if a quiz can be created.");

@@ -41,7 +41,7 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
     }
 
     @Override
-    public int insertAnswer(Answer answer, Question question) {
+    public int insertAnswer(final String answerText, final Question question, final boolean isCorrect) {
         int answerID = -1;
         String query = "INSERT INTO answer (answerText, isCorrect, questionID) VALUES (?, ?, ?)";
 
@@ -49,8 +49,8 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new answer.
-            pstmt.setString(1, answer.getAnswerText());
-            pstmt.setBoolean(2, answer.isCorrect());
+            pstmt.setString(1, answerText);
+            pstmt.setBoolean(2, isCorrect);
             pstmt.setInt(3, question.getQuestionID());
 
             // Execute the query, then check that the answer was inserted.

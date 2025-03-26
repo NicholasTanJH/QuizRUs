@@ -43,7 +43,7 @@ public class AccessQuestionTest {
     @Test
     public void testGetQuestions() {
         // Creating a quiz to pass to the access questions method
-        Quiz quiz1 = new Quiz(0, "Flags of Countries", new User(1, "kakashi", "password1"));
+        Quiz quiz1 = new Quiz(0, "Flags of Countries", new User(1, "kakashi", "password1", "kakashi", "hatake"), 120);
 
         // Get the list of questions for quiz1
         List<Question> questions = accessQuestions.getQuestions(quiz1);

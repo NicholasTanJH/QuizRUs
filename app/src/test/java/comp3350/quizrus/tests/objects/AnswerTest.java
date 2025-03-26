@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class AnswerTest {
     @Test
     public void testAnswer1() {
-        Quiz quiz = new Quiz(1, "Sample Quiz", null);
+        Quiz quiz = new Quiz(1, "Sample Quiz", null, 120);
         Question question = new Question(1, "Sample Question", quiz, "Multiple Choice");
         Answer answer = new Answer(1, "Sample Answer", true, question);
 
@@ -26,7 +26,7 @@ public class AnswerTest {
 
     @Test
     public void testAnswerComparison() {
-        Quiz quiz = new Quiz(2, "Comparison Quiz", null);
+        Quiz quiz = new Quiz(2, "Comparison Quiz", null, 120);
         Question question = new Question(2, "Comparison Question", quiz, "True/False");
         Answer answer1 = new Answer(2, "Answer A", true, question);
         Answer answer2 = new Answer(2, "Answer A", true, question);

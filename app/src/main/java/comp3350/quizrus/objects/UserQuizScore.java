@@ -11,17 +11,6 @@ public class UserQuizScore {
     private int score;
     private Timestamp timeAdded;
 
-    public UserQuizScore(User newUser, Quiz newQuiz, int newNumCorrect, int newtimeTaken, int newScore,
-            Timestamp newTimeAdded) {
-        this.userQuizScoreID = -1;
-        this.user = newUser;
-        this.quiz = newQuiz;
-        this.numCorrect = newNumCorrect;
-        this.timeTaken = newtimeTaken;
-        this.score = newScore;
-        this.timeAdded = newTimeAdded;
-    }
-
     public UserQuizScore(int newUserQuizScoreID, User newUser, Quiz newQuiz, int newNumCorrect, int newtimeTaken,
             int newScore, Timestamp newTimeAdded) {
         this.userQuizScoreID = newUserQuizScoreID;
@@ -37,9 +26,6 @@ public class UserQuizScore {
         return this.userQuizScoreID;
     }
 
-    public void setUserQuizScoreID(final int newUserQuizScoreID) {
-        this.userQuizScoreID = newUserQuizScoreID;
-    }
 
     public User getUser() {
         return this.user;
