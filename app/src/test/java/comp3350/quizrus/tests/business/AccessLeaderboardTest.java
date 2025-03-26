@@ -44,12 +44,12 @@ public class AccessLeaderboardTest {
 
     @Test
     public void testGetScoresForQuiz() {
-        User user1 = new User(1, "user1", "password");
-        User user2 = new User(2, "user2", "password");
-        Quiz quiz = new Quiz(1, "test", user1);
+        User user1 = new User(1, "user1", "password", "test", "test");
+        User user2 = new User(2, "user2", "password", "test", "test");
+        Quiz quiz = new Quiz(1, "test", user1, 10);
 
-        UserQuizScore score1 = new UserQuizScore(user1, quiz, 5, 30, 500, Timestamp.valueOf("2025-03-20 12:00:00"));
-        UserQuizScore score2 = new UserQuizScore(user2, quiz, 3, 40, 300, Timestamp.valueOf("2025-03-20 12:05:00"));
+        UserQuizScore score1 = new UserQuizScore(1, user1, quiz, 5, 30, 500, Timestamp.valueOf("2025-03-20 12:00:00"));
+        UserQuizScore score2 = new UserQuizScore(2, user2, quiz, 3, 40, 300, Timestamp.valueOf("2025-03-20 12:05:00"));
 
         List<UserQuizScore> mockScores = Arrays.asList(score1, score2);
 
@@ -64,8 +64,8 @@ public class AccessLeaderboardTest {
 
     @Test
     public void testGetUserHighScore() {
-        User user = new User(1, "testUser", "password");
-        Quiz quiz = new Quiz(1, "test", user);
+        User user = new User(1, "testUser", "password", "test", "test");
+        Quiz quiz = new Quiz(1, "test", user, 10);
 
         when(mockScorePersistence.getUserHighScore(quiz, user)).thenReturn(150);
 
@@ -75,8 +75,8 @@ public class AccessLeaderboardTest {
 
     @Test
     public void testGetNumAttempts() {
-        User user = new User(1, "testUser", "password");
-        Quiz quiz = new Quiz(1, "test", user);
+        User user = new User(1, "testUser", "password", "test", "test");
+        Quiz quiz = new Quiz(1, "test", user, 10);
 
         when(mockScorePersistence.getNumAttempts(quiz, user)).thenReturn(3);
 
@@ -86,14 +86,14 @@ public class AccessLeaderboardTest {
 
     @Test
     public void testCreateUserQuizScore() {
-        User user = new User(1, "testUser", "password");
-        Quiz quiz = new Quiz(1, "test", user);
+        User user = new User(1, "testUser", "password", "test", "test");
+        Quiz quiz = new Quiz(1, "test", user, 10);
         Timestamp timeAdded = Timestamp.valueOf("2025-03-20 12:00:00");
 
-        UserQuizScore mockScore = new UserQuizScore(user, quiz, 4, 30, 400, timeAdded);
+        UserQuizScore mockScore = new UserQuizScore(1, user, quiz, 4, 30, 400, timeAdded);
 
         // Mock behavior: insertScore should return a valid userQuizScoreID
-        when(mockScorePersistence.insertScore(any(UserQuizScore.class), eq(user), eq(quiz))).thenReturn(10);
+        when(mockScorePersistence.insertScore(eq(user), eq(quiz), eq(4), eq(30), eq(400), eq(timeAdded))).thenReturn(10);
 
         UserQuizScore createdScore = accessLeaderboard.CreateUserQuizScore(user, quiz, 4, 30, 400, timeAdded);
 
@@ -107,12 +107,12 @@ public class AccessLeaderboardTest {
 
     @Test
     public void testCreateUserQuizScore_Failure() {
-        User user = new User(1, "testUser", "password");
-        Quiz quiz = new Quiz(1, "test", user);
+        User user = new User(1, "testUser", "password", "test", "test");
+        Quiz quiz = new Quiz(1, "test", user, 10);
         Timestamp timeAdded = Timestamp.valueOf("2025-03-20 12:00:00");
 
         // Mock behavior: insertScore fails (returns -1)
-        when(mockScorePersistence.insertScore(any(UserQuizScore.class), eq(user), eq(quiz))).thenReturn(-1);
+        when(mockScorePersistence.insertScore(eq(user), eq(quiz), eq(4), eq(30), eq(400), eq(timeAdded))).thenReturn(-1);
 
         UserQuizScore createdScore = accessLeaderboard.CreateUserQuizScore(user, quiz, 4, 30, 400, timeAdded);
 
