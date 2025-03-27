@@ -12,7 +12,6 @@ import comp3350.quizrus.persistence.stubs.UserPersistenceStub;
 import comp3350.quizrus.tests.utils.TestUtils;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +62,13 @@ public class AccessUserTest {
         String error = accessUsers.authenticateUser("kakashi", "Hello1!", "Hello1!", "Saige", "Santana" );
         assertEquals("Username must be:\n\n \t - Username is taken",error);
 
-        String error1 = accessUsers.authenticateUser("kakashi1!", "Hello", "Hello", "Saige", "Santana" );
-        assertEquals(error1, "Password must have:\n\n \t - 8 or more characters\n \t - Number (0-9)\n \t - Special character (eg. !@#$%^&*()_+)");
+        String error1 = accessUsers.authenticateUser("kakashishishishishishishishishishishishishi", "Hello", "Hello", "Saige", "Santana" );
+        assertEquals(error1, "Username must be:\n\n \t - 20 characters or shorter");
+
+        String error2 = accessUsers.authenticateUser("", "Hello1!!", "Hello1!!", "Saige", "Santana" );
+        assertEquals(error2,"Username must be:\n\n \t - 20 characters or shorter" );
+
+        String error3 = accessUsers.authenticateUser("kakashi1!", "Hello", "Hello", "Saige", "Santana" );
+        assertEquals(error3, "Password must have:\n\n \t - 8 or more characters\n \t - Number (0-9)\n \t - Special character (eg. !@#$%^&*()_+)");
     }
 }

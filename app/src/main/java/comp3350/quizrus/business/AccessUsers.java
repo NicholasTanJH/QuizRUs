@@ -94,7 +94,7 @@ public class AccessUsers {
     }
 
     public String authenticateUsername(String username) {
-
+        username = username.trim();
         String errorMessage = "";
         User user = userPersistence.getUserByUsername(username);
         boolean found = (user != null);
