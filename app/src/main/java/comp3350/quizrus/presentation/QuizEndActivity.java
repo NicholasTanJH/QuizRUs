@@ -3,6 +3,7 @@ package comp3350.quizrus.presentation;
 import static comp3350.quizrus.business.CalculateScore.calculateScore;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -59,6 +60,8 @@ public class QuizEndActivity extends AppCompatActivity {
         Intent intent = getIntent();
         AccessQuestions accessQuestions = new AccessQuestions();
         String textViewHolder;
+
+        quizEndAudio();
 
         accessLeaderboard = new AccessLeaderboard();
 
@@ -118,6 +121,25 @@ public class QuizEndActivity extends AppCompatActivity {
         //Quick Calc to get time taken
         int timeTaken = timeLimitTotal - timeLeft;
         //Stores the results of the quiz
-        accessLeaderboard.CreateUserQuizScore(currUser, currQuiz, numCorrectQuestions, timeTaken, userHighScoreTotal, );
+        accessLeaderboard.CreateUserQuizScore(currUser, currQuiz, numCorrectQuestions, timeTaken, userHighScoreTotal);
+    }
+
+    private void quizEndAudio() {
+        int luckyNumber = 7;
+        int maxChance = 10;
+        int minChance = 1;
+        int range = maxChance - minChance + 1;
+        MediaPlayer mediaPlayer;
+
+        int audioChance = (int)(Math.random() * range) + minChance;
+
+        if(audioChance == luckyNumber){
+            mediaPlayer = MediaPlayer.create(this,R.raw.haha_funny_sound);
+        }
+        else {
+            mediaPlayer = MediaPlayer.create(this,R.raw.applause_sound_effect);
+        }
+
+        mediaPlayer.start();
     }
 }

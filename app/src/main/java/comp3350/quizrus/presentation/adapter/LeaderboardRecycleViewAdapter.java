@@ -20,6 +20,14 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
     private final int totalQuestionNumber;
     private final boolean isEmptyLeaderboard;
 
+    /**
+     * @param context
+     * This is the context for the android resources.
+     * @param userQuizScoreList
+     * The list of the user's and their scores.
+     * @param totalQuestionNumber
+     * The total number of questions.
+     */
     public LeaderboardRecycleViewAdapter(Context context, List<UserQuizScore> userQuizScoreList, int totalQuestionNumber) {
         this.context = context;
         this.userQuizScoreList = userQuizScoreList;
@@ -27,6 +35,14 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         isEmptyLeaderboard = userQuizScoreList.isEmpty();
     }
 
+    /**
+     * @param parent
+     * The ViewGroup into which the new View will be added after it is bound to an adapter position.
+     * @param viewType
+     * The view type of the new View.
+     * @return
+     * Returns the view for the leaderboard.
+     */
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,6 +51,13 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         return new LeaderboardRecycleViewAdapter.MyViewHolder(view);
     }
 
+    /**
+     * This binds the fragmented layout to the leaderboard, and inputs the information needed.
+     * @param holder
+     * The ViewHolder which should be updated to represent the contents of the item at the given position in the data set.
+     * @param position
+     * The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         TextView leaderboardOrderNumberTV = holder.leaderboardOrderNumberTV;
@@ -71,6 +94,10 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         }
     }
 
+    /**
+     * @return
+     * Gets the number of leaderboard entries
+     */
     @Override
     public int getItemCount() {
         if (isEmptyLeaderboard) {
@@ -88,6 +115,10 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         TextView leaderboardScoreTV;
         TextView leaderboardScoreInfoTV;
 
+        /**
+         * @param itemView
+         * This is the text in the text views for the leaderboard
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             leaderboardOrderNumberTV = itemView.findViewById(R.id.leaderboardOrderNumberTV);
