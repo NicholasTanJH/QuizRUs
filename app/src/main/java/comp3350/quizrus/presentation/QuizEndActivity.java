@@ -97,8 +97,12 @@ public class QuizEndActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Shows the leaderboard in the end screen
+     * grabs the information from the logic layer based on the quiz
+     */
     private void showLeaderboard() {
-        List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz);
+        List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz, 1);
 
         // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.EndLeaderBoardRecyclerView);
@@ -107,6 +111,9 @@ public class QuizEndActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * Stores the users final score
+     */
     private void saveScore(){
         //Quick Calc to get time taken
         int timeTaken = timeLimitTotal - timeLeft;
