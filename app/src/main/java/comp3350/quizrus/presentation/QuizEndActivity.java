@@ -105,7 +105,7 @@ public class QuizEndActivity extends AppCompatActivity {
      * grabs the information from the logic layer based on the quiz
      */
     private void showLeaderboard() {
-        List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz, 1);
+        List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz, 5);
 
         // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.EndLeaderBoardRecyclerView);
