@@ -15,7 +15,7 @@ SET SCHEMA PUBLIC
 INSERT INTO USER VALUES(0, 'demo', 'Password0!', 'Jessie', 'Andrade')
 INSERT INTO USER VALUES(1, 'kakashi', 'Password1!', 'Saige', 'Santana')
 INSERT INTO QUIZ VALUES(0, 'Flags of Countries', 0, 120)
-INSERT INTO QUIZ VALUES(1, 'Celebrity Partners', 1, 120)
+INSERT INTO QUIZ VALUES(1, 'Celebrity Partners', 1, 10)
 INSERT INTO QUESTION VALUES(0, 'Which of these countries have white in their flag?', 0, 'MULTIPLE_CHOICE')
 INSERT INTO QUESTION VALUES(1, 'In which country was the first flag created?', 0, 'MULTIPLE_CHOICE')
 INSERT INTO QUESTION VALUES(2, 'The flag of Canada is commonly known as', 0, 'MULTIPLE_CHOICE')

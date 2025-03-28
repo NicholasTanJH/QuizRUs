@@ -9,6 +9,7 @@ import comp3350.quizrus.persistence.stubs.UserPersistenceStub;
 import comp3350.quizrus.persistence.stubs.QuizPersistenceStub;
 import comp3350.quizrus.persistence.stubs.QuestionPersistenceStub;
 import comp3350.quizrus.persistence.stubs.AnswerPersistenceStub;
+import comp3350.quizrus.persistence.stubs.UserQuizScorePersistenceStub;
 import comp3350.quizrus.persistence.hsqldb.UserPersistenceHSQLDB;
 import comp3350.quizrus.persistence.hsqldb.QuizPersistenceHSQLDB;
 import comp3350.quizrus.persistence.hsqldb.QuestionPersistenceHSQLDB;
