@@ -95,8 +95,7 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
     }
 
     /**
-     * @return
-     * Gets the number of leaderboard entries
+     * @return 1 if leaderboard is empty, or else the number of leaderboard
      */
     @Override
     public int getItemCount() {
@@ -107,8 +106,7 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         }
     }
 
-    // ==============================ViewHolder
-    // Class==========================================================
+    // ==============================ViewHolder Class==========================================================
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView leaderboardOrderNumberTV;
         TextView leaderboardNameTV;

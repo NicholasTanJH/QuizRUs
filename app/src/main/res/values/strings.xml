@@ -67,4 +67,14 @@
     <string name="_0_1">0/1</string>
     <string name="_0s">0s</string>
     <string name="deletion_is_disabled_as_you_are_not_the_owner_of_this_quiz">(Deletion is disabled as you are not the owner of this quiz)</string>
+    <string name="search_result_message">%1$d results found from \"%2$s\"</string>
+    <string name="no_question_entered">No question entered</string>
+    <string name="sorry_please_enter_a_question_for_this_quiz">Sorry, please enter a question for this quiz.</string>
+    <string name="missing_answer">Missing answer</string>
+    <string name="sorry_please_enter_all_answers_to_this_question">Sorry, please enter all answers to this question.</string>
+    <string name="created_by">Created by %1$s</string>
+    <string name="time_limit_text">Time limit: %1$d%s</string>
+    <string name="question_number_text">No. of Questions: %1$d</string>
+    <string name="confirm_deletion">Confirm Deletion</string>
+    <string name="are_you_sure_you_want_to_delete_this_quiz_this_action_cannot_be_undone">Are you sure you want to delete this quiz? This action cannot be undone.</string>
 </resources>

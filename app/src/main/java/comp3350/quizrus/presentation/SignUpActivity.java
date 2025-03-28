@@ -54,6 +54,12 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Get all of the inputs from UI
+     * Attempts to sign in
+     * Show popup when sign in failed
+     * Animate button when sign in succeed
+     */
     private void checkSignInInfo() {
         String newUsername = textInputEditTextUsername.getText().toString();
         String newPassword = textInputEditTextPassword.getText().toString();
@@ -73,11 +79,12 @@ public class SignUpActivity extends AppCompatActivity {
         else
         {
             setAlertMessage(getString(R.string.invalid_sign_up), errorMessage);
-            return;
         }
     }
 
-    // animation for changing the button text when registering
+    /**
+     * Animate the button when sign up succeed
+     */
     private void successfulSignUpAnimation() {
         buttonCreateAccount.setText(R.string.registering);
         new Handler().postDelayed(() -> {
@@ -88,6 +95,12 @@ public class SignUpActivity extends AppCompatActivity {
         }, 1500);
     }
 
+
+    /**
+     * Create popup
+     * @param alertTitle popup title
+     * @param alertMessage popup message
+     */
     private void setAlertMessage(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         SpannableString spannableMessage = new SpannableString(alertMessage);

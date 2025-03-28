@@ -24,6 +24,7 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
     private final User currUser;
 
     /**
+     * quizTitles passed in from QuizSelectionActivity
      * @param context
      * This is the context for the android resource.
      * @param quizzes
@@ -31,7 +32,6 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
      * @param currUser
      * This is the currently logged in user.
      */
-    // quizTitles passed in from QuizSelectionActivity
     public QuizRecycleViewAdapter(Context context, List<Quiz> quizzes, User currUser) {
         this.context = context;
         this.quizzes = quizzes;
@@ -101,8 +101,7 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
         return quizzes.size();
     }
 
-    // ==============================ViewHolder
-    // Class==========================================================
+    // ==============================ViewHolder Class============================================================
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView quizTitle;
 

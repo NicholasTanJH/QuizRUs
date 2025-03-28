@@ -62,6 +62,11 @@ public class UserLoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Get username and password from user and tried to log in
+     * get the response from logic layer
+     * do animation corresponding to login is successful or not
+     */
     private void logIn() {
         String logInUsername = textInputEditTextUsername.getText().toString();
         String logInPassword = textInputEditTextPassword.getText().toString();
@@ -76,7 +81,12 @@ public class UserLoginActivity extends AppCompatActivity {
         }
     }
 
-    // animation for changing the button text when registering
+    /**
+     * Give popup when login failed
+     * Animate button when login succeeded
+     * @param isLoginInfoCorrect login info is right
+     * @param user User object that was logged in
+     */
     private void logInAnimation(boolean isLoginInfoCorrect, User user) {
         buttonLogIn.setText(R.string.logging_in);
         if (isLoginInfoCorrect) {
@@ -97,6 +107,11 @@ public class UserLoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Create popup
+     * @param alertTitle title popup
+     * @param alertMessage message popup
+     */
     private void setAlertMessage(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         SpannableString spannableMessage = new SpannableString(alertMessage);

@@ -34,16 +34,6 @@ public class PreviewActivity extends AppCompatActivity {
     User currUser;
     Quiz currQuiz;
     List<Question> questions;
-    ImageButton buttonBack;
-    TextView quizTitleTV;
-    TextView creatorTV;
-    TextView timeLimitTV;
-    TextView questionNumberTV;
-    TextView userHighScoreTV;
-    TextView userAttemptsTV;
-    TextView deleteTV;
-    Button buttonStart;
-    Button buttonDeleteQuiz;
     int totalQuestionNumber;
 
     @Override
@@ -57,9 +47,10 @@ public class PreviewActivity extends AppCompatActivity {
             return insets;
         });
 
-        //accessLeaderboard
+        //AccessLeaderboard
         accessLeaderboard = new AccessLeaderboard();
 
+        //Get intent passing variables
         Intent intent = getIntent();
         currQuiz = (Quiz) intent.getSerializableExtra("currQuiz");
         currUser = (User) intent.getSerializableExtra("currUser");
@@ -67,49 +58,73 @@ public class PreviewActivity extends AppCompatActivity {
         AccessQuestions accessQuestions = new AccessQuestions();
         questions = accessQuestions.getQuestions(currQuiz);
 
-        //back button
-        buttonBack = findViewById(R.id.buttonBack);
-        buttonBack.setOnClickListener(button -> finish());
+        setUpQuizInfo();
+        setUpButtons();
+        showLeaderboard();
+    }
 
+    private void setUpQuizInfo() {
         //Quiz title
         String quizTitle = currQuiz.getTitle();
-        quizTitleTV = findViewById(R.id.quizTitleTextView);
+        TextView quizTitleTV = findViewById(R.id.quizTitleTextView);
         quizTitleTV.setText(quizTitle);
 
         //Creator
         String creator = currQuiz.getUser().getUsername();
-        String creatorDisplayText = "Created by " + creator;
-        creatorTV = findViewById(R.id.creatorTextView);
+        String creatorDisplayText = String.format(getString(R.string.created_by), creator);
+        TextView creatorTV = findViewById(R.id.creatorTextView);
         creatorTV.setText(creatorDisplayText);
 
         //Time limit
         int timeLimit = currQuiz.getTimeLimit();
-        String timeLimitDisplayText = "Time limit: " + Integer.toString(timeLimit) + "s";
-        timeLimitTV = findViewById(R.id.timeLimitTextView);
+        String timeLimitDisplayText = String.format(getString(R.string.time_limit_text), timeLimit, "s");
+        TextView timeLimitTV = findViewById(R.id.timeLimitTextView);
         timeLimitTV.setText(timeLimitDisplayText);
 
         //# of Questions
         totalQuestionNumber = questions.size();
-        String questionNumberDisplayText = "No. of Question: " + totalQuestionNumber;
-        questionNumberTV = findViewById(R.id.questionNumberTextView);
+        String questionNumberDisplayText = String.format(getString(R.string.question_number_text), totalQuestionNumber);
+        TextView questionNumberTV = findViewById(R.id.questionNumberTextView);
         questionNumberTV.setText(questionNumberDisplayText);
 
+        //User top score
+        TextView userHighScoreTV = findViewById(R.id.userHighScoreTV);
+        int userHighScore = accessLeaderboard.getUserHighScore(currQuiz, currUser);
+        //no change; the display will be "-"
+        if (userHighScore != 0) {
+            userHighScoreTV.setText(String.valueOf(userHighScore));
+        }
+
+        //User attempts
+        TextView userAttemptsTV = findViewById(R.id.userAttemptsTV);
+        int userAttempts = accessLeaderboard.getNumAttempts(currQuiz, currUser);
+        //no change; the display will be "-"
+        if (userAttempts != 0) {
+            userAttemptsTV.setText(String.valueOf(userAttempts));
+        }
+    }
+
+    private void setUpButtons() {
+        //back button
+        ImageButton buttonBack = findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(button -> finish());
+
         //start button
-        buttonStart = findViewById(R.id.buttonStart);
+        Button buttonStart = findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(button -> startQuiz());
 
         //Delete Quiz button
         AccessQuizzes accessQuizzes = new AccessQuizzes();
         boolean isQuizBelongsToUser = accessQuizzes.isQuizBelongsToUser(currQuiz, currUser);
-        buttonDeleteQuiz = findViewById(R.id.buttonDeleteQuiz);
-        deleteTV = findViewById(R.id.deleteTV);
+        Button buttonDeleteQuiz = findViewById(R.id.buttonDeleteQuiz);
+        TextView deleteTV = findViewById(R.id.deleteTV);
         if (isQuizBelongsToUser) {
             deleteTV.setVisibility(View.GONE);
             buttonDeleteQuiz.setOnClickListener(b -> {
                 //popup for delete confirmation
                 new AlertDialog.Builder(this)
-                        .setTitle("Confirm Deletion")
-                        .setMessage("Are you sure you want to delete this quiz? This action cannot be undone.")
+                        .setTitle(R.string.confirm_deletion)
+                        .setMessage(R.string.are_you_sure_you_want_to_delete_this_quiz_this_action_cannot_be_undone)
                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 accessQuizzes.deleteQuiz(currQuiz, currUser);
@@ -124,34 +139,11 @@ public class PreviewActivity extends AppCompatActivity {
             buttonDeleteQuiz.setEnabled(false);
             buttonDeleteQuiz.setAlpha(0.5f);
         }
-
-        //User top score
-        userHighScoreTV = findViewById(R.id.userHighScoreTV);
-        int userHighScore = accessLeaderboard.getUserHighScore(currQuiz, currUser);
-        //no change; the display will be "-"
-        if (userHighScore != 0) {
-            userHighScoreTV.setText(String.valueOf(userHighScore));
-        }
-
-        //User attempts
-        userAttemptsTV = findViewById(R.id.userAttemptsTV);
-        int userAttempts = accessLeaderboard.getNumAttempts(currQuiz, currUser);
-        //no change; the display will be "-"
-        if (userAttempts != 0) {
-            userAttemptsTV.setText(String.valueOf(userAttempts));
-        }
-
-        showLeaderboard();
     }
 
-    private void startQuiz() {
-        Intent intent = new Intent(this, MCQuestionActivity.class);
-        intent.putExtra("currQuiz", currQuiz); // pass the Quiz object that is pressed
-        intent.putExtra("currUser", currUser); // pass the User object that is pressed
-        this.startActivity(intent);
-        finish();
-    }
-
+    /**
+     * Show top 5 scores in the leaderboard
+     */
     private void showLeaderboard() {
         List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz, 5);
 
@@ -160,5 +152,16 @@ public class PreviewActivity extends AppCompatActivity {
         LeaderboardRecycleViewAdapter adapter = new LeaderboardRecycleViewAdapter(this, userQuizScoreList, totalQuestionNumber);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    /**
+     * Go to MCQuestion page
+     */
+    private void startQuiz() {
+        Intent intent = new Intent(this, MCQuestionActivity.class);
+        intent.putExtra("currQuiz", currQuiz); // pass the Quiz object that is pressed
+        intent.putExtra("currUser", currUser); // pass the User object that is pressed
+        this.startActivity(intent);
+        finish();
     }
 }

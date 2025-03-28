@@ -57,6 +57,10 @@ public class QuizCreationActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Record the new quiz info
+     * Invalid quiz input format will be notified through alertMessage popup
+     */
     private void setupQuizInfo() {
         Intent intent;
         String quizName = quizNameEditText.getText().toString();
@@ -81,6 +85,11 @@ public class QuizCreationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method is called whenever user want to save a new question they have created
+     * Save the user input into a list to record the new question they create
+     * Invalid question input format will be notified through alertMessage popup
+     */
     private void setAlertMessage(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         SpannableString spannableMessage = new SpannableString(alertMessage);
