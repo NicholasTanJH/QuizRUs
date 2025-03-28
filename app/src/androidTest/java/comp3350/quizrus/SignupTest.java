@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 
 import comp3350.quizrus.presentation.UserLoginActivity;
 
+import androidx.test.espresso.Espresso;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -29,11 +30,15 @@ public class SignupTest {
 
         // Fill in sign-up details
         onView(withId(R.id.textInputETUsername)).perform(typeText("testUser"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password00!"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.textInputETConfirmPassword)).perform(typeText("Password00!"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.textInputETFirstName)).perform(typeText("John"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.textInputETLastName)).perform(typeText("Doe"));
-        closeSoftKeyboard();
+        Espresso.closeSoftKeyboard();
         // Click sign-up button
         onView(withId(R.id.buttonCreateAccount)).perform(click());
         sleep(5000);
