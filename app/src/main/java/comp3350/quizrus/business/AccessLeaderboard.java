@@ -10,11 +10,9 @@ import comp3350.quizrus.persistence.UserQuizScorePersistence;
 
 public class AccessLeaderboard {
     private UserQuizScorePersistence scorePersistence;
-    private List<UserQuizScore> userQuizScores;
 
     public AccessLeaderboard() {
         this.scorePersistence = Services.getUserQuizScorePersistence();
-        this.userQuizScores = null;
     }
 
     public AccessLeaderboard(final UserQuizScorePersistence scorePersistence) {

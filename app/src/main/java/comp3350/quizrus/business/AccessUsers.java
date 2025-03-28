@@ -10,14 +10,10 @@ import comp3350.quizrus.persistence.UserPersistence;
 public class AccessUsers {
     private UserPersistence userPersistence;
     private List<User> users;
-    private User user;
-    private int currentUser;
 
     public AccessUsers() {
         this.userPersistence = Services.getUserPersistence();
         this.users = null;
-        this.user = null;
-        this.currentUser = 0;
     }
 
     public AccessUsers(final UserPersistence userPersistence) {

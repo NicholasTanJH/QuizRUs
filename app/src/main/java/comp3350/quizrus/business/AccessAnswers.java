@@ -10,14 +10,10 @@ import comp3350.quizrus.persistence.AnswerPersistence;
 public class AccessAnswers {
     private AnswerPersistence answerPersistence;
     private List<Answer> answers;
-    private Answer answer;
-    private int currentAnswer;
 
     public AccessAnswers() {
         this.answerPersistence = Services.getAnswerPersistence();
         this.answers = null;
-        this.answer = null;
-        this.currentAnswer = 0;
     }
 
     public AccessAnswers(final AnswerPersistence answerPersistence) {

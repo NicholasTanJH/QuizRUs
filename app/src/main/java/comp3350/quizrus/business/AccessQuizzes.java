@@ -11,14 +11,10 @@ import comp3350.quizrus.persistence.QuizPersistence;
 public class AccessQuizzes {
     private QuizPersistence quizPersistence;
     private List<Quiz> quizzes;
-    private Quiz quiz;
-    private int currentQuiz;
 
     public AccessQuizzes() {
         quizPersistence = Services.getQuizPersistence();
         quizzes = null;
-        quiz = null;
-        currentQuiz = 0;
     }
 
     public AccessQuizzes(final QuizPersistence quizPersistence) {
