@@ -31,13 +31,13 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            //find the top numEntries scores for a quiz
+            // find the top numEntries scores for a quiz
             pstmt.setInt(1, quiz.getQuizID());
             pstmt.setInt(2, numEntries);
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    //create the list of objects to return
+                    // create the list of objects to return
                     UserQuizScore userQuizScore = buildUserQuizScoreFromRS(rs);
                     userQuizScores.add(userQuizScore);
                 }
@@ -54,26 +54,22 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
      * returns the highest score from a user's attempt on a specific quiz
      */
     @Override
-    public int getUserHighScore(Quiz quiz, User user)
-    {
+    public int getUserHighScore(Quiz quiz, User user) {
         String query = "SELECT MAX(score) FROM user_quiz_score WHERE quizID = ? AND userID = ?";
 
         try (Connection conn = DatabaseManager.connection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            //query the score from a specific attempt on a quiz
+            // query the score from a specific attempt on a quiz
             pstmt.setInt(1, quiz.getQuizID());
             pstmt.setInt(2, user.getUserID());
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    if(rs.wasNull())
-                    {
+                    if (rs.wasNull()) {
                         return 0;
-                    }
-                    else
-                    {
-                        //return the value of the user's highest score on the quiz
+                    } else {
+                        // return the value of the user's highest score on the quiz
                         return rs.getInt(1);
                     }
                 }
@@ -88,20 +84,19 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
      * return the number of attempts a user made on a quiz
      */
     @Override
-    public int getNumAttempts(Quiz quiz, User user)
-    {
+    public int getNumAttempts(Quiz quiz, User user) {
         String query = "SELECT COUNT(*) FROM user_quiz_score WHERE quizID = ? AND userID = ?";
 
         try (Connection conn = DatabaseManager.connection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            //query the scores for the number of attempts
+            // query the scores for the number of attempts
             pstmt.setInt(1, quiz.getQuizID());
             pstmt.setInt(2, user.getUserID());
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    //return the number of scores a user has recorded
+                    // return the number of scores a user has recorded
                     return rs.getInt(1);
                 }
             }
@@ -115,7 +110,8 @@ public class UserQuizScorePersistenceHSQLDB implements UserQuizScorePersistence 
      * using the objects variables to insert it into the database
      */
     @Override
-    public int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score) {
+    public int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken,
+            final int score) {
         int userQuizScoreID = -1;
         String query = "INSERT INTO user_quiz_score (userID, quizID, numCorrect, timeTaken, score) VALUES (?, ?, ?, ?, ?)";
 

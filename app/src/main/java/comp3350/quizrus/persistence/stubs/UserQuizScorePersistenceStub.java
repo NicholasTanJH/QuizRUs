@@ -56,7 +56,8 @@ public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
         int highestScore = 0;
 
         for (UserQuizScore userQuizScore : this.userQuizScores) {
-            if (userQuizScore.getQuiz().getQuizID() == quiz.getQuizID() && userQuizScore.getUser().getUserID() == user.getUserID()) {
+            if (userQuizScore.getQuiz().getQuizID() == quiz.getQuizID()
+                    && userQuizScore.getUser().getUserID() == user.getUserID()) {
                 if (userQuizScore.getScore() > highestScore) {
                     highestScore = userQuizScore.getScore();
                 }
@@ -70,7 +71,8 @@ public class UserQuizScorePersistenceStub implements UserQuizScorePersistence {
         int numAttempts = 0;
 
         for (UserQuizScore userQuizScore : this.userQuizScores) {
-            if (userQuizScore.getQuiz().getQuizID() == quiz.getQuizID() && userQuizScore.getUser().getUserID() == user.getUserID()) {
+            if (userQuizScore.getQuiz().getQuizID() == quiz.getQuizID()
+                    && userQuizScore.getUser().getUserID() == user.getUserID()) {
                 numAttempts++;
             }
         }
