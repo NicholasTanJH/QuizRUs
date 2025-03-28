@@ -44,6 +44,9 @@ public class AccessUsers {
         }
     }
 
+    /**
+     * Checks if a user with the inputted username exists and confirms password
+     */
     public User loginUser(final String username, final String password) {
         User user = userPersistence.getUserByUsername(username);
         if (user != null && password.equals(user.getPassword())) {
@@ -52,10 +55,14 @@ public class AccessUsers {
         return null;
     }
 
+    /**
+     * when creating a new account, checks that each inputted field follows the requirements
+     */
     public String authenticateUser(String newUsername, String newPassword, String newConfirmedPassword, String newFirstname, String newLastname)
     {
         String errorMessage = "";
 
+        //we only want to show an error for the first inputted field that is incorrect
         if(errorMessage.equals(""))
         {
             errorMessage = authenticateUsername(newUsername);
@@ -93,10 +100,15 @@ public class AccessUsers {
         return errorMessage;
     }
 
+    /**
+     * checks if username has not been taken and is of correct length
+     */
     public String authenticateUsername(String username) {
         username = username.trim();
         String errorMessage = "";
+
         User user = userPersistence.getUserByUsername(username);
+
         boolean found = (user != null);
         if (found) {
             errorMessage += "\n \t - Username is taken";
@@ -115,6 +127,9 @@ public class AccessUsers {
         }
     }
 
+    /**
+     * checks if password has all of the following: 8 or more characters, lowercase, uppercase, number, and a special character
+     */
     public String authenticatePassword(String password) {
         String upperCase = ".*[A-Z].*";
         String lowerCase = ".*[a-z].*";

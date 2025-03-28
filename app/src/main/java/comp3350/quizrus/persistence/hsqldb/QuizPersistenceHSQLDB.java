@@ -17,6 +17,9 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
     public QuizPersistenceHSQLDB() {
     }
 
+    /**
+     * returns the quiz with the primary key quizID
+     */
     @Override
     public Quiz getQuizByID(int quizID) {
         Quiz quiz = null;
@@ -25,9 +28,11 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
+            //query for quizzes with the inputted quizID
             pstmt.setInt(1, quizID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
+                    //create the object to return
                     quiz = buildQuizFromResultSet(rs);
                 }
             }
@@ -39,6 +44,9 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         return quiz;
     }
 
+    /**
+     * returns a list of all quizzes
+     */
     @Override
     public List<Quiz> getAllQuizzes() {
         List<Quiz> quizzes = new ArrayList<>();
@@ -49,6 +57,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
                 ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
+                //create the list of objects to return
                 Quiz quiz = buildQuizFromResultSet(rs);
                 quizzes.add(quiz);
             }
@@ -60,6 +69,9 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         return quizzes;
     }
 
+    /**
+     * returns a list of quizzes with the inputted title (or similar to)
+     */
     @Override
     public List<Quiz> getQuizzesByTitle(String quizTitle) {
         List<Quiz> quizzes = new ArrayList<>();
@@ -72,6 +84,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
             pstmt.setString(1, "%" + quizTitle + "%");
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
+                    //create the list of objects to return
                     Quiz curr_quiz = buildQuizFromResultSet(rs);
                     quizzes.add(curr_quiz);
                 }
@@ -84,6 +97,9 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         return quizzes;
     }
 
+    /**
+     * using the objects variables to insert it into the database
+     */
     @Override
     public int insertQuiz(final String title, final User user, final int timer) {
         int quizID = -1;
@@ -116,6 +132,9 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         }
     }
 
+    /**
+     * deletes a quiz from the database if the owner requested it
+     */
     @Override
     public void deleteQuiz(Quiz quiz) {
         String query = "DELETE FROM quiz WHERE quizID = ?";
@@ -123,6 +142,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
+            //query for the quiz that has the specified quizID
             pstmt.setInt(1, quiz.getQuizID());
 
             // Execute the query, then check that the quiz was deleted.
@@ -136,6 +156,9 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         }
     }
 
+    /**
+     * Builds and creates the needed object to return to the UI layers
+     */
     private Quiz buildQuizFromResultSet(ResultSet rs) throws SQLException {
         int quizID = rs.getInt("quizID");
         String title = rs.getString("title");

@@ -17,6 +17,9 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
     public AnswerPersistenceHSQLDB() {
     }
 
+    /**
+     * returns the answer with the primary key answerID
+     */
     @Override
     public List<Answer> getAnswersForQuestions(Question question) {
         List<Answer> answers = new ArrayList<>();
@@ -25,9 +28,11 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
+            //query for answers that belong to a question
             pstmt.setInt(1, question.getQuestionID());
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
+                    //create the list of objects to return
                     Answer curr_answer = buildAnswerFromResultSet(rs);
                     answers.add(curr_answer);
                 }
@@ -40,6 +45,9 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
         return answers;
     }
 
+    /**
+     * using the objects variables to insert it into the database
+     */
     @Override
     public int insertAnswer(final String answerText, final Question question, final boolean isCorrect) {
         int answerID = -1;
@@ -72,6 +80,9 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
         }
     }
 
+    /**
+     * Builds and creates the needed object to return to the UI layers
+     */
     private Answer buildAnswerFromResultSet(ResultSet rs) throws SQLException {
         int answerID = rs.getInt("answerID");
         String answerText = rs.getString("answerText");
