@@ -13,8 +13,7 @@ import comp3350.quizrus.persistence.QuestionPersistence;
 import comp3350.quizrus.persistence.stubs.QuestionPersistenceStub;
 import comp3350.quizrus.tests.utils.TestUtils;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +49,7 @@ public class AccessQuestionTest {
 
         System.out.println("Testing that a list of questions is returned correctly");
         assertNotNull(questions);
-        assertTrue(questions.size() == 5); // Assume quiz1 has 5 questions
+        assertEquals(5, questions.size()); // Assume quiz1 has 5 questions
 
         System.out.println("Testing that questions in the list are as expected");
         assertTrue(0 == questions.get(0).getQuestionID());
