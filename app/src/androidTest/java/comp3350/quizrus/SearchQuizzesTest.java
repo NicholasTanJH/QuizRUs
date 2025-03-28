@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 
 import comp3350.quizrus.presentation.UserLoginActivity;
 
+import androidx.test.espresso.Espresso;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -27,6 +28,7 @@ public class SearchQuizzesTest {
     public void SearchQuizzes() {
         // login
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
@@ -34,7 +36,7 @@ public class SearchQuizzesTest {
 
         // use the search bar
         onView(withId(R.id.searchInput)).perform(typeText("Flags of Countries"));
-        closeSoftKeyboard();
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.searchButton)).perform(click());
         sleep(5000);
 
@@ -44,7 +46,7 @@ public class SearchQuizzesTest {
 
         // use search bar again
         onView(withId(R.id.searchInput)).perform(typeText("Part"));
-        closeSoftKeyboard();
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.searchButton)).perform(click());
         sleep(5000);
     }

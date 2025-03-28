@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 
 import comp3350.quizrus.presentation.UserLoginActivity;
 
+import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -29,8 +30,9 @@ public class SignInOutTest {
     public void loginAndOut() {
         // login
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
-        closeSoftKeyboard();
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
 

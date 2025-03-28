@@ -29,7 +29,9 @@ public class AddQuizTest {
     public void addQuiz() {
         // login
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
 
@@ -45,6 +47,7 @@ public class AddQuizTest {
         onView(withText("OK")).perform(ViewActions.click());
         sleep(500);
         onView(withId(R.id.QuizNameInput)).perform(typeText("System Test Quiz"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.TimerInput)).perform(typeText("10"));
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.buttonEditQuestion)).perform(click());
@@ -56,7 +59,9 @@ public class AddQuizTest {
         onView(withText("OK")).perform(ViewActions.click());
         sleep(500);
         onView(withId(R.id.QuestionInput)).perform(typeText("Question 1"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.CorrectAnswerInput)).perform(typeText("A 1"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.WrongAnswerInputOne)).perform(typeText("A 2"));
         Espresso.closeSoftKeyboard();
         sleep(1000);
@@ -65,14 +70,19 @@ public class AddQuizTest {
         onView(withText("OK")).perform(ViewActions.click());
         sleep(500);
         onView(withId(R.id.WrongAnswerInputTwo)).perform(typeText("A 3"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.WrongAnswerInputThree)).perform(typeText("A 4"));
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.buttonSave)).perform(click());
         sleep(1000);
         onView(withId(R.id.QuestionInput)).perform(typeText("Question 2"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.CorrectAnswerInput)).perform(typeText("A 1"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.WrongAnswerInputOne)).perform(typeText("A 2"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.WrongAnswerInputTwo)).perform(typeText("A 3"));
+        Espresso.closeSoftKeyboard();
         onView(withId(R.id.WrongAnswerInputThree)).perform(typeText("A 4"));
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.buttonSave)).perform(click());
