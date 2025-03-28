@@ -1,4 +1,5 @@
 package comp3350.quizrus;
+
 import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
@@ -26,18 +27,17 @@ public class ViewQuizzesTest {
 
     @Test
     public void viewQuizzes() {
-        //login
+        // login
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
 
-        //click and back out
+        // click and back out
         onView(withId(R.id.listQuiz)).perform(RecyclerViewActions.actionOnItemAtPosition(0, ViewActions.click()));
         sleep(2000);
         onView(withId(R.id.buttonBack)).perform(click());
         sleep(1000);
     }
 }
-

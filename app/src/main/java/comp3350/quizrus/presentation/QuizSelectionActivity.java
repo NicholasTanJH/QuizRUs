@@ -46,7 +46,6 @@ public class QuizSelectionActivity extends Activity {
         setUpAddQuizIcon();
     }
 
-
     /**
      * Refresh the listQuiz RecyclerView to display all quizzes
      */
@@ -57,10 +56,12 @@ public class QuizSelectionActivity extends Activity {
     }
 
     /**
-     * Once search button is clicked, get the input text from search bar and pass it to logic to search
+     * Once search button is clicked, get the input text from search bar and pass it
+     * to logic to search
      * Refresh the quiz recycle view list once got the returned search list
      * Display the search result
-     * Set up the "x" cancel button where it will remove the search query when clicked
+     * Set up the "x" cancel button where it will remove the search query when
+     * clicked
      */
     private void setUpSearch() {
         EditText searchET = findViewById(R.id.searchInput);
@@ -79,10 +80,11 @@ public class QuizSelectionActivity extends Activity {
                 List<Quiz> searchedQuizzes = accessQuiz.searchQuizzes(searchText);
                 showQuizzes(searchedQuizzes);
 
-                //Search result
+                // Search result
                 searchResult.setVisibility(View.VISIBLE);
                 int resultCount = searchedQuizzes.size();
-                String searchResultMessage = String.format(getString(R.string.search_result_message), resultCount, searchText);
+                String searchResultMessage = String.format(getString(R.string.search_result_message), resultCount,
+                        searchText);
                 searchResultTV.setText(searchResultMessage);
             }
         });
@@ -105,7 +107,6 @@ public class QuizSelectionActivity extends Activity {
         recyclerViewListQuiz.setAdapter(adapter);
         recyclerViewListQuiz.setLayoutManager(new LinearLayoutManager(this));
     }
-
 
     /**
      * @return All the quizzes

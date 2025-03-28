@@ -1,4 +1,5 @@
 package comp3350.quizrus;
+
 import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
@@ -23,16 +24,17 @@ import androidx.test.runner.AndroidJUnit4;
 public class AttemptQuizTest {
     @Rule
     public ActivityTestRule<UserLoginActivity> activityRule = new ActivityTestRule<>(UserLoginActivity.class);
+
     @Test
-    public void AttemptQuiz(){
-        //login
+    public void AttemptQuiz() {
+        // login
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
 
-        //attempt quiz
+        // attempt quiz
         onView(withId(R.id.listQuiz))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, ViewActions.click()));
         onView(withId(R.id.buttonStart)).perform(click());

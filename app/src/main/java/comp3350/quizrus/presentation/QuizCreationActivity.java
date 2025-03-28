@@ -71,7 +71,8 @@ public class QuizCreationActivity extends AppCompatActivity {
         if (quizName.isEmpty()) {
             setAlertMessage(getString(R.string.no_quiz_name), getString(R.string.please_enter_a_quiz_name));
         } else if (timerString.isEmpty()) {
-            setAlertMessage(getString(R.string.not_a_number), getString(R.string.please_enter_a_number_into_the_timer_field));
+            setAlertMessage(getString(R.string.not_a_number),
+                    getString(R.string.please_enter_a_number_into_the_timer_field));
         } else {
             timerAmount = Integer.parseInt(timerString);
             intent = new Intent(this, QuizModifyQuestionActivity.class);
@@ -86,7 +87,8 @@ public class QuizCreationActivity extends AppCompatActivity {
     }
 
     /**
-     * This method is called whenever user want to save a new question they have created
+     * This method is called whenever user want to save a new question they have
+     * created
      * Save the user input into a list to record the new question they create
      * Invalid question input format will be notified through alertMessage popup
      */

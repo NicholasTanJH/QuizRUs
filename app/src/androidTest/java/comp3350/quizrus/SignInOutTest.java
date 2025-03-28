@@ -1,4 +1,5 @@
 package comp3350.quizrus;
+
 import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
@@ -26,14 +27,14 @@ public class SignInOutTest {
 
     @Test
     public void loginAndOut() {
-        //login
+        // login
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
 
-        //logout
+        // logout
         onView(withId(R.id.accountImageButton)).perform(click());
         sleep(1000);
         onView(withText("Sign Out"))

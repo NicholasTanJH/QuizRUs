@@ -28,8 +28,10 @@ public class QuestionPersistenceStub implements QuestionPersistence {
         insertQuestion("Which of these countries have white in their flag?", quiz1, "MULTIPLE_CHOICE");
         insertQuestion("In which country was the first flag created?", quiz1, "MULTIPLE_CHOICE");
         insertQuestion("The flag of Canada is commonly known as", quiz1, "MULTIPLE_CHOICE");
-        insertQuestion("How many stars are there on the flag of the United States of America?", quiz1, "MULTIPLE_CHOICE");
-        insertQuestion("The flag of Australia contains which other country’s flag in its top left corner?", quiz1, "MULTIPLE_CHOICE");
+        insertQuestion("How many stars are there on the flag of the United States of America?", quiz1,
+                "MULTIPLE_CHOICE");
+        insertQuestion("The flag of Australia contains which other country’s flag in its top left corner?", quiz1,
+                "MULTIPLE_CHOICE");
 
         // Add questions for the second quiz.
         insertQuestion("Who is the partner of J.K. Rowling?", quiz2, "MULTIPLE_CHOICE");

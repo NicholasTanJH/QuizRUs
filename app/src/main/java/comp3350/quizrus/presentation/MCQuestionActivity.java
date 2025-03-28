@@ -90,10 +90,9 @@ public class MCQuestionActivity extends AppCompatActivity {
             quizzingMusic = null;
         }
 
-        //stop timer
+        // stop timer
         countDownTimer.cancel();
     }
-
 
     /**
      * Get intent passing variables (Quiz to be played, and User playing)
@@ -106,10 +105,9 @@ public class MCQuestionActivity extends AppCompatActivity {
         Collections.shuffle(questions); // randomize
         totalQuestionCount = questions.size();
 
-        //get User
+        // get User
         currUser = (User) intent.getSerializableExtra("currUser");
     }
-
 
     /**
      * Set up the option buttons to have response when clicked
@@ -120,7 +118,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         optionButton3 = findViewById(R.id.button3);
         optionButton4 = findViewById(R.id.button4);
 
-        optionButtons = new Button[]{optionButton1, optionButton2, optionButton3, optionButton4};
+        optionButtons = new Button[] { optionButton1, optionButton2, optionButton3, optionButton4 };
 
         for (Button optionButton : optionButtons) {
             optionButton.setOnClickListener(b -> handleOptionButtonClick((Button) b, optionButtons));
@@ -129,6 +127,7 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     /**
      * Set up setOnClickListener to keep track on clicked option button
+     * 
      * @param clickedButton Clicked button
      * @param optionButtons List of the four option buttons
      */
@@ -247,7 +246,7 @@ public class MCQuestionActivity extends AppCompatActivity {
         proceedButton.setBackgroundResource(R.drawable.question_proceed_button_next);
         proceedButton.setOnClickListener(proceedButton -> {
             if (totalQuestionCount == questionNum) {
-                goToQuizEndPage(); //Go to quiz end page after done
+                goToQuizEndPage(); // Go to quiz end page after done
             } else {
                 // reset when still have more questions
                 reset();
@@ -273,6 +272,7 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     /**
      * Get the option button according to the order
+     * 
      * @param buttonOrder Button order number (0-3)
      * @return Button object with the order number
      */
@@ -298,6 +298,7 @@ public class MCQuestionActivity extends AppCompatActivity {
 
     /**
      * Audio for getting right or wrong
+     * 
      * @param isRight User got question right
      */
     private void putRightOrWrongAudio(boolean isRight) {
@@ -335,7 +336,7 @@ public class MCQuestionActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        goToQuizEndPage(); //Go to quiz end page after done
+                        goToQuizEndPage(); // Go to quiz end page after done
                     }
                 }, 2000);
             }
@@ -362,7 +363,8 @@ public class MCQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * Go to End page with intent passing variables (score, quiz, currUser, timePassed)
+     * Go to End page with intent passing variables (score, quiz, currUser,
+     * timePassed)
      */
     private void goToQuizEndPage() {
         int timePassed = (int) timeLeftInMillis / MILLIS_CONVERT;

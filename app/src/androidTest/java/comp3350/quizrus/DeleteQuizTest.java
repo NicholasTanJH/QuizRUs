@@ -25,15 +25,16 @@ import androidx.test.runner.AndroidJUnit4;
 public class DeleteQuizTest {
     @Rule
     public ActivityTestRule<UserLoginActivity> activityRule = new ActivityTestRule<>(UserLoginActivity.class);
+
     @Test
-    public void deleteQuiz(){
+    public void deleteQuiz() {
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
 
-        //deleteQuiz
+        // deleteQuiz
         onView(withId(R.id.listQuiz))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, ViewActions.click()));
         onView(withId(R.id.buttonDeleteQuiz)).perform(click());

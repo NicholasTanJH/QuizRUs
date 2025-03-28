@@ -72,7 +72,8 @@ public class UserLoginActivity extends AppCompatActivity {
         String logInPassword = textInputEditTextPassword.getText().toString();
 
         if (logInUsername.isEmpty() || logInPassword.isEmpty()) {
-            setAlertMessage(getString(R.string.failed_to_log_in), getString(R.string.login_information_cannot_be_empty));
+            setAlertMessage(getString(R.string.failed_to_log_in),
+                    getString(R.string.login_information_cannot_be_empty));
         } else {
             AccessUsers accessUsers = new AccessUsers();
             User user = accessUsers.loginUser(logInUsername, logInPassword);
@@ -84,8 +85,9 @@ public class UserLoginActivity extends AppCompatActivity {
     /**
      * Give popup when login failed
      * Animate button when login succeeded
+     * 
      * @param isLoginInfoCorrect login info is right
-     * @param user User object that was logged in
+     * @param user               User object that was logged in
      */
     private void logInAnimation(boolean isLoginInfoCorrect, User user) {
         buttonLogIn.setText(R.string.logging_in);
@@ -101,7 +103,8 @@ public class UserLoginActivity extends AppCompatActivity {
             }, 1500);
         } else {
             new Handler().postDelayed(() -> {
-                setAlertMessage(getString(R.string.failed_to_log_in), getString(R.string.incorrect_username_or_password_please_try_again));
+                setAlertMessage(getString(R.string.failed_to_log_in),
+                        getString(R.string.incorrect_username_or_password_please_try_again));
                 buttonLogIn.setText(R.string.log_in);
             }, 1000);
         }
@@ -109,7 +112,8 @@ public class UserLoginActivity extends AppCompatActivity {
 
     /**
      * Create popup
-     * @param alertTitle title popup
+     * 
+     * @param alertTitle   title popup
      * @param alertMessage message popup
      */
     private void setAlertMessage(String alertTitle, String alertMessage) {

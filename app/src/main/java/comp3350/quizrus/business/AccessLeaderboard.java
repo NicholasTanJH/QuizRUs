@@ -26,17 +26,16 @@ public class AccessLeaderboard {
         return scorePersistence.getScoresForQuiz(quiz, numEntries);
     }
 
-    public int getUserHighScore(Quiz quiz, User user)
-    {
+    public int getUserHighScore(Quiz quiz, User user) {
         return scorePersistence.getUserHighScore(quiz, user);
     }
 
-    public int getNumAttempts(Quiz quiz, User user)
-    {
+    public int getNumAttempts(Quiz quiz, User user) {
         return scorePersistence.getNumAttempts(quiz, user);
     }
 
-    public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score) {
+    public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect,
+            final int timeTaken, final int score) {
         int userQuizScoreID = scorePersistence.insertScore(user, quiz, numCorrect, timeTaken, score);
 
         if (userQuizScoreID != -1) {

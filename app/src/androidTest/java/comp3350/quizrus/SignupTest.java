@@ -1,4 +1,5 @@
 package comp3350.quizrus;
+
 import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
@@ -39,4 +40,3 @@ public class SignupTest {
     }
 
 }
-
