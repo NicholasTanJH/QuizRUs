@@ -34,6 +34,17 @@ public class AccessLeaderboard {
         return scorePersistence.getNumAttempts(quiz, user);
     }
 
+    public double getAverageScore(Quiz quiz, User user)
+    {
+        double avg = scorePersistence.getAverageScore(quiz, user);
+        return Double.parseDouble(String.format("%.2f", avg));
+    }
+
+    public int getNumAttempts(Quiz quiz, User user)
+    {
+        return scorePersistence.getNumAttempts(quiz, user);
+    }
+
     public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect,
             final int timeTaken, final int score) {
         int userQuizScoreID = scorePersistence.insertScore(user, quiz, numCorrect, timeTaken, score);
