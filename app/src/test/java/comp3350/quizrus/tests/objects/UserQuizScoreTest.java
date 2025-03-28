@@ -1,26 +1,22 @@
 package comp3350.quizrus.tests.objects;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.sql.Timestamp;
 
 import comp3350.quizrus.objects.Quiz;
 import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.UserQuizScore;
 
 public class UserQuizScoreTest {
-
     private User user;
     private Quiz quiz;
-    private Timestamp timestamp;
 
     @Before
     public void setUp() {
         user = new User(1, "testUser", "password", "test", "test");
         quiz = new Quiz(1, "test", user, 10);
-        timestamp = new Timestamp(System.currentTimeMillis());
     }
 
     @Test
@@ -34,4 +30,3 @@ public class UserQuizScoreTest {
         assertEquals(80, score.getScore());
     }
 }
-

@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 
 import comp3350.quizrus.tests.business.AccessAnswerIT;
 import comp3350.quizrus.tests.business.AccessAnswerTest;
+import comp3350.quizrus.tests.business.AccessLeaderboardIT;
 import comp3350.quizrus.tests.business.AccessLeaderboardTest;
 import comp3350.quizrus.tests.business.AccessQuestionIT;
 import comp3350.quizrus.tests.business.AccessQuizIT;
@@ -31,12 +32,13 @@ import comp3350.quizrus.tests.objects.AnswerTest;
         AccessQuizTest.class,
         AccessQuestionTest.class,
         AccessAnswerTest.class,
+        CalculateScoreTest.class,
+        AccessLeaderboardTest.class,
         AccessAnswerIT.class,
         AccessQuestionIT.class,
         AccessQuizIT.class,
         AccessUserIT.class,
-        CalculateScoreTest.class,
-        AccessLeaderboardTest.class
+        AccessLeaderboardIT.class,
 })
 public class AllTests {
 }
