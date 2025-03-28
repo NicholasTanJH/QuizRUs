@@ -46,7 +46,7 @@ public class AddQuizTest {
         //create quiz
         onView(withId(R.id.newQuizButton)).perform(click());
         sleep(1000);
-        onView(withId(R.id.buttonBackCreateQuiz)).perform(click());
+        onView(withId(R.id.buttonBackCreateQuiz)).perform(click()); //back out
         sleep(1000);
         onView(withId(R.id.newQuizButton)).perform(click());
         sleep(1000);
@@ -59,6 +59,8 @@ public class AddQuizTest {
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.buttonEditQuestion)).perform(click());
         sleep(1000);
+
+        //create question
         onView(withId(R.id.buttonSave)).perform(click());
         sleep(500);
         onView(withText("OK")).perform(ViewActions.click());

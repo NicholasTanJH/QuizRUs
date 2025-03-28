@@ -11,6 +11,7 @@ import org.junit.runners.Suite;
         SearchQuizzesTest.class,
         SignInOutTest.class,
         SignupTest.class,
+        TimerTest.class
 })
 
 public class AllAcceptanceTests {
