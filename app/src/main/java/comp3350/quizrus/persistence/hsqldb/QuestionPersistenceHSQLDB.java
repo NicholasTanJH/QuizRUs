@@ -32,7 +32,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
             pstmt.setInt(1, questionID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    //create the object to return
+                    // create the object to return
                     question = buildQuestionFromResultSet(rs);
                 }
             }
@@ -59,7 +59,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
             pstmt.setInt(1, quiz.getQuizID());
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    //create the list of objects to return
+                    // create the list of objects to return
                     Question curr_question = buildQuestionFromResultSet(rs);
                     questions.add(curr_question);
                 }

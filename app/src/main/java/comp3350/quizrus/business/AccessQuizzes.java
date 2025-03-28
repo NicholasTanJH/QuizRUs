@@ -38,14 +38,10 @@ public class AccessQuizzes {
     /**
      * Search for a quiz with a specific quiz title based on a query string
      */
-    public List<Quiz> searchQuizzes(String quizTitle)
-    {
-        if(quizTitle != null)
-        {
+    public List<Quiz> searchQuizzes(String quizTitle) {
+        if (quizTitle != null) {
             return quizPersistence.getQuizzesByTitle(quizTitle);
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -60,7 +56,7 @@ public class AccessQuizzes {
         }
     }
 
-    public boolean isQuizBelongsToUser(Quiz quiz, User user){
+    public boolean isQuizBelongsToUser(Quiz quiz, User user) {
         return quiz.getUser().getUserID() == user.getUserID();
     }
 

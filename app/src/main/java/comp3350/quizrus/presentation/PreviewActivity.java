@@ -47,10 +47,10 @@ public class PreviewActivity extends AppCompatActivity {
             return insets;
         });
 
-        //AccessLeaderboard
+        // AccessLeaderboard
         accessLeaderboard = new AccessLeaderboard();
 
-        //Get intent passing variables
+        // Get intent passing variables
         Intent intent = getIntent();
         currQuiz = (Quiz) intent.getSerializableExtra("currQuiz");
         currUser = (User) intent.getSerializableExtra("currUser");
@@ -64,56 +64,56 @@ public class PreviewActivity extends AppCompatActivity {
     }
 
     private void setUpQuizInfo() {
-        //Quiz title
+        // Quiz title
         String quizTitle = currQuiz.getTitle();
         TextView quizTitleTV = findViewById(R.id.quizTitleTextView);
         quizTitleTV.setText(quizTitle);
 
-        //Creator
+        // Creator
         String creator = currQuiz.getUser().getUsername();
         String creatorDisplayText = String.format(getString(R.string.created_by), creator);
         TextView creatorTV = findViewById(R.id.creatorTextView);
         creatorTV.setText(creatorDisplayText);
 
-        //Time limit
+        // Time limit
         int timeLimit = currQuiz.getTimeLimit();
         String timeLimitDisplayText = String.format(getString(R.string.time_limit_text), timeLimit, "s");
         TextView timeLimitTV = findViewById(R.id.timeLimitTextView);
         timeLimitTV.setText(timeLimitDisplayText);
 
-        //# of Questions
+        // # of Questions
         totalQuestionNumber = questions.size();
         String questionNumberDisplayText = String.format(getString(R.string.question_number_text), totalQuestionNumber);
         TextView questionNumberTV = findViewById(R.id.questionNumberTextView);
         questionNumberTV.setText(questionNumberDisplayText);
 
-        //User top score
+        // User top score
         TextView userHighScoreTV = findViewById(R.id.userHighScoreTV);
         int userHighScore = accessLeaderboard.getUserHighScore(currQuiz, currUser);
-        //no change; the display will be "-"
+        // no change; the display will be "-"
         if (userHighScore != 0) {
             userHighScoreTV.setText(String.valueOf(userHighScore));
         }
 
-        //User attempts
+        // User attempts
         TextView userAttemptsTV = findViewById(R.id.userAttemptsTV);
         int userAttempts = accessLeaderboard.getNumAttempts(currQuiz, currUser);
-        //no change; the display will be "-"
+        // no change; the display will be "-"
         if (userAttempts != 0) {
             userAttemptsTV.setText(String.valueOf(userAttempts));
         }
     }
 
     private void setUpButtons() {
-        //back button
+        // back button
         ImageButton buttonBack = findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(button -> finish());
 
-        //start button
+        // start button
         Button buttonStart = findViewById(R.id.buttonStart);
         buttonStart.setOnClickListener(button -> startQuiz());
 
-        //Delete Quiz button
+        // Delete Quiz button
         AccessQuizzes accessQuizzes = new AccessQuizzes();
         boolean isQuizBelongsToUser = accessQuizzes.isQuizBelongsToUser(currQuiz, currUser);
         Button buttonDeleteQuiz = findViewById(R.id.buttonDeleteQuiz);
@@ -121,14 +121,14 @@ public class PreviewActivity extends AppCompatActivity {
         if (isQuizBelongsToUser) {
             deleteTV.setVisibility(View.GONE);
             buttonDeleteQuiz.setOnClickListener(b -> {
-                //popup for delete confirmation
+                // popup for delete confirmation
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.confirm_deletion)
                         .setMessage(R.string.are_you_sure_you_want_to_delete_this_quiz_this_action_cannot_be_undone)
                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 accessQuizzes.deleteQuiz(currQuiz, currUser);
-                                //exit this page
+                                // exit this page
                                 finish();
                             }
                         })
@@ -149,7 +149,8 @@ public class PreviewActivity extends AppCompatActivity {
 
         // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.leaderboardRecyclerView);
-        LeaderboardRecycleViewAdapter adapter = new LeaderboardRecycleViewAdapter(this, userQuizScoreList, totalQuestionNumber);
+        LeaderboardRecycleViewAdapter adapter = new LeaderboardRecycleViewAdapter(this, userQuizScoreList,
+                totalQuestionNumber);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

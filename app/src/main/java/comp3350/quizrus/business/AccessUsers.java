@@ -56,43 +56,36 @@ public class AccessUsers {
     }
 
     /**
-     * when creating a new account, checks that each inputted field follows the requirements
+     * when creating a new account, checks that each inputted field follows the
+     * requirements
      */
-    public String authenticateUser(String newUsername, String newPassword, String newConfirmedPassword, String newFirstname, String newLastname)
-    {
+    public String authenticateUser(String newUsername, String newPassword, String newConfirmedPassword,
+            String newFirstname, String newLastname) {
         String errorMessage = "";
 
-        //we only want to show an error for the first inputted field that is incorrect
-        if(errorMessage.equals(""))
-        {
+        // we only want to show an error for the first inputted field that is incorrect
+        if (errorMessage.equals("")) {
             errorMessage = authenticateUsername(newUsername);
         }
 
-        if(errorMessage.equals(""))
-        {
+        if (errorMessage.equals("")) {
             errorMessage = authenticatePassword(newPassword);
         }
 
-        if(errorMessage.equals(""))
-        {
-            if(!newPassword.equals(newConfirmedPassword))
-            {
+        if (errorMessage.equals("")) {
+            if (!newPassword.equals(newConfirmedPassword)) {
                 errorMessage = "Please ensure the confirmed password matches your password.";
             }
         }
 
-        if(errorMessage.equals(""))
-        {
-            if(!authenticateName(newFirstname))
-            {
+        if (errorMessage.equals("")) {
+            if (!authenticateName(newFirstname)) {
                 errorMessage = "Please fill in your first name.";
             }
         }
 
-        if(errorMessage.equals(""))
-        {
-            if(!authenticateName(newLastname))
-            {
+        if (errorMessage.equals("")) {
+            if (!authenticateName(newLastname)) {
                 errorMessage = "Please fill in your last name.";
             }
         }
@@ -117,18 +110,16 @@ public class AccessUsers {
             errorMessage += "\n \t - 20 characters or shorter";
         }
 
-        if(errorMessage.isEmpty())
-        {
+        if (errorMessage.isEmpty()) {
             return errorMessage;
-        }
-        else
-        {
+        } else {
             return "Username must be:\n" + errorMessage;
         }
     }
 
     /**
-     * checks if password has all of the following: 8 or more characters, lowercase, uppercase, number, and a special character
+     * checks if password has all of the following: 8 or more characters, lowercase,
+     * uppercase, number, and a special character
      */
     public String authenticatePassword(String password) {
         String upperCase = ".*[A-Z].*";
@@ -153,12 +144,9 @@ public class AccessUsers {
             errorMessage += "\n \t - Special character (eg. !@#$%^&*()_+)";
         }
 
-        if(errorMessage.isEmpty())
-        {
+        if (errorMessage.isEmpty()) {
             return errorMessage;
-        }
-        else
-        {
+        } else {
             return "Password must have:\n" + errorMessage;
         }
     }

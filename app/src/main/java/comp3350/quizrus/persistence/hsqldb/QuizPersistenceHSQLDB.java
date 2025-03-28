@@ -28,11 +28,11 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            //query for quizzes with the inputted quizID
+            // query for quizzes with the inputted quizID
             pstmt.setInt(1, quizID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    //create the object to return
+                    // create the object to return
                     quiz = buildQuizFromResultSet(rs);
                 }
             }
@@ -57,7 +57,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
                 ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                //create the list of objects to return
+                // create the list of objects to return
                 Quiz quiz = buildQuizFromResultSet(rs);
                 quizzes.add(quiz);
             }
@@ -84,7 +84,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
             pstmt.setString(1, "%" + quizTitle + "%");
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    //create the list of objects to return
+                    // create the list of objects to return
                     Quiz curr_quiz = buildQuizFromResultSet(rs);
                     quizzes.add(curr_quiz);
                 }
@@ -142,7 +142,7 @@ public class QuizPersistenceHSQLDB implements QuizPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            //query for the quiz that has the specified quizID
+            // query for the quiz that has the specified quizID
             pstmt.setInt(1, quiz.getQuizID());
 
             // Execute the query, then check that the quiz was deleted.

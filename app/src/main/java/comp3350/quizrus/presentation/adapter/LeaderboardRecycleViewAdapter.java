@@ -22,13 +22,14 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
 
     /**
      * @param context
-     * This is the context for the android resources.
+     *                            This is the context for the android resources.
      * @param userQuizScoreList
-     * The list of the user's and their scores.
+     *                            The list of the user's and their scores.
      * @param totalQuestionNumber
-     * The total number of questions.
+     *                            The total number of questions.
      */
-    public LeaderboardRecycleViewAdapter(Context context, List<UserQuizScore> userQuizScoreList, int totalQuestionNumber) {
+    public LeaderboardRecycleViewAdapter(Context context, List<UserQuizScore> userQuizScoreList,
+            int totalQuestionNumber) {
         this.context = context;
         this.userQuizScoreList = userQuizScoreList;
         this.totalQuestionNumber = totalQuestionNumber;
@@ -37,11 +38,12 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
 
     /**
      * @param parent
-     * The ViewGroup into which the new View will be added after it is bound to an adapter position.
+     *                 The ViewGroup into which the new View will be added after it
+     *                 is bound to an adapter position.
      * @param viewType
-     * The view type of the new View.
+     *                 The view type of the new View.
      * @return
-     * Returns the view for the leaderboard.
+     *         Returns the view for the leaderboard.
      */
     @NonNull
     @Override
@@ -52,11 +54,14 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
     }
 
     /**
-     * This binds the fragmented layout to the leaderboard, and inputs the information needed.
+     * This binds the fragmented layout to the leaderboard, and inputs the
+     * information needed.
+     * 
      * @param holder
-     * The ViewHolder which should be updated to represent the contents of the item at the given position in the data set.
+     *                 The ViewHolder which should be updated to represent the
+     *                 contents of the item at the given position in the data set.
      * @param position
-     * The position of the item within the adapter's data set.
+     *                 The position of the item within the adapter's data set.
      */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
@@ -65,7 +70,7 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         TextView leaderboardScoreTV = holder.leaderboardScoreTV;
         TextView leaderboardScoreInfoTV = holder.leaderboardScoreInfoTV;
 
-        //show a default leaderboard item if the leaderboard is empty
+        // show a default leaderboard item if the leaderboard is empty
         if (isEmptyLeaderboard) {
             leaderboardNameTV.setText(R.string.this_quiz_hasn_t_been_attempted_yet);
         } else {
@@ -106,7 +111,8 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         }
     }
 
-    // ==============================ViewHolder Class==========================================================
+    // ==============================ViewHolder
+    // Class==========================================================
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView leaderboardOrderNumberTV;
         TextView leaderboardNameTV;
@@ -115,7 +121,7 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
 
         /**
          * @param itemView
-         * This is the text in the text views for the leaderboard
+         *                 This is the text in the text views for the leaderboard
          */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

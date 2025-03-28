@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -66,26 +65,26 @@ public class QuizEndActivity extends AppCompatActivity {
         currUser = (User) intent.getSerializableExtra("currUser");
         numCorrectQuestions = intent.getIntExtra("score", 0);
 
-        //Inputting the time remaining
+        // Inputting the time remaining
         timeLeft = intent.getIntExtra("timeLeft", 0);
         textViewHolder = "Time: " + timeLeft + "s";
         timeLeftTV = findViewById(R.id.timeRemaining);
         timeLeftTV.setText(textViewHolder);
 
-        //Getting number of questions
+        // Getting number of questions
         questions = accessQuestions.getQuestions(currQuiz);
         totalQuestionNumber = questions.size();
 
-        //Putting the number of correct questions
+        // Putting the number of correct questions
         textViewHolder = "Correct: " + numCorrectQuestions + "/" + totalQuestionNumber;
         questionNumScoreTV = findViewById(R.id.correctQuestions);
         questionNumScoreTV.setText(textViewHolder);
 
-        //Time limit stored for calculation?
+        // Time limit stored for calculation?
         timeLimitTotal = currQuiz.getTimeLimit();
 
         // User current score
-        userHighScoreTotal = CalculateScore.calculateScore(numCorrectQuestions,timeLimitTotal,timeLeft);
+        userHighScoreTotal = CalculateScore.calculateScore(numCorrectQuestions, timeLimitTotal, timeLeft);
         textViewHolder = "Score: " + userHighScoreTotal;
         highScoreTV = findViewById(R.id.finalScore);
         highScoreTV.setText(textViewHolder);
@@ -107,7 +106,8 @@ public class QuizEndActivity extends AppCompatActivity {
 
         // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.EndLeaderBoardRecyclerView);
-        LeaderboardRecycleViewAdapter adapter = new LeaderboardRecycleViewAdapter(this, userQuizScoreList, totalQuestionNumber);
+        LeaderboardRecycleViewAdapter adapter = new LeaderboardRecycleViewAdapter(this, userQuizScoreList,
+                totalQuestionNumber);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -115,10 +115,10 @@ public class QuizEndActivity extends AppCompatActivity {
     /**
      * Stores the users final score
      */
-    private void saveScore(){
-        //Quick Calc to get time taken
+    private void saveScore() {
+        // Quick Calc to get time taken
         int timeTaken = timeLimitTotal - timeLeft;
-        //Stores the results of the quiz
+        // Stores the results of the quiz
         accessLeaderboard.CreateUserQuizScore(currUser, currQuiz, numCorrectQuestions, timeTaken, userHighScoreTotal);
     }
 
@@ -129,13 +129,12 @@ public class QuizEndActivity extends AppCompatActivity {
         int range = maxChance - minChance + 1;
         MediaPlayer mediaPlayer;
 
-        int audioChance = (int)(Math.random() * range) + minChance;
+        int audioChance = (int) (Math.random() * range) + minChance;
 
-        if(audioChance == luckyNumber){
-            mediaPlayer = MediaPlayer.create(this,R.raw.haha_funny_sound);
-        }
-        else {
-            mediaPlayer = MediaPlayer.create(this,R.raw.applause_sound_effect);
+        if (audioChance == luckyNumber) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.haha_funny_sound);
+        } else {
+            mediaPlayer = MediaPlayer.create(this, R.raw.applause_sound_effect);
         }
 
         mediaPlayer.start();

@@ -18,17 +18,17 @@ import comp3350.quizrus.tests.objects.AnswerTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        UserTest.class,
-        QuizTest.class,
-        QuestionTest.class,
-        AnswerTest.class,
-        UserQuizScoreTest.class,
-        AccessUserTest.class,
-        AccessQuizTest.class,
-        AccessQuestionTest.class,
-        AccessAnswerTest.class,
-        CalculateScoreTest.class,
-        AccessLeaderboardTest.class,
+                UserTest.class,
+                QuizTest.class,
+                QuestionTest.class,
+                AnswerTest.class,
+                UserQuizScoreTest.class,
+                AccessUserTest.class,
+                AccessQuizTest.class,
+                AccessQuestionTest.class,
+                AccessAnswerTest.class,
+                CalculateScoreTest.class,
+                AccessLeaderboardTest.class,
 })
 public class AllUnitTests {
 }

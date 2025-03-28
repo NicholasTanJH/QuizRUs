@@ -26,11 +26,11 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            //query for users with the inputted userID
+            // query for users with the inputted userID
             pstmt.setInt(1, userID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    //create the object to return
+                    // create the object to return
                     user = buildUserFromResultSet(rs);
                 }
             }
@@ -53,11 +53,11 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            //query for users with the inputted username
+            // query for users with the inputted username
             pstmt.setString(1, username);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    //create the object to return
+                    // create the object to return
                     user = buildUserFromResultSet(rs);
                 }
             }
@@ -82,7 +82,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
                 ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                //create the list of objects to return
+                // create the list of objects to return
                 User user = buildUserFromResultSet(rs);
                 users.add(user);
             }

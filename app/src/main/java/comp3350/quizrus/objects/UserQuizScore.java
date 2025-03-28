@@ -22,7 +22,6 @@ public class UserQuizScore {
         return this.userQuizScoreID;
     }
 
-
     public User getUser() {
         return this.user;
     }

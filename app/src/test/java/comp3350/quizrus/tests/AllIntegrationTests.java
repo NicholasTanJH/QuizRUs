@@ -11,11 +11,11 @@ import comp3350.quizrus.tests.business.AccessUserIT;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        AccessAnswerIT.class,
-        AccessQuestionIT.class,
-        AccessQuizIT.class,
-        AccessUserIT.class,
-        AccessLeaderboardIT.class,
+                AccessAnswerIT.class,
+                AccessQuestionIT.class,
+                AccessQuizIT.class,
+                AccessUserIT.class,
+                AccessLeaderboardIT.class,
 })
-public class AllIntegrationTests{
+public class AllIntegrationTests {
 }

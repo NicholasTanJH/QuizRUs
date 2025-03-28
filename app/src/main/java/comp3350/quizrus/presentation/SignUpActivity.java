@@ -69,15 +69,13 @@ public class SignUpActivity extends AppCompatActivity {
 
         AccessUsers accessUsers = new AccessUsers();
 
-        String errorMessage = accessUsers.authenticateUser(newUsername, newPassword, newConfirmPassword, newFirstName, newLastName);
+        String errorMessage = accessUsers.authenticateUser(newUsername, newPassword, newConfirmPassword, newFirstName,
+                newLastName);
 
-        if(errorMessage.isEmpty())
-        {
+        if (errorMessage.isEmpty()) {
             accessUsers.createUser(newUsername, newPassword, newFirstName, newLastName);
             successfulSignUpAnimation();
-        }
-        else
-        {
+        } else {
             setAlertMessage(getString(R.string.invalid_sign_up), errorMessage);
         }
     }
@@ -95,10 +93,10 @@ public class SignUpActivity extends AppCompatActivity {
         }, 1500);
     }
 
-
     /**
      * Create popup
-     * @param alertTitle popup title
+     * 
+     * @param alertTitle   popup title
      * @param alertMessage popup message
      */
     private void setAlertMessage(String alertTitle, String alertMessage) {

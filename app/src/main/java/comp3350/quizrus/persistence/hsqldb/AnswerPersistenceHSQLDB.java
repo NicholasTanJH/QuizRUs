@@ -28,11 +28,11 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            //query for answers that belong to a question
+            // query for answers that belong to a question
             pstmt.setInt(1, question.getQuestionID());
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    //create the list of objects to return
+                    // create the list of objects to return
                     Answer curr_answer = buildAnswerFromResultSet(rs);
                     answers.add(curr_answer);
                 }

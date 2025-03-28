@@ -1,13 +1,9 @@
 package comp3350.quizrus;
 
 import static android.os.SystemClock.sleep;
-import static androidx.test.espresso.Espresso.closeSoftKeyboard;
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
@@ -15,16 +11,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import comp3350.quizrus.objects.User;
-import comp3350.quizrus.presentation.QuizSelectionActivity;
 import comp3350.quizrus.presentation.UserLoginActivity;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.anything;
 
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -37,16 +27,16 @@ public class AddQuizTest {
 
     @Test
     public void addQuiz() {
-        //login
+        // login
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
         onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
 
-        //create quiz
+        // create quiz
         onView(withId(R.id.newQuizButton)).perform(click());
         sleep(1000);
-        onView(withId(R.id.buttonBackCreateQuiz)).perform(click()); //back out
+        onView(withId(R.id.buttonBackCreateQuiz)).perform(click()); // back out
         sleep(1000);
         onView(withId(R.id.newQuizButton)).perform(click());
         sleep(1000);
@@ -60,7 +50,7 @@ public class AddQuizTest {
         onView(withId(R.id.buttonEditQuestion)).perform(click());
         sleep(1000);
 
-        //create question
+        // create question
         onView(withId(R.id.buttonSave)).perform(click());
         sleep(500);
         onView(withText("OK")).perform(ViewActions.click());
