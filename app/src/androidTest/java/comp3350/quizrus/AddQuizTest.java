@@ -36,7 +36,7 @@ public class AddQuizTest {
     public ActivityTestRule<UserLoginActivity> activityRule = new ActivityTestRule<>(UserLoginActivity.class);
 
     @Test
-    public void AttemptQuiz() {
+    public void addQuiz() {
         //login
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));

@@ -20,12 +20,12 @@ import androidx.test.runner.AndroidJUnit4;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class TimerTest {
+public class ViewQuizzesTest {
     @Rule
     public ActivityTestRule<UserLoginActivity> activityRule = new ActivityTestRule<>(UserLoginActivity.class);
 
     @Test
-    public void runOutQuizTime() {
+    public void viewQuizzes() {
         //login
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
@@ -33,12 +33,11 @@ public class TimerTest {
         onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
 
-        //play quiz and let the time out
-        onView(withId(R.id.listQuiz)).perform(RecyclerViewActions.actionOnItemAtPosition(1, ViewActions.click()));
-        onView(withId(R.id.buttonStart)).perform(click());
-        sleep(15000);
-
+        //click and back out
+        onView(withId(R.id.listQuiz)).perform(RecyclerViewActions.actionOnItemAtPosition(0, ViewActions.click()));
+        sleep(2000);
+        onView(withId(R.id.buttonBack)).perform(click());
+        sleep(1000);
     }
-
 }
 
