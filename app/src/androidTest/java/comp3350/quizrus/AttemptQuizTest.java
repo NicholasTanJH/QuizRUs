@@ -1,25 +1,16 @@
 package comp3350.quizrus;
 import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import comp3350.quizrus.objects.User;
-import comp3350.quizrus.presentation.QuizSelectionActivity;
 import comp3350.quizrus.presentation.UserLoginActivity;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.anything;
 
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
