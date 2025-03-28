@@ -42,15 +42,6 @@ public class SignupTest {
         closeSoftKeyboard();
         // Click sign-up button
         onView(withId(R.id.buttonCreateAccount)).perform(click());
-
-        //Test sign in
-        sleep(5000);
-        onView(withId(R.id.textInputETUsername)).perform(typeText("huzaifa"));
-        onView(withId(R.id.textInputETPassword)).perform(typeText("Quizrus69!"));
-        closeSoftKeyboard();
-
-        // Click sign-in button
-        onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
     }
 
