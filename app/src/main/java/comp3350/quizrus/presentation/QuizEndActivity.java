@@ -1,7 +1,5 @@
 package comp3350.quizrus.presentation;
 
-import static comp3350.quizrus.business.CalculateScore.calculateScore;
-
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -35,7 +33,6 @@ public class QuizEndActivity extends AppCompatActivity {
     private User currUser;
     private Quiz currQuiz;
     private List<Question> questions;
-    private ImageButton buttonBack;
     private int numCorrectQuestions;
     private int totalQuestionNumber;
     private int timeLeft;
@@ -71,7 +68,7 @@ public class QuizEndActivity extends AppCompatActivity {
 
         //Inputting the time remaining
         timeLeft = intent.getIntExtra("timeLeft", 0);
-        textViewHolder = timeLeft + "s";
+        textViewHolder = "Time: " + timeLeft + "s";
         timeLeftTV = findViewById(R.id.timeRemaining);
         timeLeftTV.setText(textViewHolder);
 
@@ -80,7 +77,7 @@ public class QuizEndActivity extends AppCompatActivity {
         totalQuestionNumber = questions.size();
 
         //Putting the number of correct questions
-        textViewHolder = numCorrectQuestions + "/" + totalQuestionNumber;
+        textViewHolder = "Grade: " + numCorrectQuestions + "/" + totalQuestionNumber;
         questionNumScoreTV = findViewById(R.id.correctQuestions);
         questionNumScoreTV.setText(textViewHolder);
 
@@ -88,16 +85,17 @@ public class QuizEndActivity extends AppCompatActivity {
         timeLimitTotal = currQuiz.getTimeLimit();
 
         // User current score
-        userHighScoreTotal = calculateScore(numCorrectQuestions,timeLimitTotal,timeLeft);
-        textViewHolder = "" + userHighScoreTotal;
+        userHighScoreTotal = CalculateScore.calculateScore(numCorrectQuestions,timeLimitTotal,timeLeft);
+        textViewHolder = "Score: " + userHighScoreTotal;
         highScoreTV = findViewById(R.id.finalScore);
         highScoreTV.setText(textViewHolder);
+
+        saveScore();
 
         showLeaderboard();
 
         buttonGoHome = findViewById(R.id.goHomeButton);
-        buttonGoHome.setOnClickListener(button -> saveScore());
-
+        buttonGoHome.setOnClickListener(button -> finish());
     }
 
     /**
