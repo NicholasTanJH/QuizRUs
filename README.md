@@ -3,6 +3,8 @@
 > Quiz"R"Us is a video game quizzing tool that provides an engaging and fun alternative to helping people study and learn.
 
 ### [Vision Statement](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/blob/main/docs/VisionStatement.md)
+### [Architecture](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/blob/main/ARCHITECTURE.md?ref_type=heads)
+### [Retrospective]()
 
 ### Iteration 1
 
@@ -19,3 +21,5 @@
 ### Iteration 3
 
 - #### [Features](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/issues/?sort=created_date&state=all&label_name%5B%5D=Feature&milestone_title=Iteration%203&first_page_size=20)
+    - [User Stories](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/issues/?sort=created_date&state=all&label_name%5B%5D=User%20Story&milestone_title=Iteration%203&first_page_size=100)
+        - [Developer Tasks](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/issues/?sort=created_date&state=all&milestone_title=Iteration%203&label_name%5B%5D=Developer%20Task&first_page_size=100)
