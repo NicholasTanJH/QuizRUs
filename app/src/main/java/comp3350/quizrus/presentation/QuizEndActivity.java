@@ -1,6 +1,7 @@
 package comp3350.quizrus.presentation;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -57,6 +58,8 @@ public class QuizEndActivity extends AppCompatActivity {
         AccessQuestions accessQuestions = new AccessQuestions();
         String textViewHolder;
 
+        quizEndAudio();
+
         accessLeaderboard = new AccessLeaderboard();
 
         currQuiz = (Quiz) intent.getSerializableExtra("currQuiz");
@@ -95,6 +98,10 @@ public class QuizEndActivity extends AppCompatActivity {
         buttonGoHome.setOnClickListener(button -> finish());
     }
 
+    /**
+     * Shows the leaderboard in the end screen
+     * grabs the information from the logic layer based on the quiz
+     */
     private void showLeaderboard() {
         List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz, 5);
 
@@ -105,10 +112,32 @@ public class QuizEndActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * Stores the users final score
+     */
     private void saveScore(){
         //Quick Calc to get time taken
         int timeTaken = timeLimitTotal - timeLeft;
         //Stores the results of the quiz
         accessLeaderboard.CreateUserQuizScore(currUser, currQuiz, numCorrectQuestions, timeTaken, userHighScoreTotal);
+    }
+
+    private void quizEndAudio() {
+        int luckyNumber = 7;
+        int maxChance = 10;
+        int minChance = 1;
+        int range = maxChance - minChance + 1;
+        MediaPlayer mediaPlayer;
+
+        int audioChance = (int)(Math.random() * range) + minChance;
+
+        if(audioChance == luckyNumber){
+            mediaPlayer = MediaPlayer.create(this,R.raw.haha_funny_sound);
+        }
+        else {
+            mediaPlayer = MediaPlayer.create(this,R.raw.applause_sound_effect);
+        }
+
+        mediaPlayer.start();
     }
 }
