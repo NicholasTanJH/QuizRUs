@@ -23,7 +23,7 @@ public class QuizPersistenceStub implements QuizPersistence {
 
         // Add quizzes.
         insertQuiz("Flags of Countries", user1, 120);
-        insertQuiz("Celebrity Partners", user2, 120);
+        insertQuiz("Celebrity Partners", user2, 10);
     }
 
     @Override
