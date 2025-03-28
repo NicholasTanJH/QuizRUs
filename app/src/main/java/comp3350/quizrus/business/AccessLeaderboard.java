@@ -1,6 +1,5 @@
 package comp3350.quizrus.business;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import comp3350.quizrus.application.Services;
@@ -23,8 +22,16 @@ public class AccessLeaderboard {
         this.scorePersistence = scorePersistence;
     }
 
-    public List<UserQuizScore> getScoresForQuiz(Quiz quiz) {
-        return scorePersistence.getScoresForQuiz(quiz);
+    public List<UserQuizScore> getScoresForQuiz(Quiz quiz, int numEntries) {
+        return scorePersistence.getScoresForQuiz(quiz, numEntries);
+    }
+
+    public int getUserHighScore(Quiz quiz, User user) {
+        return scorePersistence.getUserHighScore(quiz, user);
+    }
+
+    public int getNumAttempts(Quiz quiz, User user) {
+        return scorePersistence.getNumAttempts(quiz, user);
     }
 
     public double getAverageScore(Quiz quiz, User user)
@@ -39,17 +46,14 @@ public class AccessLeaderboard {
     }
 
     public UserQuizScore CreateUserQuizScore(final User user, final Quiz quiz, final int numCorrect,
-            final int timeTaken, final int newScore, final Timestamp timeAdded) {
-        UserQuizScore newUserQuizScore = new UserQuizScore(user, quiz, numCorrect, timeTaken, newScore, timeAdded);
+            final int timeTaken, final int score) {
+        int userQuizScoreID = scorePersistence.insertScore(user, quiz, numCorrect, timeTaken, score);
 
-        int userQuizScoreID = scorePersistence.insertScore(newUserQuizScore, user, quiz);
         if (userQuizScoreID != -1) {
-            newUserQuizScore.setUserQuizScoreID(userQuizScoreID);
+            return new UserQuizScore(userQuizScoreID, user, quiz, numCorrect, timeTaken, score);
         } else {
             return null;
         }
-
-        return newUserQuizScore;
     }
 
 }

@@ -14,10 +14,12 @@ import comp3350.quizrus.persistence.AnswerPersistence;
 import comp3350.quizrus.persistence.PersistenceException;
 
 public class AnswerPersistenceHSQLDB implements AnswerPersistence {
-
     public AnswerPersistenceHSQLDB() {
     }
 
+    /**
+     * returns the answer with the primary key answerID
+     */
     @Override
     public List<Answer> getAnswersForQuestions(Question question) {
         List<Answer> answers = new ArrayList<>();
@@ -26,9 +28,11 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
+            // query for answers that belong to a question
             pstmt.setInt(1, question.getQuestionID());
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
+                    // create the list of objects to return
                     Answer curr_answer = buildAnswerFromResultSet(rs);
                     answers.add(curr_answer);
                 }
@@ -41,8 +45,11 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
         return answers;
     }
 
+    /**
+     * using the objects variables to insert it into the database
+     */
     @Override
-    public int insertAnswer(Answer answer, Question question) {
+    public int insertAnswer(final String answerText, final Question question, final boolean isCorrect) {
         int answerID = -1;
         String query = "INSERT INTO answer (answerText, isCorrect, questionID) VALUES (?, ?, ?)";
 
@@ -50,8 +57,8 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new answer.
-            pstmt.setString(1, answer.getAnswerText());
-            pstmt.setBoolean(2, answer.isCorrect());
+            pstmt.setString(1, answerText);
+            pstmt.setBoolean(2, isCorrect);
             pstmt.setInt(3, question.getQuestionID());
 
             // Execute the query, then check that the answer was inserted.
@@ -73,6 +80,9 @@ public class AnswerPersistenceHSQLDB implements AnswerPersistence {
         }
     }
 
+    /**
+     * Builds and creates the needed object to return to the UI layers
+     */
     private Answer buildAnswerFromResultSet(ResultSet rs) throws SQLException {
         int answerID = rs.getInt("answerID");
         String answerText = rs.getString("answerText");

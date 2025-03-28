@@ -61,7 +61,7 @@
             android:layout_weight="1"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:text="Quiz Create:"
+            android:text="@string/quiz_create"
             android:textColor="@color/colorWhite"
             android:textSize="60sp"
             android:textStyle="bold" />
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Quiz Name:"
+            android:text="@string/quiz_name"
             android:textColor="@color/colorWhite"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/login_text_input_layout_background"
+            android:background="@drawable/grey_borderless_background"
             android:hint="..."
             android:inputType="text"
             android:maxLength="40"
@@ -116,7 +116,7 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Time (Seconds):"
+            android:text="@string/time_seconds"
             android:textColor="@color/colorWhite"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/login_text_input_layout_background"
+            android:background="@drawable/grey_borderless_background"
             android:hint="..."
             android:inputType="text"
             android:maxLength="40"
@@ -162,7 +162,7 @@
             android:layout_marginBottom="80dp"
             android:layout_weight="1"
             android:background="@drawable/button_background"
-            android:text="Edit Questions"
+            android:text="@string/edit_questions"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             android:textSize="40sp" />

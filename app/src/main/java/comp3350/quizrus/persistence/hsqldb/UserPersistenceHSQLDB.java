@@ -15,6 +15,9 @@ public class UserPersistenceHSQLDB implements UserPersistence {
     public UserPersistenceHSQLDB() {
     }
 
+    /**
+     * returns the user with the primary key userID
+     */
     @Override
     public User getUserByID(int userID) {
         User user = null;
@@ -23,9 +26,11 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
+            // query for users with the inputted userID
             pstmt.setInt(1, userID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
+                    // create the object to return
                     user = buildUserFromResultSet(rs);
                 }
             }
@@ -37,17 +42,22 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         return user;
     }
 
+    /**
+     * returns the user with the unique inputted username
+     */
     @Override
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(final String username) {
         User user = null;
         String query = "SELECT * FROM user WHERE username = ?";
 
         try (Connection conn = DatabaseManager.connection();
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
+            // query for users with the inputted username
             pstmt.setString(1, username);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
+                    // create the object to return
                     user = buildUserFromResultSet(rs);
                 }
             }
@@ -59,6 +69,9 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         return user;
     }
 
+    /**
+     * returns a list of all users
+     */
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -69,6 +82,7 @@ public class UserPersistenceHSQLDB implements UserPersistence {
                 ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
+                // create the list of objects to return
                 User user = buildUserFromResultSet(rs);
                 users.add(user);
             }
@@ -80,8 +94,11 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         return users;
     }
 
+    /**
+     * using the objects variables to insert it into the database
+     */
     @Override
-    public int insertUser(User newUser) {
+    public int insertUser(final String username, final String password, final String firstname, final String lastname) {
         int userID = -1;
         String query = "INSERT INTO user (username, password, firstname, lastname) VALUES (?, ?, ?, ?)";
 
@@ -89,10 +106,10 @@ public class UserPersistenceHSQLDB implements UserPersistence {
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new user.
-            pstmt.setString(1, newUser.getUsername());
-            pstmt.setString(2, newUser.getPassword());
-            pstmt.setString(3, newUser.getFirstname());
-            pstmt.setString(4, newUser.getLastname());
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setString(3, firstname);
+            pstmt.setString(4, lastname);
 
             // Execute the query, then check that the user was inserted.
             int affectedRows = pstmt.executeUpdate();
@@ -113,6 +130,9 @@ public class UserPersistenceHSQLDB implements UserPersistence {
         }
     }
 
+    /**
+     * Builds and creates the needed object to return to the UI layers
+     */
     private User buildUserFromResultSet(ResultSet rs) throws SQLException {
         int userID = rs.getInt("userID");
         String username = rs.getString("username");

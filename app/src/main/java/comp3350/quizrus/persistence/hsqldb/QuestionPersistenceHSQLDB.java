@@ -14,10 +14,12 @@ import comp3350.quizrus.persistence.PersistenceException;
 import comp3350.quizrus.persistence.QuestionPersistence;
 
 public class QuestionPersistenceHSQLDB implements QuestionPersistence {
-
     public QuestionPersistenceHSQLDB() {
     }
 
+    /**
+     * returns the question with the primary key questionID
+     */
     @Override
     public Question getQuestionByID(int questionID) {
         Question question = null;
@@ -30,6 +32,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
             pstmt.setInt(1, questionID);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
+                    // create the object to return
                     question = buildQuestionFromResultSet(rs);
                 }
             }
@@ -41,6 +44,9 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
         return question;
     }
 
+    /**
+     * returns the list of questions for a specific quiz
+     */
     @Override
     public List<Question> getQuestionsForQuiz(Quiz quiz) {
         List<Question> questions = new ArrayList<>();
@@ -53,6 +59,7 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
             pstmt.setInt(1, quiz.getQuizID());
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
+                    // create the list of objects to return
                     Question curr_question = buildQuestionFromResultSet(rs);
                     questions.add(curr_question);
                 }
@@ -65,8 +72,11 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
         return questions;
     }
 
+    /**
+     * using the objects variables to insert it into the database
+     */
     @Override
-    public int insertQuestion(Question question, Quiz quiz) {
+    public int insertQuestion(final String questionText, final Quiz quiz, final String questionType) {
         int questionID = -1;
         String query = "INSERT INTO question (questionText, quizID, questionType) VALUES (?, ?, ?)";
 
@@ -74,9 +84,9 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
                 PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
             // Set the values for the new question.
-            pstmt.setString(1, question.getQuestionText());
+            pstmt.setString(1, questionText);
             pstmt.setInt(2, quiz.getQuizID());
-            pstmt.setString(3, question.getQuestionType());
+            pstmt.setString(3, questionType);
 
             // Execute the query, then check that the question was inserted.
             int affectedRows = pstmt.executeUpdate();
@@ -97,6 +107,9 @@ public class QuestionPersistenceHSQLDB implements QuestionPersistence {
         }
     }
 
+    /**
+     * Builds and creates the needed object to return to the UI layers
+     */
     private Question buildQuestionFromResultSet(ResultSet rs) throws SQLException {
         int questionID = rs.getInt("questionID");
         String questionText = rs.getString("questionText");

@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
-                android:text="Sign Up"
+                android:text="@string/sign_up"
                 android:textColor="@color/colorWhite"
                 android:textSize="60sp"
                 android:textStyle="bold" />
@@ -75,8 +75,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
-                android:background="@drawable/login_text_input_layout_background"
-                android:hint="Username"
+                android:background="@drawable/grey_borderless_background"
+                android:hint="@string/username"
                 android:padding="10dp"
                 android:textColorHint="@color/colorWhite">
 
@@ -99,9 +99,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
-                android:background="@drawable/login_text_input_layout_background"
+                android:background="@drawable/grey_borderless_background"
                 android:gravity="center"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:padding="10dp"
                 android:textColorHint="@color/colorWhite">
 
@@ -124,9 +124,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
-                android:background="@drawable/login_text_input_layout_background"
+                android:background="@drawable/grey_borderless_background"
                 android:gravity="center"
-                android:hint="Confirm Password"
+                android:hint="@string/confirm_password"
                 android:padding="10dp"
                 android:textColorHint="@color/colorWhite">
 
@@ -149,9 +149,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
-                android:background="@drawable/login_text_input_layout_background"
+                android:background="@drawable/grey_borderless_background"
                 android:gravity="center"
-                android:hint="First Name"
+                android:hint="@string/first_name"
                 android:padding="10dp"
                 android:textColorHint="@color/colorWhite">
 
@@ -174,9 +174,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
-                android:background="@drawable/login_text_input_layout_background"
+                android:background="@drawable/grey_borderless_background"
                 android:gravity="center"
-                android:hint="Last Name"
+                android:hint="@string/last_name"
                 android:padding="10dp"
                 android:textColorHint="@color/colorWhite">
 
@@ -201,7 +201,7 @@
                 android:layout_marginVertical="10dp"
                 android:layout_marginHorizontal="20dp"
                 android:background="@drawable/button_background"
-                android:text="Sign Up"
+                android:text="@string/sign_up"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="35sp" />

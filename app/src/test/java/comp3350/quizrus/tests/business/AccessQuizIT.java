@@ -118,8 +118,8 @@ public class AccessQuizIT {
         assertNull(quiz2);
     }
 
-    @Test
-    public void testQuizOnDeleteCascade() {
+    // @Test
+    // public void testQuizOnDeleteCascade() {
 
-    }
+    // }
 }

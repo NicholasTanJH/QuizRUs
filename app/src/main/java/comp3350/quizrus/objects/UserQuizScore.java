@@ -1,7 +1,5 @@
 package comp3350.quizrus.objects;
 
-import java.sql.Timestamp;
-
 public class UserQuizScore {
     private int userQuizScoreID;
     private User user;
@@ -9,36 +7,19 @@ public class UserQuizScore {
     private int numCorrect;
     private int timeTaken;
     private int score;
-    private Timestamp timeAdded;
-
-    public UserQuizScore(User newUser, Quiz newQuiz, int newNumCorrect, int newtimeTaken, int newScore,
-            Timestamp newTimeAdded) {
-        this.userQuizScoreID = -1;
-        this.user = newUser;
-        this.quiz = newQuiz;
-        this.numCorrect = newNumCorrect;
-        this.timeTaken = newtimeTaken;
-        this.score = newScore;
-        this.timeAdded = newTimeAdded;
-    }
 
     public UserQuizScore(int newUserQuizScoreID, User newUser, Quiz newQuiz, int newNumCorrect, int newtimeTaken,
-            int newScore, Timestamp newTimeAdded) {
+            int newScore) {
         this.userQuizScoreID = newUserQuizScoreID;
         this.user = newUser;
         this.quiz = newQuiz;
         this.numCorrect = newNumCorrect;
         this.timeTaken = newtimeTaken;
         this.score = newScore;
-        this.timeAdded = newTimeAdded;
     }
 
     public int getUserQuizScoreID() {
         return this.userQuizScoreID;
-    }
-
-    public void setUserQuizScoreID(final int newUserQuizScoreID) {
-        this.userQuizScoreID = newUserQuizScoreID;
     }
 
     public User getUser() {
@@ -59,9 +40,5 @@ public class UserQuizScore {
 
     public int getScore() {
         return this.score;
-    }
-
-    public Timestamp getTimeAdded() {
-        return this.timeAdded;
     }
 }

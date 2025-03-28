@@ -40,20 +40,18 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
     User currUser;
     String quizName;
     int timerAmount;
-
     List<String[]> newQuestionAndAnswersList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-
-        newQuestionAndAnswersList = new ArrayList<>();
-
         setContentView(R.layout.activity_quiz_modify_question);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
+            newQuestionAndAnswersList = new ArrayList<>();
 
             questionEditText = findViewById(R.id.QuestionInput);
             correctAnswerEditText = findViewById(R.id.CorrectAnswerInput);
@@ -63,19 +61,28 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
             saveQuestionButton = findViewById(R.id.buttonSave);
             doneQuestionsButton = findViewById(R.id.buttonDoneEditQuestion);
 
+            // Get Intent passing variables
             Intent intent = getIntent();
             currUser = (User) intent.getSerializableExtra("loggedInUser");
             quizName = intent.getStringExtra("quizName");
             timerAmount = intent.getIntExtra("timerAmount", 0);
 
+            // Save question
             saveQuestionButton.setOnClickListener(button -> setupQuestion());
 
+            // Done question
             doneQuestionsButton.setOnClickListener(button -> setupQuestions());
 
             return insets;
         });
     }
 
+    /**
+     * This method is called whenever user want to save a new question they have
+     * created
+     * Save the user input into a list to record the new question they create
+     * Invalid question input format will be notified through alertMessage popup
+     */
     private void setupQuestion() {
         // add the questions to the list
         String question = questionEditText.getText().toString();
@@ -85,10 +92,12 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
         String wrongAnswerThree = wrongAnswerThreeEditText.getText().toString();
 
         if (question.isEmpty()) {
-            setAlertMessage("No question entered", "Sorry, please enter a question for this quiz.");
+            setAlertMessage(getString(R.string.no_question_entered),
+                    getString(R.string.sorry_please_enter_a_question_for_this_quiz));
         } else if (correctAnswer.isEmpty() || wrongAnswerOne.isEmpty() || wrongAnswerTwo.isEmpty()
                 || wrongAnswerThree.isEmpty()) {
-            setAlertMessage("Missing answer", "Sorry, please enter all answers to this question.");
+            setAlertMessage(getString(R.string.missing_answer),
+                    getString(R.string.sorry_please_enter_all_answers_to_this_question));
         } else {
             String[] questionAndAnswers = new String[5];
 
@@ -104,8 +113,10 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
         }
     }
 
-    // animation for button when question is saved successfully
-    // clear out all the edit text
+    /**
+     * Animation for button when question is saved successfully
+     * Clear out all the edit text
+     */
     private void reset() {
         questionEditText.setText("");
         correctAnswerEditText.setText("");
@@ -115,13 +126,18 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
 
         saveQuestionButton.setText("✓");
         new Handler().postDelayed(() -> {
-            saveQuestionButton.setText("Save Question");
+            saveQuestionButton.setText(R.string.save_question);
         }, 1000);
     }
 
+    /**
+     * This method is called when the user is done with creating new question
+     * Add each saved new questions to db
+     */
     private void setupQuestions() {
         if (newQuestionAndAnswersList.isEmpty()) {
-            setAlertMessage("No questions entered", "Sorry, please enter at least one question with answers.");
+            setAlertMessage(getString(R.string.no_questions_entered),
+                    getString(R.string.sorry_please_enter_at_least_one_question_with_answers));
         } else {
             // make new quiz
             AccessQuizzes accessQuizzes = new AccessQuizzes();
@@ -150,9 +166,12 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
                 finish();
             }, 500);
         }
-
     }
 
+    /**
+     * @param alertTitle   Popup title
+     * @param alertMessage Popup message
+     */
     private void setAlertMessage(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         SpannableString spannableMessage = new SpannableString(alertMessage);

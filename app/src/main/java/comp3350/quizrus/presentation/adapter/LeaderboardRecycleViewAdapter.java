@@ -20,13 +20,31 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
     private final int totalQuestionNumber;
     private final boolean isEmptyLeaderboard;
 
-    public LeaderboardRecycleViewAdapter(Context context, List<UserQuizScore> userQuizScoreList, int totalQuestionNumber) {
+    /**
+     * @param context
+     *                            This is the context for the android resources.
+     * @param userQuizScoreList
+     *                            The list of the user's and their scores.
+     * @param totalQuestionNumber
+     *                            The total number of questions.
+     */
+    public LeaderboardRecycleViewAdapter(Context context, List<UserQuizScore> userQuizScoreList,
+            int totalQuestionNumber) {
         this.context = context;
         this.userQuizScoreList = userQuizScoreList;
         this.totalQuestionNumber = totalQuestionNumber;
         isEmptyLeaderboard = userQuizScoreList.isEmpty();
     }
 
+    /**
+     * @param parent
+     *                 The ViewGroup into which the new View will be added after it
+     *                 is bound to an adapter position.
+     * @param viewType
+     *                 The view type of the new View.
+     * @return
+     *         Returns the view for the leaderboard.
+     */
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,6 +53,16 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         return new LeaderboardRecycleViewAdapter.MyViewHolder(view);
     }
 
+    /**
+     * This binds the fragmented layout to the leaderboard, and inputs the
+     * information needed.
+     * 
+     * @param holder
+     *                 The ViewHolder which should be updated to represent the
+     *                 contents of the item at the given position in the data set.
+     * @param position
+     *                 The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         TextView leaderboardOrderNumberTV = holder.leaderboardOrderNumberTV;
@@ -42,9 +70,9 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         TextView leaderboardScoreTV = holder.leaderboardScoreTV;
         TextView leaderboardScoreInfoTV = holder.leaderboardScoreInfoTV;
 
-        //show a default leaderboard item if the leaderboard is empty
+        // show a default leaderboard item if the leaderboard is empty
         if (isEmptyLeaderboard) {
-            leaderboardNameTV.setText("This quiz hasn’t been attempted yet");
+            leaderboardNameTV.setText(R.string.this_quiz_hasn_t_been_attempted_yet);
         } else {
             int currOrderNumber = position + 1;
             UserQuizScore currUserQuizScore = userQuizScoreList.get(position);
@@ -71,6 +99,9 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         }
     }
 
+    /**
+     * @return 1 if leaderboard is empty, or else the number of leaderboard
+     */
     @Override
     public int getItemCount() {
         if (isEmptyLeaderboard) {
@@ -88,6 +119,10 @@ public class LeaderboardRecycleViewAdapter extends RecyclerView.Adapter<Leaderbo
         TextView leaderboardScoreTV;
         TextView leaderboardScoreInfoTV;
 
+        /**
+         * @param itemView
+         *                 This is the text in the text views for the leaderboard
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             leaderboardOrderNumberTV = itemView.findViewById(R.id.leaderboardOrderNumberTV);

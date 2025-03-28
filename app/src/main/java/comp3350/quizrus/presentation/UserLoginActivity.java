@@ -62,12 +62,18 @@ public class UserLoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Get username and password from user and tried to log in
+     * get the response from logic layer
+     * do animation corresponding to login is successful or not
+     */
     private void logIn() {
         String logInUsername = textInputEditTextUsername.getText().toString();
         String logInPassword = textInputEditTextPassword.getText().toString();
 
         if (logInUsername.isEmpty() || logInPassword.isEmpty()) {
-            setAlertMessage("Failed to Log In", "Login information cannot be empty");
+            setAlertMessage(getString(R.string.failed_to_log_in),
+                    getString(R.string.login_information_cannot_be_empty));
         } else {
             AccessUsers accessUsers = new AccessUsers();
             User user = accessUsers.loginUser(logInUsername, logInPassword);
@@ -76,9 +82,15 @@ public class UserLoginActivity extends AppCompatActivity {
         }
     }
 
-    // animation for changing the button text when registering
+    /**
+     * Give popup when login failed
+     * Animate button when login succeeded
+     * 
+     * @param isLoginInfoCorrect login info is right
+     * @param user               User object that was logged in
+     */
     private void logInAnimation(boolean isLoginInfoCorrect, User user) {
-        buttonLogIn.setText("Logging In...");
+        buttonLogIn.setText(R.string.logging_in);
         if (isLoginInfoCorrect) {
             new Handler().postDelayed(() -> {
                 buttonLogIn.setText("✓");
@@ -91,12 +103,19 @@ public class UserLoginActivity extends AppCompatActivity {
             }, 1500);
         } else {
             new Handler().postDelayed(() -> {
-                setAlertMessage("Failed to Log In", "Incorrect username or password. Please try again.");
-                buttonLogIn.setText("Log In");
+                setAlertMessage(getString(R.string.failed_to_log_in),
+                        getString(R.string.incorrect_username_or_password_please_try_again));
+                buttonLogIn.setText(R.string.log_in);
             }, 1000);
         }
     }
 
+    /**
+     * Create popup
+     * 
+     * @param alertTitle   title popup
+     * @param alertMessage message popup
+     */
     private void setAlertMessage(String alertTitle, String alertMessage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         SpannableString spannableMessage = new SpannableString(alertMessage);
@@ -120,7 +139,6 @@ public class UserLoginActivity extends AppCompatActivity {
         String[] assetNames;
         Context context = getApplicationContext();
         File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
-        resetDB(dataDirectory);
         AssetManager assetManager = getAssets();
 
         try {
@@ -162,22 +180,6 @@ public class UserLoginActivity extends AppCompatActivity {
 
                 out.close();
                 in.close();
-            }
-        }
-    }
-
-    private void resetDB(File dataDirectory) {
-        if (dataDirectory.exists() && dataDirectory.isDirectory()) {
-            // Get all files in the directory.
-            File[] files = dataDirectory.listFiles();
-
-            if (files != null) {
-                for (File file : files) {
-                    // Delete each file in the directory.
-                    if (file.isFile()) {
-                        file.delete();
-                    }
-                }
             }
         }
     }

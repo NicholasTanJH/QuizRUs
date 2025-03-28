@@ -13,8 +13,7 @@ import comp3350.quizrus.persistence.QuestionPersistence;
 import comp3350.quizrus.persistence.stubs.QuestionPersistenceStub;
 import comp3350.quizrus.tests.utils.TestUtils;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,14 +42,14 @@ public class AccessQuestionTest {
     @Test
     public void testGetQuestions() {
         // Creating a quiz to pass to the access questions method
-        Quiz quiz1 = new Quiz(0, "Flags of Countries", new User(1, "kakashi", "password1"));
+        Quiz quiz1 = new Quiz(0, "Flags of Countries", new User(1, "kakashi", "password1", "kakashi", "hatake"), 120);
 
         // Get the list of questions for quiz1
         List<Question> questions = accessQuestions.getQuestions(quiz1);
 
         System.out.println("Testing that a list of questions is returned correctly");
         assertNotNull(questions);
-        assertTrue(questions.size() == 5); // Assume quiz1 has 5 questions
+        assertEquals(5, questions.size()); // Assume quiz1 has 5 questions
 
         System.out.println("Testing that questions in the list are as expected");
         assertTrue(0 == questions.get(0).getQuestionID());

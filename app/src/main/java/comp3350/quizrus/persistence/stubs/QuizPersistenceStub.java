@@ -22,8 +22,8 @@ public class QuizPersistenceStub implements QuizPersistence {
         User user2 = new User(1, "kakashi", "Password1!", "Saige", "Santana");
 
         // Add quizzes.
-        insertQuiz(new Quiz(0, "Flags of Countries", user1, 120), user1);
-        insertQuiz(new Quiz(1, "Celebrity Partners", user2, 120), user2);
+        insertQuiz("Flags of Countries", user1, 120);
+        insertQuiz("Celebrity Partners", user2, 10);
     }
 
     @Override
@@ -42,26 +42,11 @@ public class QuizPersistenceStub implements QuizPersistence {
     }
 
     @Override
-    public List<Quiz> getUserQuizzes(User user) {
-        List<Quiz> userQuizzes = new ArrayList<>();
-
-        for (Quiz quiz : this.quizzes) {
-            if (quiz.getUser().equals(user)) {
-                userQuizzes.add(quiz);
-            }
-        }
-        return Collections.unmodifiableList(userQuizzes);
-    }
-
-    @Override
-    public List<Quiz> getQuizzesByTitle(String quizTitle)
-    {
+    public List<Quiz> getQuizzesByTitle(String quizTitle) {
         List<Quiz> titledQuizzes = new ArrayList<>();
 
-        for(Quiz quiz : this.quizzes)
-        {
-            if(quiz.getTitle().toLowerCase().contains(quizTitle.toLowerCase()))
-            {
+        for (Quiz quiz : this.quizzes) {
+            if (quiz.getTitle().toLowerCase().contains(quizTitle.toLowerCase())) {
                 titledQuizzes.add(quiz);
             }
         }
@@ -70,11 +55,11 @@ public class QuizPersistenceStub implements QuizPersistence {
     }
 
     @Override
-    public int insertQuiz(Quiz quiz, User user) {
-        quiz.setQuizID(this.numQuizzes);
-        this.quizzes.add(quiz);
+    public int insertQuiz(final String title, final User user, final int timer) {
+        Quiz newQuiz = new Quiz(numQuizzes, title, user, timer);
+        this.quizzes.add(newQuiz);
         this.numQuizzes++;
-        return quiz.getQuizID();
+        return newQuiz.getQuizID();
     }
 
     @Override

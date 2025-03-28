@@ -7,11 +7,11 @@ import comp3350.quizrus.objects.User;
 import comp3350.quizrus.objects.Quiz;
 
 public interface UserQuizScorePersistence {
-    List<UserQuizScore> getScoresForQuiz(Quiz quiz);
+    List<UserQuizScore> getScoresForQuiz(Quiz quiz, int numEntries);
 
-    double getAverageScore(Quiz quiz, User user);
+    int getUserHighScore(Quiz quiz, User user);
 
     int getNumAttempts(Quiz quiz, User user);
 
-    int insertScore(UserQuizScore score, User user, Quiz Quiz);
+    int insertScore(final User user, final Quiz quiz, final int numCorrect, final int timeTaken, final int score);
 }

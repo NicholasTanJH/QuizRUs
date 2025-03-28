@@ -26,8 +26,8 @@ import java.util.List;
 
 public class QuizSelectionActivity extends Activity {
     AccessQuizzes accessQuiz;
-    List<Quiz> quizzes;
     User currUser;
+    RecyclerView recyclerViewListQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +38,32 @@ public class QuizSelectionActivity extends Activity {
         currUser = (User) intent.getSerializableExtra("loggedInUser");
         accessQuiz = new AccessQuizzes();
 
-        setUpSearchButton();
-        getQuizzes();
-        showQuizzes();
+        recyclerViewListQuiz = findViewById(R.id.listQuiz);
+
+        setUpSearch();
+        showQuizzes(getAllQuizzes());
         setUpUserIcon();
         setUpAddQuizIcon();
     }
 
+    /**
+     * Refresh the listQuiz RecyclerView to display all quizzes
+     */
     @Override
     protected void onResume() {
         super.onResume();
-        getQuizzes();
-        showQuizzes();
+        showQuizzes(getAllQuizzes());
     }
 
-    private void setUpSearchButton() {
+    /**
+     * Once search button is clicked, get the input text from search bar and pass it
+     * to logic to search
+     * Refresh the quiz recycle view list once got the returned search list
+     * Display the search result
+     * Set up the "x" cancel button where it will remove the search query when
+     * clicked
+     */
+    private void setUpSearch() {
         EditText searchET = findViewById(R.id.searchInput);
         ImageButton searchButton = findViewById(R.id.searchButton);
         LinearLayout searchResult = findViewById(R.id.searchResult);
@@ -66,33 +77,42 @@ public class QuizSelectionActivity extends Activity {
             searchET.getText().clear();
 
             if (!searchText.isEmpty()) {
-                quizzes = accessQuiz.searchQuizzes(searchText);
-                showQuizzes();
+                List<Quiz> searchedQuizzes = accessQuiz.searchQuizzes(searchText);
+                showQuizzes(searchedQuizzes);
 
+                // Search result
                 searchResult.setVisibility(View.VISIBLE);
-                int resultCount = quizzes.size();
-                String searchResultMessage = resultCount + " results found from \"" + searchText + "\"";
+                int resultCount = searchedQuizzes.size();
+                String searchResultMessage = String.format(getString(R.string.search_result_message), resultCount,
+                        searchText);
                 searchResultTV.setText(searchResultMessage);
             }
         });
 
+        // "x" cancel button
         searchResultCancerButton.setOnClickListener(button -> {
             searchResult.setVisibility(View.GONE);
-            getQuizzes();
-            showQuizzes();
+            showQuizzes(getAllQuizzes());
         });
     }
 
-    private void showQuizzes() {
+    /**
+     * Display quizzes in the listQuiz recycle view
+     *
+     * @param quizzes list of Quiz to be displayed
+     */
+    private void showQuizzes(List<Quiz> quizzes) {
         // Setting up the recycle view
-        RecyclerView recyclerView = findViewById(R.id.listQuiz);
-        QuizRecycleViewAdapter adapter = new QuizRecycleViewAdapter(this, quizzes);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        QuizRecycleViewAdapter adapter = new QuizRecycleViewAdapter(this, quizzes, currUser);
+        recyclerViewListQuiz.setAdapter(adapter);
+        recyclerViewListQuiz.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void getQuizzes() {
-        quizzes = accessQuiz.getQuizzes();
+    /**
+     * @return All the quizzes
+     */
+    private List<Quiz> getAllQuizzes() {
+        return accessQuiz.getQuizzes();
     }
 
     private void setUpUserIcon() {
@@ -100,6 +120,11 @@ public class QuizSelectionActivity extends Activity {
         accountButton.setOnClickListener(button -> showPopupSignOutMenu(button));
     }
 
+    /**
+     * Show the popup that contains the username and sign out button
+     *
+     * @param view The account icon image button
+     */
     private void showPopupSignOutMenu(View view) {
         PopupMenu signOutPopUp = new PopupMenu(this, view);
         MenuInflater inflater = signOutPopUp.getMenuInflater();
@@ -111,6 +136,7 @@ public class QuizSelectionActivity extends Activity {
             userMenuItem.setTitle(currUser.getUsername());
         }
 
+        // Set up the sign out button
         signOutPopUp.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_sign_out) {
                 Intent intent = new Intent(QuizSelectionActivity.this, UserLoginActivity.class);
@@ -130,6 +156,9 @@ public class QuizSelectionActivity extends Activity {
         createQuizButton.setOnClickListener(button -> startCreatingNewQuiz());
     }
 
+    /**
+     * Go to QuizCreation page
+     */
     private void startCreatingNewQuiz() {
         Intent intent = new Intent(this, QuizCreationActivity.class);
         intent.putExtra("loggedInUser", currUser);
