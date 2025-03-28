@@ -30,6 +30,9 @@ public class AccessAnswers {
         return answers;
     }
 
+    /**
+     * Used by the UI to get the index in the list of the correct answer
+     */
     public int getCorrectAnswerPosition(List<Answer> answers) {
         // Find the position of the correct answer in the list.
         int correctAnswerPosition = -1;

@@ -35,6 +35,9 @@ public class AccessQuizzes {
         return Collections.unmodifiableList(quizzes);
     }
 
+    /**
+     * Search for a quiz with a specific quiz title based on a query string
+     */
     public List<Quiz> searchQuizzes(String quizTitle)
     {
         if(quizTitle != null)
