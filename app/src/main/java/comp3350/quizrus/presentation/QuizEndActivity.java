@@ -77,7 +77,7 @@ public class QuizEndActivity extends AppCompatActivity {
         totalQuestionNumber = questions.size();
 
         //Putting the number of correct questions
-        textViewHolder = "Grade: " + numCorrectQuestions + "/" + totalQuestionNumber;
+        textViewHolder = "Correct: " + numCorrectQuestions + "/" + totalQuestionNumber;
         questionNumScoreTV = findViewById(R.id.correctQuestions);
         questionNumScoreTV.setText(textViewHolder);
 
