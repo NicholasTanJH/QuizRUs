@@ -1,4 +1,5 @@
 package comp3350.quizrus;
+
 import static android.os.SystemClock.sleep;
 import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onData;
@@ -29,34 +30,23 @@ import androidx.test.runner.AndroidJUnit4;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class AttemptQuizTest {
+public class DeleteQuizTest {
     @Rule
     public ActivityTestRule<UserLoginActivity> activityRule = new ActivityTestRule<>(UserLoginActivity.class);
     @Test
-    public void AttemptQuiz(){
-        //login
+    public void deleteQuiz(){
         onView(withId(R.id.textInputETUsername)).perform(typeText("kakashi"));
         onView(withId(R.id.textInputETPassword)).perform(typeText("Password1!"));
         closeSoftKeyboard();
         onView(withId(R.id.buttonLogin)).perform(click());
         sleep(5000);
 
-        //attempt quiz
+        //deleteQuiz
         onView(withId(R.id.listQuiz))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, ViewActions.click()));
-        onView(withId(R.id.buttonStart)).perform(click());
-        onView(withId(R.id.button1)).perform(click());
-        onView(withId(R.id.buttonProceed)).perform(click());
-        onView(withId(R.id.buttonProceed)).perform(click());
-        sleep(2000);
-        onView(withId(R.id.button1)).perform(click());
-        onView(withId(R.id.buttonProceed)).perform(click());
-        onView(withId(R.id.buttonProceed)).perform(click());
-        sleep(2000);
-        onView(withId(R.id.goHomeButton)).perform(click());
-        sleep(2000);
-        onView(withId(R.id.listQuiz))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, ViewActions.click()));
-        sleep(2000);
+        onView(withId(R.id.buttonDeleteQuiz)).perform(click());
+        onView(withText("Delete"))
+                .perform(ViewActions.click());
+        sleep(5000);
     }
 }
