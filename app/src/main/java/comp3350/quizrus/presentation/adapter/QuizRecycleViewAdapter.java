@@ -24,9 +24,13 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
     private final User currUser;
 
     /**
-     * @param context Context from the Activity that call this
-     * @param quizzes List of quizzes
-     * @param currUser Current logged in user
+     * quizTitles passed in from QuizSelectionActivity
+     * @param context
+     * This is the context for the android resource.
+     * @param quizzes
+     * This is the list of quizzes available.
+     * @param currUser
+     * This is the currently logged in user.
      */
     public QuizRecycleViewAdapter(Context context, List<Quiz> quizzes, User currUser) {
         this.context = context;
@@ -35,10 +39,12 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
     }
 
     /**
-     * @param parent   The ViewGroup into which the new View will be added after it is bound to
-     *                 an adapter position.
-     * @param viewType The view type of the new View.
-     * @return A new instance of MyViewHolder containing the inflated quiz row view.
+     * @param parent
+     * The ViewGroup into which the new View will be added after it is bound to an adapter position.
+     * @param viewType
+     * The view type of the new View.
+     * @return
+     * Returns the quiz recycle view
      */
     @NonNull
     @Override
@@ -49,10 +55,10 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
     }
 
     /**
-     * Implementing the quiz tiles to each item and set up the action once clicked
-     * @param holder   The ViewHolder which should be updated to represent the contents of the
-     *                 item at the given position in the data set.
-     * @param position The position of the item within the adapter's data set.
+     * @param holder
+     * The ViewHolder which should be updated to represent the contents of the item at the given position in the data set.
+     * @param position
+     * The position of the item within the adapter's data set.
      */
     @Override
     public void onBindViewHolder(@NonNull QuizRecycleViewAdapter.MyViewHolder holder, int position) {
@@ -86,10 +92,10 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
     }
 
     /**
-     * Setting the number of rows in the recycleView
-     * @return Number of quizzes
+     * @return
+     * Number of items in the recycle view (rows of selectable quiz)
+     * Defined by the size of the quizTitles arraylist
      */
-    // Defined by the size of the quizTitles arraylist
     @Override
     public int getItemCount() {
         return quizzes.size();
@@ -99,6 +105,10 @@ public class QuizRecycleViewAdapter extends RecyclerView.Adapter<QuizRecycleView
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView quizTitle;
 
+        /**
+         * @param itemView
+         * This grabs the quiz title view
+         */
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             quizTitle = itemView.findViewById(R.id.quiz_selection_item_title);

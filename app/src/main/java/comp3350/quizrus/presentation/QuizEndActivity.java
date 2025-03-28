@@ -1,8 +1,7 @@
 package comp3350.quizrus.presentation;
 
-import static comp3350.quizrus.business.CalculateScore.calculateScore;
-
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,7 +33,6 @@ public class QuizEndActivity extends AppCompatActivity {
     private User currUser;
     private Quiz currQuiz;
     private List<Question> questions;
-    private ImageButton buttonBack;
     private int numCorrectQuestions;
     private int totalQuestionNumber;
     private int timeLeft;
@@ -60,6 +58,8 @@ public class QuizEndActivity extends AppCompatActivity {
         AccessQuestions accessQuestions = new AccessQuestions();
         String textViewHolder;
 
+        quizEndAudio();
+
         accessLeaderboard = new AccessLeaderboard();
 
         currQuiz = (Quiz) intent.getSerializableExtra("currQuiz");
@@ -68,7 +68,7 @@ public class QuizEndActivity extends AppCompatActivity {
 
         //Inputting the time remaining
         timeLeft = intent.getIntExtra("timeLeft", 0);
-        textViewHolder = timeLeft + "s";
+        textViewHolder = "Time: " + timeLeft + "s";
         timeLeftTV = findViewById(R.id.timeRemaining);
         timeLeftTV.setText(textViewHolder);
 
@@ -77,7 +77,7 @@ public class QuizEndActivity extends AppCompatActivity {
         totalQuestionNumber = questions.size();
 
         //Putting the number of correct questions
-        textViewHolder = numCorrectQuestions + "/" + totalQuestionNumber;
+        textViewHolder = "Grade: " + numCorrectQuestions + "/" + totalQuestionNumber;
         questionNumScoreTV = findViewById(R.id.correctQuestions);
         questionNumScoreTV.setText(textViewHolder);
 
@@ -85,20 +85,25 @@ public class QuizEndActivity extends AppCompatActivity {
         timeLimitTotal = currQuiz.getTimeLimit();
 
         // User current score
-        userHighScoreTotal = calculateScore(numCorrectQuestions,timeLimitTotal,timeLeft);
-        textViewHolder = "" + userHighScoreTotal;
+        userHighScoreTotal = CalculateScore.calculateScore(numCorrectQuestions,timeLimitTotal,timeLeft);
+        textViewHolder = "Score: " + userHighScoreTotal;
         highScoreTV = findViewById(R.id.finalScore);
         highScoreTV.setText(textViewHolder);
+
+        saveScore();
 
         showLeaderboard();
 
         buttonGoHome = findViewById(R.id.goHomeButton);
-        buttonGoHome.setOnClickListener(button -> saveScore());
-
+        buttonGoHome.setOnClickListener(button -> finish());
     }
 
+    /**
+     * Shows the leaderboard in the end screen
+     * grabs the information from the logic layer based on the quiz
+     */
     private void showLeaderboard() {
-        List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz);
+        List<UserQuizScore> userQuizScoreList = accessLeaderboard.getScoresForQuiz(currQuiz, 5);
 
         // Setting up the recycle view
         RecyclerView recyclerView = findViewById(R.id.EndLeaderBoardRecyclerView);
@@ -107,10 +112,32 @@ public class QuizEndActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * Stores the users final score
+     */
     private void saveScore(){
         //Quick Calc to get time taken
         int timeTaken = timeLimitTotal - timeLeft;
         //Stores the results of the quiz
-        accessLeaderboard.CreateUserQuizScore(currUser, currQuiz, numCorrectQuestions, timeTaken, userHighScoreTotal, );
+        accessLeaderboard.CreateUserQuizScore(currUser, currQuiz, numCorrectQuestions, timeTaken, userHighScoreTotal);
+    }
+
+    private void quizEndAudio() {
+        int luckyNumber = 7;
+        int maxChance = 10;
+        int minChance = 1;
+        int range = maxChance - minChance + 1;
+        MediaPlayer mediaPlayer;
+
+        int audioChance = (int)(Math.random() * range) + minChance;
+
+        if(audioChance == luckyNumber){
+            mediaPlayer = MediaPlayer.create(this,R.raw.haha_funny_sound);
+        }
+        else {
+            mediaPlayer = MediaPlayer.create(this,R.raw.applause_sound_effect);
+        }
+
+        mediaPlayer.start();
     }
 }
