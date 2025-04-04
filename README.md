@@ -28,5 +28,5 @@
 
 ### Presentation
 - #### Preface: 
-  - We had decided to use a template for our webstie presentation using jekyll
+We had decided to use a template for our webstie presentation using jekyll
 - #### [Website](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/blob/3b6df61832926b9ee29bae2668cb8d7b4b0669ff/Group11Website.zip)
