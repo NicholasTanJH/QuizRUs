@@ -13,8 +13,9 @@ Jekyll requires the following:
 ## Instuctions
 1. Install all [prerequisites](https://jekyllrb.com/docs/installation/).
 2. Install the jekyll and bundler gems. `gem install jekyll bundler`
-3. Build the site and make it available on a local server. `bundle exec jekyll serve`
-
+3. Change into QuizRUsWebsite directory. `cd QuizRUsWebstie`
+4. Build the site and make it available on a local server. `bundle exec jekyll serve`
+5. Browse to http://localhost:4000
 
 For more information, please go to the Jekyll official website [Jekyll Tutorial](https://jekyllrb.com/docs/)
 
