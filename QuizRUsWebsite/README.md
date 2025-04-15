@@ -2,10 +2,6 @@
 
 This is a static website powered by [Jekyll](https://jekyllrb.com/) and the [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) theme.  
 
-## To Run It
-`bundle exec jekyll serve`
-
-
 ## Prerequisites
 
 Jekyll requires the following:
