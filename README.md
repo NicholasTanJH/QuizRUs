@@ -27,5 +27,6 @@
         - [Developer Tasks](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/issues/?sort=created_date&state=all&milestone_title=Iteration%203&label_name%5B%5D=Developer%20Task&first_page_size=100)
 
 ### Presentation
-- #### [Website](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/blob/3b6df61832926b9ee29bae2668cb8d7b4b0669ff/Group11Website.zip)
+- #### [Website file](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/blob/main/Group11Website.zip)
+- #### [Website README](https://code.cs.umanitoba.ca/comp3350-winter2025/a02-g11-realengineers/-/blob/main/QuizRUsWebsite/README.md?ref_type=heads)
     - We had decided to use a template for our webstie presentation which can be run through jekyll
