@@ -51,30 +51,30 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-            newQuestionAndAnswersList = new ArrayList<>();
-
-            questionEditText = findViewById(R.id.QuestionInput);
-            correctAnswerEditText = findViewById(R.id.CorrectAnswerInput);
-            wrongAnswerOneEditText = findViewById(R.id.WrongAnswerInputOne);
-            wrongAnswerTwoEditText = findViewById(R.id.WrongAnswerInputTwo);
-            wrongAnswerThreeEditText = findViewById(R.id.WrongAnswerInputThree);
-            saveQuestionButton = findViewById(R.id.buttonSave);
-            doneQuestionsButton = findViewById(R.id.buttonDoneEditQuestion);
-
-            // Get Intent passing variables
-            Intent intent = getIntent();
-            currUser = (User) intent.getSerializableExtra("loggedInUser");
-            quizName = intent.getStringExtra("quizName");
-            timerAmount = intent.getIntExtra("timerAmount", 0);
-
-            // Save question
-            saveQuestionButton.setOnClickListener(button -> setupQuestion());
-
-            // Done question
-            doneQuestionsButton.setOnClickListener(button -> setupQuestions());
-
             return insets;
         });
+
+        newQuestionAndAnswersList = new ArrayList<>();
+
+        questionEditText = findViewById(R.id.QuestionInput);
+        correctAnswerEditText = findViewById(R.id.CorrectAnswerInput);
+        wrongAnswerOneEditText = findViewById(R.id.WrongAnswerInputOne);
+        wrongAnswerTwoEditText = findViewById(R.id.WrongAnswerInputTwo);
+        wrongAnswerThreeEditText = findViewById(R.id.WrongAnswerInputThree);
+        saveQuestionButton = findViewById(R.id.buttonSave);
+        doneQuestionsButton = findViewById(R.id.buttonDoneEditQuestion);
+
+        // Get Intent passing variables
+        Intent intent = getIntent();
+        currUser = (User) intent.getSerializableExtra("loggedInUser");
+        quizName = intent.getStringExtra("quizName");
+        timerAmount = intent.getIntExtra("timerAmount", 0);
+
+        // Save question
+        saveQuestionButton.setOnClickListener(button -> setupQuestion());
+
+        // Done question
+        doneQuestionsButton.setOnClickListener(button -> setupQuestions());
     }
 
     /**
@@ -127,7 +127,7 @@ public class QuizModifyQuestionActivity extends AppCompatActivity {
         saveQuestionButton.setText("✓");
         new Handler().postDelayed(() -> {
             saveQuestionButton.setText(R.string.save_question);
-        }, 1000);
+            }, 1000);
     }
 
     /**
