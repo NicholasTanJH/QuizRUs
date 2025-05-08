@@ -1,6 +1,6 @@
 ![Quiz"R"Us Logo](/docs/quizruslogo.png)
 
-> Quiz"R"Us is a video game quizzing tool that provides an engaging and fun alternative to helping people study and learn.
+> Quiz"R"Us is a video game quizzing tool that provides an engaging and fun alternative to study and learn.
 
 ## 🎮 Demo Video 
 [![Quiz"R"Us Demo video](https://img.youtube.com/vi/tefqnf15yhk/0.jpg)](https://www.youtube.com/watch?v=tefqnf15yhk)
